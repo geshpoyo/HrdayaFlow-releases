@@ -11,7 +11,7 @@
 | サイト | URL | 内容 |
 |:--|:--|:--|
 | 🌐 公式 LP | <https://geshpoyo.github.io/HrdayaFlow-releases/> | プロダクト紹介 + ダウンロード導線 |
-| 💾 リリース | <https://github.com/geshpoyo/HrdayaFlow-releases/releases> | MSI インストーラ (準備中、2026 年 6 月末予定) |
+| 💾 リリース | <https://github.com/geshpoyo/HrdayaFlow-releases/releases> | MSI インストーラ (準備中、2026 年 8 月 ベータテスト公開予定) |
 | 📖 マニュアル | <https://vet-scopius.wiki/獣医志Scopius/開発アプリケーション/Index> | 全機能リファレンス + 使い方 |
 
 ## このアプリについて
@@ -32,7 +32,7 @@ Flutter Desktop (UI) ↔ Rust core (グラフ演算 + FFI) ↔ Python AI service
 ## ステータス
 
 - 現在: v0.0.4 開発中
-- 次期リリース: v0.1.0 (Windows MSI、2026 年 6 月末予定)
+- 次期リリース: v0.1.0 ベータ (Windows MSI、2026 年 8 月 ベータテスト公開予定)
 
 ## ライセンス
 
