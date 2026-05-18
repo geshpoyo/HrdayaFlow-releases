@@ -1,0 +1,357 @@
+/**
+ * Design Tokens — Senastra Design System
+ * =========================================
+ * Version: 1.0.0 (vendored snapshot for HrdayaFlow promo site)
+ * Source: ../../Senastra/design-tokens.css
+ *
+ * このファイルは Senastra から取り込んだベンダーコピー。手で編集しない。
+ * 上流を更新したらこのファイルも同時に差し替えること。
+ */
+
+:root {
+  /* --- Primitive (固定カラー・変えない) --- */
+
+  /* Neutral */
+  --primitive-neutral-0:   #FFFFFF;
+  --primitive-neutral-50:  #FAFAFA;
+  --primitive-neutral-100: #F4F4F6;
+  --primitive-neutral-200: #E8E8EC;
+  --primitive-neutral-300: #D0D0D8;
+  --primitive-neutral-400: #A8A8B4;
+  --primitive-neutral-500: #787888;
+  --primitive-neutral-600: #525260;
+  --primitive-neutral-700: #363644;
+  --primitive-neutral-800: #1E1E28;
+  --primitive-neutral-900: #111118;
+  --primitive-neutral-950: #0C0C10;
+
+  /* Accent — Indigo (ブランドカラー) */
+  --primitive-accent-50:  #EDEDFB;
+  --primitive-accent-100: #D8D8F6;
+  --primitive-accent-200: #B4B4EE;
+  --primitive-accent-300: #8A8AE4;
+  --primitive-accent-400: #6E6EE0;
+  --primitive-accent-500: #5B5BD6;
+  --primitive-accent-600: #4848C4;
+  --primitive-accent-700: #3636A0;
+  --primitive-accent-800: #27277A;
+  --primitive-accent-900: #1A1A50;
+  --primitive-accent-950: #10103A;
+
+  /* Semantic — Status */
+  --primitive-success: #3DD68C;
+  --primitive-warning: #F5A623;
+  --primitive-error:   #E54D2E;
+  --primitive-info:    #3B82F6;
+}
+
+/* ── Light Mode (default) ── */
+:root,
+[data-theme="light"] {
+  --color-bg:          var(--primitive-neutral-50);
+  --color-bg-subtle:   var(--primitive-neutral-100);
+  --color-bg-inset:    var(--primitive-neutral-200);
+
+  --color-surface:         var(--primitive-neutral-0);
+  --color-surface-hover:   var(--primitive-neutral-50);
+  --color-surface-active:  var(--primitive-neutral-100);
+  --color-surface-overlay: rgba(255, 255, 255, 0.85);
+
+  --color-border:        var(--primitive-neutral-200);
+  --color-border-strong: var(--primitive-neutral-300);
+  --color-border-focus:  var(--primitive-accent-500);
+
+  --color-text-primary:   #0C0C10;
+  --color-text-secondary: #52526A;
+  --color-text-tertiary:  #9898A8;
+  --color-text-disabled:  #BBBBC8;
+  --color-text-inverse:   #FAFAFA;
+  --color-text-on-accent: #FFFFFF;
+
+  --color-accent:        var(--primitive-accent-500);
+  --color-accent-hover:  var(--primitive-accent-600);
+  --color-accent-active: var(--primitive-accent-700);
+  --color-accent-subtle: var(--primitive-accent-50);
+  --color-accent-muted:  var(--primitive-accent-100);
+
+  --color-success:        #2BB87A;
+  --color-success-subtle: #EDFBF4;
+  --color-warning:        #D4891E;
+  --color-warning-subtle: #FEF6E7;
+  --color-error:          #C93B1A;
+  --color-error-subtle:   #FEF0EC;
+  --color-info:           #2563EB;
+  --color-info-subtle:    #EFF6FF;
+
+  --shadow-color: 0deg 0% 0%;
+}
+
+/* ── Dark Mode ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg:          #0C0C10;
+    --color-bg-subtle:   #111118;
+    --color-bg-inset:    #0A0A0D;
+
+    --color-surface:         #18181F;
+    --color-surface-hover:   #1E1E27;
+    --color-surface-active:  #25252F;
+    --color-surface-overlay: rgba(18, 18, 24, 0.90);
+
+    --color-border:        #25252F;
+    --color-border-strong: #35353F;
+    --color-border-focus:  var(--primitive-accent-400);
+
+    --color-text-primary:   #EEEEF2;
+    --color-text-secondary: #9898A8;
+    --color-text-tertiary:  #5A5A6A;
+    --color-text-disabled:  #38383C;
+    --color-text-inverse:   #0C0C10;
+    --color-text-on-accent: #FFFFFF;
+
+    --color-accent:        var(--primitive-accent-400);
+    --color-accent-hover:  var(--primitive-accent-300);
+    --color-accent-active: var(--primitive-accent-200);
+    --color-accent-subtle: var(--primitive-accent-950);
+    --color-accent-muted:  var(--primitive-accent-900);
+
+    --color-success:        #3DD68C;
+    --color-success-subtle: #0D2A1E;
+    --color-warning:        #F5A623;
+    --color-warning-subtle: #2A1E08;
+    --color-error:          #E54D2E;
+    --color-error-subtle:   #2A100A;
+    --color-info:           #60A5FA;
+    --color-info-subtle:    #0D1A2E;
+
+    --shadow-color: 0deg 0% 0%;
+  }
+}
+
+[data-theme="dark"] {
+  --color-bg:          #0C0C10;
+  --color-bg-subtle:   #111118;
+  --color-bg-inset:    #0A0A0D;
+
+  --color-surface:         #18181F;
+  --color-surface-hover:   #1E1E27;
+  --color-surface-active:  #25252F;
+  --color-surface-overlay: rgba(18, 18, 24, 0.90);
+
+  --color-border:        #25252F;
+  --color-border-strong: #35353F;
+  --color-border-focus:  var(--primitive-accent-400);
+
+  --color-text-primary:   #EEEEF2;
+  --color-text-secondary: #9898A8;
+  --color-text-tertiary:  #5A5A6A;
+  --color-text-disabled:  #38383C;
+  --color-text-inverse:   #0C0C10;
+  --color-text-on-accent: #FFFFFF;
+
+  --color-accent:        var(--primitive-accent-400);
+  --color-accent-hover:  var(--primitive-accent-300);
+  --color-accent-active: var(--primitive-accent-200);
+  --color-accent-subtle: var(--primitive-accent-950);
+  --color-accent-muted:  var(--primitive-accent-900);
+
+  --color-success:        #3DD68C;
+  --color-success-subtle: #0D2A1E;
+  --color-warning:        #F5A623;
+  --color-warning-subtle: #2A1E08;
+  --color-error:          #E54D2E;
+  --color-error-subtle:   #2A100A;
+  --color-info:           #60A5FA;
+  --color-info-subtle:    #0D1A2E;
+
+  --shadow-color: 0deg 0% 0%;
+}
+
+
+/* ─────────────────────────────────────────────
+   2. TYPOGRAPHY
+   ───────────────────────────────────────────── */
+:root {
+  --font-sans:  'Inter', 'Hiragino Sans', 'Yu Gothic UI', system-ui, -apple-system, sans-serif;
+  --font-mono:  'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+
+  --text-2xs:  10px;
+  --text-xs:   12px;
+  --text-sm:   13px;
+  --text-base: 15px;
+  --text-md:   16px;
+  --text-lg:   18px;
+  --text-xl:   20px;
+  --text-2xl:  24px;
+  --text-3xl:  30px;
+  --text-4xl:  36px;
+  --text-5xl:  48px;
+  --text-hero: 64px;
+  --text-display: 80px;
+
+  --font-regular:   400;
+  --font-medium:    500;
+  --font-semibold:  600;
+  --font-bold:      700;
+
+  --leading-none:    1;
+  --leading-tight:   1.2;
+  --leading-snug:    1.4;
+  --leading-normal:  1.6;
+  --leading-relaxed: 1.75;
+  --leading-loose:   2;
+
+  --tracking-tighter: -0.04em;
+  --tracking-tight:   -0.02em;
+  --tracking-normal:   0em;
+  --tracking-wide:     0.04em;
+  --tracking-wider:    0.08em;
+  --tracking-widest:   0.16em;
+}
+
+
+/* ─────────────────────────────────────────────
+   3. SPACING (4px base)
+   ───────────────────────────────────────────── */
+:root {
+  --space-px:  1px;
+  --space-0:   0px;
+  --space-0-5: 2px;
+  --space-1:   4px;
+  --space-1-5: 6px;
+  --space-2:   8px;
+  --space-2-5: 10px;
+  --space-3:   12px;
+  --space-4:   16px;
+  --space-5:   20px;
+  --space-6:   24px;
+  --space-7:   28px;
+  --space-8:   32px;
+  --space-10:  40px;
+  --space-12:  48px;
+  --space-14:  56px;
+  --space-16:  64px;
+  --space-20:  80px;
+  --space-24:  96px;
+  --space-28:  112px;
+  --space-32:  128px;
+  --space-40:  160px;
+  --space-48:  192px;
+  --space-64:  256px;
+
+  --page-padding-x:    var(--space-6);
+  --page-padding-x-lg: var(--space-16);
+  --section-gap:       var(--space-20);
+  --card-padding:      var(--space-6);
+  --form-gap:          var(--space-4);
+}
+
+
+/* ─────────────────────────────────────────────
+   4. BORDER RADIUS
+   ───────────────────────────────────────────── */
+:root {
+  --radius-none: 0px;
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-3xl:  32px;
+  --radius-full: 9999px;
+
+  --radius-button:  var(--radius-md);
+  --radius-input:   var(--radius-md);
+  --radius-card:    var(--radius-lg);
+  --radius-modal:   var(--radius-xl);
+  --radius-tooltip: var(--radius-sm);
+  --radius-badge:   var(--radius-full);
+}
+
+
+/* ─────────────────────────────────────────────
+   5. SHADOW
+   ───────────────────────────────────────────── */
+:root {
+  --shadow-xs:
+    0 1px 2px hsl(var(--shadow-color) / 0.05);
+
+  --shadow-sm:
+    0 1px 3px hsl(var(--shadow-color) / 0.07),
+    0 1px 2px hsl(var(--shadow-color) / 0.04);
+
+  --shadow-md:
+    0 4px 8px  hsl(var(--shadow-color) / 0.08),
+    0 2px 4px  hsl(var(--shadow-color) / 0.04);
+
+  --shadow-lg:
+    0 8px 24px hsl(var(--shadow-color) / 0.10),
+    0 4px 8px  hsl(var(--shadow-color) / 0.06);
+
+  --shadow-xl:
+    0 16px 48px hsl(var(--shadow-color) / 0.12),
+    0  8px 16px hsl(var(--shadow-color) / 0.06);
+
+  --shadow-2xl:
+    0 32px 64px hsl(var(--shadow-color) / 0.16),
+    0 16px 32px hsl(var(--shadow-color) / 0.08);
+
+  --shadow-inset:
+    inset 0 1px 2px hsl(var(--shadow-color) / 0.08);
+
+  --ring-focus:
+    0 0 0 3px hsl(var(--shadow-color) / 0.04),
+    0 0 0 2px var(--color-border-focus);
+
+  --glow-accent:
+    0 0 24px hsl(248deg 70% 65% / 0.20);
+}
+
+
+/* ─────────────────────────────────────────────
+   6. MOTION
+   ───────────────────────────────────────────── */
+:root {
+  --duration-instant: 0ms;
+  --duration-fast:    100ms;
+  --duration-base:    150ms;
+  --duration-slow:    250ms;
+  --duration-slower:  400ms;
+
+  --ease-linear:   linear;
+  --ease-in:       cubic-bezier(0.4, 0, 1, 1);
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-bounce:   cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  --transition-fast:   var(--duration-fast)   var(--ease-out);
+  --transition-base:   var(--duration-base)   var(--ease-out);
+  --transition-slow:   var(--duration-slow)   var(--ease-out);
+  --transition-spring: var(--duration-slower) var(--ease-spring);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast:   0ms;
+    --duration-base:   0ms;
+    --duration-slow:   0ms;
+    --duration-slower: 0ms;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   7. Z-INDEX
+   ───────────────────────────────────────────── */
+:root {
+  --z-below:   -1;
+  --z-base:     0;
+  --z-raised:  10;
+  --z-dropdown: 20;
+  --z-sticky:   30;
+  --z-overlay:  40;
+  --z-modal:    50;
+  --z-toast:    60;
+  --z-tooltip:  70;
+}

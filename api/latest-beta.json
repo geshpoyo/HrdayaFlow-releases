@@ -1,0 +1,13 @@
+{
+  "latest_version": "0.0.0-beta",
+  "build": 0,
+  "channel": "beta",
+  "url": "",
+  "sha256": "",
+  "size_bytes": 0,
+  "published_at": "1970-01-01T00:00:00Z",
+  "release_notes_url": "https://hrdayaflow.app/release-notes",
+  "release_notes_snippet": "No beta release yet.",
+  "min_required_version": "0.0.0",
+  "deprecated_versions": []
+}

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="dark" data-typeface="noto-sans-jp">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HṛdayaFlow — 思考に、流れを。</title>
+<meta name="description" content="HṛdayaFlow は、テキスト・画像・動画・音声・コード・Web 埋め込みまでを一枚に束ね、関係線で結ぶマインドマップキャンバス。Markdown / JSON Canvas / OPML / Mermaid / XMind / FreeMind / Scapple への相互運用、PDF 出力、Rust + Flutter によるハイブリッド構成。" />
+<meta name="theme-color" content="#0C0C10" />
+<meta property="og:title" content="HṛdayaFlow — 思考に、流れを。" />
+<meta property="og:description" content="テキスト・画像・動画・音声・コード・Web 埋め込みを一枚に束ね、関係線で結ぶマインドマップキャンバス。" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="./assets/mandala.png" />
+<link rel="icon" type="image/png" href="./assets/mandala.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Senastra Design System (vendored) -->
+<link rel="stylesheet" href="./vendor/senastra/design-tokens.css" />
+<link rel="stylesheet" href="./vendor/senastra/typography-presets.css" />
+<link rel="stylesheet" href="./vendor/senastra/app-hrdaya.css" />
+
+<!-- Site overrides (must come after Senastra tokens) -->
+<link rel="stylesheet" href="./style.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     HEADER (sticky, minimal)
+============================================================ -->
+<header class="site-header" id="siteHeader">
+  <a href="#top" class="brand">
+    <img src="./assets/mandala.png" alt="" class="brand-mark" />
+    <span class="brand-text">Hṛdaya<span class="brand-accent">Flow</span></span>
+  </a>
+  <nav class="site-nav">
+    <a href="#what">What</a>
+    <a href="#nodes">Nodes</a>
+    <a href="#canvas">Canvas</a>
+    <a href="#media">Media</a>
+    <a href="#format">Format</a>
+    <a href="#interop">Interop</a>
+    <a href="#core">Core</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#download">Download</a>
+  </nav>
+</header>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section id="top" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-mandala" aria-hidden="true">
+    <img src="./assets/mandala.png" alt="" />
+  </div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">— A mindful canvas for your thoughts</p>
+    <h1 class="hero-title">
+      <span class="hero-title-line">思考に、</span>
+      <span class="hero-title-line accent">流れを。</span>
+    </h1>
+    <p class="hero-sub">
+      テキスト・画像・動画・音声・コード・Web 埋め込み。<br />
+      思考の素材をすべて一枚に束ね、関係線で結ぶ。<br />
+      <span class="muted">HṛdayaFlow は、アイデアの輪郭を描きながら考えるためのマインドマップキャンバスです。</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#download" class="btn btn-primary">ダウンロード</a>
+      <a href="#what" class="btn btn-ghost">詳しく見る</a>
+    </div>
+    <ul class="hero-tags">
+      <li>10 種のノート形式</li>
+      <li>.hrf 形式 + 7 形式と相互運用</li>
+      <li>Rust + Flutter ハイブリッド</li>
+      <li>Windows 10 / 11 対応</li>
+    </ul>
+  </div>
+  <a href="#what" class="scroll-hint" aria-label="スクロール">
+    <span>SCROLL</span>
+    <span class="scroll-line"></span>
+  </a>
+</section>
+
+<!-- ============================================================
+     01 WHAT
+============================================================ -->
+<section id="what" class="section section-what reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">01</span>
+      <span class="section-name">WHAT IS HṛDAYAFLOW</span>
+    </div>
+    <h2 class="section-title">
+      心の動きを、<br />
+      一枚のマップに。
+    </h2>
+    <div class="what-grid">
+      <div class="what-copy">
+        <p>
+          HṛdayaFlow（フリダヤフロー）は、サンスクリット語の
+          <em>hṛdaya</em>（心・核）と、英語の <em>flow</em>（流れ）から名付けた
+          デスクトップ向けのマインドマップキャンバスです。
+        </p>
+        <p>
+          アイデアを箇条書きに閉じ込めず、素材ごと張り付けて、線でつないで、
+          いつでも形を変えられる。マインドマップの自由さに、
+          美しい秩序と、再利用可能なファイル形式を与えることを目指しています。
+        </p>
+        <p>
+          学習ノート、リサーチ、プロダクト設計、脚本構成、プロジェクトの整理、
+          読書メモ、旅程づくり ――
+          一枚のキャンバスを使い倒す場面はいくらでも広がります。
+        </p>
+      </div>
+      <div class="what-pillars">
+        <div class="pillar">
+          <span class="pillar-num">∞</span>
+          <strong>無限キャンバス</strong>
+          <span>パン・ズームで自在に広がる作業空間。大規模マップも軽快に描画。</span>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">◆</span>
+          <strong>多形式ノート</strong>
+          <span>テキスト・画像・動画・音声・コード・Web 埋め込みの 10 種類。</span>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">◇</span>
+          <strong>関係線で結ぶ</strong>
+          <span>ドラッグ & ドロップで即エッジ作成、複数選択で一括接続も可能。</span>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">⟷</span>
+          <strong>相互運用</strong>
+          <span>Markdown / JSON Canvas / OPML / Mermaid / XMind 等と双方向変換。</span>
+        </div>
+        <div class="pillar">
+          <span class="pillar-num">⬢</span>
+          <strong>ハイブリッド構成</strong>
+          <span>Rust コアで重い処理、Flutter で美しい UI。両者を flutter_rust_bridge で接続。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     02 NODE TYPES (10 kinds)
+============================================================ -->
+<section id="nodes" class="section section-nodes reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">02</span>
+      <span class="section-name">NODE TYPES</span>
+    </div>
+    <h2 class="section-title">
+      思考の素材を、<br />
+      そのままに。
+    </h2>
+    <p class="section-lead">
+      文字だけで足りないことはよくあります。HṛdayaFlow は、キャンバス上で扱える
+      ノート形式を最初から 10 種類用意しています。何をつなげても、同じ一枚に収まります。
+    </p>
+
+    <div class="nodes-grid">
+      <article class="node-card">
+        <div class="node-glyph">Aa</div>
+        <h3>テキストノート</h3>
+        <p>基本のノート。フォント・配色・影・境界線を細かく指定でき、Markdown 風インライン記法も解釈します。</p>
+        <ul class="node-tags">
+          <li>B / I / U / 打消し</li>
+          <li>揃え・色・影</li>
+          <li>Magnetic</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">▢</div>
+        <h3>コンテナノート</h3>
+        <p>ノート群を包むボックス。折りたたみで中身を隠したり、一括で移動・整列したりできます。</p>
+        <ul class="node-tags">
+          <li>折りたたみ</li>
+          <li>メンバー管理</li>
+          <li>一括移動</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">◎</div>
+        <h3>画像ノート</h3>
+        <p>D&D で画像を貼るだけでノート化。ZIP 内 assets/ に自動取り込み、クロップ編集にも対応。</p>
+        <ul class="node-tags">
+          <li>D&D 対応</li>
+          <li>埋め込み / 外部参照</li>
+          <li>クロップ</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">⤴</div>
+        <h3>リンクノート</h3>
+        <p>URL を貼ると favicon と OGP メタデータを自動取得してカード化。`.url` ファイルの D&D も可能。</p>
+        <ul class="node-tags">
+          <li>favicon + OGP</li>
+          <li>複数 URL 一括</li>
+          <li>SSRF 対策</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">▶</div>
+        <h3>動画ノート</h3>
+        <p>media_kit + libmpv/FFmpeg 同梱で、H.264 / H.265 / .mkv / .webm / AV1 を OS コーデック非依存で再生。</p>
+        <ul class="node-tags">
+          <li>H.265 / AV1 対応</li>
+          <li>YouTube iframe</li>
+          <li>広告自動スキップ (任意)</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">♫</div>
+        <h3>音声ノート</h3>
+        <p>just_audio + audio_waveforms で波形表示 + シーク。録音ファイルや講義録を視覚的に扱えます。</p>
+        <ul class="node-tags">
+          <li>波形 UI</li>
+          <li>タップでシーク</li>
+          <li>transcript メタ</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">¶</div>
+        <h3>Markdown ノート</h3>
+        <p>見出し・リスト・表・コードブロックをフル GFM 拡張で描画。長めの文章はこちらで。</p>
+        <ul class="node-tags">
+          <li>表 / 取り消し線</li>
+          <li>タスクリスト</li>
+          <li>往復変換</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">☑</div>
+        <h3>チェックリストノート</h3>
+        <p>項目ごとに優先度・期限・メモを持たせられる TODO。ドラッグで並び替え、インライン編集可能。</p>
+        <ul class="node-tags">
+          <li>優先度 / 期限</li>
+          <li>ReorderableListView</li>
+          <li>Markdown 往復</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">&lt;/&gt;</div>
+        <h3>コードノート</h3>
+        <p>flutter_highlight でシンタックスハイライト。30+ 言語対応、Tab インデント、Ctrl+Shift+C で全文コピー。</p>
+        <ul class="node-tags">
+          <li>atom-one-light / dark</li>
+          <li>行番号 / 折返し</li>
+          <li>D&D 取り込み</li>
+        </ul>
+      </article>
+
+      <article class="node-card">
+        <div class="node-glyph">⊞</div>
+        <h3>埋め込みノート</h3>
+        <p>任意の HTML / iframe を配置可能。ホスト信頼リストで未信頼ソースを遮断、CSP 付き描画。</p>
+        <ul class="node-tags">
+          <li>ホスト信頼レジストリ</li>
+          <li>CSP 付き iframe</li>
+          <li>flutter_html fallback</li>
+        </ul>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     03 CANVAS & FLOW
+============================================================ -->
+<section id="canvas" class="section section-canvas reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">03</span>
+      <span class="section-name">CANVAS & FLOW</span>
+    </div>
+    <h2 class="section-title">
+      関係を、<br />
+      自然な手の動きで。
+    </h2>
+    <p class="section-lead">
+      マインドマップは、ノートそのものよりも「ノート同士のつながり」が本体です。
+      HṛdayaFlow は、関係を張る・組み替える・まとめる動作を、できるだけ直感的に。
+    </p>
+
+    <div class="split-grid">
+      <div class="split-block">
+        <h3>ドラッグ & ドロップで、エッジ作成</h3>
+        <p>
+          ノートを別のノートにドラッグして離すだけで、関係線 (エッジ) が作成されます。
+          Shift で → 方向矢印、Alt で ← 矢印、Ctrl で ↔ 両方向。
+          複数選択して一括ドロップすれば、同じターゲットに何本でもまとめて繋げます。
+        </p>
+        <ul class="feat-list">
+          <li>カーソル先端 or 中心点が重なれば作成</li>
+          <li>擦れ違いだけの偶発作成は回避</li>
+          <li>既存エッジの上に再ドロップで解除 / 矢印変更</li>
+        </ul>
+      </div>
+      <div class="split-block">
+        <h3>選択と整列</h3>
+        <p>
+          マーキー選択、複数選択、キーボードショートカット (Ctrl+A、Esc) で
+          対象を自在に切り替え。ドラッグ中は自動アライン補助線が出て、
+          縦横の整列が勝手に揃います。
+        </p>
+        <ul class="feat-list">
+          <li>マーキー・Shift+クリック多重選択</li>
+          <li>Align スナップ</li>
+          <li>Alt+矢印で順序入れ替え</li>
+        </ul>
+      </div>
+      <div class="split-block">
+        <h3>Container / Frame でまとめる</h3>
+        <p>
+          関連ノートをコンテナで抱えて折りたたみ可能に、
+          背景フレームで大きく「領域」として扱うこともできます。
+          深い階層を持たず、浅く・広く・柔らかく整理できる構造です。
+        </p>
+        <ul class="feat-list">
+          <li>コンテナ = 折りたたみ可・メンバー管理</li>
+          <li>フレーム = 背景の領域指定 (エッジ端点にならない)</li>
+          <li>グループ可視化の一括制御</li>
+        </ul>
+      </div>
+      <div class="split-block">
+        <h3>操作はすべてキーボードでも</h3>
+        <p>
+          Ctrl+B / I / U / Shift+X で太字・斜体・下線・打消し、
+          Ctrl+Shift+L/E/R/J で揃え、Ctrl+[ / ] でフォントサイズ。
+          Format Panel の多くの操作にショートカットが割り当てられています。
+        </p>
+        <ul class="feat-list">
+          <li>Ctrl+B/I/U/Shift+X</li>
+          <li>Ctrl+Shift+L/E/R/J</li>
+          <li>Ctrl+[ / ] でサイズ</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     04 RICH MEDIA
+============================================================ -->
+<section id="media" class="section section-media reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">04</span>
+      <span class="section-name">RICH MEDIA & WEB</span>
+    </div>
+    <h2 class="section-title">
+      メディアの扱いに、<br />
+      妥協はありません。
+    </h2>
+    <p class="section-lead">
+      「思考の素材」は、今や文字だけではありません。動画、音声、Web ページ、コードスニペット。
+      それぞれに固有の UX を持たせ、キャンバス上で本来の性能を発揮するように設計しました。
+    </p>
+
+    <div class="media-grid">
+      <article class="media-card">
+        <div class="media-title">
+          <span class="media-badge">Video</span>
+          <h3>H.265 / .mkv / AV1 まで OS 非依存で再生</h3>
+        </div>
+        <p>
+          Windows 標準プレイヤー依存をやめ、<strong>media_kit + libmpv + FFmpeg</strong>
+          を同梱。HEVC (H.265) 拡張や、.mkv / .webm / AV1 / VP9 などユーザ持ち込みの動画を
+          そのまま再生できます。LGPL ライセンス本文同梱で法的整備も済み。
+        </p>
+        <div class="spec-list">
+          <div><span>対応コーデック</span><span>H.264 / H.265 / VP9 / AV1</span></div>
+          <div><span>対応コンテナ</span><span>.mp4 / .mkv / .webm / .mov</span></div>
+          <div><span>YouTube</span><span>iframe 埋め込み + watch URL fallback</span></div>
+          <div><span>広告自動スキップ</span><span>公式 Skip Ad ボタンの自動化 (任意・OFF 可)</span></div>
+          <div><span>LGPL 遵守</span><span>NOTICE + 本文同梱、設定画面から参照</span></div>
+        </div>
+      </article>
+
+      <article class="media-card">
+        <div class="media-title">
+          <span class="media-badge">Audio</span>
+          <h3>波形でシーク、透き通った操作感</h3>
+        </div>
+        <p>
+          <strong>just_audio + audio_waveforms</strong> で、ノート内に波形を描画。
+          波形タップでシーク、スペースキーで再生/一時停止。
+          録音された会議ログ、取材音源、ポッドキャストを「視覚的に」扱えるようになります。
+        </p>
+        <div class="spec-list">
+          <div><span>波形</span><span>PlayerWaveStyle ベース / .peaks.json キャッシュ</span></div>
+          <div><span>埋め込み</span><span>小容量は .hrf に内包 / 大容量は file URI 参照</span></div>
+          <div><span>メタ</span><span>alt テキスト / transcript / 色</span></div>
+        </div>
+      </article>
+
+      <article class="media-card">
+        <div class="media-title">
+          <span class="media-badge">Code</span>
+          <h3>30+ 言語に対応する、参照用コードブロック</h3>
+        </div>
+        <p>
+          <strong>flutter_highlight</strong> による atom-one-light / dark のシンタックスハイライト。
+          言語選択 / 行番号 / 折返し / フォントサイズをインスペクタで調整。
+          ソースコードファイルをそのまま D&D してノート化することもできます (2MB まで)。
+        </p>
+        <div class="spec-list">
+          <div><span>ハイライト</span><span>atom-one light / dark</span></div>
+          <div><span>編集</span><span>ダブルクリックでプレーン編集 / Tab インデント</span></div>
+          <div><span>コピー</span><span>Ctrl+Shift+C で全文クリップボード</span></div>
+        </div>
+      </article>
+
+      <article class="media-card">
+        <div class="media-title">
+          <span class="media-badge">Web</span>
+          <h3>Web ページそのものを、キャンバスに</h3>
+        </div>
+        <p>
+          リンクノートの発展型として、任意の HTML / iframe をキャンバス上で表示できる
+          <strong>埋め込みノート</strong>を用意。既定は「未信頼」で静的フォールバック描画、
+          ユーザがホストを信頼登録すると実 iframe が走る仕組みです。
+        </p>
+        <div class="spec-list">
+          <div><span>描画経路</span><span>iOS/Android/macOS = WebView / 他 = flutter_html</span></div>
+          <div><span>安全</span><span>ホスト信頼レジストリ / CSP 付き / スクリプト検知</span></div>
+          <div><span>貼り付け</span><span>HTML ファイル D&D / iframe タグ直貼り</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     05 FORMAT & SHORTCUTS
+============================================================ -->
+<section id="format" class="section section-format reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-name">FORMAT & SHORTCUTS</span>
+    </div>
+    <h2 class="section-title">
+      見た目も、速さも。<br />
+      手に馴染むインターフェース。
+    </h2>
+    <p class="section-lead">
+      フォーマットパネルを全ノート共通で整備。「文字を整える」行為が、
+      複数ノート横断で一発でかかります。キーボード派のための網羅的なショートカットも用意。
+    </p>
+
+    <div class="format-grid">
+      <div class="format-col">
+        <h3>Format Panel (共通)</h3>
+        <ul class="tick-list">
+          <li><strong>書体</strong> — B / I / U / 打消し / フォントサイズ</li>
+          <li><strong>配置</strong> — 左揃え / 中央 / 右揃え / 両端</li>
+          <li><strong>配色</strong> — テキスト / 塗り / 境界線 / 影</li>
+          <li><strong>境界線</strong> — 太さ / スタイル (実線・破線・点線)</li>
+          <li><strong>状態</strong> — Faded (薄表示) / Magnetic (吸着)</li>
+          <li><strong>複数選択対応</strong> — 選んだ全ノートに一括適用</li>
+        </ul>
+      </div>
+      <div class="format-col">
+        <h3>キーボード・ショートカット</h3>
+        <div class="kbd-list">
+          <div><code>Ctrl+B / I / U</code><span>太字 / 斜体 / 下線</span></div>
+          <div><code>Ctrl+Shift+X</code><span>打消し</span></div>
+          <div><code>Ctrl+Shift+L</code><span>左揃え</span></div>
+          <div><code>Ctrl+Shift+E</code><span>中央揃え</span></div>
+          <div><code>Ctrl+Shift+R</code><span>右揃え</span></div>
+          <div><code>Ctrl+Shift+J</code><span>両端揃え</span></div>
+          <div><code>Ctrl+[ / ]</code><span>フォントサイズ -/+</span></div>
+          <div><code>Ctrl+A</code><span>全選択</span></div>
+          <div><code>Ctrl+Z / Y</code><span>Undo / Redo</span></div>
+          <div><code>Ctrl+S</code><span>保存</span></div>
+          <div><code>Ctrl+F</code><span>検索</span></div>
+          <div><code>Ctrl+Shift+C</code><span>コードノート全文コピー</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     06 FILE FORMAT & INTEROP
+============================================================ -->
+<section id="interop" class="section section-interop reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">06</span>
+      <span class="section-name">.hrf FORMAT & INTEROP</span>
+    </div>
+    <h2 class="section-title">
+      閉じない。<br />
+      持ち出し自由。
+    </h2>
+    <p class="section-lead">
+      データを特定のアプリに囲い込まないことを、最初から前提にしています。
+      HṛdayaFlow 独自の <strong>.hrf</strong> 形式に加えて、
+      主要なマインドマップ / ノート形式と双方向変換します。
+    </p>
+
+    <div class="interop-grid">
+      <div class="interop-hero">
+        <div class="hrf-badge">.hrf</div>
+        <div>
+          <h3>ZIP ベースの .hrf 形式</h3>
+          <p>
+            画像・動画・音声などの資産もろともひとつの ZIP に格納。
+            SHA256 での整合性チェック、アトミック書き出し、正規化パスでの
+            エントリ解決で、ファイルが壊れにくく移動もしやすい設計です。
+          </p>
+          <ul class="tick-list tight">
+            <li>ZIP コンテナに document.json + assets/</li>
+            <li>SHA256 整合性チェック + tmp → rename アトミック書き出し</li>
+            <li>asset extractor でフォルダ展開も可能</li>
+            <li>履歴データは JSON patch 形式で差分のみ保持</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="interop-formats">
+        <h3>双方向変換 (7 形式)</h3>
+        <div class="fmt-grid">
+          <div class="fmt">
+            <div class="fmt-name">Markdown</div>
+            <div class="fmt-detail">見出し階層 + タスクリスト + 往復用 HTML コメント</div>
+          </div>
+          <div class="fmt">
+            <div class="fmt-name">JSON Canvas</div>
+            <div class="fmt-detail">Obsidian Canvas 互換の JSON スキーマ</div>
+          </div>
+          <div class="fmt">
+            <div class="fmt-name">OPML</div>
+            <div class="fmt-detail">階層型アウトライン交換の定番フォーマット</div>
+          </div>
+          <div class="fmt">
+            <div class="fmt-name">Mermaid</div>
+            <div class="fmt-detail">mindmap グラフ記法で README 等に貼れる</div>
+          </div>
+          <div class="fmt">
+            <div class="fmt-name">XMind</div>
+            <div class="fmt-detail">商用マインドマップ定番形式の読み書き</div>
+          </div>
+          <div class="fmt">
+            <div class="fmt-name">FreeMind</div>
+            <div class="fmt-detail">FreeMind / Freeplane の .mm ファイル</div>
+          </div>
+          <div class="fmt">
+            <div class="fmt-name">Scapple</div>
+            <div class="fmt-detail">Literature &amp; Latte 形式 (インポート)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="export-bar">
+      <div class="export-item">
+        <div class="export-title">PDF 出力</div>
+        <div class="export-detail">Noto Sans JP 同梱、印刷プレビュー付き、キャンバス全体 / 選択ノートを出力</div>
+      </div>
+      <div class="export-item">
+        <div class="export-title">ノート個別エクスポート</div>
+        <div class="export-detail">ノート単位での Markdown / PDF 出力、章別ドキュメント作成に</div>
+      </div>
+      <div class="export-item">
+        <div class="export-title">アセット取り出し</div>
+        <div class="export-detail">.hrf 内の画像・動画・音声をフォルダに一括展開</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     07 UNDER THE HOOD
+============================================================ -->
+<section id="core" class="section section-core reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">07</span>
+      <span class="section-name">UNDER THE HOOD</span>
+    </div>
+    <h2 class="section-title">
+      見えない所にこそ、<br />
+      思想を宿す。
+    </h2>
+    <p class="section-lead">
+      表に出ない部分こそ、性能・安定性・長期運用に効きます。HṛdayaFlow は
+      <strong>Rust コア + Flutter UI</strong> のハイブリッド構成で、
+      それぞれの得意分野を活かす設計にしています。
+    </p>
+
+    <div class="core-grid">
+      <div class="core-card">
+        <div class="core-head">
+          <span class="core-num">01</span>
+          <h3>Rust コア (hrdaya_core)</h3>
+        </div>
+        <p>
+          ZIP 読み書き、SHA256 検証、JSON patch 計算、大量ノード処理といった
+          「重い仕事」はすべて Rust で実装。flutter_rust_bridge を介して Flutter 側から呼び出します。
+        </p>
+        <ul class="tick-list">
+          <li>flutter_rust_bridge 2.x による型安全な橋渡し</li>
+          <li>hrf_assets クレート: tmp → rename のアトミック書き出し</li>
+          <li>criterion ベンチマーク (JSON patch Undo 等)</li>
+        </ul>
+      </div>
+
+      <div class="core-card">
+        <div class="core-head">
+          <span class="core-num">02</span>
+          <h3>差分ベース Undo (K11-bis)</h3>
+        </div>
+        <p>
+          Undo 履歴を完全スナップショットではなく、freezed + JSON patch の差分で保持。
+          巨大なキャンバスでも履歴スタックがコンパクトに。
+          状態ハッシュ (<code>parentStateHash</code>) で分岐検出、clean slate guard で暴発抑制。
+        </p>
+        <ul class="tick-list">
+          <li>JSON patch 形式の差分 Undo</li>
+          <li>freezed (Dart) + 不変データ構造</li>
+          <li>parentStateHash による履歴ブランチ検出</li>
+        </ul>
+      </div>
+
+      <div class="core-card">
+        <div class="core-head">
+          <span class="core-num">03</span>
+          <h3>Senastra デザインシステム</h3>
+        </div>
+        <p>
+          姉妹プロジェクト <em>Senastra</em> (ポジティブ・ブランドデザインライブラリ) のトークンと
+          コンポーネントを採用。タイポ、カラー、モーション、a11y まで一貫した体験。
+        </p>
+        <ul class="tick-list">
+          <li>SenastraA11y による色覚・高コントラストプリセット</li>
+          <li>senastra_flutter: 統一された Pie menu / Button / Card</li>
+          <li>motion curve / duration 標準化</li>
+        </ul>
+      </div>
+
+      <div class="core-card">
+        <div class="core-head">
+          <span class="core-num">04</span>
+          <h3>CI / 予算ゲート</h3>
+        </div>
+        <p>
+          パフォーマンスと配布サイズに予算を設定し、超過したら CI でブロック。
+          長期運用で「少しずつ重くなる」のを防ぎます。
+        </p>
+        <ul class="tick-list">
+          <li><code>.senastra/budgets.yaml</code> でメトリクス定義</li>
+          <li>GitHub Actions <code>budget-gate.yml</code> で強制</li>
+          <li>history jsonl で推移を可視化</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     08 PREVIEW (visual section)
+============================================================ -->
+<section id="preview" class="section section-preview reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">08</span>
+      <span class="section-name">PREVIEW</span>
+    </div>
+    <h2 class="section-title">
+      キャンバスは、<br />
+      思考の景色になる。
+    </h2>
+    <div class="preview-stage">
+      <div class="preview-frame">
+        <div class="preview-placeholder">
+          <div class="preview-grid"></div>
+          <svg class="preview-edges" viewBox="0 0 800 500" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M 400 250 C 300 210, 250 180, 176 140" class="edge" pathLength="1" />
+            <path d="M 400 250 C 500 210, 550 180, 624 140" class="edge" pathLength="1" />
+            <path d="M 400 250 C 300 300, 250 340, 176 390" class="edge" pathLength="1" />
+            <path d="M 400 250 L 400 410" class="edge" pathLength="1" />
+          </svg>
+          <div class="preview-node n1"><div class="dot"></div><span>Hṛdaya</span></div>
+          <div class="preview-node n2"><div class="dot"></div><span>Flow</span></div>
+          <div class="preview-node n3"><div class="dot"></div><span>Canvas</span></div>
+          <div class="preview-node n4"><div class="dot"></div><span>Media</span></div>
+          <div class="preview-node n5"><div class="dot"></div><span>.hrf</span></div>
+        </div>
+      </div>
+      <p class="preview-caption muted">
+        プレビューはイメージです。実際の画面は、ノートの種類や量に応じて自在に変化します。
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     09 ROADMAP
+============================================================ -->
+<section id="roadmap" class="section section-roadmap reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">09</span>
+      <span class="section-name">ROADMAP</span>
+    </div>
+    <h2 class="section-title">
+      開発は、<br />
+      公開されています。
+    </h2>
+    <p class="section-lead">
+      HṛdayaFlow は、個人開発でも「見える化」を大事にしています。
+      マイルストーンごとに何を目指しているかを公開し、
+      フィードバックがそのまま次の設計に反映される循環を作ります。
+    </p>
+
+    <ol class="timeline">
+      <li class="tl-item tl-done">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-head">
+            <span class="tl-label">現在</span>
+            <h3>v0.0.3 — 開発プレビュー</h3>
+          </div>
+          <p>
+            主要 10 ノート種別、関係線 D&D、Format Panel、.hrf 相互運用、
+            PDF 出力、K11-bis 差分 Undo、video/audio 基盤 — ここまで実装済み。
+          </p>
+        </div>
+      </li>
+
+      <li class="tl-item tl-next">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-head">
+            <span class="tl-label">2026年 6 月末</span>
+            <h3>v0.1.0 — 初版 MVP リリース</h3>
+          </div>
+          <p>
+            Windows 向け MSI パッケージ配布、コード署名、ユーザマニュアル、
+            OCR インポート、10k ノード性能、a11y ナレータ、i18n (JP/EN)、
+            AI suggestion (text-to-mindmap 他) — 配布ブロッカーを全て解消。
+          </p>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-head">
+            <span class="tl-label">2026年 7 月</span>
+            <h3>v0.1.1 — MCP 統合</h3>
+          </div>
+          <p>
+            Claude Desktop / Cursor / Claude CLI が MCP プロトコル経由で
+            HṛdayaFlow を呼び出し、LLM とキャンバスを双方向につなぐ 1 ヶ月。
+            fine + bulk の両粒度でノード追加 / 編集、render_png で逆方向の画像返し。
+          </p>
+        </div>
+      </li>
+
+      <li class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-body">
+          <div class="tl-head">
+            <span class="tl-label">以降</span>
+            <h3>v0.2.0 → v1.0 GA</h3>
+          </div>
+          <p>
+            macOS / Linux 展開、クラウド同期、共同編集、プラグイン API 拡張、
+            API 安定宣言 (1.0)。ロードマップは公開リポジトリで日々更新されます。
+          </p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================================================
+     10 DOWNLOAD
+============================================================ -->
+<section id="download" class="section section-download reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">10</span>
+      <span class="section-name">DOWNLOAD</span>
+    </div>
+    <h2 class="section-title">
+      まもなく、<br />
+      お手元に。
+    </h2>
+    <div class="download-grid">
+      <div class="dl-card">
+        <div class="dl-meta">Windows — v0.1.0</div>
+        <div class="dl-status">
+          <span class="dot-pulse"></span>
+          <span>2026 年 6 月末 配布予定</span>
+        </div>
+        <p>
+          Windows 10 / 11 対応の MSI インストーラを準備中。
+          Rust + Flutter のハイブリッド構成で、大規模マップでも軽快に動作します。
+          HEVC 拡張も OS 設定なしで動作します。
+        </p>
+        <a href="#" class="btn btn-primary btn-disabled" aria-disabled="true">近日公開</a>
+      </div>
+      <div class="dl-card secondary">
+        <div class="dl-meta">Later — macOS / Linux</div>
+        <div class="dl-status"><span>対応予定</span></div>
+        <p>
+          Flutter 基盤で開発しているため、macOS / Linux への展開も視野に入れています。
+          コア機能の安定化後、順次対応予定。
+        </p>
+        <span class="btn btn-ghost btn-disabled" aria-disabled="true">Coming later</span>
+      </div>
+    </div>
+
+    <div class="spec-foot">
+      <div><span>ファイル形式</span><span>.hrf (ZIP ベース独自形式)</span></div>
+      <div><span>相互運用</span><span>Markdown / JSON Canvas / OPML / Mermaid / XMind / FreeMind / Scapple</span></div>
+      <div><span>ライセンス</span><span>アプリ: プロプライエタリ (評価利用無料) / libmpv / FFmpeg: LGPL (同梱 NOTICE 参照)</span></div>
+      <div><span>動作要件</span><span>Windows 10 1803 以降、WebView2 Runtime (Win10 標準 / Win11 標準搭載)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="./assets/mandala.png" alt="" class="footer-mark" />
+      <div>
+        <div class="footer-name">HṛdayaFlow</div>
+        <div class="footer-tag muted">A mindful canvas for your thoughts.</div>
+      </div>
+    </div>
+    <nav class="footer-nav">
+      <a href="#what">What</a>
+      <a href="#nodes">Nodes</a>
+      <a href="#canvas">Canvas</a>
+      <a href="#media">Media</a>
+      <a href="#format">Format</a>
+      <a href="#interop">Interop</a>
+      <a href="#core">Core</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#download">Download</a>
+    </nav>
+    <div class="footer-bottom muted">
+      <span>© 2026 HṛdayaFlow</span>
+      <span>Crafted with Flutter · Rust · Senastra</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============================================================
+     Settings panel (graph paper toggle / cell size)
+     右下 floating。app.js が状態管理して localStorage に保存する。
+============================================================ -->
+<aside class="grid-settings" id="gridSettings">
+  <button
+    class="grid-settings-toggle"
+    id="gridSettingsToggle"
+    type="button"
+    aria-label="表示設定を開く"
+    aria-controls="gridSettingsPanel"
+    aria-expanded="false"
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33h0a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51h0a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82v0a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </svg>
+  </button>
+  <div class="grid-settings-panel" id="gridSettingsPanel" role="dialog" aria-label="表示設定" hidden>
+    <h4>表示設定</h4>
+
+    <label class="grid-setting" for="gridToggle">
+      <span>方眼紙背景</span>
+      <input type="checkbox" id="gridToggle" checked />
+    </label>
+
+    <div class="grid-setting grid-setting--stack">
+      <div class="grid-setting-label">
+        <label for="gridSize">マス目サイズ</label>
+        <output for="gridSize" id="gridSizeOut">32px</output>
+      </div>
+      <input type="range" id="gridSize" min="8" max="80" step="2" value="32" />
+      <div class="grid-setting-row" role="group" aria-label="サイズプリセット">
+        <button type="button" class="preset-btn" data-size="16">16</button>
+        <button type="button" class="preset-btn" data-size="24">24</button>
+        <button type="button" class="preset-btn" data-size="32" data-active="true">32</button>
+        <button type="button" class="preset-btn" data-size="48">48</button>
+        <button type="button" class="preset-btn" data-size="64">64</button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<script src="./app.js" defer></script>
+</body>
+</html>

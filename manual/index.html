@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HṛdayaFlow — 全機能ブラウザ</title>
+<meta name="description" content="HṛdayaFlow の全機能を 1 ページでスキャン。12 種のノート、7 形式の相互運用、AI、Undo、書式パネル、ショートカット、開発者ガイドまで。" />
+<meta property="og:title" content="HṛdayaFlow — 全機能ブラウザ" />
+<meta property="og:description" content="12 種のノート、7 形式の相互運用、AI 連携。マニュアル全 16 章を 1 ページで一気見。" />
+<meta property="og:type" content="website" />
+<meta property="og:image" content="../assets/mandala.png" />
+<link rel="icon" type="image/png" href="../assets/mandala.png" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Space+Grotesk:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<style>
+:root {
+  --bg: #0a0a0f;
+  --bg-soft: #121218;
+  --bg-card: #16161d;
+  --bg-elevated: #1b1b24;
+  --bg-card-hover: #1e1e28;
+  --fg: #f5f5f7;
+  --fg-muted: #8a8a92;
+  --fg-dim: #5a5a62;
+  --accent: #b8afff;
+  --accent-sub: #6b5fb5;
+  --accent-line: rgba(184, 175, 255, 0.25);
+  --accent-glow: rgba(184, 175, 255, 0.18);
+  --gold: #c8a14c;
+  --divider: rgba(255, 255, 255, 0.08);
+  --ff-jp: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif;
+  --ff-en: 'Space Grotesk', -apple-system, sans-serif;
+  --ff-mono: 'JetBrains Mono', monospace;
+  --ff: var(--ff-jp);
+  --container: 1200px;
+  --gutter: clamp(20px, 4vw, 48px);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--ff);
+  font-weight: 400;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: 0; background: 0; color: inherit; }
+img { max-width: 100%; display: block; }
+.muted { color: var(--fg-muted); }
+.mono { font-family: var(--ff-mono); }
+.en { font-family: var(--ff-en); }
+
+/* ================ HEADER ================ */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px var(--gutter);
+  background: rgba(10, 10, 15, 0.78);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--divider);
+}
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 18px; }
+.brand-mark { width: 28px; height: 28px; border-radius: 50%; }
+.brand-accent { color: var(--accent); }
+.site-nav { display: flex; gap: 22px; font-size: 14px; }
+.site-nav a { color: var(--fg-muted); transition: color .2s; }
+.site-nav a:hover, .site-nav a.active { color: var(--accent); }
+.header-cta { padding: 8px 16px; background: var(--accent); color: var(--bg); font-weight: 600; border-radius: 6px; font-size: 14px; }
+.header-cta:hover { background: var(--fg); }
+@media (max-width: 800px) { .site-nav { display: none; } }
+
+/* ================ HERO ================ */
+.hero {
+  position: relative;
+  padding: 96px var(--gutter) 80px;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 50% 30%, var(--accent-glow), transparent 60%),
+    radial-gradient(circle at 80% 80%, rgba(200, 161, 76, 0.08), transparent 60%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  display: inline-block;
+  font-family: var(--ff-en);
+  font-size: 13px; letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 24px;
+  padding: 4px 14px;
+  border: 1px solid var(--accent-line);
+  border-radius: 99px;
+}
+.hero-title {
+  font-size: clamp(40px, 7vw, 84px);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 28px;
+}
+.hero-title .accent {
+  background: linear-gradient(120deg, var(--accent), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.hero-sub {
+  font-size: clamp(15px, 1.4vw, 18px);
+  color: var(--fg-muted);
+  max-width: 660px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+}
+.hero-stats {
+  display: flex; justify-content: center; gap: clamp(20px, 5vw, 60px);
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.hero-stat { text-align: center; }
+.hero-stat-num {
+  font-family: var(--ff-en);
+  font-size: clamp(28px, 4vw, 48px);
+  font-weight: 700;
+  background: linear-gradient(140deg, var(--accent), var(--gold));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  line-height: 1;
+}
+.hero-stat-label { font-size: 12px; color: var(--fg-muted); margin-top: 6px; letter-spacing: 0.12em; text-transform: uppercase; }
+.hero-ctas { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+.btn {
+  padding: 14px 28px;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: all .2s;
+  display: inline-block;
+}
+.btn-primary { background: var(--accent); color: var(--bg); }
+.btn-primary:hover { background: var(--fg); transform: translateY(-2px); }
+.btn-ghost { border: 1px solid rgba(255,255,255,0.2); color: var(--fg); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ================ SECTION COMMON ================ */
+section.feat {
+  padding: 80px var(--gutter);
+  max-width: var(--container);
+  margin: 0 auto;
+  scroll-margin-top: 80px;
+}
+.section-eyebrow {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.section-title {
+  font-size: clamp(28px, 4.5vw, 44px);
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 16px;
+}
+.section-lead {
+  color: var(--fg-muted);
+  font-size: 16px;
+  max-width: 720px;
+  margin-bottom: 48px;
+}
+
+/* ================ SEARCH BAR ================ */
+.search-wrap {
+  position: sticky; top: 60px; z-index: 50;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--divider);
+  padding: 16px var(--gutter);
+  display: flex; align-items: center; gap: 16px;
+  flex-wrap: wrap;
+}
+.search-input {
+  flex: 1; min-width: 200px;
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  padding: 10px 14px;
+  color: var(--fg);
+  font-size: 15px;
+}
+.search-input:focus { outline: none; border-color: var(--accent); }
+.search-input::placeholder { color: var(--fg-dim); }
+.search-counter { font-size: 13px; color: var(--fg-muted); }
+.filter-chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.filter-chip {
+  padding: 6px 12px;
+  border-radius: 99px;
+  font-size: 12px;
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  color: var(--fg-muted);
+  transition: all .2s;
+}
+.filter-chip:hover, .filter-chip.active {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+}
+
+/* ================ NODES GRID ================ */
+.nodes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+.node-card {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all .25s var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.node-card:hover {
+  background: var(--bg-card-hover);
+  border-color: var(--accent-line);
+  transform: translateY(-3px);
+}
+.node-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0; transition: opacity .25s;
+}
+.node-card:hover::before { opacity: 1; }
+.node-icon {
+  width: 36px; height: 36px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+.node-name {
+  font-weight: 700; font-size: 16px; margin-bottom: 4px;
+}
+.node-name .en { font-size: 13px; color: var(--fg-muted); margin-left: 6px; font-weight: 400; }
+.node-desc { color: var(--fg-muted); font-size: 13px; line-height: 1.6; }
+.node-tags { margin-top: 10px; display: flex; gap: 6px; flex-wrap: wrap; }
+.node-tag {
+  font-size: 10px;
+  padding: 2px 8px;
+  background: rgba(184,175,255,0.1);
+  color: var(--accent);
+  border-radius: 4px;
+  letter-spacing: 0.05em;
+}
+
+/* ================ FEATURE LIST ================ */
+.feat-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
+.feat-item {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  padding: 20px;
+  transition: all .2s;
+}
+.feat-item:hover { border-color: var(--accent-line); }
+.feat-item-title { font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.feat-item-title .kbd { font-family: var(--ff-mono); font-size: 11px; background: var(--bg-elevated); padding: 2px 6px; border-radius: 4px; color: var(--accent); }
+.feat-item-desc { font-size: 13px; color: var(--fg-muted); line-height: 1.6; }
+
+/* ================ FORMAT GRID ================ */
+.format-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 12px;
+}
+.format-card {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+  transition: all .2s;
+}
+.format-card:hover { background: var(--bg-card-hover); transform: translateY(-2px); border-color: var(--accent-line); }
+.format-name { font-family: var(--ff-mono); font-size: 14px; font-weight: 700; color: var(--accent); margin-bottom: 4px; }
+.format-ext { font-size: 11px; color: var(--fg-dim); margin-bottom: 10px; }
+.format-io {
+  display: flex; justify-content: center; gap: 4px; font-size: 11px;
+}
+.io-badge {
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--bg-elevated);
+  color: var(--fg-dim);
+  letter-spacing: 0.06em;
+}
+.io-badge.on { background: var(--accent); color: var(--bg); }
+
+/* ================ ARCHITECTURE ================ */
+.arch-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 32px;
+}
+.arch-row {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px dashed var(--divider);
+  align-items: center;
+}
+.arch-row:last-child { border-bottom: 0; }
+.arch-layer {
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+.arch-content {
+  background: var(--bg-elevated);
+  padding: 18px 22px;
+  border-radius: 8px;
+  border-left: 3px solid var(--accent);
+}
+.arch-content h3 { font-size: 15px; margin-bottom: 6px; }
+.arch-content p { font-size: 13px; color: var(--fg-muted); }
+.arch-bridge {
+  text-align: center; font-family: var(--ff-mono);
+  font-size: 11px; color: var(--fg-dim);
+  letter-spacing: 0.1em;
+}
+
+/* ================ MANUAL CHAPTERS ================ */
+.chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 14px;
+}
+.chap-card {
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  padding: 18px;
+  display: flex; flex-direction: column;
+  transition: all .2s;
+  text-decoration: none;
+  color: var(--fg);
+  position: relative;
+}
+.chap-card:hover {
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  border-color: var(--accent-line);
+}
+.chap-num {
+  font-family: var(--ff-en);
+  font-size: 12px;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  margin-bottom: 4px;
+}
+.chap-title { font-weight: 700; font-size: 16px; margin-bottom: 8px; }
+.chap-desc { font-size: 13px; color: var(--fg-muted); line-height: 1.55; flex: 1; }
+.chap-arrow { margin-top: 12px; color: var(--accent); font-size: 13px; opacity: 0; transition: all .2s; }
+.chap-card:hover .chap-arrow { opacity: 1; transform: translateX(4px); }
+
+/* ================ KBD TABLE ================ */
+.kbd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+.kbd-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.kbd-key {
+  font-family: var(--ff-mono);
+  font-size: 11px;
+  background: var(--bg-elevated);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: var(--accent);
+  white-space: nowrap;
+}
+
+/* ================ FINAL CTA ================ */
+.cta-section {
+  padding: 100px var(--gutter);
+  text-align: center;
+  background:
+    radial-gradient(circle at 50% 50%, var(--accent-glow), transparent 70%),
+    var(--bg-soft);
+  margin-top: 60px;
+}
+.cta-title {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+.cta-sub { color: var(--fg-muted); margin-bottom: 32px; }
+
+/* ================ FOOTER ================ */
+.site-footer {
+  padding: 40px var(--gutter);
+  text-align: center;
+  border-top: 1px solid var(--divider);
+  font-size: 13px;
+  color: var(--fg-dim);
+}
+.site-footer a { color: var(--fg-muted); margin: 0 10px; }
+.site-footer a:hover { color: var(--accent); }
+
+/* ================ HIDDEN STATE ================ */
+.hidden { display: none !important; }
+
+/* ================ ANIMATIONS ================ */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal { opacity: 0; }
+.reveal.in { animation: fadeInUp .8s var(--ease) forwards; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  html { scroll-behavior: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <a href="#top" class="brand">
+    <img src="../assets/mandala.png" alt="" class="brand-mark" />
+    <span>Hṛdaya<span class="brand-accent">Flow</span></span>
+  </a>
+  <nav class="site-nav">
+    <a href="#nodes">ノード</a>
+    <a href="#canvas">キャンバス</a>
+    <a href="#format">書式</a>
+    <a href="#interop">相互運用</a>
+    <a href="#ai">AI</a>
+    <a href="#chapters">マニュアル</a>
+  </nav>
+  <a href="../index.html" class="header-cta">トップへ</a>
+</header>
+
+<!-- HERO -->
+<section id="top" class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <p class="hero-eyebrow">FEATURE BROWSER · v0.0.3</p>
+  <h1 class="hero-title">
+    全機能を、<br />
+    <span class="accent">1 ページで。</span>
+  </h1>
+  <p class="hero-sub">
+    HṛdayaFlow にできることを、スクロール 1 分で。<br />
+    気になった機能はクリックでマニュアルへ。
+  </p>
+  <div class="hero-stats">
+    <div class="hero-stat"><div class="hero-stat-num">12</div><div class="hero-stat-label">Node Types</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">7</div><div class="hero-stat-label">Interop Formats</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">3</div><div class="hero-stat-label">AI Backends</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">60+</div><div class="hero-stat-label">Shortcuts</div></div>
+    <div class="hero-stat"><div class="hero-stat-num">16</div><div class="hero-stat-label">Manual Chapters</div></div>
+  </div>
+  <div class="hero-ctas">
+    <a href="#nodes" class="btn btn-primary">機能を見る</a>
+    <a href="#chapters" class="btn btn-ghost">マニュアル一覧</a>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <input type="search" id="searchInput" class="search-input" placeholder="🔍  機能名・キーワードで絞り込み (例: 画像、Ctrl+G、AI)" />
+  <span id="searchCounter" class="search-counter"></span>
+  <div class="filter-chips" id="filterChips">
+    <button class="filter-chip active" data-cat="all">すべて</button>
+    <button class="filter-chip" data-cat="node">ノード</button>
+    <button class="filter-chip" data-cat="canvas">キャンバス</button>
+    <button class="filter-chip" data-cat="format">書式</button>
+    <button class="filter-chip" data-cat="interop">相互運用</button>
+    <button class="filter-chip" data-cat="ai">AI</button>
+    <button class="filter-chip" data-cat="kbd">ショートカット</button>
+  </div>
+</div>
+
+<!-- 12 NODE TYPES -->
+<section id="nodes" class="feat" data-cat="node">
+  <p class="section-eyebrow">01 · CONTENT</p>
+  <h2 class="section-title">12 種のノート</h2>
+  <p class="section-lead">テキストだけじゃない。動画・音声・コード・数式・Web 埋め込みまで、思考の素材を全部 1 枚の上に置ける。</p>
+
+  <div class="nodes-grid" id="nodesGrid">
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="text プレーンテキスト inline mark">
+      <div class="node-icon">📝</div>
+      <div class="node-name">Text<span class="en">プレーン</span></div>
+      <div class="node-desc">短いラベル・キーワード。部分太字・部分色付けに対応。</div>
+      <div class="node-tags"><span class="node-tag">B/I/U/S</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="markdown md commonmark 長文">
+      <div class="node-icon">📄</div>
+      <div class="node-name">Markdown<span class="en">リッチ</span></div>
+      <div class="node-desc">CommonMark 準拠。見出し・リスト・コード・表。64KB 超は外部ファイル化。</div>
+      <div class="node-tags"><span class="node-tag">CommonMark</span><span class="node-tag">flutter_markdown</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="image 画像 png jpg crop">
+      <div class="node-icon">🖼️</div>
+      <div class="node-name">Image<span class="en">画像</span></div>
+      <div class="node-desc">PNG/JPG/GIF/WebP/SVG。D&D 取込、Inspector でクロップ。</div>
+      <div class="node-tags"><span class="node-tag">D&D</span><span class="node-tag">crop</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="link url リンク favicon">
+      <div class="node-icon">🔗</div>
+      <div class="node-name">Link<span class="en">URL</span></div>
+      <div class="node-desc">URL を 1 枚のカードに。favicon 自動取得、クリックで既定ブラウザ。</div>
+      <div class="node-tags"><span class="node-tag">favicon</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="video 動画 mp4 webm">
+      <div class="node-icon">🎬</div>
+      <div class="node-name">Video<span class="en">動画</span></div>
+      <div class="node-desc">MP4/WebM/MOV。サムネイル + 再生ボタン、durationSec 表示。</div>
+      <div class="node-tags"><span class="node-tag">video_player</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="audio 音声 mp3 m4a 波形">
+      <div class="node-icon">🎵</div>
+      <div class="node-name">Audio<span class="en">音声</span></div>
+      <div class="node-desc">MP3/M4A/OGG/WAV。波形表示、再生時間。読み込み時に波形キャッシュ生成。</div>
+      <div class="node-tags"><span class="node-tag">just_audio</span><span class="node-tag">waveform</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="checklist チェックリスト task todo">
+      <div class="node-icon">☑️</div>
+      <div class="node-name">Checklist<span class="en">タスク</span></div>
+      <div class="node-desc">複数アイテム + 完了フラグ。並べ替え・追加・削除。Outline で進捗 (3/8)。</div>
+      <div class="node-tags"><span class="node-tag">todo</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="code コード syntax highlight">
+      <div class="node-icon">💻</div>
+      <div class="node-name">Code<span class="en">コード</span></div>
+      <div class="node-desc">100+ 言語のシンタックスハイライト。テーマ連動 (Light/Dark)。</div>
+      <div class="node-tags"><span class="node-tag">flutter_highlight</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="embed iframe html sandbox">
+      <div class="node-icon">🌐</div>
+      <div class="node-name">Embed<span class="en">埋め込み</span></div>
+      <div class="node-desc">YouTube/Twitter/Figma を iframe で。CSP sandbox + sanitizer。</div>
+      <div class="node-tags"><span class="node-tag">iframe</span><span class="node-tag">CSP</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="math latex 数式 katex">
+      <div class="node-icon">∑</div>
+      <div class="node-name">Math<span class="en">数式</span></div>
+      <div class="node-desc">LaTeX で数式。inline / block 表示。<span class="mono">\int_0^∞ e^{-x²}</span> など。</div>
+      <div class="node-tags"><span class="node-tag">flutter_math</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="frame 装飾 矩形 背景">
+      <div class="node-icon">🔲</div>
+      <div class="node-name">Frame<span class="en">装飾</span></div>
+      <div class="node-desc">枠だけのノート。視覚的な囲い・背景・ラベル領域。</div>
+      <div class="node-tags"><span class="node-tag">decorative</span></div>
+    </a>
+    <a class="node-card searchable" href="../docs/manual/04-nodes.md" data-keywords="container グループ 折りたたみ ctrl-g">
+      <div class="node-icon">📦</div>
+      <div class="node-name">Container<span class="en">グループ</span></div>
+      <div class="node-desc">複数ノートをまとめる箱。折りたたみ・サブマップ昇格。<span class="mono">Ctrl+G</span></div>
+      <div class="node-tags"><span class="node-tag">Ctrl+G</span><span class="node-tag">submap</span></div>
+    </a>
+  </div>
+</section>
+
+<!-- CANVAS GESTURES -->
+<section id="canvas" class="feat" data-cat="canvas">
+  <p class="section-eyebrow">02 · CANVAS</p>
+  <h2 class="section-title">無限キャンバスとジェスチャー</h2>
+  <p class="section-lead">どこにでも置ける自由度と、揃えれば整然となるオートレイアウトのハイブリッド。</p>
+
+  <div class="feat-list">
+    <div class="feat-item searchable" data-keywords="pan ズーム zoom mouse wheel">
+      <div class="feat-item-title">パン & ズーム <span class="kbd">Ctrl+ホイール</span></div>
+      <div class="feat-item-desc">中ボタンドラッグでパン、Ctrl+ホイールでカーソル位置中心ズーム (5%〜800%)。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="select 矩形 投げ縄 lasso">
+      <div class="feat-item-title">矩形・投げ縄選択 <span class="kbd">Shift+ドラッグ</span></div>
+      <div class="feat-item-desc">完全包含/Crossing 切替。Shift+クリックで選択追加、Ctrl+A で全選択。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="grid snap グリッド スナップ magnetic">
+      <div class="feat-item-title">グリッド & マグネティック <span class="kbd">Ctrl+;</span></div>
+      <div class="feat-item-desc">8/16/32/64 px グリッド、エッジ吸着、ガイド線スナップ。Alt で一時無効。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="align 整列 distribute 配置">
+      <div class="feat-item-title">整列・配置</div>
+      <div class="feat-item-desc">左/中央/右、上/中央/下揃え。横/縦方向の均等配置。複数選択時に右クリック。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="blender g s r 変形 transform">
+      <div class="feat-item-title">Blender 風変形 <span class="kbd">G/S/R</span></div>
+      <div class="feat-item-desc">Grab/Scale/Rotate モード。X/Y で軸固定、数値タイプで量指定。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="z-order 重ね順 前面 背面">
+      <div class="feat-item-title">重ね順 <span class="kbd">Ctrl+]/Ctrl+[</span></div>
+      <div class="feat-item-desc">1 段ずつ前後、Ctrl+Shift で最前/最背。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="edge エッジ 接続 ハンドル ドラッグ">
+      <div class="feat-item-title">ハンドルドラッグでエッジ作成</div>
+      <div class="feat-item-desc">ノート端のハンドルから他ノートへ。Shift で矢印、Alt で逆向き、Ctrl で双方向。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="container グループ ctrl g 折りたたみ">
+      <div class="feat-item-title">グループ化 <span class="kbd">Ctrl+G</span></div>
+      <div class="feat-item-desc">複数選択 → Container 化、折りたたみ可。Ctrl+Alt+G で内部 Auto Layout。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="submap サブマップ 昇格">
+      <div class="feat-item-title">サブマップ昇格</div>
+      <div class="feat-item-desc">Container を別タブで開いて編集。複雑な部分を分離整理。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="layer レイヤー lock visibility">
+      <div class="feat-item-title">レイヤー</div>
+      <div class="feat-item-desc">表示/非表示・ロック・色付け。エッジだけのレイヤーも作れる。</div>
+    </div>
+  </div>
+</section>
+
+<!-- FORMAT INSPECTOR -->
+<section id="format" class="feat" data-cat="format">
+  <p class="section-eyebrow">03 · FORMAT</p>
+  <h2 class="section-title">Inspector & 書式パネル</h2>
+  <p class="section-lead">Scapple の NOTE FORMAT 相当 + 拡張。複数選択で一括変更も。</p>
+
+  <div class="feat-list">
+    <div class="feat-item searchable" data-keywords="bold italic underline strikethrough biu">
+      <div class="feat-item-title">B / I / U / S <span class="kbd">Ctrl+B</span></div>
+      <div class="feat-item-desc">太字・斜体・下線・取り消し線。範囲選択で部分適用 (InlineMark)。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="font size フォントサイズ">
+      <div class="feat-item-title">フォントサイズ</div>
+      <div class="feat-item-desc">8〜144px のスライダー or 数値入力。Ctrl++/Ctrl+- で 2px ステップ。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="alignment 配置 left center right">
+      <div class="feat-item-title">配置 <span class="kbd">Ctrl+L/E/R</span></div>
+      <div class="feat-item-desc">水平 (左/中/右) / 垂直 (上/中/下) を独立に。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="color picker カラー 色">
+      <div class="feat-item-title">カラーピッカー</div>
+      <div class="feat-item-desc">プリセット 16 + カスタム HEX + Recent 8。テキスト色 / 塗り / 枠 / 影に独立指定。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="shape 図形 rect ellipse cloud diamond">
+      <div class="feat-item-title">図形 (8 種)</div>
+      <div class="feat-item-desc">矩形/角丸/楕円/ひし形/六角/雲/平行四辺形/三角。Ctrl+Shift+1〜8 で切替。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="border 枠 線 dashed dotted">
+      <div class="feat-item-title">Border</div>
+      <div class="feat-item-desc">幅 0〜10px、Style (実線/破線/点線/二重)、色。Ctrl+Shift+B でトグル。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="shadow 影 drop">
+      <div class="feat-item-title">Drop Shadow</div>
+      <div class="feat-item-desc">ON/OFF 切替。色・距離はテーマ連動。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="opacity 不透明度 透明">
+      <div class="feat-item-title">Opacity</div>
+      <div class="feat-item-desc">0〜100% スライダー。0% でも選択は可。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="magnetic snap 吸着">
+      <div class="feat-item-title">Magnetic Snap</div>
+      <div class="feat-item-desc">他ノートのエッジと整合する位置で吸着。重要ノートだけ ON 推奨。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="kind switcher 種別切替">
+      <div class="feat-item-title">種別切替 (Kind Switcher)</div>
+      <div class="feat-item-desc">text → markdown → image など、データを保ったまま変換。</div>
+    </div>
+  </div>
+</section>
+
+<!-- INTEROP / FORMATS -->
+<section id="interop" class="feat" data-cat="interop">
+  <p class="section-eyebrow">04 · INTEROP</p>
+  <h2 class="section-title">7 形式と相互運用</h2>
+  <p class="section-lead">主形式は <span class="mono">.hrf</span> v0.2 (ZIP)。Mermaid・Obsidian Canvas・OPML・XMind・FreeMind・Scapple・Markdown と双方向 / 片方向で行き来。</p>
+
+  <div class="format-grid">
+    <div class="format-card searchable" data-keywords="hrf zip native">
+      <div class="format-name">.hrf v0.2</div>
+      <div class="format-ext">ZIP コンテナ</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="hrf v0.1 後方互換">
+      <div class="format-name">.hrf v0.1</div>
+      <div class="format-ext">最小 ZIP (互換)</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="json naked fallback">
+      <div class="format-name">naked JSON</div>
+      <div class="format-ext">.json (fallback)</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="markdown md outline obsidian">
+      <div class="format-name">Markdown</div>
+      <div class="format-ext">.md outline</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="mermaid mmd github">
+      <div class="format-name">Mermaid</div>
+      <div class="format-ext">.mmd</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="json canvas obsidian">
+      <div class="format-name">JSON Canvas</div>
+      <div class="format-ext">.canvas (Obsidian)</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="opml outline">
+      <div class="format-name">OPML</div>
+      <div class="format-ext">.opml</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="xmind">
+      <div class="format-name">XMind</div>
+      <div class="format-ext">.xmind</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="freemind freeplane">
+      <div class="format-name">FreeMind</div>
+      <div class="format-ext">.mm</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="scapple scap">
+      <div class="format-name">Scapple</div>
+      <div class="format-ext">.scap</div>
+      <div class="format-io"><span class="io-badge on">Read</span><span class="io-badge">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="pdf print 印刷 出力">
+      <div class="format-name">PDF</div>
+      <div class="format-ext">ベクター・印刷</div>
+      <div class="format-io"><span class="io-badge">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="png raster">
+      <div class="format-name">PNG</div>
+      <div class="format-ext">ラスター 96/144/300dpi</div>
+      <div class="format-io"><span class="io-badge">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+    <div class="format-card searchable" data-keywords="svg vector inkscape">
+      <div class="format-name">SVG</div>
+      <div class="format-ext">編集可ベクター</div>
+      <div class="format-io"><span class="io-badge">Read</span><span class="io-badge on">Write</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- AI -->
+<section id="ai" class="feat" data-cat="ai">
+  <p class="section-eyebrow">05 · AI</p>
+  <h2 class="section-title">AI 連携 (3 backend)</h2>
+  <p class="section-lead">stub (オフライン) / Ollama (ローカル LLM) / PrudeLLM (ホスト)。テキスト⇔マップ往復、エッジ提案、子提案。</p>
+
+  <div class="feat-list">
+    <div class="feat-item searchable" data-keywords="text to map テキスト マップ 生成">
+      <div class="feat-item-title">テキスト → マップ <span class="kbd">Ctrl+Enter</span></div>
+      <div class="feat-item-desc">箇条書きや文章をノート + エッジに構造化。WebSocket でストリーミング表示。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="summarize 要約 map text">
+      <div class="feat-item-title">マップ → 要約</div>
+      <div class="feat-item-desc">箇条書き / 段落 / Twitter 280字 / 1行 から文体選択。クリップボード or 新規 Markdown へ。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="suggest edges エッジ 提案">
+      <div class="feat-item-title">Suggest Edges</div>
+      <div class="feat-item-desc">繋がっていない関連ノート間のエッジを提案。信頼度スコア付き。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="suggest children 子 提案">
+      <div class="feat-item-title">Suggest Children <span class="kbd">Ctrl+Shift+R</span></div>
+      <div class="feat-item-desc">1 ノートに対して子候補を生成。「目的・期日・担当・リスク・予算」など。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="diff json patch 差分">
+      <div class="feat-item-title">Diff (JSON Patch)</div>
+      <div class="feat-item-desc">2 マップの差分を RFC 6902 で取得。バージョン管理・共同編集の基礎。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="mcp server claude cursor">
+      <div class="feat-item-title">MCP Server (HTTP)</div>
+      <div class="feat-item-desc">Claude Desktop / Cursor などから操作可能。read / find_node / bulk_apply / bulk_patch。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="ollama ローカル llm">
+      <div class="feat-item-title">Ollama (ローカル)</div>
+      <div class="feat-item-desc">localhost:11434 を自動検出。プライバシー重視のユーザー向け。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="prudellm api hosted">
+      <div class="feat-item-title">PrudeLLM (ホスト)</div>
+      <div class="feat-item-desc">API キーで利用。明示同意制。マップ内容が外部送信される。</div>
+    </div>
+    <div class="feat-item searchable" data-keywords="stub fallback rule based">
+      <div class="feat-item-title">Stub フォールバック</div>
+      <div class="feat-item-desc">LLM タイムアウト時に rule-based に自動切替。アプリは止まらない。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHITECTURE -->
+<section class="feat">
+  <p class="section-eyebrow">06 · STACK</p>
+  <h2 class="section-title">3 層アーキテクチャ</h2>
+  <p class="section-lead">UI = Flutter で機敏に、Core = Rust で安全・高速に、AI = Python で隔離。</p>
+
+  <div class="arch-wrap">
+    <div class="arch-row">
+      <div class="arch-layer">UI</div>
+      <div class="arch-content">
+        <h3>Flutter Desktop (Dart 3.x)</h3>
+        <p>キャンバス描画 (CustomPaint) / ジェスチャー / ノード編集 / パネル / Inspector / Undo Adapter</p>
+      </div>
+    </div>
+    <div class="arch-bridge">↑ ↓ FFI (flutter_rust_bridge 2.12)</div>
+    <div class="arch-row">
+      <div class="arch-layer">CORE</div>
+      <div class="arch-content">
+        <h3>Rust (hrdaya_core)</h3>
+        <p>graph / layout / .hrf v0.2 ZIP I/O / importers (7 形式) / exporters (PDF/SVG/PNG/Md) / JSON Patch (RFC 6902)</p>
+      </div>
+    </div>
+    <div class="arch-bridge">↑ ↓ HTTP / WebSocket :8765</div>
+    <div class="arch-row">
+      <div class="arch-layer">AI</div>
+      <div class="arch-content">
+        <h3>Python AI Service (FastAPI)</h3>
+        <p>/api/generate-map / /api/summarize-map / Backend: stub / PrudeLLM / Ollama</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- KEY SHORTCUTS -->
+<section class="feat" data-cat="kbd">
+  <p class="section-eyebrow">07 · SHORTCUTS</p>
+  <h2 class="section-title">よく使うショートカット (抜粋)</h2>
+  <p class="section-lead">全 60+ 種は <a href="../docs/manual/13-keyboard-reference.md" style="color: var(--accent);">13 ショートカット早見表</a> へ。</p>
+
+  <div class="kbd-grid">
+    <div class="kbd-row searchable" data-keywords="ctrl s save 保存"><span>保存</span><span class="kbd-key">Ctrl+S</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl o open 開く"><span>開く</span><span class="kbd-key">Ctrl+O</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl z undo"><span>Undo</span><span class="kbd-key">Ctrl+Z</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl y redo"><span>Redo</span><span class="kbd-key">Ctrl+Y</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl alt z 履歴"><span>履歴ビューア</span><span class="kbd-key">Ctrl+Alt+Z</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl f search 検索"><span>検索</span><span class="kbd-key">Ctrl+F</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl k command palette"><span>コマンドパレット</span><span class="kbd-key">Ctrl+K</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl p quickopen"><span>QuickOpen</span><span class="kbd-key">Ctrl+P</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl g group container"><span>グループ化</span><span class="kbd-key">Ctrl+G</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl shift n ノード ピッカー"><span>ノード種別ピッカー</span><span class="kbd-key">Ctrl+Shift+N</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl 9 fit 全体"><span>Fit (全体表示)</span><span class="kbd-key">Ctrl+9</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl 0 zoom"><span>Zoom 100%</span><span class="kbd-key">Ctrl+0</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl ; grid"><span>グリッド ON/OFF</span><span class="kbd-key">Ctrl+;</span></div>
+    <div class="kbd-row searchable" data-keywords="shift ; snap"><span>スナップ ON/OFF</span><span class="kbd-key">Shift+;</span></div>
+    <div class="kbd-row searchable" data-keywords="g grab"><span>Grab (移動)</span><span class="kbd-key">G</span></div>
+    <div class="kbd-row searchable" data-keywords="s scale"><span>Scale (拡大縮小)</span><span class="kbd-key">S</span></div>
+    <div class="kbd-row searchable" data-keywords="r rotate"><span>Rotate (回転)</span><span class="kbd-key">R</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl b bold"><span>Bold</span><span class="kbd-key">Ctrl+B</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl shift e エクスポート"><span>エクスポート選択</span><span class="kbd-key">Ctrl+Shift+E</span></div>
+    <div class="kbd-row searchable" data-keywords="ctrl enter ai"><span>AI 生成</span><span class="kbd-key">Ctrl+Enter</span></div>
+  </div>
+</section>
+
+<!-- MANUAL CHAPTERS -->
+<section id="chapters" class="feat">
+  <p class="section-eyebrow">08 · MANUAL</p>
+  <h2 class="section-title">マニュアル全 16 章</h2>
+  <p class="section-lead">Obsidian で開けば <span class="mono">[[]]</span> wikilink で章間移動。リポ内パスは <span class="mono">docs/manual/</span>。</p>
+
+  <div class="chapters-grid">
+    <a class="chap-card" href="../../docs/manual/00-INDEX.md">
+      <div class="chap-num">00</div>
+      <div class="chap-title">INDEX</div>
+      <div class="chap-desc">全 16 章の目次。Obsidian で最初に開く。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/01-overview.md">
+      <div class="chap-num">01</div>
+      <div class="chap-title">概要とアーキテクチャ</div>
+      <div class="chap-desc">製品コンセプト・3 層構成・対応 OS・他製品との位置づけ。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/02-getting-started.md">
+      <div class="chap-num">02</div>
+      <div class="chap-title">はじめに</div>
+      <div class="chap-desc">インストール・初回起動・5 分でわかる基本操作・最初のつまずき集。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/03-canvas-and-gestures.md">
+      <div class="chap-num">03</div>
+      <div class="chap-title">キャンバスとジェスチャー</div>
+      <div class="chap-desc">パン・ズーム・選択・スナップ・グリッド・Blender 風 G/S/R 変形。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/04-nodes.md">
+      <div class="chap-num">04</div>
+      <div class="chap-title">ノード 12 種</div>
+      <div class="chap-desc">text/markdown/image/video/audio/link/checklist/code/embed/math/frame/container。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/05-edges-and-connections.md">
+      <div class="chap-num">05</div>
+      <div class="chap-title">エッジと接続</div>
+      <div class="chap-desc">ハンドルドラッグ・semantic type (parent-child/cause-effect/dependency)・スタイル。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/06-groups-and-containers.md">
+      <div class="chap-num">06</div>
+      <div class="chap-title">グループと Container</div>
+      <div class="chap-desc">Ctrl+G・折りたたみ・サブマップ昇格・layoutHint (freeform/tree/radial)。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/07-inspector-and-formatting.md">
+      <div class="chap-num">07</div>
+      <div class="chap-title">Inspector と書式</div>
+      <div class="chap-desc">Format Panel: B/I/U/S・色・枠線・影・図形・Magnetic Snap。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/08-undo-history.md">
+      <div class="chap-num">08</div>
+      <div class="chap-title">Undo / 履歴</div>
+      <div class="chap-desc">JSON Patch (RFC 6902) ベース・coalesce・履歴ビューア・永続化オプション。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/09-search-and-outline.md">
+      <div class="chap-num">09</div>
+      <div class="chap-title">検索と Outline</div>
+      <div class="chap-desc">Ctrl+F 全体検索・Ctrl+K コマンドパレット・Outline パネル・Layer。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/10-ai-features.md">
+      <div class="chap-num">10</div>
+      <div class="chap-title">AI 機能</div>
+      <div class="chap-desc">テキスト⇔マップ・Suggest Edges/Children・3 backend・MCP Server。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/11-files-and-interop.md">
+      <div class="chap-num">11</div>
+      <div class="chap-title">ファイルと相互運用</div>
+      <div class="chap-desc">.hrf v0.2 仕様・7 形式 import/export・Asset Extractor・PDF/PNG/SVG。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/12-themes-i18n-a11y.md">
+      <div class="chap-num">12</div>
+      <div class="chap-title">テーマ・多言語・a11y</div>
+      <div class="chap-desc">Light/Dark・ja/en/zh・スクリーンリーダー・モーション軽減・WCAG AA。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/13-keyboard-reference.md">
+      <div class="chap-num">13</div>
+      <div class="chap-title">ショートカット早見表</div>
+      <div class="chap-desc">全キーボード操作の網羅リスト。印刷推奨。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/14-developer-guide.md">
+      <div class="chap-num">14</div>
+      <div class="chap-title">開発者ガイド</div>
+      <div class="chap-desc">CLI・MCP server・budget gate・寄稿フロー・ビルド。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+    <a class="chap-card" href="../../docs/manual/15-troubleshooting.md">
+      <div class="chap-num">15</div>
+      <div class="chap-title">トラブルシューティング</div>
+      <div class="chap-desc">FAQ・既知の問題・ログの場所・バグ報告フォーマット。</div>
+      <div class="chap-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta-section">
+  <h2 class="cta-title">気になった機能は手で触ってみる。</h2>
+  <p class="cta-sub">マニュアルの「動作確認チェックリスト」を順に試すと、開発と相性が良い。</p>
+  <div class="hero-ctas">
+    <a href="../index.html#download" class="btn btn-primary">ダウンロード</a>
+    <a href="../../docs/manual/02-getting-started.md" class="btn btn-ghost">はじめに →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <p>HṛdayaFlow · Feature Browser · v0.0.3 (2026-04-28)</p>
+  <p style="margin-top: 12px;">
+    <a href="../index.html">トップ</a> ·
+    <a href="../../docs/manual/00-INDEX.md">マニュアル</a> ·
+    <a href="../../README.md">README</a> ·
+    <a href="../../docs/manual/15-troubleshooting.md">トラブル</a>
+  </p>
+</footer>
+
+<script>
+// ============== SEARCH & FILTER ==============
+const searchInput = document.getElementById('searchInput');
+const counter = document.getElementById('searchCounter');
+const chips = document.querySelectorAll('#filterChips .filter-chip');
+let activeCat = 'all';
+let activeQuery = '';
+
+function applyFilter() {
+  const q = activeQuery.trim().toLowerCase();
+  const allItems = document.querySelectorAll('.searchable');
+  let visible = 0;
+  let total = allItems.length;
+
+  allItems.forEach(el => {
+    const sec = el.closest('section[data-cat]');
+    const secCat = sec ? sec.dataset.cat : null;
+    const catMatch = activeCat === 'all' || secCat === activeCat;
+    const text = (el.textContent + ' ' + (el.dataset.keywords || '')).toLowerCase();
+    const queryMatch = !q || text.includes(q);
+    const show = catMatch && queryMatch;
+    el.classList.toggle('hidden', !show);
+    if (show) visible++;
+  });
+
+  // Hide section headers if all items in that section are hidden
+  document.querySelectorAll('section[data-cat]').forEach(sec => {
+    const items = sec.querySelectorAll('.searchable');
+    const anyVisible = Array.from(items).some(i => !i.classList.contains('hidden'));
+    sec.classList.toggle('hidden', !anyVisible && (activeCat !== 'all' || q));
+  });
+
+  counter.textContent = (q || activeCat !== 'all')
+    ? `${visible} / ${total} 件`
+    : '';
+}
+
+searchInput.addEventListener('input', e => {
+  activeQuery = e.target.value;
+  applyFilter();
+});
+
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeCat = chip.dataset.cat;
+    applyFilter();
+  });
+});
+
+// ============== SMOOTH ANCHOR (header offset) ==============
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href').slice(1);
+    const target = document.getElementById(id);
+    if (target) {
+      e.preventDefault();
+      const y = target.getBoundingClientRect().top + window.pageYOffset - 64;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+
+// ============== SCROLL REVEAL ==============
+const reveal = () => {
+  document.querySelectorAll('.feat, .hero-stats').forEach(el => {
+    if (!el.classList.contains('reveal')) el.classList.add('reveal');
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 80) el.classList.add('in');
+  });
+};
+window.addEventListener('scroll', reveal, { passive: true });
+window.addEventListener('load', reveal);
+
+// ============== ACTIVE NAV HIGHLIGHT ==============
+const navLinks = document.querySelectorAll('.site-nav a');
+const sectionIds = Array.from(navLinks).map(a => a.getAttribute('href').slice(1));
+window.addEventListener('scroll', () => {
+  const scrollY = window.pageYOffset + 120;
+  let current = sectionIds[0];
+  for (const id of sectionIds) {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= scrollY) current = id;
+  }
+  navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+}, { passive: true });
+</script>
+
+</body>
+</html>

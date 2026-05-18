@@ -1,0 +1,90 @@
+/**
+ * Typography Presets — Senastra Design System (subset)
+ * =====================================================
+ * Vendored snapshot for HrdayaFlow promo site.
+ * 上流: ../../Senastra/themes/typography-presets.css （20 プリセットのうち
+ * LP で使う noto-sans-jp と editorial だけを抽出）
+ */
+
+:root {
+  /* Primitive stacks（プリセットで上書き） */
+  --font-sans: 'Inter', 'Hiragino Sans', 'Yu Gothic UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', 'HGS Mincho E', serif;
+  --font-rounded: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+
+  /* Semantic */
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.04em;
+  --tracking-ui: 0.01em;
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: noto-sans-jp（日本語 UI 向けゴシック）
+   HrdayaFlow LP の既定。本文も見出しも Noto Sans JP。
+   英文 UI ラベルは別途 --font-display-en / --font-ui-en で
+   Space Grotesk を上書きしている（style.css 側）。
+   ═════════════════════════════════════════════ */
+[data-typeface="noto-sans-jp"] {
+  --font-sans: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans JP', ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.035em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.65;
+  --leading-heading: 1.18;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: editorial（雑誌風・見出し明朝）
+   HrdayaFlow LP の代替候補。和の落ち着きを強めたいときに
+   <html data-typeface="editorial"> へ切り替え。
+   ═════════════════════════════════════════════ */
+[data-typeface="editorial"] {
+  --font-sans: 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.06em;
+  --tracking-display: 0.08em;
+  --tracking-ui: 0.05em;
+  --leading-body: 1.78;
+  --leading-heading: 1.3;
+}
+
+/* ─────────────────────────────────────────────
+   UTILITY: タイポを一括適用
+   ───────────────────────────────────────────── */
+.type-body    { font-family: var(--font-body); line-height: var(--leading-body); }
+.type-heading { font-family: var(--font-heading); letter-spacing: var(--tracking-heading); line-height: var(--leading-heading); }
+.type-display { font-family: var(--font-display); letter-spacing: var(--tracking-display); }
+.type-ui      { font-family: var(--font-ui); letter-spacing: var(--tracking-ui); }
+.type-code    { font-family: var(--font-code); }
+.type-article { font-family: var(--font-article); line-height: var(--leading-body); }

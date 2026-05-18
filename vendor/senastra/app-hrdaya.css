@@ -1,0 +1,54 @@
+/**
+ * HrdayaFlow — Layer 4: App-Domain Tokens
+ * ============================================
+ * Vendored snapshot for HrdayaFlow promo site.
+ * 上流: ../../Senastra/tokens/app-hrdaya.css
+ * 依存: design-tokens.css → このファイル
+ *
+ * 命名規約: --app-hrdaya-{category}-{role}[-{variant}]
+ */
+
+/* ── Light Mode ── */
+:root,
+[data-theme="light"] {
+  --app-hrdaya-canvas-bg:        var(--color-bg);
+  --app-hrdaya-canvas-grid:      rgba(0, 0, 0, 0.06);
+  --app-hrdaya-canvas-grid-size: 20px;
+  --app-hrdaya-canvas-dot:       rgba(0, 0, 0, 0.10);
+
+  --app-hrdaya-node-bg:        var(--color-surface);
+  --app-hrdaya-node-border:    var(--color-border);
+  --app-hrdaya-node-header-bg: var(--color-bg-subtle);
+  --app-hrdaya-node-selected:  var(--color-accent);
+  --app-hrdaya-node-shadow:    var(--shadow-md);
+  --app-hrdaya-node-radius:    var(--radius-lg);
+
+  --app-hrdaya-edge-color:   var(--color-border-strong);
+  --app-hrdaya-edge-width:   2px;
+  --app-hrdaya-edge-active:  var(--color-accent);
+  --app-hrdaya-edge-preview: var(--color-accent-muted);
+
+  --app-hrdaya-port-size:   12px;
+  --app-hrdaya-port-input:  var(--color-info);
+  --app-hrdaya-port-output: var(--color-success);
+  --app-hrdaya-port-hover:  var(--color-accent-hover);
+
+  --app-hrdaya-group-bg:     rgba(91, 91, 214, 0.06);
+  --app-hrdaya-group-border: var(--color-accent-muted);
+  --app-hrdaya-group-label:  var(--color-text-secondary);
+}
+
+/* ── Dark Mode ── */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --app-hrdaya-canvas-grid: rgba(255, 255, 255, 0.04);
+    --app-hrdaya-canvas-dot:  rgba(255, 255, 255, 0.08);
+    --app-hrdaya-group-bg:    rgba(110, 110, 224, 0.08);
+  }
+}
+
+[data-theme="dark"] {
+  --app-hrdaya-canvas-grid: rgba(255, 255, 255, 0.04);
+  --app-hrdaya-canvas-dot:  rgba(255, 255, 255, 0.08);
+  --app-hrdaya-group-bg:    rgba(110, 110, 224, 0.08);
+}
