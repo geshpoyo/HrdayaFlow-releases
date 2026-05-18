@@ -6,9 +6,13 @@
 
 このリポジトリは **HrdayaFlow の公式 Web サイトとバイナリ配布** のためのものです。アプリのソースコードは含まれていません (ソースは別の private リポジトリで管理しています)。
 
-- 公式サイト: 本リポジトリの GitHub Pages
-- ダウンロード: [Releases](../../releases) (準備中、2026 年 6 月末予定)
-- マニュアル: [docs.hrdayaflow.app](https://docs.hrdayaflow.app) (近日公開)
+## 関連サイト
+
+| サイト | URL | 内容 |
+|:--|:--|:--|
+| 🌐 公式 LP | <https://geshpoyo.github.io/HrdayaFlow-releases/> | プロダクト紹介 + ダウンロード導線 |
+| 💾 リリース | <https://github.com/geshpoyo/HrdayaFlow-releases/releases> | MSI インストーラ (準備中、2026 年 6 月末予定) |
+| 📖 マニュアル | <https://vet-scopius.wiki/獣医志Scopius/開発アプリケーション/Index> | 全機能リファレンス + 使い方 |
 
 ## このアプリについて
 
