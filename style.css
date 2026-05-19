@@ -1532,6 +1532,45 @@ button:focus-visible,
 }
 
 /* ==========================================================================
+   Section 10: DOWNLOAD - beta notice (UNS-01)
+   --------------------------------------------------------------------------
+   未署名 beta のため SmartScreen 警告が出ることをユーザに事前告知。
+   ========================================================================== */
+.beta-notice {
+  margin-top: var(--space-10);
+  padding: var(--space-5) var(--space-6);
+  border: 1px dashed var(--divider);
+  border-radius: 8px;
+  background: rgba(255, 215, 0, 0.04);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.beta-notice strong {
+  display: block;
+  margin-bottom: var(--space-2);
+  color: var(--fg);
+  font-size: var(--text-base);
+  letter-spacing: 0.02em;
+}
+
+.beta-notice p {
+  margin: 0;
+  color: var(--fg-muted);
+}
+
+.beta-notice a {
+  color: var(--accent, #FFD700);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-left: var(--space-1);
+}
+
+.beta-notice a:hover {
+  opacity: 0.8;
+}
+
+/* ==========================================================================
    Settings panel (graph paper toggle / size)
    --------------------------------------------------------------------------
    右下 fixed に floating ボタン。クリックで小パネル展開。
