@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>07 Inspector と書式 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>07 Inspector と書式</h1><div class="note-meta">#manual · #inspector · #format · #style</div><h1 id="07-Inspector-と書式">07 Inspector と書式</h1>
+<p><span class="missing">← 06 グループ</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 08 Undo</span></p>
+<p>右パネルの Inspector で、選択ノートの <strong>見た目と振る舞い</strong> を調整する。代表的なマインドマップアプリの NOTE FORMAT パネル相当 + 拡張。</p>
+<h2 id="Inspector-全体構成">Inspector 全体構成</h2>
+<pre><code>┌── Inspector ──────────────┐
+│ [種別] text  [▼]           │  ← 種別切替
+│ ─────────────────────────  │
+│ ▼ Format                   │  ← 書式 (本章メイン)
+│   B I U S  Aa▾ ⇆⇆⇆        │
+│   Color: ▢ ■ ▢            │
+│   Size:  ━━━●━━━ 14        │
+│   Align: ⇤ ↔ ⇥ / ⇈ ↕ ⇊    │
+│ ─────────────────────────  │
+│ ▼ Shape                    │  ← 図形 (rect/circle/...)
+│   ▢ ◯ ◇ ⬡ ☁                │
+│   CornerRadius: ━●━━ 8     │
+│ ─────────────────────────  │
+│ ▼ Border                   │
+│   Width: ━━●━ 2            │
+│   Style: ─── ─ ─ ┄ ┄       │
+│   Color: ■                 │
+│ ─────────────────────────  │
+│ ▼ Effects                  │
+│   Shadow:  ☑                │
+│   Opacity: ━━━━●━ 100%     │
+│   Magnetic: ☑               │
+│ ─────────────────────────  │
+│ ▼ Edge (エッジ選択時)       │
+│   Type / Color / Arrow     │
+│ ─────────────────────────  │
+│ ▼ 親子・階層                │  ← v0.0.4 O 系: 階層ツリーを表示
+│   階層ツリー (5件):          │
+│   📦 Container &quot;プロジェクト&quot; │
+│   └─ 📝 aaaaa                │
+│      └─ 📝 bbbbb ◀ (選択中)  │
+│      └─ 📝 ccccc             │
+│   [このノートの親子関係を解除]│
+│ ─────────────────────────  │
+│ ▼ Meta                     │
+│   originName / alt / role  │
+└────────────────────────────┘</code></pre>
+<h2 id="親子・階層パネル-(v004-O-系)">親子・階層パネル (v0.0.4 O 系)</h2>
+<p>選択ノートを含む階層全体を <strong>ルート祖先から DFS で展開したツリー</strong> として表示する。深さ無制限。</p>
+<div class="table-wrap"><table><thead><tr><th>要素</th><th>動作</th></tr></thead><tbody><tr><td>階層ツリー (N件)</td><td>ルート祖先から DFS で全子孫を展開、<code>depth × 18px</code> でインデント</td></tr><tr><td>各行</td><td><code>└─</code> ツリーガイド + NodeKind 別アイコン (📦 Container / ⬜ Frame / 📝 text 等) + ラベル</td></tr><tr><td><code>◀</code> マーカー</td><td>現在選択中のノート、行が背景色強調 + 太字</td></tr><tr><td>行クリック (選択中以外)</td><td>キャンバスでそのノートを選択 (フォーカス移動)</td></tr><tr><td><code>✕</code> ボタン (ルート以外)</td><td>その行のノートの親 Edge を 1 本削除、子孫は保持</td></tr><tr><td>「このノートの親子関係を解除」</td><td>選択ノートに接続している hierarchy Edge を全削除 (root もそれ自身を独立化)</td></tr></tbody></table></div>
+<h3 id="利点">利点</h3>
+<ul><li>どの子ノートを選択しても <strong>同じ階層ツリーが表示</strong> される → a-b-c の関係性が一目でわかる</li><li>親子関係が深くても (a → b → c → d → e の 5 段以上でも) すべて表示</li><li>現在位置 (<code>◀</code> マーカー + 強調背景) と兄弟関係が一目でわかる</li></ul>
+<p>詳細は <a href="05-edges-and-connections.md#キーボード"><code>05-edges-and-connections.md</code></a> 参照。<code>Ctrl + P</code> で作成、<code>Alt + P</code> で解除、ノート右クリックメニューからも解除可能。</p>
+<h2 id="1-テキスト書式-(Format-Panel)">1. テキスト書式 (Format Panel)</h2>
+<h3 id="Bold-Italic-Underline-Strikethrough">Bold / Italic / Underline / Strikethrough</h3>
+<div class="table-wrap"><table><thead><tr><th>ボタン</th><th>キー</th><th>効果</th></tr></thead><tbody><tr><td><strong>B</strong></td><td><code>Ctrl + B</code></td><td>太字</td></tr><tr><td>_I_</td><td><code>Ctrl + I</code></td><td>斜体</td></tr><tr><td>&lt;u&gt;U&lt;/u&gt;</td><td><code>Ctrl + U</code></td><td>下線</td></tr><tr><td><del>S</del></td><td><code>Ctrl + Shift + S</code></td><td>取り消し線</td></tr></tbody></table></div>
+<p>選択範囲がある場合は <strong>その範囲のみ</strong> に適用 (InlineMark)、なければノート全体。</p>
+<h3 id="フォントサイズ">フォントサイズ</h3>
+<p>スライダー or 数値入力。<strong>8〜144 px</strong>。既定 14 px。</p>
+<p><code>Ctrl + +</code> / <code>Ctrl + -</code> で 1 段階 (2 px) 増減。</p>
+<h3 id="配置">配置</h3>
+<p>水平: 左 / 中央 / 右
+垂直: 上 / 中央 / 下</p>
+<p>⌨ <code>Ctrl + L</code> / <code>Ctrl + E</code> / <code>Ctrl + R</code> で水平、<code>Ctrl + Shift + L/E/R</code> で垂直。</p>
+<h3 id="Alignment-ボタンの-writingMode-適応">Alignment ボタンの writingMode 適応</h3>
+<p>ノートの <code>writingMode</code> (<code>horizontal-tb</code> / <code>vertical-rl</code> / <code>vertical-lr</code>) と <code>textDirection</code> (<code>ltr</code> / <code>rtl</code>) に応じて、Inspector の Alignment ボタンは <strong>アイコンと意味が動的に切り替わる</strong>。物理的な「左寄せ」ではなく、論理的な「行頭寄せ / 中央 / 行末寄せ / 両端揃え」が常に正しく表示される設計。</p>
+<div class="table-wrap"><table><thead><tr><th>mode</th><th>start / left</th><th>center</th><th>end / right</th><th>justify</th></tr></thead><tbody><tr><td><strong>横書き LTR</strong> (<code>horizontal-tb</code> + <code>ltr</code>)</td><td>左寄せ ⮜</td><td>中央 ⮯</td><td>右寄せ ⮞</td><td>両端 ⮇</td></tr><tr><td><strong>横書き RTL</strong> (<code>horizontal-tb</code> + <code>rtl</code>)</td><td>右寄せ ⮞</td><td>中央 ⮯</td><td>左寄せ ⮜</td><td>両端 ⮇</td></tr><tr><td><strong>縦書き</strong> (<code>vertical-rl/lr</code>)</td><td>上寄せ ⮝</td><td>中央 ⮯</td><td>下寄せ ⮟</td><td>(非表示)</td></tr></tbody></table></div>
+<p>縦書きでは <strong>justify は意味をなさないため非表示</strong> になる (列単位での両端揃えは未対応)。</p>
+<h4 id="内部実装-(参考)">内部実装 (参考)</h4>
+<ul><li><code>app/lib/panels/inspector/format/alignment_button_presentation.dart</code> で mode → icon/tooltip マッピング</li><li><code>app/test/panels/inspector/alignment_button_test.dart</code> で 4 ケース (横書き LTR / 横書き RTL / 縦書き / justify 非表示) を保証</li></ul>
+<h4 id="動作確認">動作確認</h4>
+<ol><li>横書きノート選択 → Inspector Alignment 4 ボタン (左/中/右/両端) が出る</li><li>ノートの writingMode を縦書きに切り替える → Alignment ボタンが上/中/下の 3 ボタンに変わる (justify が消える)</li><li>テキスト方向を rtl に変えると左寄せ ⇄ 右寄せのアイコンが入れ替わる</li></ol>
+<h3 id="テキスト色">テキスト色</h3>
+<p>カラーピッカー。プリセット 16 色 + カスタム HEX 入力。Recent 履歴 8 色。</p>
+<h2 id="2-図形-(Shape)">2. 図形 (Shape)</h2>
+<p>ノートの形を変える。</p>
+<div class="table-wrap"><table><thead><tr><th>形状</th><th>用途</th></tr></thead><tbody><tr><td><code>rect</code> (矩形, 既定)</td><td>標準</td></tr><tr><td><code>rounded</code></td><td>角丸 (cornerRadius 調整可)</td></tr><tr><td><code>ellipse</code></td><td>楕円</td></tr><tr><td><code>diamond</code></td><td>ひし形 (フローチャート判定)</td></tr><tr><td><code>hexagon</code></td><td>六角形 (タグ・カテゴリ感)</td></tr><tr><td><code>cloud</code></td><td>雲形</td></tr><tr><td><code>parallelogram</code></td><td>平行四辺形</td></tr><tr><td><code>triangle</code></td><td>三角</td></tr></tbody></table></div>
+<p>⌨ <code>Ctrl + Shift + 1〜8</code> でショートカット (上から順)。</p>
+<h3 id="CornerRadius">CornerRadius</h3>
+<p><code>rounded</code> 選択時に有効。0〜32 px。</p>
+<h2 id="3-枠線-(Border)">3. 枠線 (Border)</h2>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>値</th></tr></thead><tbody><tr><td>Width</td><td>0〜10 px (0 で枠なし)</td></tr><tr><td>Style</td><td>solid / dashed / dotted / double</td></tr><tr><td>Color</td><td>カラーピッカー</td></tr></tbody></table></div>
+<p><code>Ctrl + Shift + B</code> で枠線 ON / OFF (切替)。</p>
+<h2 id="4-塗り-(Fill)">4. 塗り (Fill)</h2>
+<p>ノート内部の色。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>値</th></tr></thead><tbody><tr><td>Color</td><td>カラーピッカー / 透明 / グラデーション 🚧</td></tr><tr><td>Opacity</td><td>0〜100%</td></tr></tbody></table></div>
+<h2 id="5-エフェクト-(Effects)">5. エフェクト (Effects)</h2>
+<h3 id="Drop-Shadow">Drop Shadow</h3>
+<p>ON / OFF。色・距離・ぼかしは固定 (Settings で全体トーン変更)。</p>
+<h3 id="Opacity">Opacity</h3>
+<p>ノート全体の不透明度。0% で完全透明 (選択は可)。</p>
+<h3 id="Magnetic-Snap">Magnetic Snap</h3>
+<p>ON のとき、ドラッグ移動中に他ノートのエッジと整合する位置で吸着。</p>
+<blockquote><p>⚠ 全ノートで Magnetic ON だと逆に引っかかりすぎる。重要ノートだけ ON 推奨。</p></blockquote>
+<h2 id="6-ノート種別切替-(Kind-Switcher)">6. ノート種別切替 (Kind Switcher)</h2>
+<p>Inspector 上部のドロップダウン。データを保ったまま種別変換。</p>
+<p>例: text → markdown は text を <code>body</code> にコピー。markdown → text は最初の段落を text に。</p>
+<h2 id="7-共通スタイルライブラリ-(Style-Library)-🚧">7. 共通スタイルライブラリ (Style Library) 🚧</h2>
+<p><code>styles[]</code> (map.json) に名前付きスタイル定義 → ノートに <code>styleRef</code> で参照。1 か所変えれば全ノートに反映。</p>
+<p>現在は手動編集 / API 経由。GUI の Style Manager は <strong>将来予定</strong>。</p>
+<h2 id="8-エッジ-Inspector">8. エッジ Inspector</h2>
+<p>エッジを選択すると Edge セクションが現れる (<span class="missing">03-edges-and-connections › エッジのスタイル</span> 参照)。</p>
+<h2 id="9-Container-Inspector">9. Container Inspector</h2>
+<p>Container 選択時の追加項目 (<span class="missing">04-groups-and-containers › container-プロパティ</span> 参照)。</p>
+<h2 id="10-Meta-セクション">10. Meta セクション</h2>
+<div class="table-wrap"><table><thead><tr><th>フィールド</th><th>用途</th></tr></thead><tbody><tr><td>originName</td><td>インポート元のファイル名</td></tr><tr><td>originalFileName</td><td>アセット元の表示名</td></tr><tr><td>alt</td><td>スクリーンリーダー用代替テキスト</td></tr><tr><td>role</td><td>ARIA role 相当</td></tr><tr><td>任意 key-value</td><td>プロジェクト固有メモ</td></tr></tbody></table></div>
+<h2 id="複数選択時の-Inspector">複数選択時の Inspector</h2>
+<p>複数ノート選択時は <strong>共通プロパティのみ</strong> が表示され、変更すると <strong>全選択ノートに一括適用</strong>。</p>
+<blockquote><p>例: 5 個選択 → fontSize を 18 に → 全部 18 になる。</p></blockquote>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] B / I / U / S が範囲選択に効く</li><li>[ ] フォントサイズスライダーが効く</li><li>[ ] テキスト色を変えると即反映</li><li>[ ] Shape を <code>cloud</code> に → 雲形になる</li><li>[ ] CornerRadius が rounded で効く</li><li>[ ] Border 幅 0 で枠が消える</li><li>[ ] Shadow ON で影が出る</li><li>[ ] Opacity 50% で半透明</li><li>[ ] Magnetic snap でドラッグ時に吸着</li><li>[ ] 種別切替 text → markdown が成功</li><li>[ ] 5 個選択 → fontSize 一括変更が効く</li></ul>
+<p><span class="missing">← 06</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 08</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#07-Inspector-と書式">07 Inspector と書式</a></li><li class="lvl-2"><a href="#Inspector-全体構成">Inspector 全体構成</a></li><li class="lvl-2"><a href="#親子・階層パネル-(v004-O-系)">親子・階層パネル (v0.0.4 O 系)</a></li><li class="lvl-3"><a href="#利点">利点</a></li><li class="lvl-2"><a href="#1-テキスト書式-(Format-Panel)">1. テキスト書式 (Format Panel)</a></li><li class="lvl-3"><a href="#Bold-Italic-Underline-Strikethrough">Bold / Italic / Underline / Strikethrough</a></li><li class="lvl-3"><a href="#フォントサイズ">フォントサイズ</a></li><li class="lvl-3"><a href="#配置">配置</a></li><li class="lvl-3"><a href="#Alignment-ボタンの-writingMode-適応">Alignment ボタンの writingMode 適応</a></li><li class="lvl-3"><a href="#テキスト色">テキスト色</a></li><li class="lvl-2"><a href="#2-図形-(Shape)">2. 図形 (Shape)</a></li><li class="lvl-3"><a href="#CornerRadius">CornerRadius</a></li><li class="lvl-2"><a href="#3-枠線-(Border)">3. 枠線 (Border)</a></li><li class="lvl-2"><a href="#4-塗り-(Fill)">4. 塗り (Fill)</a></li><li class="lvl-2"><a href="#5-エフェクト-(Effects)">5. エフェクト (Effects)</a></li><li class="lvl-3"><a href="#Drop-Shadow">Drop Shadow</a></li><li class="lvl-3"><a href="#Opacity">Opacity</a></li><li class="lvl-3"><a href="#Magnetic-Snap">Magnetic Snap</a></li><li class="lvl-2"><a href="#6-ノート種別切替-(Kind-Switcher)">6. ノート種別切替 (Kind Switcher)</a></li><li class="lvl-2"><a href="#7-共通スタイルライブラリ-(Style-Library)-🚧">7. 共通スタイルライブラリ (Style Library) 🚧</a></li><li class="lvl-2"><a href="#8-エッジ-Inspector">8. エッジ Inspector</a></li><li class="lvl-2"><a href="#9-Container-Inspector">9. Container Inspector</a></li><li class="lvl-2"><a href="#10-Meta-セクション">10. Meta セクション</a></li><li class="lvl-2"><a href="#複数選択時の-Inspector">複数選択時の Inspector</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">07 Inspect</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/06-inspector-and-formatting";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

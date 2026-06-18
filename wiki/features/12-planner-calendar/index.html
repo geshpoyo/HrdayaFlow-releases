@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 Planner / Calendar | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>12 Planner / Calendar</h1><div class="note-meta">#manual · #planner · #calendar · #tasks · #rrule</div><h1 id="12-Planner-Calendar">12 Planner / Calendar</h1>
+<p><span class="missing">← 11 ファイル</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13 テーマ</span></p>
+<p>Planner は、マインドマップとは別に日程・タスクを扱う作業面です。左アクティビティバーの <strong>プランナー</strong> から開きます。</p>
+<blockquote><p>現在の主実装は Calendar です。Timeline / Task list は画面枠がありますが、後フェーズで拡張予定です。</p></blockquote>
+<h2 id="データの考え方">データの考え方</h2>
+<p>Planner の予定・タスクは、<code>.hrf</code> ファイルではなくアプリ全体の Planner store に保存されます。A.hrf で登録した予定は、B.hrf を開いていても同じ Planner から見えます。</p>
+<p>永続先はアプリサポートフォルダ配下の <code>hrdayaflow/planner.json</code> です。将来 SQLite へ移行できるよう、UI と保存層は分離されています。</p>
+<h2 id="Calendar-ビュー">Calendar ビュー</h2>
+<p>Calendar は月 / 週 / 日を切り替えられます。</p>
+<div class="table-wrap"><table><thead><tr><th>表示</th><th>用途</th></tr></thead><tbody><tr><td>月</td><td>月全体の予定量を俯瞰する</td></tr><tr><td>週</td><td>時間帯つきの予定を並べて見る</td></tr><tr><td>日</td><td>1 日の予定を詳細に見る</td></tr></tbody></table></div>
+<p>上部のナビゲーションで前後へ移動し、<strong>今日</strong>で現在日に戻ります。</p>
+<h2 id="予定・タスクの追加">予定・タスクの追加</h2>
+<p>Calendar 上の日付や時間帯をクリックすると追加ダイアログが開きます。予定は開始 / 終了、終日、タスクは期限や完了状態を持てます。</p>
+<p>下部のクイック追加バーでは、日本語・英語の自然な入力を簡易解析します。</p>
+<p>例:</p>
+<pre><code class="language-text">明日 14:00 打ち合わせ
+毎週月 9:00 週次レビュー
+平日 8:30 朝の確認
+monthly 15 report</code></pre>
+<p>対応する主な解析:</p>
+<div class="table-wrap"><table><thead><tr><th>入力</th><th>解釈</th></tr></thead><tbody><tr><td>今日 / 明日 / 明後日 / 昨日</td><td>相対日付</td></tr><tr><td>月火水木金土日 / mon tue ...</td><td>曜日</td></tr><tr><td>14:00 / 9時30分</td><td>時刻</td></tr><tr><td>毎日 / 毎週 / 平日 / 毎月D日</td><td>RRULE 繰り返し</td></tr></tbody></table></div>
+<h2 id="繰り返し">繰り返し</h2>
+<p>繰り返しは RFC5545 の RRULE 文字列として保存されます。現在は daily / weekly / monthly / yearly の基本形と、曜日・月日指定を扱います。</p>
+<h2 id="操作">操作</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>予定クリック</td><td>編集ダイアログを開く</td></tr><tr><td>タスクのチェック</td><td>完了 / 未完了を切り替え</td></tr><tr><td>週 / 日ビューでドラッグ</td><td>予定の移動</td></tr><tr><td>下端リサイズ</td><td>予定の終了時刻を変更</td></tr></tbody></table></div>
+<h2 id="マインドマップとの関係">マインドマップとの関係</h2>
+<p>現段階では Planner はアプリ全体の予定表として独立しています。今後、ノートから予定化、予定から元ノートへジャンプ、Kanban / Gantt / Table との同一データ表示へ拡張する計画があります。</p>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] 左アクティビティバーから Planner を開ける</li><li>[ ] Calendar の月 / 週 / 日を切り替えられる</li><li>[ ] 今日ボタンで現在日に戻る</li><li>[ ] 日付クリックで予定を追加できる</li><li>[ ] クイック追加で「明日 14:00 打ち合わせ」を予定化できる</li><li>[ ] タスクの完了状態を切り替えられる</li><li>[ ] 週 / 日ビューで予定の移動・リサイズができる</li><li>[ ] 別の <code>.hrf</code> を開いても Planner の予定が見える</li></ul>
+<p><span class="missing">← 11</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#12-Planner-Calendar">12 Planner / Calendar</a></li><li class="lvl-2"><a href="#データの考え方">データの考え方</a></li><li class="lvl-2"><a href="#Calendar-ビュー">Calendar ビュー</a></li><li class="lvl-2"><a href="#予定・タスクの追加">予定・タスクの追加</a></li><li class="lvl-2"><a href="#繰り返し">繰り返し</a></li><li class="lvl-2"><a href="#操作">操作</a></li><li class="lvl-2"><a href="#マインドマップとの関係">マインドマップとの関係</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">12 Planner</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/12-planner-calendar";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

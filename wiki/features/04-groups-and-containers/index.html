@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>06 グループと Container | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>06 グループと Container</h1><div class="note-meta">#manual · #groups · #containers · #hierarchy</div><h1 id="06-グループと-Container">06 グループと Container</h1>
+<p><span class="missing">← 05 エッジ</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 07 Inspector</span></p>
+<p>複数ノートを「箱」にまとめる仕組みが Container (実体グループ)、視覚的なまとまりだけが Frame (装飾)。サブマップ昇格でテーマ別マップを切り出せる。</p>
+<blockquote><p><strong>v0.0.4 親子関係再設計 (2026-05-17)</strong>: Container と Frame の「子の所有」は <strong><code>EdgeKind.hierarchy</code> の親子関係 Edge</strong> で表現されるようになりました。</p>
+<ul><li><strong>Frame も子を持てる</strong> ようになり、Frame を移動すると親子関係 Edge で繋がった子ノートも追従します</li><li><code>Container.containerMembers[]</code> は <strong>derived cache</strong> (hierarchy edges から再生成される派生値) に格下げ。schema 後方互換のため <code>.hrf</code> 上にも保存され、v0.1 系の reader でも開けます</li><li>Container/Frame の中の階層構造はそのまま保持される (例: tesst → test2 の親子関係がある状態で Container 化しても、関係は維持)</li><li>詳細は <a href="../v0-0-4/o-hierarchy-redesign/README.md">docs/v0-0-4/o-hierarchy-redesign/README.md</a></li></ul></blockquote>
+<h2 id="用語の整理">用語の整理</h2>
+<div class="table-wrap"><table><thead><tr><th>概念</th><th>実体</th><th>折りたたみ</th><th>子の所有</th><th>用途</th></tr></thead><tbody><tr><td><strong>Frame</strong></td><td>装飾矩形</td><td>×</td><td>✅ (hierarchy edges)</td><td>視覚的な背景・囲み、親移動で子追従</td></tr><tr><td><strong>Container</strong></td><td>グループ実体</td><td>✅</td><td>✅ (hierarchy edges、members[] は cache)</td><td>論理的なまとまり、折りたたみ可能、サブマップ昇格可</td></tr><tr><td><strong>Submap</strong></td><td>別マップ</td><td>(Container として現れる)</td><td>✅</td><td>大きな概念を別キャンバスに</td></tr></tbody></table></div>
+<h2 id="Container-を作る">Container を作る</h2>
+<h3 id="既存ノートをまとめる">既存ノートをまとめる</h3>
+<ol><li>🖱 複数ノート選択 (矩形ドラッグ or <code>Shift + クリック</code>)</li><li>⌨ <code>Ctrl + G</code></li><li>→ 周囲を囲む Container が生成、選択ノートのうち <strong>階層のトップ</strong> (親が選択外、または親なし) だけが Container の直接子として hierarchy Edge で接続される</li><li>→ 選択内の既存親子関係はそのまま温存される (例: A→B が既にあり、A, B を一緒に Container 化すると <code>Container → A → B</code> の階層になる)</li></ol>
+<h3 id="空の-Container-を作る">空の Container を作る</h3>
+<p>⌨ <code>Ctrl + Shift + N</code> → ピッカー → <code>G</code> (Container)</p>
+<h3 id="解除">解除</h3>
+<ul><li>⌨ <code>Ctrl + Shift + G</code>: Container 自体を削除し、直接子のノートを独立化 (Ungroup)</li><li>⌨ <code>Alt + P</code> (選択中ノートに対して): その親 hierarchy Edge を 1 本削除。Container の中から特定ノートだけを外したい場合に使う (子孫は引き続き選択ノートに従属する)</li></ul>
+<h2 id="Container-の操作">Container の操作</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 タイトルバーをダブルクリック</td><td>ラベル編集</td></tr><tr><td>🖱 タイトルバーの <code>▶</code> / <code>▼</code></td><td>折りたたみ / 展開</td></tr><tr><td>🖱 Container 自体をドラッグ</td><td>中の子孫すべてが推移的に追従 (hierarchy edges 経由)</td></tr><tr><td>🖱 子ノート単独をドラッグ</td><td><strong>Container が子の bbox を内包するよう自動再フィット</strong> (v0.0.4 P-01)</td></tr><tr><td>🖱 Container のリサイズハンドル (4 辺 + 4 角)</td><td><strong>8 方向リサイズ可能</strong>。ただし子 bbox + padding を下回るサイズには縮められない (v0.0.4 P-02)</td></tr><tr><td>👁 Container 矩形内に親子関係のないノートが重なっている</td><td><strong>赤い破線枠で警告</strong>、Tooltip「Container 内にありますが親子関係はありません」(v0.0.4 P-03)</td></tr><tr><td>⌨ <code>G</code> (Blender 風 grab) でアクティブが Container</td><td>同上、子孫が追従</td></tr><tr><td>⌨ 矢印キー nudge で Container が選択中</td><td>同上、子孫が追従</td></tr><tr><td>🖱 子ノートを Container 外にドラッグ</td><td>members から自動的に外れる (旧挙動)</td></tr><tr><td>🖱 ノートを Container にドラッグオーバー</td><td>members に追加 (吸い込み)</td></tr><tr><td>⌨ <code>Ctrl + Alt + G</code></td><td>Container 内を Auto Layout</td></tr><tr><td>⌨ <code>Alt + P</code> (Container の子に対して)</td><td>親子関係 Edge を 1 本解除、子が Container から離脱</td></tr></tbody></table></div>
+<h2 id="Container-プロパティ">Container プロパティ</h2>
+<p>Inspector に出る項目:</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>説明</th></tr></thead><tbody><tr><td>label</td><td>Container のタイトル (ヘッダーに表示)</td></tr><tr><td>collapsed</td><td>折りたたみ状態 (永続化)</td></tr><tr><td>layoutHint</td><td><code>freeform</code> / <code>tree-down</code> / <code>tree-right</code> / <code>radial</code></td></tr><tr><td>padding</td><td>子ノートとの余白</td></tr><tr><td>fillColor / borderColor</td><td>見た目</td></tr><tr><td>autoSize</td><td>子の範囲に自動フィットするか</td></tr></tbody></table></div>
+<h2 id="Container-の追従動作">Container の追従動作</h2>
+<ul><li>✅ Container を移動 → 子も同じだけ動く</li><li>✅ Container をリサイズ → 子は固定 (自動フィット ON なら逆)</li><li>✅ 子を選択 → Container は選択されない (操作対象は子)</li><li>✅ Container 自体を選択するには <strong>ヘッダーバーをクリック</strong></li></ul>
+<h2 id="サブマップ-(Submap)-昇格">サブマップ (Submap) 昇格</h2>
+<p>Container を <strong>「別のマップ」として開く</strong> 機能。複雑な部分を分離して整理。</p>
+<h3 id="昇格手順">昇格手順</h3>
+<ol><li>Container を右クリック → <strong>「サブマップとして開く」</strong></li><li>新しいタブが開き、Container の中身が「ルートマップ」として表示</li><li>親マップ側では Container がリンクアイコンに変化</li></ol>
+<h3 id="サブマップを再び親に">サブマップを再び親に</h3>
+<p>サブマップ側で右クリック → <strong>「親マップに戻す」</strong> → サブマップの内容が Container として吸収される (差分はマージ)。</p>
+<h3 id="注意">注意</h3>
+<ul><li>⚠ サブマップ昇格中はそのスコープ外のエッジを引けない</li><li>⚠ 親マップを保存しないと、サブマップの編集も同じ <code>.hrf</code> には保存されない</li></ul>
+<h2 id="折りたたみと検索">折りたたみと検索</h2>
+<p>折りたたまれた Container 内のノートも:</p>
+<ul><li>✅ Outline パネルでは展開して見える</li><li>✅ <code>Ctrl + F</code> 検索の対象になる (ヒット時に自動展開)</li><li>❌ キャンバス上は隠れたまま</li></ul>
+<h2 id="ネスト">ネスト</h2>
+<p>Container の中に Container を入れられる。深さ制限なし。ただし 5 階層を超えると Outline 表示が見づらくなるので 3 階層以内推奨。</p>
+<h2 id="レイアウトヒント">レイアウトヒント</h2>
+<p><code>layoutHint</code> を <code>tree-right</code> にすると、子ノートを展開時に右方向ツリーで自動配置 (Reingold-Tilford 風)。手動配置を維持したい場合は <code>freeform</code>。</p>
+<div class="table-wrap"><table><thead><tr><th>layoutHint</th><th>配置</th><th>用途</th></tr></thead><tbody><tr><td><code>freeform</code></td><td>手動 (既定)</td><td>スクラップブック型</td></tr><tr><td><code>tree-down</code></td><td>上から下へツリー</td><td>階層図</td></tr><tr><td><code>tree-right</code></td><td>左から右へツリー</td><td>フロー図</td></tr><tr><td><code>radial</code></td><td>中心から放射状</td><td>マインドマップ古典型</td></tr></tbody></table></div>
+<p>Container 内で ⌨ <code>Ctrl + Alt + G</code> → 現在の hint で Auto Layout を即実行。</p>
+<h2 id="グループ化-(Frame-との使い分け)">グループ化 (Frame との使い分け)</h2>
+<div class="table-wrap"><table><thead><tr><th>目的</th><th>使うもの</th></tr></thead><tbody><tr><td>視覚的に「ここまでが営業部のメモ」と囲みたい</td><td>Frame</td></tr><tr><td>「営業部のメモ」5 個を一塊として動かしたい</td><td>Container</td></tr><tr><td>「営業部のメモ」を別の <code>.hrf</code> に分けたいレベル</td><td>サブマップ昇格後、エクスポート</td></tr></tbody></table></div>
+<h2 id="レイヤー-(Layer)">レイヤー (Layer)</h2>
+<p>Outline パネルの上部に「Layer」リスト。レイヤー単位で:</p>
+<ul><li>表示 / 非表示</li><li>ロック (編集不可)</li><li>色付け (レイヤーごとに半透明色を重ねる)</li></ul>
+<p>ノートとエッジはレイヤーに所属。新規作成時は <strong>アクティブレイヤー</strong> に入る。</p>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] 複数選択 → <code>Ctrl + G</code> で Container 化</li><li>[ ] Container を折りたたみ → 中身が消える</li><li>[ ] Container をドラッグ → 子も動く</li><li>[ ] 子をドラッグで Container 外へ → members から外れる</li><li>[ ] <code>Ctrl + Shift + G</code> で Container 解除</li><li>[ ] サブマップとして開く → 新タブで表示</li><li>[ ] サブマップ内の編集を保存 → 親側の Container にも反映</li><li>[ ] Outline パネルで階層が見える</li><li>[ ] Layer で表示 / 非表示切替</li></ul>
+<p><span class="missing">← 05</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 07</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#06-グループと-Container">06 グループと Container</a></li><li class="lvl-2"><a href="#用語の整理">用語の整理</a></li><li class="lvl-2"><a href="#Container-を作る">Container を作る</a></li><li class="lvl-3"><a href="#既存ノートをまとめる">既存ノートをまとめる</a></li><li class="lvl-3"><a href="#空の-Container-を作る">空の Container を作る</a></li><li class="lvl-3"><a href="#解除">解除</a></li><li class="lvl-2"><a href="#Container-の操作">Container の操作</a></li><li class="lvl-2"><a href="#Container-プロパティ">Container プロパティ</a></li><li class="lvl-2"><a href="#Container-の追従動作">Container の追従動作</a></li><li class="lvl-2"><a href="#サブマップ-(Submap)-昇格">サブマップ (Submap) 昇格</a></li><li class="lvl-3"><a href="#昇格手順">昇格手順</a></li><li class="lvl-3"><a href="#サブマップを再び親に">サブマップを再び親に</a></li><li class="lvl-3"><a href="#注意">注意</a></li><li class="lvl-2"><a href="#折りたたみと検索">折りたたみと検索</a></li><li class="lvl-2"><a href="#ネスト">ネスト</a></li><li class="lvl-2"><a href="#レイアウトヒント">レイアウトヒント</a></li><li class="lvl-2"><a href="#グループ化-(Frame-との使い分け)">グループ化 (Frame との使い分け)</a></li><li class="lvl-2"><a href="#レイヤー-(Layer)">レイヤー (Layer)</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">06 グループと C</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/04-groups-and-containers";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

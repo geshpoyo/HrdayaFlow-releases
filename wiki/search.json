@@ -1,0 +1,140 @@
+[
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "HṛdayaFlow ユーザーマニュアル",
+    "description": "",
+    "url": "/00-INDEX/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "01 概要とアーキテクチャ",
+    "description": "",
+    "url": "/basics/01-overview/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "02 はじめに",
+    "description": "",
+    "url": "/basics/02-getting-started/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "03-startup-on-windows",
+    "description": "",
+    "url": "/basics/03-startup-on-windows/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "インストール時の警告 (SmartScreen) について",
+    "description": "",
+    "url": "/basics/04-install-warning/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "03 キャンバスとジェスチャー",
+    "description": "",
+    "url": "/features/01-canvas-and-gestures/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "04 ノード 13 種",
+    "description": "",
+    "url": "/features/02-nodes/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "05 エッジと接続",
+    "description": "",
+    "url": "/features/03-edges-and-connections/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "06 グループと Container",
+    "description": "",
+    "url": "/features/04-groups-and-containers/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "05-note-stacks",
+    "description": "",
+    "url": "/features/05-note-stacks/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "07 Inspector と書式",
+    "description": "",
+    "url": "/features/06-inspector-and-formatting/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "07-note-presets",
+    "description": "",
+    "url": "/features/07-note-presets/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "08 Undo / 履歴",
+    "description": "",
+    "url": "/features/08-undo-history/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "09 検索と Outline",
+    "description": "",
+    "url": "/features/09-search-and-outline/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "10 AI 機能",
+    "description": "",
+    "url": "/features/10-ai-features/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "11 ファイルと相互運用",
+    "description": "",
+    "url": "/features/11-files-and-interop/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "12 Planner / Calendar",
+    "description": "",
+    "url": "/features/12-planner-calendar/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "privacy",
+    "description": "",
+    "url": "/privacy/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "13 ショートカット早見表",
+    "description": "",
+    "url": "/reference/01-keyboard-shortcuts/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "12 テーマ・多言語・アクセシビリティ",
+    "description": "",
+    "url": "/reference/02-themes-i18n-a11y/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "15 トラブルシューティング",
+    "description": "",
+    "url": "/reference/03-troubleshooting/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "14 開発者ガイド",
+    "description": "",
+    "url": "/reference/04-developer-guide/"
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "15 アプリ設定",
+    "description": "",
+    "url": "/reference/05-app-settings/"
+  }
+]

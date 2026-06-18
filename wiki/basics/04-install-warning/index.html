@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>インストール時の警告 (SmartScreen) について | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>インストール時の警告 (SmartScreen) について</h1><div class="note-meta">#install · #smartscreen · #beta</div><p><a class="wikilink" href="../../basics/03-startup-on-windows/">← 03 Windows 起動マニュアル</a> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 01 キャンバスとジェスチャー →</span></p>
+<h1 id="インストール時の警告-(SmartScreen)-について">インストール時の警告 (SmartScreen) について</h1>
+<blockquote><p>🚧 <strong>Beta 期のお知らせ</strong>
+HrdayaFlow v0.x (beta) は <strong>コード署名証明書が未取得</strong> のため、Windows のインストール時に「Windows によって PC が保護されました」という警告が表示されます。これはアプリの安全性とは無関係で、商用版リリース時に証明書を取得して解消する予定です。</p></blockquote>
+<h2 id="なぜ警告が出るのか">なぜ警告が出るのか</h2>
+<p>Windows の SmartScreen は、<strong>「Microsoft が信頼する発行元の証明書で署名されていないアプリ」</strong> に対して警告を表示する仕組みです。HrdayaFlow beta は証明書未取得のため、この警告対象になります。</p>
+<p>警告画面の例:</p>
+<pre><code>┌──────────────────────────────────────────┐
+│ ⚠ Windows によって PC が保護されました    │
+│                                          │
+│ Microsoft Defender SmartScreen は認識さ  │
+│ れないアプリの起動を停止しました。       │
+│ このアプリを実行すると PC が危険に       │
+│ さらされる可能性があります。              │
+│                                          │
+│   [実行しない]                            │
+└──────────────────────────────────────────┘</code></pre>
+<h2 id="回避手順-(Windows-10-11)">回避手順 (Windows 10 / 11)</h2>
+<ol><li><strong>ダウンロードした MSI をダブルクリック</strong></li><li>上記の警告画面が表示される</li><li>中央の青字の <strong>「詳細情報」</strong> をクリック</li><li>アプリ名 (<code>HrdayaFlow-x.y.z-x64.msi</code>) と発行元 (不明な発行元) が表示される</li><li>右下の <strong>「実行」</strong> ボタンをクリック</li><li>インストールウィザードが起動 → 通常のインストール手順へ</li></ol>
+<h3 id="視覚的な手順">視覚的な手順</h3>
+<pre><code>警告画面
+  ↓
+[詳細情報] をクリック  ← ★ 中央の青字、見落としやすい
+  ↓
+アプリ名表示
+  ↓
+[実行] ボタンをクリック  ← ★ 右下に出現
+  ↓
+インストール開始</code></pre>
+<h2 id="安全性について">安全性について</h2>
+<ul><li><strong>SHA256 ハッシュ検証</strong>: HrdayaFlow の auto-update 機構は MSI のダウンロード時に <strong>SHA256 ハッシュをサーバ発表値と照合</strong> し、改竄を検知します。署名がなくても、配布経路での tamper は検出されます。</li><li><strong>配布元</strong>: MSI は GitHub Releases (<code>https://github.com/geshpoyo/HrdayaFlow-releases/releases</code>) からのみ配布。第三者ミラーは公式に存在しません。</li><li><strong>オープン度</strong>: アプリ本体のソースは現在 private ですが、配布インフラ (このリポジトリ + GitHub Pages + Releases) はすべて public で監査可能です。</li></ul>
+<h2 id="SmartScreen-警告がいつ消えるか">SmartScreen 警告がいつ消えるか</h2>
+<div class="table-wrap"><table><thead><tr><th>段階</th><th>状態</th></tr></thead><tbody><tr><td>現在 (beta)</td><td>証明書なし → 常に警告</td></tr><tr><td>証明書取得後 (OV)</td><td>警告は出るが「発行元: HrdayaFlow (確認済み)」と表示。DL 数累積で消える</td></tr><tr><td>商用版 (EV 証明書取得後)</td><td>警告ゼロ。発行元名がそのまま表示</td></tr></tbody></table></div>
+<p>商用版リリース (v1.0 以降) で証明書取得を予定しています。</p>
+<h2 id="それでも警告が怖い場合">それでも警告が怖い場合</h2>
+<ul><li>VirusTotal で MSI ファイルをスキャン → クリーン確認 (https://www.virustotal.com/)</li><li>仮想マシン (VMware Workstation Player など、無料) で先にインストール → 動作確認 → 本番 PC へ</li><li>Hyper-V Sandbox (Windows 11 Pro 機能) で隔離実行</li></ul>
+<h2 id="トラブルシューティング">トラブルシューティング</h2>
+<div class="table-wrap"><table><thead><tr><th>症状</th><th>対応</th></tr></thead><tbody><tr><td>「詳細情報」が表示されない</td><td>Windows Update 適用後に再試行。極端に古い Windows 10 では UI が異なる場合あり</td></tr><tr><td>「実行」を押しても何も起きない</td><td>管理者権限で再試行 (右クリック → 管理者として実行)</td></tr><tr><td>「Windows Defender がブロックしました」</td><td>一時的に Defender の Real-time protection を OFF → インストール → ON に戻す (推奨しない、最終手段)</td></tr><tr><td>警告ではなく完全にブロック (実行不可)</td><td>組織管理デバイスの場合、IT 管理者の設定により実行不可能。個人 PC を使用</td></tr></tbody></table></div>
+<h2 id="関連">関連</h2>
+<ul><li><span class="missing">02 はじめに</span> — 通常のインストール手順</li><li><a class="wikilink" href="../../basics/03-startup-on-windows/">03 Windows 起動マニュアル</a> — 起動時の注意点</li><li><span class="missing">reference/03 トラブルシューティング</span> — その他の問題</li></ul>
+<hr>
+<p><a class="wikilink" href="../../basics/03-startup-on-windows/">← 03</a> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 機能編へ</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#インストール時の警告-(SmartScreen)-について">インストール時の警告 (SmartScreen) について</a></li><li class="lvl-2"><a href="#なぜ警告が出るのか">なぜ警告が出るのか</a></li><li class="lvl-2"><a href="#回避手順-(Windows-10-11)">回避手順 (Windows 10 / 11)</a></li><li class="lvl-3"><a href="#視覚的な手順">視覚的な手順</a></li><li class="lvl-2"><a href="#安全性について">安全性について</a></li><li class="lvl-2"><a href="#SmartScreen-警告がいつ消えるか">SmartScreen 警告がいつ消えるか</a></li><li class="lvl-2"><a href="#それでも警告が怖い場合">それでも警告が怖い場合</a></li><li class="lvl-2"><a href="#トラブルシューティング">トラブルシューティング</a></li><li class="lvl-2"><a href="#関連">関連</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /><line x1="170" y1="150" x2="170" y2="250" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">インストール時の警告</text>
+    <a href="../../basics/03-startup-on-windows/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>03-startup-on-windows</title></a><a href="../../00-INDEX/"><circle cx="170" cy="250" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">03-start</text><text x="170" y="266" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="basics/04-install-warning";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

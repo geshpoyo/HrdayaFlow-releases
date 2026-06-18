@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>14 開発者ガイド | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>14 開発者ガイド</h1><div class="note-meta">#manual · #developer · #build · #cli · #mcp</div><h1 id="14-開発者ガイド">14 開発者ガイド</h1>
+<p><span class="missing">← 13 ショートカット</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 15 トラブル</span></p>
+<p>ソースから動かす / 拡張する人向け。CLI ツール、ビルド、MCP サーバ、CI、寄稿フロー。</p>
+<h2 id="セットアップ">セットアップ</h2>
+<p>詳細: <span class="missing">開発環境セットアップ_Windows.md</span></p>
+<p>最低限:</p>
+<div class="table-wrap"><table><thead><tr><th>必要</th><th>バージョン</th><th>入手</th></tr></thead><tbody><tr><td>Flutter SDK</td><td>3.27+</td><td>flutter.dev</td></tr><tr><td>Rust toolchain</td><td>1.78+ (stable)</td><td>rustup</td></tr><tr><td>Python</td><td>3.11+</td><td>python.org</td></tr><tr><td>Visual Studio Build Tools</td><td>2022 (Windows)</td><td>visualstudio.microsoft.com</td></tr><tr><td>Git</td><td>任意</td><td>git-scm.com</td></tr></tbody></table></div>
+<pre><code class="language-powershell">git clone https://github.com/&lt;owner&gt;/HrdayaFlow.git
+cd HrdayaFlow</code></pre>
+<h2 id="ビルドと起動">ビルドと起動</h2>
+<h3 id="Flutter-app-(UI)">Flutter app (UI)</h3>
+<pre><code class="language-powershell">cd app
+flutter pub get
+flutter run -d windows           # debug
+flutter run -d windows --release # release</code></pre>
+<p>ホットリロード: ターミナルで <code>r</code>、ホットリスタート: <code>R</code>、終了: <code>q</code>。</p>
+<h3 id="Rust-core">Rust core</h3>
+<pre><code class="language-powershell">cd core
+cargo build                     # debug
+cargo build --release           # release
+cargo test                      # 全テスト
+cargo test --test hrf_assets_ordering_test  # 特定 test
+cargo clippy -- -D warnings     # lint</code></pre>
+<p><code>flutter run</code> 時に Rust DLL が古いと FFI エラー。Rust 側を変更したら <strong>必ず</strong> <code>cargo build</code> してから <code>flutter run</code>。</p>
+<h3 id="Python-AI-service">Python AI service</h3>
+<pre><code class="language-powershell">cd ai_service
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+python -m uvicorn main:app --reload --host 127.0.0.1 --port 8765 --app-dir src
+pytest tests/                   # 全テスト</code></pre>
+<h3 id="FFI-コード生成">FFI コード生成</h3>
+<p>Rust 側 API (<code>core/src/api.rs</code>) を変更したら:</p>
+<pre><code class="language-powershell">cd app
+flutter_rust_bridge_codegen generate</code></pre>
+<p><code>app/lib/bridge_generated.dart/</code> が更新される。<code>git status</code> で差分確認、commit。</p>
+<h2 id="CLI-ツール-cli">CLI ツール {#cli}</h2>
+<p><code>core/src/bin/</code> 配下にスタンドアロン CLI。</p>
+<h3 id="hrf-(汎用)"><code>hrf</code> (汎用)</h3>
+<pre><code class="language-powershell">hrf import input.opml --output output.hrf
+hrf export input.hrf --format markdown --output out.md
+hrf hash input.hrf                    # 内部 SHA256 一覧
+hrf diff before.hrf after.hrf         # JSON Patch 出力
+hrf apply-patch base.hrf patch.json   # JSON Patch 適用
+hrf list-assets input.hrf             # アセット一覧</code></pre>
+<h3 id="bench_k11_gate"><code>bench_k11_gate</code></h3>
+<pre><code class="language-powershell">cargo run --bin bench_k11_gate --features bench-gate</code></pre>
+<p>K11-bis (JSON Patch undo) のベンチマーク。<code>docs/may-2026/k11-bis-json-patch-crate.md</code> 参照。</p>
+<h3 id="budget_checkdart"><code>budget_check.dart</code></h3>
+<pre><code class="language-powershell">cd tools/budget_check
+dart run lib/main.dart --baseline baseline.json --current current.json</code></pre>
+<p>CI で <code>.github/workflows/budget-gate.yml</code> から呼ばれる。詳細: [[#budget-gate]]</p>
+<h2 id="MCP-Server-(HrdayaFlow-を-Claude-Cursor-から操作)">MCP Server (HrdayaFlow を Claude / Cursor から操作)</h2>
+<p><code>app/lib/mcp/</code> で <strong>HTTP ベース MCP wrapper</strong> をホスト。</p>
+<h3 id="起動">起動</h3>
+<p>アプリ起動時に自動で <code>localhost:3737</code> にホスト (Settings で OFF 可)。</p>
+<p>stdio fallback: <code>rust/hrdayaflow-mcp/</code> バイナリを <code>claude_desktop_config.json</code> に登録。</p>
+<pre><code class="language-json">{
+  &quot;mcpServers&quot;: {
+    &quot;hrdayaflow&quot;: {
+      &quot;command&quot;: &quot;C:\\path\\to\\hrdayaflow-mcp.exe&quot;,
+      &quot;args&quot;: []
+    }
+  }
+}</code></pre>
+<h3 id="公開ツール">公開ツール</h3>
+<div class="table-wrap"><table><thead><tr><th>ツール</th><th>用途</th></tr></thead><tbody><tr><td><code>read()</code></td><td>現在開いているマップ全体 (map.json)</td></tr><tr><td><code>find_node(id)</code></td><td>1 ノート取得</td></tr><tr><td><code>find_edge(from, to)</code></td><td>エッジ取得</td></tr><tr><td><code>bulk_apply(operations)</code></td><td>操作配列を一括実行</td></tr><tr><td><code>bulk_patch(patch)</code></td><td>RFC 6902 JSON Patch 適用</td></tr><tr><td><code>screenshot(area)</code></td><td>領域スクショ取得</td></tr></tbody></table></div>
+<p>詳細仕様: <code>docs/v0-1-1/c-mcp-tools/</code>。</p>
+<h3 id="設定-hand-rolled-JSON-RPC">設定: hand-rolled JSON-RPC</h3>
+<p>メモリにあるとおり、<strong>rmcp crate は使わない</strong>。<code>rust/hrdayaflow-mcp/</code> で hand-rolled JSON-RPC proxy。理由: 依存最小、Rust core との型共有。</p>
+<h2 id="Budget-Gate-(CI-性能ガード)-budget-gate">Budget Gate (CI 性能ガード) {#budget-gate}</h2>
+<p><code>.github/workflows/budget-gate.yml</code> で PR ごとに走る。</p>
+<h3 id="計測対象">計測対象</h3>
+<p><code>docs/performance-budgets.yaml</code> に定義:</p>
+<pre><code class="language-yaml">budgets:
+  app_size_mb:        { target: 80,  hard_limit: 120 }
+  startup_ms:         { target: 2000, hard_limit: 3000 }
+  open_1000nodes_ms:  { target: 1500, hard_limit: 2500 }
+  memory_idle_mb:     { target: 200, hard_limit: 350 }
+  ...</code></pre>
+<h3 id="違反時の挙動">違反時の挙動</h3>
+<p><code>enforcement</code> セクションで定義 (M12, 2026-05-31):</p>
+<div class="table-wrap"><table><thead><tr><th>状態</th><th>exit code</th><th>PR ステータス</th></tr></thead><tbody><tr><td>全て target 内</td><td>0</td><td>✅ pass</td></tr><tr><td>target 超 / hard_limit 内</td><td>1</td><td>⚠ warning (merge 可)</td></tr><tr><td>hard_limit 超</td><td>2</td><td>❌ fail (merge 不可)</td></tr><tr><td>baseline 不在</td><td>3</td><td>🚧 baseline 生成のみ</td></tr><tr><td>設定エラー</td><td>4</td><td>エラー</td></tr></tbody></table></div>
+<p><code>STRICT_OVERRIDE=1</code> 環境変数で warning も fail に昇格。</p>
+<h2 id="アーキテクチャ-Lint-(senastra_architect)-🔌">アーキテクチャ Lint (senastra_architect) 🔌</h2>
+<p>Senastra 側に依頼中 (<span class="missing">../may-2026/senastra-requests/01-delta-pattern-lint</span>)。完了後 CI に組込:</p>
+<ul><li>循環依存検出</li><li>god-module 警告 (1500 LOC / 40 public API 超)</li><li>shared/ 肥大化警告</li></ul>
+<h2 id="i18n-(翻訳寄稿)-i18n">i18n (翻訳寄稿) {#i18n}</h2>
+<ol><li><code>app/lib/l10n/intl_ja.arb</code> を origin として参照</li><li><code>intl_&lt;lang&gt;.arb</code> を新規作成 (例: <code>intl_zh.arb</code>)</li><li>すべての key を翻訳</li><li><code>flutter gen-l10n</code> で <code>lib/l10n/intl_*.g.dart</code> を再生成</li><li>テスト: <code>flutter run -d windows</code> で言語切替して確認</li><li>PR</li></ol>
+<h2 id="テスト">テスト</h2>
+<div class="table-wrap"><table><thead><tr><th>階層</th><th>コマンド</th><th>場所</th></tr></thead><tbody><tr><td>Rust unit + integration</td><td><code>cargo test</code></td><td><code>core/src/</code> <code>core/tests/</code></td></tr><tr><td>Rust property</td><td><code>cargo test --features proptest</code></td><td>各モジュール</td></tr><tr><td>Dart widget</td><td><code>flutter test</code></td><td><code>app/test/</code></td></tr><tr><td>Dart integration</td><td><code>flutter test integration_test/</code></td><td><code>app/integration_test/</code></td></tr><tr><td>Python</td><td><code>pytest</code></td><td><code>ai_service/tests/</code></td></tr><tr><td>E2E</td><td><code>tools/e2e/</code> 🚧</td><td>—</td></tr></tbody></table></div>
+<p>CI で全部走る: <code>.github/workflows/ci.yml</code>。</p>
+<h2 id="寄稿フロー">寄稿フロー</h2>
+<ol><li>Issue を立てる (or 既存 issue を選ぶ)</li><li>ブランチ: <code>feat/&lt;short-desc&gt;</code> / <code>fix/&lt;short-desc&gt;</code> / <code>docs/&lt;short-desc&gt;</code></li><li>PR を作る (template が CHECK リスト出してくれる)</li><li>全テスト pass + budget gate pass + clippy clean</li><li>レビュアーアサイン → 1 approve で merge</li></ol>
+<p>詳細: <code>.github/CONTRIBUTING.md</code> 🚧</p>
+<h2 id="デバッグ-Tips">デバッグ Tips</h2>
+<div class="table-wrap"><table><thead><tr><th>症状</th><th>確認</th></tr></thead><tbody><tr><td>FFI Result がエラー</td><td><code>RUST_LOG=debug flutter run</code> で Rust ログ表示</td></tr><tr><td>Layout が崩れる</td><td><code>flutter inspector</code> (DevTools) でツリー検査</td></tr><tr><td>AI service 接続失敗</td><td><code>curl http://127.0.0.1:8765/health</code></td></tr><tr><td>ZIP I/O エラー</td><td><code>7-Zip</code> で <code>.hrf</code> を開いて中身確認</td></tr><tr><td>Undo が壊れた</td><td><code>Ctrl + Alt + Z</code> で履歴ビューア → どこから壊れたか確認</td></tr></tbody></table></div>
+<h2 id="リリースフロー">リリースフロー</h2>
+<p>詳細: <span class="missing">release-channel-flow.md</span></p>
+<p>要点:</p>
+<ol><li><code>CHANGELOG.md</code> 更新</li><li><code>app/pubspec.yaml</code> / <code>core/Cargo.toml</code> / <code>installer/</code> の version を bump</li><li><code>git tag v&lt;x.y.z&gt;</code> → push</li><li>CI が installer ビルド + GitHub Release 作成</li><li><code>winget-manifest/</code> 更新</li></ol>
+<h2 id="ディレクトリ構成-(再掲)">ディレクトリ構成 (再掲)</h2>
+<pre><code>HrdayaFlow/
+├── app/             ← Flutter (UI)
+├── core/            ← Rust (グラフ・I/O・export)
+├── ai_service/      ← Python (LLM)
+├── architect/       ← Senastra architect (品質ガード)
+├── docs/            ← このマニュアル + 設計書
+├── installer/       ← MSI ビルド
+├── scripts/         ← 自動化スクリプト
+├── site/            ← プロモサイト
+├── tools/           ← 開発用 CLI (budget_check 等)
+└── rust/hrdayaflow-mcp/  ← MCP server</code></pre>
+<p><span class="missing">← 13</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 15</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#14-開発者ガイド">14 開発者ガイド</a></li><li class="lvl-2"><a href="#セットアップ">セットアップ</a></li><li class="lvl-2"><a href="#ビルドと起動">ビルドと起動</a></li><li class="lvl-3"><a href="#Flutter-app-(UI)">Flutter app (UI)</a></li><li class="lvl-3"><a href="#Rust-core">Rust core</a></li><li class="lvl-3"><a href="#Python-AI-service">Python AI service</a></li><li class="lvl-3"><a href="#FFI-コード生成">FFI コード生成</a></li><li class="lvl-2"><a href="#CLI-ツール-cli">CLI ツール {#cli}</a></li><li class="lvl-3"><a href="#hrf-(汎用)">hrf (汎用)</a></li><li class="lvl-3"><a href="#bench_k11_gate">benchk11gate</a></li><li class="lvl-3"><a href="#budget_checkdart">budgetcheck.dart</a></li><li class="lvl-2"><a href="#MCP-Server-(HrdayaFlow-を-Claude-Cursor-から操作)">MCP Server (HrdayaFlow を Claude / Cursor から操作)</a></li><li class="lvl-3"><a href="#起動">起動</a></li><li class="lvl-3"><a href="#公開ツール">公開ツール</a></li><li class="lvl-3"><a href="#設定-hand-rolled-JSON-RPC">設定: hand-rolled JSON-RPC</a></li><li class="lvl-2"><a href="#Budget-Gate-(CI-性能ガード)-budget-gate">Budget Gate (CI 性能ガード) {#budget-gate}</a></li><li class="lvl-3"><a href="#計測対象">計測対象</a></li><li class="lvl-3"><a href="#違反時の挙動">違反時の挙動</a></li><li class="lvl-2"><a href="#アーキテクチャ-Lint-(senastra_architect)-🔌">アーキテクチャ Lint (senastraarchitect) 🔌</a></li><li class="lvl-2"><a href="#i18n-(翻訳寄稿)-i18n">i18n (翻訳寄稿) {#i18n}</a></li><li class="lvl-2"><a href="#テスト">テスト</a></li><li class="lvl-2"><a href="#寄稿フロー">寄稿フロー</a></li><li class="lvl-2"><a href="#デバッグ-Tips">デバッグ Tips</a></li><li class="lvl-2"><a href="#リリースフロー">リリースフロー</a></li><li class="lvl-2"><a href="#ディレクトリ構成-(再掲)">ディレクトリ構成 (再掲)</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">14 開発者ガイド</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/04-developer-guide";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

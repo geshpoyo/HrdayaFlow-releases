@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>privacy | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>privacy</h1><div class="note-meta"></div><h1 id="プライバシー方針（自動更新）">プライバシー方針（自動更新）</h1>
+<p>HrdayaFlow の自動更新チェックに関する送受信情報は以下です。</p>
+<h2 id="送信する情報">送信する情報</h2>
+<ul><li>アプリバージョン（<code>User-Agent</code>）</li><li>更新チャンネル（<code>stable</code> / <code>beta</code>）</li><li>プラットフォーム情報（例: <code>windows-x64</code>）</li></ul>
+<p>User-Agent 例:</p>
+<p><code>HrdayaFlow/0.0.3 (windows; STABLE)</code></p>
+<h2 id="送信しない情報">送信しない情報</h2>
+<ul><li>マシン固有 ID</li><li>利用統計・操作ログ</li><li>マップ本文や添付データ</li><li>ユーザーアカウント情報</li></ul>
+<h2 id="停止方法">停止方法</h2>
+<ul><li><code>設定 &gt; 更新</code> の「自動的に更新を確認」を OFF にすると、自動チェックは停止します。</li><li>手動チェック（<code>今すぐ確認</code>）はユーザー操作時のみ行われます。</li></ul>
+<h2 id="備考">備考</h2>
+<ul><li>サーバー側の通常アクセスログ（IP/時刻）はホスティング基盤の標準挙動として記録される場合があります。</li></ul></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#プライバシー方針（自動更新）">プライバシー方針（自動更新）</a></li><li class="lvl-2"><a href="#送信する情報">送信する情報</a></li><li class="lvl-2"><a href="#送信しない情報">送信しない情報</a></li><li class="lvl-2"><a href="#停止方法">停止方法</a></li><li class="lvl-2"><a href="#備考">備考</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">privacy</text>
+    
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../search.json";window.__NAV__="../nav.json";window.__CUR__="privacy";window.__ROOT__="../";</script>
+<script src="../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

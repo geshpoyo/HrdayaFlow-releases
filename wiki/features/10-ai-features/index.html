@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>10 AI 機能 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>10 AI 機能</h1><div class="note-meta">#manual · #ai · #llm · #prudellm · #ollama</div><h1 id="10-AI-機能">10 AI 機能</h1>
+<p><span class="missing">← 09 検索</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 11 ファイル</span></p>
+<p>テキスト ⇔ マップの双方向変換、関連エッジ提案、子ノート提案。LLM (PrudeLLM / Ollama) と組み合わせるか、ローカルの rule-based stub だけでも動く。</p>
+<h2 id="AI-機能一覧">AI 機能一覧</h2>
+<div class="table-wrap"><table><thead><tr><th>機能</th><th>入力</th><th>出力</th><th>章</th></tr></thead><tbody><tr><td>テキスト → マップ</td><td>文章</td><td>ノート + エッジ</td><td>[[#text-to-map]]</td></tr><tr><td>マップ → 要約</td><td>マップ全体</td><td>要約テキスト</td><td>[[#summarize]]</td></tr><tr><td>Suggest Edges</td><td>マップ全体</td><td>提案エッジ一覧</td><td>[[#suggest-edges]]</td></tr><tr><td>Suggest Children</td><td>1 ノード</td><td>子候補テキスト</td><td>[[#suggest-children]]</td></tr><tr><td>Diff (構造比較)</td><td>2 マップ</td><td>JSON Patch</td><td>[[#diff]]</td></tr></tbody></table></div>
+<h2 id="バックエンド">バックエンド</h2>
+<h3 id="バックエンド一覧">バックエンド一覧</h3>
+<div class="table-wrap"><table><thead><tr><th>Backend</th><th>必要なもの</th><th>強み</th></tr></thead><tbody><tr><td><strong>stub</strong> (既定)</td><td>なし (内蔵)</td><td>オフライン・無料・予測可能</td></tr><tr><td><strong>Ollama</strong></td><td><code>localhost:11434</code> で起動中の Ollama</td><td>ローカル LLM、プライバシー</td></tr><tr><td><strong>PrudeLLM</strong></td><td>API キー</td><td>ホスト型、高品質</td></tr></tbody></table></div>
+<h3 id="切り替え">切り替え</h3>
+<p>設定 → AI → Backend → 選択。AI Panel 上部のドロップダウンからも切替可。</p>
+<p><code>/api/backends</code> を叩くと、各 backend の availability が返る:</p>
+<pre><code class="language-json">{
+  &quot;stub&quot;: { &quot;available&quot;: true },
+  &quot;ollama&quot;: { &quot;available&quot;: false, &quot;reason&quot;: &quot;connection refused&quot; },
+  &quot;prudellm&quot;: { &quot;available&quot;: false, &quot;reason&quot;: &quot;API key not set&quot; }
+}</code></pre>
+<h2 id="サービス起動-service-startup">サービス起動 {#service-startup}</h2>
+<p>AI 機能は Python AI service を必要とする (stub 含む)。</p>
+<h3 id="自動起動-(既定)">自動起動 (既定)</h3>
+<p>アプリ起動時、<code>ai_service/</code> を子プロセスで自動 spawn (port 8765)。Settings で OFF 可。</p>
+<h3 id="手動起動">手動起動</h3>
+<pre><code class="language-powershell">cd C:\Users\geshtalt\dev\HrdayaFlow\ai_service
+python -m uvicorn main:app --host 127.0.0.1 --port 8765 --app-dir src</code></pre>
+<p>ヘルスチェック: <code>curl http://127.0.0.1:8765/health</code> → <code>{&quot;status&quot;:&quot;ok&quot;}</code></p>
+<h3 id="接続確認">接続確認</h3>
+<p>ステータスバー右の AI バッジ:</p>
+<div class="table-wrap"><table><thead><tr><th>表示</th><th>意味</th></tr></thead><tbody><tr><td>🟢 AI 接続中</td><td>OK</td></tr><tr><td>🟡 stub のみ</td><td>LLM 未接続、stub にフォールバック</td></tr><tr><td>🔴 AI 未接続</td><td>service 未起動、AI 機能不可</td></tr></tbody></table></div>
+<h2 id="テキスト-→-マップ-text-to-map">テキスト → マップ {#text-to-map}</h2>
+<p>文章を投げると、ノート + エッジで構造化されたマップを返す。</p>
+<h3 id="使い方">使い方</h3>
+<ol><li>AI Panel を開く (右パネル切替 or <code>Ctrl + Shift + A</code>)</li><li>テキストを貼り付け</li><li>「生成」ボタン or <code>Ctrl + Enter</code></li><li>プレビュー表示 → 「マップに挿入」 or 「キャンセル」</li></ol>
+<h3 id="ストリーミング">ストリーミング</h3>
+<p>WebSocket (<code>/api/generate-map/stream</code>) でチャンクごとに表示。長文でも 1 ノードずつ生えてくる。</p>
+<h3 id="入力形式の例">入力形式の例</h3>
+<h4 id="箇条書き-(一番強い)">箇条書き (一番強い)</h4>
+<pre><code>プロジェクトキックオフ
+- 目的: ユーザー数 2 倍
+- 期日: 2026-09 末
+- 担当
+  - 田中 (PM)
+  - 佐藤 (eng)
+- 課題
+  - 競合の動き
+  - 予算</code></pre>
+<p>→ 5 ノード + 5 エッジの階層マップに。</p>
+<h4 id="文章-(LLM-必須)">文章 (LLM 必須)</h4>
+<pre><code>来期のキックオフは 2026-09 末。田中が PM、佐藤がエンジニアで、
+ユーザー数を 2 倍にする目標。リスクは競合と予算。</code></pre>
+<p>→ stub では弱い。LLM では概念抽出してマップ化。</p>
+<h3 id="詳細フォーマット仕様">詳細フォーマット仕様</h3>
+<p><code>docs/ai-prompts/hrdaya-output-spec.md</code> 参照。LLM プロンプトには「JSON のみで返答せよ」のテンプレ付き。</p>
+<h2 id="マップ-→-要約-summarize">マップ → 要約 {#summarize}</h2>
+<p>マップを文章にする。出力先: クリップボード / 新規 Markdown ノート / ファイル。</p>
+<h3 id="使い方">使い方</h3>
+<ol><li>キャンバスで対象を選択 (空なら全マップ)</li><li>メニュー → AI → 要約</li><li>文体選択: 箇条書き / 段落 / Twitter 280 字 / 1 行</li></ol>
+<h3 id="内部処理">内部処理</h3>
+<ul><li>LLM ON → マップ JSON を整形して LLM に投げる</li><li>LLM OFF → rule-based summarize (<code>ai_service/src/converter/map_to_summary.py</code>)<ul><li>ルートノート + 第 2 階層を箇条書き化</li></ul></li></ul>
+<h2 id="Suggest-Edges-suggest-edges">Suggest Edges {#suggest-edges}</h2>
+<p>マップ全体を見て、繋がっていない関連ノート間のエッジを提案。</p>
+<h3 id="使い方">使い方</h3>
+<p>メニュー → AI → エッジ提案 → ダイアログに候補一覧 → 個別 / 一括採用。</p>
+<pre><code>提案エッジ (12 件)
+☑ 顧客 A → 営業フロー (信頼度 0.92)
+☑ 顧客 B → 営業フロー (信頼度 0.88)
+☐ 競合分析 → 顧客 A   (信頼度 0.41 - 低)
+[ すべて採用 ] [ 選択を採用 ] [ キャンセル ]</code></pre>
+<p>LLM ON → 意味的類似度。LLM OFF → タイトル文字列の Jaccard 類似度。</p>
+<h2 id="Suggest-Children-suggest-children">Suggest Children {#suggest-children}</h2>
+<p>1 ノートに対して、その「展開候補」を提案。</p>
+<h3 id="使い方">使い方</h3>
+<p>ノート選択 → 右クリック → AI → 子を提案</p>
+<pre><code>&quot;プロジェクトキックオフ&quot; の子提案
+☑ 目的
+☑ 期日
+☑ 担当者
+☐ リスク
+☐ 予算
+[ 選択を追加 ]</code></pre>
+<h2 id="Diff-(構造比較)-diff">Diff (構造比較) {#diff}</h2>
+<p>2 つのマップ (or 同マップの 2 時点) の差分を JSON Patch で取得。</p>
+<h3 id="用途">用途</h3>
+<ul><li>バージョン管理 (どこが変わったか)</li><li>共同編集 (相手の変更を取り込み)</li><li>Undo 履歴の人間可読化</li></ul>
+<h3 id="CLI">CLI</h3>
+<pre><code class="language-powershell">hrdaya diff before.hrf after.hrf &gt; patch.json
+hrdaya apply-patch base.hrf patch.json --output result.hrf</code></pre>
+<p>詳細: <code>core/src/api.rs</code> の <code>generate_map_json_patch</code> / <code>apply_map_json_patch</code>。</p>
+<h2 id="MCP-Server-(将来)">MCP Server (将来)</h2>
+<p><code>app/lib/mcp/</code> で <strong>HTTP ベースの MCP</strong> をホスト中 (v0.1.1 計画)。Claude Desktop / Cursor などから:</p>
+<ul><li><code>read()</code> — マップ全体取得</li><li><code>find_node(id)</code> — ノート 1 件取得</li><li><code>find_edge(from, to)</code> — エッジ取得</li><li><code>bulk_apply(operations)</code> — 一括変更</li><li><code>bulk_patch(json_patch)</code> — JSON Patch 適用</li></ul>
+<p>詳細: <code>docs/v0-1-1/c-mcp-tools/</code>。</p>
+<h2 id="プロンプトテンプレート">プロンプトテンプレート</h2>
+<p><code>ai_service/src/prompts/</code> に json/jp テンプレート群。Settings → AI → プロンプト編集 で個別カスタマイズ可。</p>
+<p>例: 「文体は丁寧体」「絵文字を 1 ノートに 1 つ入れる」など。</p>
+<h2 id="エラーとフォールバック">エラーとフォールバック</h2>
+<div class="table-wrap"><table><thead><tr><th>状況</th><th>動作</th></tr></thead><tbody><tr><td>AI service 起動失敗</td><td>AI 機能無効化、ステータス 🔴</td></tr><tr><td>LLM タイムアウト (30 秒)</td><td>stub に自動フォールバック</td></tr><tr><td>LLM レスポンスが JSON 不正</td><td>1 回だけリトライ → 失敗時 stub</td></tr><tr><td>ノート数 1000 超のマップを要約</td><td>チャンク分割 → 結合</td></tr></tbody></table></div>
+<h2 id="プライバシー">プライバシー</h2>
+<ul><li>stub: ローカル完結、外部送信なし</li><li>Ollama: ローカル完結 (Ollama 自体がローカル LLM)</li><li>PrudeLLM: 外部送信。マップ内容が API 経由で送信される。Settings の「PrudeLLM 利用に同意」を ON にしないと使えない</li></ul>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] AI service が起動 (<code>http://127.0.0.1:8765/health</code> が ok)</li><li>[ ] AI バッジが 🟢 か 🟡</li><li>[ ] AI Panel で stub 選択 → テキスト → マップ生成</li><li>[ ] Ollama で同じテキストを生成 → 結果が違う</li><li>[ ] PrudeLLM で生成 (API キーあれば)</li><li>[ ] 要約 → クリップボードにコピー</li><li>[ ] エッジ提案 → 候補が出る</li><li>[ ] 子提案 → 候補が出る</li><li>[ ] LLM タイムアウトで stub にフォールバック</li><li>[ ] AI service 停止時に AI Panel が無効化される</li></ul>
+<p><span class="missing">← 09</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 11</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#10-AI-機能">10 AI 機能</a></li><li class="lvl-2"><a href="#AI-機能一覧">AI 機能一覧</a></li><li class="lvl-2"><a href="#バックエンド">バックエンド</a></li><li class="lvl-3"><a href="#バックエンド一覧">バックエンド一覧</a></li><li class="lvl-3"><a href="#切り替え">切り替え</a></li><li class="lvl-2"><a href="#サービス起動-service-startup">サービス起動 {#service-startup}</a></li><li class="lvl-3"><a href="#自動起動-(既定)">自動起動 (既定)</a></li><li class="lvl-3"><a href="#手動起動">手動起動</a></li><li class="lvl-3"><a href="#接続確認">接続確認</a></li><li class="lvl-2"><a href="#テキスト-→-マップ-text-to-map">テキスト → マップ {#text-to-map}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-3"><a href="#ストリーミング">ストリーミング</a></li><li class="lvl-3"><a href="#入力形式の例">入力形式の例</a></li><li class="lvl-3"><a href="#詳細フォーマット仕様">詳細フォーマット仕様</a></li><li class="lvl-2"><a href="#マップ-→-要約-summarize">マップ → 要約 {#summarize}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-3"><a href="#内部処理">内部処理</a></li><li class="lvl-2"><a href="#Suggest-Edges-suggest-edges">Suggest Edges {#suggest-edges}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#Suggest-Children-suggest-children">Suggest Children {#suggest-children}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#Diff-(構造比較)-diff">Diff (構造比較) {#diff}</a></li><li class="lvl-3"><a href="#用途">用途</a></li><li class="lvl-3"><a href="#CLI">CLI</a></li><li class="lvl-2"><a href="#MCP-Server-(将来)">MCP Server (将来)</a></li><li class="lvl-2"><a href="#プロンプトテンプレート">プロンプトテンプレート</a></li><li class="lvl-2"><a href="#エラーとフォールバック">エラーとフォールバック</a></li><li class="lvl-2"><a href="#プライバシー">プライバシー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">10 AI 機能</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/10-ai-features";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

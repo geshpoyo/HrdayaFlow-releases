@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>11 ファイルと相互運用 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>11 ファイルと相互運用</h1><div class="note-meta">#manual · #files · #hrf · #import · #export · #interop</div><h1 id="11-ファイルと相互運用">11 ファイルと相互運用</h1>
+<p><span class="missing">← 10 AI</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 12 テーマ</span></p>
+<p>主形式 <code>.hrf</code> v0.2 と、外部形式 7 種との往復。PDF / PNG / SVG での書き出し。</p>
+<h2 id="ネイティブ形式-hrf-v02">ネイティブ形式: <code>.hrf</code> v0.2</h2>
+<p><code>.hrf</code> は ZIP コンテナ。1 ファイルでマップ + アセット + サムネイル + 任意で履歴をパッケージ化。</p>
+<h3 id="物理レイアウト">物理レイアウト</h3>
+<pre><code>mymap.hrf  (ZIP, UTF-8 filenames)
+├── manifest.json          ← メタデータ
+├── map.json               ← マップ本体
+├── thumbnail.png          ← 512×512 プレビュー
+├── assets/
+│   ├── {sha256}.png       ← 内容ハッシュ名（同一バイト列は 1 ファイル、CE-04）
+│   ├── {sha256}.jpg
+│   ├── images/&lt;uuid&gt;.png  ← 旧形式（読み込み互換）
+│   ├── videos/&lt;uuid&gt;.mp4
+│   ├── audio/&lt;uuid&gt;.m4a
+│   ├── text/&lt;uuid&gt;.md     ← 長文 markdown body
+│   └── files/&lt;uuid&gt;.&lt;ext&gt;
+├── history/               (任意)
+│   └── snapshots/&lt;epoch&gt;.json
+└── originals/             (任意)
+    └── &lt;filename&gt;          ← import 元</code></pre>
+<h3 id="manifestjson"><code>manifest.json</code></h3>
+<pre><code class="language-json">{
+  &quot;format&quot;: &quot;hrdaya-flow&quot;,
+  &quot;formatVersion&quot;: &quot;0.2.0&quot;,
+  &quot;minViewerVersion&quot;: &quot;0.2.0&quot;,
+  &quot;created&quot;: &quot;2026-04-28T10:30:00+09:00&quot;,
+  &quot;modified&quot;: &quot;2026-04-28T18:42:11+09:00&quot;,
+  &quot;generator&quot;: { &quot;name&quot;: &quot;HṛdayaFlow&quot;, &quot;version&quot;: &quot;0.0.3&quot; },
+  &quot;platform&quot;: &quot;windows&quot;,
+  &quot;documentId&quot;: &quot;uuid-v4&quot;,
+  &quot;thumbnail&quot;: &quot;thumbnail.png&quot;,
+  &quot;assetManifest&quot;: [
+    { &quot;path&quot;: &quot;assets/images/abc.png&quot;, &quot;sha256&quot;: &quot;...&quot;, &quot;size&quot;: 12345, &quot;mime&quot;: &quot;image/png&quot; }
+  ]
+}</code></pre>
+<p><code>assetManifest</code> は <strong>改竄検知用</strong>。読み込み時に SHA256 を再計算して照合する (M7、<span class="missing">03-troubleshooting › hash-mismatch</span>)。</p>
+<h3 id="アセット重複排除（CE-04、2026-05-21〜）">アセット重複排除（CE-04、2026-05-21〜）</h3>
+<p>保存時、Rust コアが各アセットの <strong>SHA-256</strong> を計算し、ZIP 内では <code>assets/{sha256}.{ext}</code> に 1 回だけ格納する。同じ画像を複数ノードに貼っても物理ファイルは 1 つ。</p>
+<div class="table-wrap"><table><thead><tr><th>ノード側の参照（新規保存）</th><th>ZIP 内の実体</th></tr></thead><tbody><tr><td><code>sha256:abc123…</code>（64 文字 hex）</td><td><code>assets/abc123….png</code> 等</td></tr><tr><td><code>assets/images/{uuid}.png</code>（旧）</td><td>そのまま（読み込み互換）</td></tr><tr><td><code>uuid:{uuid}</code>（旧）</td><td><code>assets/images/{uuid}.*</code> 等へ解決</td></tr></tbody></table></div>
+<p>取り込み時の Dart（<code>ImageIngestionService</code> 等）は従来どおり隣接 <code>assets/images/&lt;uuid&gt;.ext</code> を作る。<strong>保存</strong>時に Rust がハッシュ化・dedup するため、Dart 側の変更は最小限。</p>
+<p>読み込み時、<code>sha256:</code> / <code>uuid:</code> 参照は <code>map.json</code> 向け JSON では <code>assets/...</code> パスへ展開され、キャンバス表示と再保存がそのまま動く。</p>
+<h3 id="mapjson-構造"><code>map.json</code> 構造</h3>
+<pre><code class="language-json">{
+  &quot;id&quot;: &quot;uuid&quot;,
+  &quot;title&quot;: &quot;マイマップ&quot;,
+  &quot;description&quot;: &quot;...&quot;,
+  &quot;canvas&quot;: { &quot;unit&quot;: &quot;px&quot;, &quot;background&quot;: &quot;#fff&quot;, &quot;gridSize&quot;: 16, &quot;viewport&quot;: {...} },
+  &quot;nodes&quot;: [ ... ],
+  &quot;edges&quot;: [ ... ],
+  &quot;styles&quot;: [ ... ],
+  &quot;submaps&quot;: { &quot;id1&quot;: { ... } },
+  &quot;layers&quot;: [ ... ]
+}</code></pre>
+<p>詳細スキーマは <code>docs/cursor-hrf-v0.2-interop.md</code> 参照。</p>
+<h3 id="後方互換">後方互換</h3>
+<div class="table-wrap"><table><thead><tr><th>入力</th><th>動作</th></tr></thead><tbody><tr><td><code>.hrf</code> v0.2 (manifest.json あり)</td><td>✅ フル機能</td></tr><tr><td><code>.hrf</code> v0.1 (map.json のみ ZIP)</td><td>✅ 自動変換、保存時は v0.2 化</td></tr><tr><td>裸 JSON (<code>.json</code> 拡張子)</td><td>✅ map.json として読み込み (アセット参照は外部 URL のみ)</td></tr><tr><td><strong>不明な拡張子の ZIP</strong></td><td>manifest 検査して hrdaya-flow 判定したら開く</td></tr></tbody></table></div>
+<h2 id="保存">保存</h2>
+<div class="table-wrap"><table><thead><tr><th>⌨</th><th>効果</th></tr></thead><tbody><tr><td><code>Ctrl + S</code></td><td>上書き保存</td></tr><tr><td><code>Ctrl + Alt + S</code></td><td>名前を付けて保存</td></tr><tr><td>(自動)</td><td>5 分ごと or 操作 50 件ごと</td></tr></tbody></table></div>
+<h3 id="自動保存">自動保存</h3>
+<p>設定 → 一般 → 自動保存。OFF / 1 分 / 5 分 / 操作ごと。</p>
+<h3 id="保存先">保存先</h3>
+<p>既定: <code>&lt;Documents&gt;/HrdayaFlow/</code>。Settings で変更可。</p>
+<h3 id="名前を付けて保存の初期ファイル名">名前を付けて保存の初期ファイル名</h3>
+<p>既存の <code>.hrf</code> を開いているタブで <strong>名前を付けて保存</strong> を実行すると、保存ダイアログのファイル名欄には現在のタブ名（例: <code>project_restore.hrf</code>）が入ります。新規の無題タブだけ <code>untitled.hrf</code> になります。</p>
+<h2 id="開く">開く</h2>
+<h3 id="Windows-ファイル関連付け">Windows ファイル関連付け</h3>
+<p>MSI でインストールした Windows 版では、Explorer で <code>.hrf</code> をダブルクリックすると HrdayaFlow が起動し、そのファイルを現在のタブへ読み込みます。起動後に「無題」のままになる場合は、ファイルパス引き渡しまたは起動引数処理の不具合として扱います。</p>
+<div class="table-wrap"><table><thead><tr><th>⌨</th><th>効果</th></tr></thead><tbody><tr><td><code>Ctrl + O</code></td><td>ファイルダイアログ</td></tr><tr><td><code>Ctrl + P</code></td><td>QuickOpen (<span class="missing">09-search-and-outline › quickopen</span>)</td></tr></tbody></table></div>
+<p>D&amp;D で <code>.hrf</code> / <code>.json</code> をウィンドウへ → HrdayaFlow ドキュメントとして開く。空の無題タブならそのタブを再利用し、既に作業中のタブなら新しいタブで開く。</p>
+<blockquote><p><code>.hrf</code> / <code>.json</code> は添付ファイルノートにはなりません。Markdown や画像などの通常ファイルだけが、埋め込み / 外部リンクを選んでキャンバス上のファイルノートになります。</p></blockquote>
+<h2 id="Import-他形式-→-HrdayaFlow">Import: 他形式 → HrdayaFlow</h2>
+<p>メニュー → ファイル → インポート → 形式選択 (or 拡張子で自動判定)。</p>
+<div class="table-wrap"><table><thead><tr><th>形式</th><th>拡張子</th><th>サポート</th><th>備考</th></tr></thead><tbody><tr><td><strong>Mermaid</strong></td><td><code>.mmd</code></td><td>✅</td><td>mindmap / flowchart 構文</td></tr><tr><td><strong>Markdown outline</strong></td><td><code>.md</code>, <code>.txt</code></td><td>✅</td><td>インデントベース</td></tr><tr><td><strong>JSON Canvas</strong> (Obsidian)</td><td><code>.canvas</code></td><td>✅</td><td>nodes + edges 双方向</td></tr><tr><td><strong>OPML</strong></td><td><code>.opml</code></td><td>✅</td><td>アウトラインプロセッサ</td></tr><tr><td><strong>XMind</strong></td><td><code>.xmind</code></td><td>✅</td><td>ZIP, content.json</td></tr><tr><td><strong>FreeMind / Freeplane</strong></td><td><code>.mm</code></td><td>✅</td><td>XML</td></tr><tr><td><strong>他のフリーフォーム MM</strong></td><td><code>.scap</code></td><td>✅</td><td>JSON ベース</td></tr><tr><td><strong>HTML/XHTML outline</strong></td><td><code>.html</code></td><td>🚧</td><td>部分対応</td></tr></tbody></table></div>
+<h3 id="Auto-detect">Auto-detect</h3>
+<p>拡張子 + magic byte で形式自動判定 → 「<code>.canvas</code> を JSON Canvas として開く?」確認 → OK で読込。</p>
+<h3 id="取り込み後の整形">取り込み後の整形</h3>
+<p>import 直後はノートが密集していることが多い。<code>Ctrl + Alt + G</code> (Container 内 Auto Layout) や、トップレベルで「整列」メニューから tree-down / radial を選ぶと整う。</p>
+<h2 id="Export-HrdayaFlow-→-他形式">Export: HrdayaFlow → 他形式</h2>
+<p>メニュー → ファイル → エクスポート → 形式選択。</p>
+<div class="table-wrap"><table><thead><tr><th>形式</th><th>用途</th><th>備考</th></tr></thead><tbody><tr><td><strong>PDF</strong></td><td>印刷・配布</td><td>A4/A3、viewport / fullmap、ベクター</td></tr><tr><td><strong>PNG</strong></td><td>プレゼン素材</td><td>解像度指定、背景色指定</td></tr><tr><td><strong>SVG</strong></td><td>編集可ベクター</td><td>Inkscape などで再編集可能</td></tr><tr><td><strong>Markdown outline</strong></td><td>Obsidian / Notion</td><td>階層を <code>-</code> インデントで</td></tr><tr><td><strong>Mermaid</strong></td><td>GitHub README</td><td>mindmap / flowchart</td></tr><tr><td><strong>JSON Canvas</strong></td><td>Obsidian Canvas</td><td>双方向</td></tr></tbody></table></div>
+<h3 id="PDF-PNG-SVG-の細かい設定">PDF / PNG / SVG の細かい設定</h3>
+<p>エクスポートダイアログで:</p>
+<ul><li><strong>スコープ</strong>: 全マップ / 現在のビューポート / 選択範囲</li><li><strong>用紙</strong>: A4 / A3 / カスタム (PDF のみ)</li><li><strong>解像度</strong>: 96 / 144 / 300 dpi (PNG のみ)</li><li><strong>背景</strong>: 白 / 透明 / 指定色</li><li><strong>マージン</strong>: 0 / 5 / 10 / 20 mm</li><li><strong>フォント埋め込み</strong>: PDF のみ ON/OFF (ファイル肥大に注意)</li></ul>
+<h3 id="PDF-出力">PDF 出力</h3>
+<ul><li>pdfium-render ベース</li><li>ベクター出力 (拡大しても劣化しない)</li><li>日本語 / 中文 / 韓文フォント対応</li><li>リンクはクリック可能 PDF リンクに変換</li><li>詳細: <code>core/src/export/pdf.rs</code></li></ul>
+<h3 id="Print">Print</h3>
+<p>⌨ <code>Ctrl + P</code> (印刷) → OS 標準ダイアログ → プリンタ選択 or 「PDF として保存」。</p>
+<h2 id="Asset-Extractor-(アセット取り出し)">Asset Extractor (アセット取り出し)</h2>
+<p><code>.hrf</code> から内蔵アセット (画像 / 動画 / 音声) を取り出すダイアログ。</p>
+<p>メニュー → ファイル → Asset Extractor</p>
+<pre><code>┌─ Asset Extractor — mymap.hrf ────────────────┐
+│ 検索: [          ]   ☑ SHA256 検証          │
+│ ─────────────────────────────────────────── │
+│ ☑ img | 顧客 A.png        | 1.2 MB | 参照: 3│
+│ ☑ vid | デモ.mp4          | 24 MB  | 参照: 1│
+│ ☐ aud | BGM.m4a           | 5 MB   | 参照: 0│
+│ ─────────────────────────────────────────── │
+│ 取り出し先: [ C:\Users\... ]  [ 選択 ]      │
+│ ☑ 同名はリネーム                            │
+│            [ キャンセル ] [ 取り出し ]      │
+└──────────────────────────────────────────────┘</code></pre>
+<p>詳細: M7 (2026-05-30) で <strong>check-then-write</strong> 反転 (<span class="missing">03-troubleshooting › hash-mismatch</span> 参照)。SHA256 不一致時は <strong>ファイルが書き込まれない</strong>。</p>
+<h3 id="信頼して展開-(Trust)">信頼して展開 (Trust)</h3>
+<p>SHA256 不一致でも「危険を承知で展開」できるエスケープハッチ。確認ダイアログ後に動作。</p>
+<h2 id="Naked-JSON-Fallback">Naked JSON Fallback</h2>
+<p><code>.json</code> 拡張子のファイルを開いた場合:</p>
+<ol><li>ZIP として開く試行 → 失敗</li><li>JSON として直接 parse → <code>map.json</code> として扱う</li><li>アセット参照は <strong>外部 URL のみ</strong> 有効 (ZIP 内アセットは存在しないため)</li><li>保存時は <code>.hrf</code> (ZIP) として保存 (上書きしたければ「名前を付けて保存」)</li></ol>
+<h2 id="大きなアセットの扱い">大きなアセットの扱い</h2>
+<div class="table-wrap"><table><thead><tr><th>状況</th><th>動作</th></tr></thead><tbody><tr><td>50 MB 以下</td><td><code>.hrf</code> 内に埋め込み</td></tr><tr><td>50 MB 超 (既定)</td><td>外部リンク参照 (originUrl のみ) を推奨ダイアログ</td></tr></tbody></table></div>
+<p>閾値は Settings で変更可 (10〜500 MB)。</p>
+<h2 id="ファイル比較・履歴">ファイル比較・履歴</h2>
+<p>CLI ツール:</p>
+<pre><code class="language-powershell">hrdaya diff before.hrf after.hrf &gt; patch.json
+hrdaya apply-patch base.hrf patch.json --output result.hrf
+hrdaya hash mymap.hrf  # SHA256 一覧</code></pre>
+<p>詳細: <span class="missing">04-developer-guide › cli</span></p>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] <code>Ctrl + S</code> で <code>.hrf</code> 保存 → ファイルが ZIP として開ける (7-Zip 等)</li><li>[ ] <code>manifest.json</code> / <code>map.json</code> / <code>assets/</code> が含まれる</li><li>[ ] <code>.hrf</code> を別 PC に持って行って開ける</li><li>[ ] <code>.hrf</code> v0.1 (古い形式) を開ける</li><li>[ ] 裸 <code>.json</code> を開ける</li><li>[ ] Mermaid <code>.mmd</code> → import → ノートとして見える</li><li>[ ] Markdown <code>.md</code> → import</li><li>[ ] JSON Canvas → 往復 (export → import で同じ)</li><li>[ ] OPML / XMind / FreeMind / その他形式 それぞれ import</li><li>[ ] PDF export → 開ける、リンクが動く</li><li>[ ] PNG export → 解像度指定が効く</li><li>[ ] SVG export → Inkscape で開ける</li><li>[ ] Asset Extractor で画像取り出し</li><li>[ ] SHA256 不一致時は書き込まれない (M7 確認)</li></ul>
+<p><span class="missing">← 10</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 12</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#11-ファイルと相互運用">11 ファイルと相互運用</a></li><li class="lvl-2"><a href="#ネイティブ形式-hrf-v02">ネイティブ形式: .hrf v0.2</a></li><li class="lvl-3"><a href="#物理レイアウト">物理レイアウト</a></li><li class="lvl-3"><a href="#manifestjson">manifest.json</a></li><li class="lvl-3"><a href="#アセット重複排除（CE-04、2026-05-21〜）">アセット重複排除（CE-04、2026-05-21〜）</a></li><li class="lvl-3"><a href="#mapjson-構造">map.json 構造</a></li><li class="lvl-3"><a href="#後方互換">後方互換</a></li><li class="lvl-2"><a href="#保存">保存</a></li><li class="lvl-3"><a href="#自動保存">自動保存</a></li><li class="lvl-3"><a href="#保存先">保存先</a></li><li class="lvl-3"><a href="#名前を付けて保存の初期ファイル名">名前を付けて保存の初期ファイル名</a></li><li class="lvl-2"><a href="#開く">開く</a></li><li class="lvl-3"><a href="#Windows-ファイル関連付け">Windows ファイル関連付け</a></li><li class="lvl-2"><a href="#Import-他形式-→-HrdayaFlow">Import: 他形式 → HrdayaFlow</a></li><li class="lvl-3"><a href="#Auto-detect">Auto-detect</a></li><li class="lvl-3"><a href="#取り込み後の整形">取り込み後の整形</a></li><li class="lvl-2"><a href="#Export-HrdayaFlow-→-他形式">Export: HrdayaFlow → 他形式</a></li><li class="lvl-3"><a href="#PDF-PNG-SVG-の細かい設定">PDF / PNG / SVG の細かい設定</a></li><li class="lvl-3"><a href="#PDF-出力">PDF 出力</a></li><li class="lvl-3"><a href="#Print">Print</a></li><li class="lvl-2"><a href="#Asset-Extractor-(アセット取り出し)">Asset Extractor (アセット取り出し)</a></li><li class="lvl-3"><a href="#信頼して展開-(Trust)">信頼して展開 (Trust)</a></li><li class="lvl-2"><a href="#Naked-JSON-Fallback">Naked JSON Fallback</a></li><li class="lvl-2"><a href="#大きなアセットの扱い">大きなアセットの扱い</a></li><li class="lvl-2"><a href="#ファイル比較・履歴">ファイル比較・履歴</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">11 ファイルと相互</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/11-files-and-interop";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

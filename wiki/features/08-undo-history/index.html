@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>08 Undo / 履歴 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>08 Undo / 履歴</h1><div class="note-meta">#manual · #undo · #history · #json-patch</div><h1 id="08-Undo-履歴">08 Undo / 履歴</h1>
+<p><span class="missing">← 07 Inspector</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 09 検索</span></p>
+<p>「やり直し」は K11-bis (2026-05) で <strong>JSON Patch (RFC 6902)</strong> ベースの差分履歴に刷新。1000+ ノードのマップでも履歴 1 件あたりミリ秒オーダー。</p>
+<h2 id="基本操作">基本操作</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>⌨ <code>Ctrl + Z</code></td><td>1 つ前の状態に戻す (Undo)</td></tr><tr><td>⌨ <code>Ctrl + Y</code> または <code>Ctrl + Shift + Z</code></td><td>やり直し (Redo)</td></tr><tr><td>⌨ <code>Ctrl + Alt + Z</code></td><td>履歴ビューアを開く</td></tr></tbody></table></div>
+<blockquote><p>⚠ 編集モード中の <code>Ctrl + Z</code> は <strong>テキストエディタ内の Undo</strong> に行く。<code>Esc</code> でキャンバスに戻ってから。</p></blockquote>
+<h2 id="仕組み-JSON-Patch-ベース">仕組み: JSON Patch ベース</h2>
+<p>各 mutation (操作) は次の流れで保存される:</p>
+<pre><code>mutation 開始 → before snapshot (map.json)
+              → 操作実行 → after snapshot
+              → diff(before, after) で JSON Patch 生成
+              → 履歴スタックに push</code></pre>
+<div class="table-wrap"><table><thead><tr><th>利点</th><th>効果</th></tr></thead><tbody><tr><td>軽量</td><td>数 KB / 履歴 (大きなマップでも)</td></tr><tr><td>可搬</td><td><code>.hrf</code> の <code>history/snapshots/</code> にも書ける</td></tr><tr><td>検査可</td><td>履歴ビューアで何が変わったか見える</td></tr><tr><td>部分適用</td><td>「色だけ戻す」「位置だけ戻す」の選択 Undo 🚧</td></tr></tbody></table></div>
+<p>実装: <code>app/lib/undo/canvas_undo_adapter.dart</code> + <code>core/Cargo.toml</code> の <code>json-patch</code> crate。</p>
+<h2 id="Coalesce-(連続操作のマージ)">Coalesce (連続操作のマージ)</h2>
+<p>ノートをドラッグして 60 フレーム動かすと、履歴に 60 件入ってしまうのを防ぐため、同じ key の連続操作は <strong>1 件にまとめられる</strong>。</p>
+<pre><code class="language-dart">_beforeMutation(&#039;move-node&#039;, coalesceKey: &#039;node_drag:${nodeId}&#039;)</code></pre>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>coalesceKey</th><th>まとめ単位</th></tr></thead><tbody><tr><td>ノート移動</td><td><code>node_drag:&lt;id&gt;</code></td><td>同一ノード 1 件</td></tr><tr><td>ノートリサイズ</td><td><code>node_resize:&lt;id&gt;</code></td><td>同一ノード 1 件</td></tr><tr><td>テキスト編集</td><td><code>text_edit:&lt;id&gt;</code></td><td>500 ms 無入力で確定</td></tr><tr><td>Inspector スライダー</td><td><code>inspector:&lt;prop&gt;:&lt;id&gt;</code></td><td>スライダー離すまで 1 件</td></tr></tbody></table></div>
+<p>「Undo 1 回で 1 ドラッグ全部戻る」というユーザー期待に合わせる。</p>
+<h2 id="履歴ビューア-(Time-Machine)">履歴ビューア (Time Machine)</h2>
+<p>⌨ <code>Ctrl + Alt + Z</code> で開く。</p>
+<pre><code>┌── 履歴 ────────────────────────┐
+│ ● 18:32:11  ノート追加 &quot;メモ&quot;   │ ← 現在
+│ ● 18:32:05  色変更 (3 件)      │
+│ ● 18:31:58  ドラッグ移動        │
+│ ● 18:31:50  Container 化        │
+│ ● 18:30:42  ファイル開く         │ ← 起点
+└───────────────────────────────┘</code></pre>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>行クリック</td><td>その時点の状態にジャンプ (前後 Undo / Redo を一気に)</td></tr><tr><td>行右クリック → 「ここから分岐」</td><td>履歴を分岐 (Blender 風) 🚧</td></tr><tr><td>行右クリック → 「この差分を見る」</td><td>JSON Patch 内容を表示</td></tr><tr><td><code>Backspace</code></td><td>履歴を 1 件削除 (Redo 不可)</td></tr></tbody></table></div>
+<h2 id="履歴の永続化">履歴の永続化</h2>
+<p>既定では <strong>メモリ内のみ</strong> (アプリ終了で消える)。Settings で「履歴を <code>.hrf</code> に書き出す」を ON にすると:</p>
+<ul><li><code>.hrf/history/snapshots/&lt;epoch&gt;.json</code> に保存</li><li>次回オープン時に再構築</li><li>ファイルサイズ増加 (1000 操作で +50 MB 程度)</li></ul>
+<h2 id="履歴の上限">履歴の上限</h2>
+<p>既定 <strong>500 件</strong>。Settings で 100〜10000 に変更可。上限超過時は古いものから捨てる (FIFO)。</p>
+<h2 id="Coalesce-設計の勘所">Coalesce 設計の勘所</h2>
+<div class="table-wrap"><table><thead><tr><th>パターン</th><th>良い coalesce</th><th>悪い coalesce</th></tr></thead><tbody><tr><td>同一プロパティの連続変更</td><td>✅ まとめる</td><td>—</td></tr><tr><td>異なるノートの操作</td><td>—</td><td>⚠ 別途扱い</td></tr><tr><td>構造変更 (Container 化など)</td><td>—</td><td>⚠ まとめない (取り返しがつかない)</td></tr></tbody></table></div>
+<p>詳細実装は <code>docs/may-2026/k11-bis-undo-diff.md</code> 参照。</p>
+<h2 id="やり直しできない操作">やり直しできない操作</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>理由</th></tr></thead><tbody><tr><td>ファイル保存 (<code>Ctrl+S</code>)</td><td>OS への書き出し</td></tr><tr><td>エクスポート (PDF など)</td><td>OS への書き出し</td></tr><tr><td>アプリ起動 / 終了</td><td>プロセス境界</td></tr><tr><td>AI 生成のキャンセル</td><td>リクエスト送信済</td></tr></tbody></table></div>
+<p>⚠ 大量の構造変更 (例: 「全ノート削除」) は確認ダイアログが出る。Undo はできるが、ヒヤリハットを減らす。</p>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] ノート追加 → <code>Ctrl + Z</code> で消える</li><li>[ ] <code>Ctrl + Y</code> で復活</li><li>[ ] ドラッグ移動 → <code>Ctrl + Z</code> 1 回でドラッグ前に戻る (60 件分が 1 件)</li><li>[ ] テキスト編集 → 500 ms 無入力後に履歴に 1 件</li><li>[ ] <code>Ctrl + Alt + Z</code> で履歴ビューア表示</li><li>[ ] 行クリックで状態ジャンプ</li><li>[ ] 履歴件数が 500 を超えると古いものが消える</li><li>[ ] アプリ再起動で履歴が消える (永続化 OFF 時)</li><li>[ ] 永続化 ON で <code>.hrf</code> 開き直しても履歴が残る</li></ul>
+<p><span class="missing">← 07</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 09</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#08-Undo-履歴">08 Undo / 履歴</a></li><li class="lvl-2"><a href="#基本操作">基本操作</a></li><li class="lvl-2"><a href="#仕組み-JSON-Patch-ベース">仕組み: JSON Patch ベース</a></li><li class="lvl-2"><a href="#Coalesce-(連続操作のマージ)">Coalesce (連続操作のマージ)</a></li><li class="lvl-2"><a href="#履歴ビューア-(Time-Machine)">履歴ビューア (Time Machine)</a></li><li class="lvl-2"><a href="#履歴の永続化">履歴の永続化</a></li><li class="lvl-2"><a href="#履歴の上限">履歴の上限</a></li><li class="lvl-2"><a href="#Coalesce-設計の勘所">Coalesce 設計の勘所</a></li><li class="lvl-2"><a href="#やり直しできない操作">やり直しできない操作</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">08 Undo / </text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/08-undo-history";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

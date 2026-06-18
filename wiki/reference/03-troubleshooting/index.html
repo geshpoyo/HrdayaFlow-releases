@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 トラブルシューティング | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>15 トラブルシューティング</h1><div class="note-meta">#manual · #troubleshooting · #faq</div><h1 id="15-トラブルシューティング">15 トラブルシューティング</h1>
+<p><span class="missing">← 14 開発者</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p>
+<p>困ったときに最初に見る章。FAQ・既知の問題・ログの場所。</p>
+<h2 id="アプリが起動しない">アプリが起動しない</h2>
+<h3 id="Windows-SmartScreen-で止まる">Windows: SmartScreen で止まる</h3>
+<p>「WindowsによってPCが保護されました」 → 「詳細情報」 → 「実行」</p>
+<h3 id="Rust-コア（hrdaya_coredll）未検出-rust-core-dll">Rust コア（<code>hrdaya_core.dll</code>）未検出 {#rust-core-dll}</h3>
+<p><strong>リリース版（MSI / 配布 ZIP）</strong> では <code>hrdaya_core.dll</code> が同梱されていないと起動直後に警告が出て、<strong>保存・別名保存・書き出しは無効</strong> になります（CE-01）。不完全な ZIP だけ保存してデータが壊れるのを防ぐためです。</p>
+<p><strong>開発版（<code>flutter run</code>）</strong> では DLL が無くても起動できますが、保存は map.json のみのフォールバックになり、アセットが ZIP に入らないことがあります。</p>
+<div class="table-wrap"><table><thead><tr><th>症状</th><th>対処</th></tr></thead><tbody><tr><td>起動時「Rust コアが見つかりません」</td><td>再インストール。<code>hrdaya_flow.exe</code> と同じフォルダに <code>hrdaya_core.dll</code> があるか確認</td></tr><tr><td>設定に「Rust コア: 未接続」</td><td><strong>設定 → Rust コア → 再接続を試行</strong>。直らなければ DLL 配置を確認</td></tr><tr><td><code>flutter run</code> で未接続</td><td>下記のビルド手順。誤アーキの DLL（x86 など）が <code>core/target</code> に残っていると error 193 になることがある</td></tr><tr><td>リリースビルド / MSI が失敗する</td><td><code>installer/build.ps1</code> が <code>hrdaya_core.dll</code> 欠落で exit 1。先に <code>cargo build --release</code></td></tr></tbody></table></div>
+<pre><code class="language-powershell">cd core
+cargo build --release
+cd ../app
+flutter run -d windows</code></pre>
+<p>Windows では Release 出力の DLL は通常次にコピーされます。</p>
+<p><code>app/build/windows/x64/runner/Release/hrdaya_core.dll</code></p>
+<p>詳細: リポジトリ内 <code>docs/debug/rust-ffi-init.md</code></p>
+<h3 id="flutter-run-でクラッシュ即終了"><code>flutter run</code> でクラッシュ即終了</h3>
+<p>Flutter SDK の version 不一致。<code>flutter doctor</code> で確認。3.27 系を推奨。</p>
+<h2 id="ファイル関係">ファイル関係</h2>
+<h3 id="ファイル整合性エラー（CE-03）-map-validation">ファイル整合性エラー（CE-03） {#map-validation}</h3>
+<p>読み込み直後、または保存前に Rust コアが <code>map.json</code> の整合性を検査します。問題があるとダイアログが表示されます（<strong>自動修復はしません</strong>）。</p>
+<div class="table-wrap"><table><thead><tr><th>種別</th><th>例</th><th>意味</th></tr></thead><tbody><tr><td>エラー</td><td><code>cyclic_hierarchy</code></td><td>親子関係（hierarchy エッジ / コンテナ members）に循環</td></tr><tr><td>エラー</td><td><code>orphan_edge_source</code> / <code>orphan_edge_target</code></td><td>存在しないノード ID を指すエッジ</td></tr><tr><td>エラー</td><td><code>duplicate_node_id</code> / <code>duplicate_edge_id</code></td><td>同一 ID の重複</td></tr><tr><td>警告</td><td><code>unknown_kind</code></td><td>未知のノート種別（将来互換のため読み込みは継続）</td></tr><tr><td>警告</td><td><code>invalid_writing_mode</code> 等</td><td><code>style</code> / <code>canvas</code> の enum 値が想定外</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>状況</th><th>対応</th></tr></thead><tbody><tr><td>読込後にエラー表示</td><td>マップは開いたまま。循環や孤立エッジを手で直すか、バックアップから復元</td></tr><tr><td>保存前にエラー表示</td><td><strong>キャンセル</strong> で保存中止。<strong>このまま保存</strong> で上書き（非推奨・データ不整合のまま残る）</td></tr><tr><td>Rust 未接続</td><td>検証はスキップ（開発ビルドのみ。リリースでは CE-01 により保存自体がブロック）</td></tr></tbody></table></div>
+<p>手編集や他ツール由来の JSON で警告だけ出ることはあります。<code>unknown_kind</code> は v0.4 先行フィールドの可能性があります。</p>
+<h3 id="hrf-が開けない"><code>.hrf</code> が開けない</h3>
+<div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>バージョン不一致 (新 → 旧)</td><td>受信側を最新に</td></tr><tr><td>ZIP 破損</td><td><code>7-Zip</code> で開けるか試す。ダメなら復旧不可</td></tr><tr><td>パスに非 ASCII 文字</td><td>UTF-8 filename Flag が立っているはずだが、古い Windows は弱い</td></tr><tr><td>アンチウィルスがブロック</td><td>例外設定</td></tr></tbody></table></div>
+<h3 id="自動保存が効かない">自動保存が効かない</h3>
+<p>設定 → 一般 → 自動保存 → ON 確認。データフォルダの書き込み権限も確認。</p>
+<h3 id="hrf-を開いた直後に「アセットの整合性が確認できません」-hash-mismatch"><code>.hrf</code> を開いた直後に「アセットの整合性が確認できません」 {#hash-mismatch}</h3>
+<p>manifest の SHA256 と実 ZIP 内容が不一致。M7 (2026-05-30) の機能で安全側に倒している。</p>
+<div class="table-wrap"><table><thead><tr><th>状況</th><th>対応</th></tr></thead><tbody><tr><td>自分で作ったマップで出る</td><td>バグ報告 (manifest 生成と書き込みの順序)</td></tr><tr><td>受け取った <code>.hrf</code> で出る</td><td>送り主に再生成してもらう。「信頼して展開」は最終手段</td></tr><tr><td>アセット 1〜2 件のみ</td><td>Asset Extractor で個別に「信頼して展開」</td></tr></tbody></table></div>
+<h3 id="naked-JSON-を保存したのに-hrf-になる">naked JSON を保存したのに <code>.hrf</code> になる</h3>
+<p>挙動は仕様。<code>.json</code> は読み込み専用扱いで、保存時は ZIP コンテナに昇格する。<code>.json</code> のまま保存したいなら CLI:</p>
+<pre><code class="language-powershell">hrf export input.hrf --format naked-json --output map.json</code></pre>
+<h2 id="キャンバス操作">キャンバス操作</h2>
+<h3 id="ノートが画面外に消えた">ノートが画面外に消えた</h3>
+<p>⌨ <code>Ctrl + 9</code> で全体表示。それでも見えなければ Outline パネルから選択 → ⌨ <code>End</code> で重心ジャンプ。</p>
+<h3 id="ドラッグしてもノートが動かない">ドラッグしてもノートが動かない</h3>
+<div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>ノートが Layer ロックされている</td><td>Outline → Layer → 🔒 を解除</td></tr><tr><td>Sticky フラグが立っている</td><td>Inspector → Common → Sticky OFF</td></tr><tr><td>Container 内のノートが Container ごと動く挙動</td><td>子だけ動かしたいなら <code>Alt + ドラッグ</code></td></tr></tbody></table></div>
+<h3 id="Dot-が勝手に消える">Dot が勝手に消える</h3>
+<p>Dot に接続するエッジが 0 本になると Dot は <strong>自動削除</strong> される (ゴミ Dot 散乱防止)。ノート削除やエッジ単独削除のあとに起きることがある。意図しない場合は <code>Ctrl + Z</code> で戻す。仕様の詳細は <span class="missing">03-edges-and-connections › ナイフでエッジリルート-dot-中継</span>。</p>
+<h3 id="スナップが意図しない位置で吸着する">スナップが意図しない位置で吸着する</h3>
+<p>Magnetic Snap が ON のノートが多い。要らないノートは Inspector → Effects → Magnetic OFF。
+一時的にスナップ無効: <code>Alt + ドラッグ</code> 。</p>
+<h3 id="Tab-キーが-pie-メニューを呼ばない"><code>Tab</code> キーが pie メニューを呼ばない</h3>
+<p>🚧 pie integration (#5) は <strong>未実装</strong> (<span class="missing">pie-integration.md</span>)。<code>Tab</code> は子ノート派生だけが動く。</p>
+<h2 id="エッジ関係">エッジ関係</h2>
+<h3 id="エッジが引けない">エッジが引けない</h3>
+<p>接続ハンドルはノードの <strong>エッジ部分にホバー</strong> で出る。中央にホバーしても出ない。</p>
+<h3 id="エッジ端が外れる">エッジ端が外れる</h3>
+<p>K-gsr10 (2026-04 修正) でほぼ解消。再現したらバグ報告。</p>
+<h2 id="Inspector-書式">Inspector / 書式</h2>
+<h3 id="書式変更が効かない">書式変更が効かない</h3>
+<p>複数選択で <strong>共通プロパティ以外</strong> を変えようとしている可能性。1 つずつ選んで試す。</p>
+<h3 id="Format-Panel-が出ない">Format Panel が出ない</h3>
+<p>Inspector パネル自体が閉じている → ⌨ <code>Ctrl + Shift + I</code> で開く。</p>
+<h2 id="Undo-履歴">Undo / 履歴</h2>
+<h3 id="Ctrl-+-Z-が効かない"><code>Ctrl + Z</code> が効かない</h3>
+<div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>編集モード中 (テキスト入力)</td><td><code>Esc</code> で抜けてから</td></tr><tr><td>履歴上限 (500 件) を超えた</td><td>設定で上限を増やす</td></tr><tr><td>履歴ビューアで分岐した</td><td>履歴ツリーを再確認</td></tr></tbody></table></div>
+<h3 id="履歴ビューアが空">履歴ビューアが空</h3>
+<p>⌨ <code>Ctrl + Alt + Z</code> で開けるが、起動直後は空。何か操作すると埋まる。</p>
+<h2 id="検索">検索</h2>
+<h3 id="Ctrl-+-F-でヒットしない"><code>Ctrl + F</code> でヒットしない</h3>
+<div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>大小区別が ON</td><td>検索ダイアログで OFF</td></tr><tr><td>種別フィルタが効いている</td><td>「すべて」に戻す</td></tr><tr><td>Container が折りたたまれていて中身が対象外設定</td><td>「Container 内も」を ON</td></tr></tbody></table></div>
+<h2 id="AI">AI</h2>
+<h3 id="AI-Panel-で「stub-のみ」と出る">AI Panel で「stub のみ」と出る</h3>
+<p>LLM (Ollama / PrudeLLM) に接続できていない。</p>
+<div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>Ollama が起動していない</td><td><code>ollama serve</code></td></tr><tr><td>ポートが違う</td><td>Settings → AI → Ollama URL 確認</td></tr><tr><td>PrudeLLM API キー未設定</td><td>Settings → AI → PrudeLLM 設定</td></tr></tbody></table></div>
+<h3 id="AI-service-自体が動かない">AI service 自体が動かない</h3>
+<pre><code class="language-powershell">curl http://127.0.0.1:8765/health</code></pre>
+<p><code>{&quot;status&quot;:&quot;ok&quot;}</code> が返らないなら:</p>
+<ol><li>ポート 8765 が他プロセスに使われていないか (<code>netstat -ano | findstr 8765</code>)</li><li>Python / pip 依存が揃っているか (<code>pip install -r ai_service/requirements.txt</code>)</li><li>Settings → AI → 「自動起動」を OFF にしてから手動で起動</li></ol>
+<p>詳細: <span class="missing">10-ai-features › service-startup</span></p>
+<h3 id="LLM-の応答が-JSON-不正">LLM の応答が JSON 不正</h3>
+<p>1 回リトライ → 2 回目失敗で stub にフォールバック。LLM のシステムプロンプトを設定 → AI → プロンプト編集 で調整。</p>
+<h2 id="印刷-PDF">印刷 / PDF</h2>
+<h3 id="PDF-の日本語が文字化け">PDF の日本語が文字化け</h3>
+<p>フォント埋め込み ON (PDF エクスポートダイアログで指定)。Noto Sans JP が embed される。</p>
+<h3 id="PDF-サイズが大きすぎる">PDF サイズが大きすぎる</h3>
+<div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>画像が大量</td><td>画像を「外部参照」に変える (50 MB 閾値)</td></tr><tr><td>フォント埋め込み</td><td>OFF にすると 1〜10 MB 程度に</td></tr></tbody></table></div>
+<h2 id="パフォーマンス">パフォーマンス</h2>
+<h3 id="1000-ノートで重い">1000 ノートで重い</h3>
+<div class="table-wrap"><table><thead><tr><th>試して</th><th>効果</th></tr></thead><tbody><tr><td>Layer で表示を絞る</td><td>レンダリング負荷減</td></tr><tr><td>編集中の Container だけ展開、他は折りたたみ</td><td>同上</td></tr><tr><td>Settings → 表示 → 「画像のサムネイル化」 ON</td><td>メモリ削減</td></tr><tr><td>Release ビルド (<code>flutter run --release</code>)</td><td>描画 3〜5 倍速</td></tr></tbody></table></div>
+<h3 id="キャンバスのスクロールがカクつく">キャンバスのスクロールがカクつく</h3>
+<div class="table-wrap"><table><thead><tr><th>試して</th><th>効果</th></tr></thead><tbody><tr><td>GPU ドライバ更新</td><td>改善することが多い</td></tr><tr><td>Settings → アクセシビリティ → モーション軽減 ON</td><td>アニメ抑制</td></tr><tr><td>Release ビルド</td><td>改善</td></tr></tbody></table></div>
+<h2 id="開発時のログノイズ">開発時のログノイズ</h2>
+<h3 id="ERROR-Failed-to-update-uiAXTree-がコンソールに溢れる"><code>[ERROR] Failed to update ui::AXTree</code> がコンソールに溢れる</h3>
+<p><strong>症状</strong>: マウス移動するたびに以下が大量に出る:</p>
+<pre><code>[ERROR:flutter/shell/platform/common/accessibility_bridge.cc(114)]
+Failed to update ui::AXTree, error: NN will not be in the tree and is not the new root</code></pre>
+<p><strong>原因</strong>: Flutter Windows shell の <strong>AXTree (アクセシビリティツリー) 同期 race</strong>。<code>Tooltip</code> などホバーで Overlay を生成・破棄する widget の通知順序が Windows shell の AX 処理と競合し、<code>Failed to update</code> ログを出す。</p>
+<p><strong>実害</strong>:</p>
+<ul><li>❌ アプリ動作には<strong>影響なし</strong> (機能・表示・データすべて正常)</li><li>❌ スクリーンリーダー (Windows ナレーター等) には影響あり (一時的に同期取れない)</li><li>⚠ <strong>コンソールが汚れて他のログが読めなくなる</strong> ← これが実害</li></ul>
+<p><strong>対処</strong>: 開発時は必ず <code>scripts/dev-run.ps1</code> でラップして起動する。</p>
+<pre><code class="language-powershell"># 直接 flutter run ではなく:
+pwsh scripts/dev-run.ps1
+pwsh scripts/dev-run.ps1 --release</code></pre>
+<p>このスクリプトは AXTree / accessibility_bridge / 既知の build warning を stderr フィルタで抑制し、本当に重要なログだけを表示します (Dart エラー、<code>[FLUTTER]</code> レベルの警告、<code>HrdayaFlow starting</code> 等のステートメッセージは色付きで表示)。</p>
+<p><strong>根本対処</strong> (将来):</p>
+<ul><li>Flutter framework 側の <code>Tooltip</code> overlay 実装が修正されるのを待つ</li><li>もしくは全 <code>Tooltip</code> を <code>StableHoverTooltip</code> (<code>app/lib/widgets/stable_hover_tooltip.dart</code>) に置換する作業を継続的に進める (高密度で hover される箇所から優先)</li></ul>
+<h2 id="ログの場所">ログの場所</h2>
+<h3 id="Windows">Windows</h3>
+<div class="table-wrap"><table><thead><tr><th>ログ</th><th>場所</th></tr></thead><tbody><tr><td>アプリログ</td><td><code>%LOCALAPPDATA%\HrdayaFlow\logs\app.log</code></td></tr><tr><td>Rust core ログ</td><td><code>%LOCALAPPDATA%\HrdayaFlow\logs\core.log</code></td></tr><tr><td>AI service ログ</td><td><code>%LOCALAPPDATA%\HrdayaFlow\logs\ai_service.log</code></td></tr><tr><td>クラッシュダンプ</td><td><code>%LOCALAPPDATA%\HrdayaFlow\crash\</code></td></tr></tbody></table></div>
+<h3 id="macOS">macOS</h3>
+<p><code>~/Library/Logs/HrdayaFlow/</code></p>
+<h3 id="Linux">Linux</h3>
+<p><code>~/.local/share/HrdayaFlow/logs/</code></p>
+<h2 id="バグ報告">バグ報告</h2>
+<p>GitHub Issues に:</p>
+<ol><li>再現手順 (3 ステップ以内が理想)</li><li>期待動作 vs 実動作</li><li>環境 (OS / バージョン)</li><li>ログ (該当箇所のみ)</li><li>スクリーンショット / 動画</li></ol>
+<p><code>.hrf</code> を添付できる場合は zip でアタッチ (機微情報があれば抽象化して再現用 fixture を)。</p>
+<h2 id="まだ解決しない">まだ解決しない</h2>
+<ul><li>⚠ <code>docs/qa-checklist.md</code> の手動 QA 一覧を 1 周してみる</li><li>⚠ <code>docs/qa-kgsr10-win11-30min.md</code> (Win11 30 分シナリオ) で症状再現確認</li><li>⚠ <code>docs/manual/release-channel-flow.md</code> の release ノート確認</li><li>最終手段: <code>Ctrl + Q</code> で終了 → アプリ再起動 (履歴メモリ揮発 OFF 時はマップ復元)</li></ul>
+<p><span class="missing">← 14</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#15-トラブルシューティング">15 トラブルシューティング</a></li><li class="lvl-2"><a href="#アプリが起動しない">アプリが起動しない</a></li><li class="lvl-3"><a href="#Windows-SmartScreen-で止まる">Windows: SmartScreen で止まる</a></li><li class="lvl-3"><a href="#Rust-コア（hrdaya_coredll）未検出-rust-core-dll">Rust コア（hrdayacore.dll）未検出 {#rust-core-dll}</a></li><li class="lvl-3"><a href="#flutter-run-でクラッシュ即終了">flutter run でクラッシュ即終了</a></li><li class="lvl-2"><a href="#ファイル関係">ファイル関係</a></li><li class="lvl-3"><a href="#ファイル整合性エラー（CE-03）-map-validation">ファイル整合性エラー（CE-03） {#map-validation}</a></li><li class="lvl-3"><a href="#hrf-が開けない">.hrf が開けない</a></li><li class="lvl-3"><a href="#自動保存が効かない">自動保存が効かない</a></li><li class="lvl-3"><a href="#hrf-を開いた直後に「アセットの整合性が確認できません」-hash-mismatch">.hrf を開いた直後に「アセットの整合性が確認できません」 {#hash-mismatch}</a></li><li class="lvl-3"><a href="#naked-JSON-を保存したのに-hrf-になる">naked JSON を保存したのに .hrf になる</a></li><li class="lvl-2"><a href="#キャンバス操作">キャンバス操作</a></li><li class="lvl-3"><a href="#ノートが画面外に消えた">ノートが画面外に消えた</a></li><li class="lvl-3"><a href="#ドラッグしてもノートが動かない">ドラッグしてもノートが動かない</a></li><li class="lvl-3"><a href="#Dot-が勝手に消える">Dot が勝手に消える</a></li><li class="lvl-3"><a href="#スナップが意図しない位置で吸着する">スナップが意図しない位置で吸着する</a></li><li class="lvl-3"><a href="#Tab-キーが-pie-メニューを呼ばない">Tab キーが pie メニューを呼ばない</a></li><li class="lvl-2"><a href="#エッジ関係">エッジ関係</a></li><li class="lvl-3"><a href="#エッジが引けない">エッジが引けない</a></li><li class="lvl-3"><a href="#エッジ端が外れる">エッジ端が外れる</a></li><li class="lvl-2"><a href="#Inspector-書式">Inspector / 書式</a></li><li class="lvl-3"><a href="#書式変更が効かない">書式変更が効かない</a></li><li class="lvl-3"><a href="#Format-Panel-が出ない">Format Panel が出ない</a></li><li class="lvl-2"><a href="#Undo-履歴">Undo / 履歴</a></li><li class="lvl-3"><a href="#Ctrl-+-Z-が効かない">Ctrl + Z が効かない</a></li><li class="lvl-3"><a href="#履歴ビューアが空">履歴ビューアが空</a></li><li class="lvl-2"><a href="#検索">検索</a></li><li class="lvl-3"><a href="#Ctrl-+-F-でヒットしない">Ctrl + F でヒットしない</a></li><li class="lvl-2"><a href="#AI">AI</a></li><li class="lvl-3"><a href="#AI-Panel-で「stub-のみ」と出る">AI Panel で「stub のみ」と出る</a></li><li class="lvl-3"><a href="#AI-service-自体が動かない">AI service 自体が動かない</a></li><li class="lvl-3"><a href="#LLM-の応答が-JSON-不正">LLM の応答が JSON 不正</a></li><li class="lvl-2"><a href="#印刷-PDF">印刷 / PDF</a></li><li class="lvl-3"><a href="#PDF-の日本語が文字化け">PDF の日本語が文字化け</a></li><li class="lvl-3"><a href="#PDF-サイズが大きすぎる">PDF サイズが大きすぎる</a></li><li class="lvl-2"><a href="#パフォーマンス">パフォーマンス</a></li><li class="lvl-3"><a href="#1000-ノートで重い">1000 ノートで重い</a></li><li class="lvl-3"><a href="#キャンバスのスクロールがカクつく">キャンバスのスクロールがカクつく</a></li><li class="lvl-2"><a href="#開発時のログノイズ">開発時のログノイズ</a></li><li class="lvl-3"><a href="#ERROR-Failed-to-update-uiAXTree-がコンソールに溢れる">[ERROR] Failed to update ui::AXTree がコンソールに溢れる</a></li><li class="lvl-2"><a href="#ログの場所">ログの場所</a></li><li class="lvl-3"><a href="#Windows">Windows</a></li><li class="lvl-3"><a href="#macOS">macOS</a></li><li class="lvl-3"><a href="#Linux">Linux</a></li><li class="lvl-2"><a href="#バグ報告">バグ報告</a></li><li class="lvl-2"><a href="#まだ解決しない">まだ解決しない</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">15 トラブルシュー</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/03-troubleshooting";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

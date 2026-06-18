@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05-note-stacks | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>05-note-stacks</h1><div class="note-meta"></div><h1 id="ノート-Stack-(NS-01)">ノート Stack (NS-01)</h1>
+<p>複数選択したノートを、<strong>最後に選択した（アクティブ）ノートを固定</strong>し、残りをその <strong>右（横）</strong> または <strong>下（縦）</strong> に隙間を空けて並べます。整列ガイド（Align）とは別機能です。</p>
+<h2 id="関連">関連</h2>
+<ul><li>キャンバス全般: <span class="missing">01-canvas-and-gestures</span></li><li>ノートプリセット: <a class="wikilink" href="../../features/07-note-presets/">07-note-presets</a></li></ul>
+<h2 id="使い方">使い方</h2>
+<ol><li><code>Shift+クリック</code> などで <strong>2 つ以上</strong> ノートを選ぶ（<strong>最後に選んだノートが親</strong>）。</li><li>次のいずれかで実行:<ul><li><strong>ツールバー</strong>の Stack アイコンをクリックするか、<strong>長押し / 右クリック</strong>でサブメニュー（縦・横・解除）。</li><li><strong>インスペクタ</strong>の <strong>Stack</strong> セクションで方向を選んで <strong>Stack 整列</strong>。</li><li><strong>右クリック</strong>メニューから Stack（縦 / 横）。</li><li><strong>編集 &gt; Stack</strong> サブメニュー。</li></ul></li><li>軸は <strong>縦</strong> か <strong>横</strong> のいずれかを選びます（保存済みマップの既存 Stack はそのまま開けます）。</li></ol>
+<h2 id="ショートカット">ショートカット</h2>
+<p>ノートを <strong>テキスト編集中にしていない</strong> ときのみ有効です。</p>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>キー</th></tr></thead><tbody><tr><td>Stack（縦）</td><td><code>Ctrl+Alt+V</code>（Mac は <code>Cmd+Alt+V</code>）</td></tr><tr><td>Stack（横）</td><td><code>Ctrl+Alt+H</code>（Mac は <code>Cmd+Alt+H</code>）</td></tr></tbody></table></div>
+<p><strong>別名保存</strong>は <code>Ctrl+Alt+S</code>（Mac は <code>Cmd+Alt+S</code>）です。  
+<strong>クリップボードからのインポート</strong>は <code>Ctrl+Shift+Alt+V</code>（Mac は <code>Cmd+Shift+Alt+V</code>）です。</p>
+<h2 id="インスペクタ（Stack-状態のとき）">インスペクタ（Stack 状態のとき）</h2>
+<p>同一 Stack に属するノートだけをまとめて選ぶと:</p>
+<ul><li><strong>Alignment</strong>（先頭 / 中央 / 末尾 / 両端）を変えて即再整列できます。連続操作は Undo が 1 まとまりになります。</li><li><strong>Margin</strong> スライダーで子どうしの間隔を変えられます。ドラッグ中は Undo が <code>coalesce</code> されます。</li><li><strong>Stack 解除</strong>で <code>stackGroupId</code> などの状態を消します。</li></ul>
+<p>単一選択時でも Stack セクションは表示されますが、<strong>Stack 整列</strong>は 2 件以上選んだときだけ有効です。</p>
+<h2 id="永続化">永続化</h2>
+<p>Stack の状態は <code>map.json</code> 上の各ノードに保存されます。<code>.hrf</code> を保存して再度開くと復元されます。フィールドがない古いファイルもそのまま開けます。</p>
+<h2 id="親ノートを削除したとき">親ノートを削除したとき</h2>
+<p>同一 Stack に子が残り、削除されたのが親だけだった場合、<strong>もっとも先頭側にあった子が新しい親</strong>になります（グループは維持）。</p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#ノート-Stack-(NS-01)">ノート Stack (NS-01)</a></li><li class="lvl-2"><a href="#関連">関連</a></li><li class="lvl-2"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#ショートカット">ショートカット</a></li><li class="lvl-2"><a href="#インスペクタ（Stack-状態のとき）">インスペクタ（Stack 状態のとき）</a></li><li class="lvl-2"><a href="#永続化">永続化</a></li><li class="lvl-2"><a href="#親ノートを削除したとき">親ノートを削除したとき</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">05-note-st</text>
+    <a href="../../features/07-note-presets/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>07-note-presets</title></a><text x="170" y="66" text-anchor="middle">07-note-</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/05-note-stacks";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>15 アプリ設定 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>15 アプリ設定</h1><div class="note-meta">#manual · #settings · #image-cache · #markdown · #mcp · #tray</div><h1 id="15-アプリ設定">15 アプリ設定</h1>
+<p><span class="missing">← 14 開発者</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p>
+<p>設定ダイアログでは、表示・Markdown・画像キャッシュ・MCP / AI ターゲットなど、アプリ全体の挙動を調整できます。</p>
+<h2 id="画像キャッシュ-(ImageCache)">画像キャッシュ (ImageCache)</h2>
+<p>大量の画像ノートを扱うとき、メモリ上に保持するデコード済み bitmap の上限を調整できます。設定変更は再起動不要で即時反映されます。</p>
+<div class="table-wrap"><table><thead><tr><th>モード</th><th>説明</th></tr></thead><tbody><tr><td>自動（既定）</td><td>物理 RAM の 1/16、最大 512 MB。RAM 取得不能時は 256 MB</td></tr><tr><td>128 / 256 / 512 MB / 1 GB</td><td>固定上限</td></tr><tr><td>RAM/8</td><td>物理 RAM の 1/8、最大 2 GB。警告ダイアログのうえ opt-in</td></tr><tr><td>カスタム</td><td>32 MB〜2 GB を MB 単位で指定</td></tr></tbody></table></div>
+<p>設定画面には、適用上限・使用中サイズ・件数の診断表示があります。<strong>キャッシュをクリア</strong>しても Undo やドキュメント本体には影響しません。</p>
+<h2 id="Markdown-表示">Markdown 表示</h2>
+<p>Markdown ノートの見え方を切り替えます。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>動作</th></tr></thead><tbody><tr><td>標準</td><td>コンパクトな表示</td></tr><tr><td>読みやすい</td><td>行間を広げ、長い Markdown や AI 回答を読みやすく表示</td></tr><tr><td>ラスタキャッシュ</td><td>math / Mermaid などの重い描画を PNG キャッシュして再描画負荷を下げる</td></tr></tbody></table></div>
+<h2 id="AI-ライブターゲット">AI ライブターゲット</h2>
+<p>外部 AI（Claude Desktop / Cursor など）が MCP 経由でキャンバスを編集するとき、<strong>AI ターゲット</strong>の付いた 1 枚のタブへ読み書きが解決されます。</p>
+<ul><li>AI ターゲットのタブには <strong>AI</strong> バッジが表示されます。</li><li>任意のタブを右クリック → <strong>AI にリンク</strong> で手動ターゲット化できます。</li><li>解除はタブ右クリック → <strong>AI のリンクを解除</strong>、または AI バッジクリック。</li><li>AI が新規マップを作った場合や未設定時に AI が動いた場合は、新しいタブが自動でターゲット化されます。</li></ul>
+<h3 id="AI-追従">AI 追従</h3>
+<div class="table-wrap"><table><thead><tr><th>状態</th><th>動作</th></tr></thead><tbody><tr><td>オフ（既定）</td><td>対象タブは更新されますが、表示は切り替わりません</td></tr><tr><td>オン</td><td>AI が編集するたびに対象タブへ自動で切り替え、ウィンドウを前面化します</td></tr></tbody></table></div>
+<h2 id="トレイからクイック追加">トレイからクイック追加</h2>
+<p>システムトレイの HrdayaFlow アイコンを右クリックし、<strong>クイック追加</strong>を選ぶと小さな入力画面が開きます。複数行を入力でき、<code>Ctrl + Enter</code>（macOS は <code>Cmd + Enter</code>）または <strong>追加</strong>でノートを作成します。</p>
+<ul><li>追加先は AI バッジの付いた AI ターゲットタブです。</li><li>AI ターゲットが無い場合は、新しいタブを作って自動的にターゲット化します。</li><li>ターゲット内でノートが選択されていればその近く、未選択なら末尾ノートの近くへ配置します。</li><li>トレイを利用できない環境では項目自体が表示されず、通常のアプリ動作には影響しません。</li></ul>
+<h2 id="左アクティビティバー">左アクティビティバー</h2>
+<p>左端のアクティビティバーは、展開 / 折りたたみ状態を保存します。アイコンだけに畳むとキャンバスを広く使えます。</p>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] ImageCache の上限を変更して即時反映される</li><li>[ ] Markdown 表示プリセットを切り替えるとノート表示が変わる</li><li>[ ] AI ターゲットをタブ右クリックで設定 / 解除できる</li><li>[ ] トレイのクイック追加で AI ターゲットタブへノートが追加される</li><li>[ ] 左アクティビティバーの折りたたみ状態が次回起動でも維持される</li></ul>
+<p><span class="missing">← 14</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#15-アプリ設定">15 アプリ設定</a></li><li class="lvl-2"><a href="#画像キャッシュ-(ImageCache)">画像キャッシュ (ImageCache)</a></li><li class="lvl-2"><a href="#Markdown-表示">Markdown 表示</a></li><li class="lvl-2"><a href="#AI-ライブターゲット">AI ライブターゲット</a></li><li class="lvl-3"><a href="#AI-追従">AI 追従</a></li><li class="lvl-2"><a href="#トレイからクイック追加">トレイからクイック追加</a></li><li class="lvl-2"><a href="#左アクティビティバー">左アクティビティバー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">15 アプリ設定</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/05-app-settings";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

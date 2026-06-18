@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>05 エッジと接続 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>05 エッジと接続</h1><div class="note-meta">#manual · #edges · #connections</div><h1 id="05-エッジと接続">05 エッジと接続</h1>
+<p><span class="missing">← 04 ノード</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 06 グループ</span></p>
+<p>ノート同士を関係づけるのがエッジ。ただの線ではなく、<strong>意味 (semantic type)</strong> と <strong>見た目 (style)</strong> を独立して扱う。</p>
+<h2 id="エッジを引く">エッジを引く</h2>
+<p>🖱 ノードの上端 / 右端 / 下端 / 左端にホバー → <strong>接続ハンドル</strong> (小さな○) が出る → ハンドルをドラッグ → 行き先ノードへドロップ。</p>
+<div class="table-wrap"><table><thead><tr><th>修飾キー</th><th>生成されるエッジ</th></tr></thead><tbody><tr><td>なし</td><td>parent-child (シンプル線)</td></tr><tr><td><code>Shift + ドラッグ</code></td><td>cause-effect (矢印つき)</td></tr><tr><td><code>Alt + ドラッグ</code></td><td>逆向き矢印</td></tr><tr><td><code>Ctrl + ドラッグ</code></td><td>双方向矢印</td></tr><tr><td><code>Shift + Alt + ドラッグ</code></td><td>dependency (破線矢印)</td></tr></tbody></table></div>
+<h2 id="キーボード">キーボード</h2>
+<p>⌨ <strong><code>Ctrl + P</code></strong> (Mac は <code>⌘ + P</code>): 選択ノートに親子 (階層) Edge を追加します。</p>
+<ul><li><strong>アクティブオブジェクト</strong> (= 最後に選んだノート、太い実線ボーダーで表示) が <strong>親</strong>、それ以外の選択ノートすべてが <strong>子</strong> になります (Blender 流 &quot;Make Parent&quot;)</li><li>3 ノート以上選択していると、アクティブ 1 つを親に、他全部を子にする「放射状」の親子関係が一括作成されます</li><li>子が既に別の親を持っている場合は <strong>silent replacement</strong> で上書きされます (1 子 1 親の原則)</li><li>多重選択で cycle / self-parent が含まれる場合は <strong>partial success</strong>: 該当ペアだけスキップして残りを作成、結果は toast で通知</li></ul>
+<p>⌨ <strong><code>Alt + P</code></strong>: 選択ノートそれぞれの <strong>親</strong> hierarchy Edge を 1 本削除します (Blender 流 &quot;Clear Parent&quot;)。子孫との関係は保持されます。</p>
+<p>🖱 <strong>ノート右クリック → 「親子関係を解除」</strong>: Alt+P と同じ挙動。選択中ノートに親がある時のみメニューに現れます。</p>
+<h3 id="親子関係の特殊な振る舞い-(v004-O-系)">親子関係の特殊な振る舞い (v0.0.4 O 系)</h3>
+<ul><li><strong>キャンバスには矢印が描画されません</strong> (<code>EdgeKind.hierarchy</code> は描画されない)</li><li>データは Inspector「親子・階層」セクションで <strong>ルートからの完全ツリー</strong> として確認・編集できます</li><li><strong>親を移動すると子孫すべてが推移的に追従</strong> します (Blender 流 transform inheritance)<ul><li>対象操作: G (Blender grab) / D&amp;D ドラッグ / 矢印キー nudge / Inspector x,y 入力</li><li>回転 (R) / スケール (S) の伝播は v2 以降</li></ul></li><li><strong>Container と Frame も親子関係 Edge の端点</strong> になれます<ul><li>Container を移動すると中の子孫が追従 (<code>Container.containerMembers[]</code> は cache)</li><li>Frame に対しても親子関係を結べる (装飾フレームに子ノートを従属させる)</li></ul></li><li><strong>親子関係と通常エッジは共存できます</strong>: 親 a → 子 b の親子関係を持つノート間に、<strong><code>generic</code> / <code>causality</code> / <code>reference</code> 等の通常エッジを別途引くことが可能</strong>。両者は独立したレイヤーとして扱われる</li></ul>
+<h2 id="Semantic-Type-(意味)">Semantic Type (意味)</h2>
+<p>エッジには「種類」がある。見た目とは独立して、データとして保持される。</p>
+<div class="table-wrap"><table><thead><tr><th>Semantic Type</th><th>既定の見た目</th><th>用途</th></tr></thead><tbody><tr><td><code>parent-child</code></td><td>細い実線</td><td>階層・所属</td></tr><tr><td><code>cause-effect</code></td><td>矢印つき実線</td><td>因果関係</td></tr><tr><td><code>dependency</code></td><td>破線矢印</td><td>依存・参照</td></tr><tr><td><code>relation</code></td><td>太い実線</td><td>関連 (緩い)</td></tr><tr><td><code>custom</code></td><td>ユーザー定義</td><td>プロジェクト固有</td></tr></tbody></table></div>
+<p>Inspector の Edge セクションで type を変えると、自動でデフォルトスタイルが当たる。後から個別に上書き可。</p>
+<h2 id="エッジのスタイル">エッジのスタイル</h2>
+<p>選択 → Inspector → Edge セクション。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>値</th></tr></thead><tbody><tr><td>線色</td><td>任意カラー</td></tr><tr><td>線幅</td><td>1〜10 px</td></tr><tr><td>ダッシュパターン</td><td>実線 / 破線 / 点線 / 1 点鎖線</td></tr><tr><td>矢印頭</td><td>なし / 片端 / 両端 / 大きさ</td></tr><tr><td>カーブ</td><td>直線 / ベジェ (S字) / 直角 (Manhattan)</td></tr><tr><td>ラベル</td><td>エッジ上に表示するテキスト</td></tr><tr><td>ラベル位置</td><td>中央 / from 寄り / to 寄り</td></tr></tbody></table></div>
+<h3 id="ラベル">ラベル</h3>
+<p>エッジをダブルクリック → ラベル編集モード。短文 (例: 「呼び出す」「from 2024」)。</p>
+<h2 id="エッジの編集と削除">エッジの編集と削除</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 エッジクリック</td><td>選択</td></tr><tr><td>🖱 エッジドラッグ (中点)</td><td>カーブを曲げる (ベジェ制御点)</td></tr><tr><td>🖱 エッジ端をドラッグ</td><td>接続先ノードを変更</td></tr><tr><td>⌨ <code>Delete</code></td><td>エッジ削除</td></tr><tr><td>🖱 右クリック → 削除 / Type 変更</td><td>コンテキストメニュー</td></tr></tbody></table></div>
+<h2 id="接続点-(Pin)">接続点 (Pin)</h2>
+<p>ノートには複数の <strong>接続点</strong> (上下左右の中央に既定で 4 つ) がある。エッジの from / to は <code>{nodeId, pin}</code> の組として保存される。</p>
+<p>🚧 任意位置への pin 追加は将来予定。現状は 4 方向固定。</p>
+<h2 id="自動レイアウトとエッジ">自動レイアウトとエッジ</h2>
+<p><span class="missing">04-groups-and-containers</span> の Container 内で「Auto Layout」を実行すると、エッジを最短にする配置を計算 (Reingold-Tilford 風)。</p>
+<h2 id="既存ノートの繋ぎ替え">既存ノートの繋ぎ替え</h2>
+<p>🖱 エッジの <strong>端点</strong> (○) をドラッグ → 別ノードに重ねる → 接続が変わる。</p>
+<h2 id="多対多">多対多</h2>
+<p>1 つのノートから何本でも引ける。ノートに来るエッジ数も無制限。Inspector の「接続一覧」で全部見える。</p>
+<h2 id="接続検証-(GSR-変形時)">接続検証 (G/S/R 変形時)</h2>
+<p>K-gsr10 (2026-04 修正) で、Group/Scale/Rotate 変形時にエッジが自動で追従。回転 90° でもエッジ端が自然に繋がる。</p>
+<h2 id="エッジの一括操作">エッジの一括操作</h2>
+<p>複数選択 → 右クリック → <strong>エッジ操作</strong> メニュー:</p>
+<ul><li>一括スタイル変更 (色 / 線幅)</li><li>一括 type 変更</li><li>削除</li></ul>
+<h2 id="エッジ非表示">エッジ非表示</h2>
+<p>Layer (Outline パネル) でレイヤー単位で表示/非表示。エッジだけのレイヤーを作って、複雑なマップを段階的に見せられる。</p>
+<h2 id="ナイフでエッジリルート-(Dot-中継)">ナイフでエッジリルート (Dot 中継)</h2>
+<p>エッジが多くて混雑したキャンバスでは、ナイフツールで複数エッジを切って <strong>Dot</strong> という中継ノートを生成し、視覚的に集約できる。Blender Node Wrangler のナイフツールを参考にしている。</p>
+<h3 id="切断前-→-切断後-(イメージ)">切断前 → 切断後 (イメージ)</h3>
+<pre><code>切断前 (ファンイン):
+  A ──→ X
+  B ──→ X
+  C ──→ X
+
+切断後 (1 ストローク = 1 Dot):
+  A ──→ ● ──→ X
+  B ──┘    └── (Dot→X は本数ぶん残る。重なって 1 本に見えることもある)
+  C ──┘</code></pre>
+<p>スクリーンショット付きの設計資料: <span class="missing">v0.0.4 Q 系議事録</span></p>
+<h3 id="操作">操作</h3>
+<ol><li><code>Shift</code> を押しながら <strong>右マウスダウン</strong> → <strong>ドラッグ</strong> で軌跡を引く</li><li>軌跡が通過した <strong>通常エッジ</strong> (キャンバスに見えるエッジ) が赤くハイライトされる</li><li>右マウスアップで切断確定。ストローク終点に <strong>Dot</strong> が 1 個生成される</li><li>切断された各エッジ <code>S → T</code> は <code>S → Dot</code> と <code>Dot → T</code> の 2 本に分割される</li></ol>
+<h3 id="仕様">仕様</h3>
+<ul><li><strong>1 ストローク = 1 Dot</strong>: ストロークで切った全エッジは同じ Dot を共有する (自動集約)</li><li><strong>属性継承</strong>: 元エッジの矢印頭・色・線種などは分割後の両方に継承される</li><li><strong>Target merge なし</strong>: 同じ Target に複数エッジが向かっていても自動でまとめない。<code>Dot → Target</code> が N 本残る (視覚的には重なって 1 本に見えることもある)</li><li><strong>Hierarchy Edge は切れない</strong>: 親子関係を表す内部エッジはナイフ通過しても無視される (<span class="missing">親子関係</span> 参照)</li><li><strong>Undo</strong>: 1 ストローク = 1 Undo (<code>Ctrl + Z</code> 1 回でストローク全体を巻き戻す)</li></ul>
+<h3 id="中断-誤発動防止">中断 / 誤発動防止</h3>
+<ul><li>ドラッグ中の <code>Esc</code> で軌跡破棄。Edge も Dot も変化しない</li><li><code>Shift + 右クリック</code> (移動 3 px 未満で離す) は通常の右クリックメニューを表示する (ナイフは発動しない)</li></ul>
+<h3 id="Dot-ノートについて">Dot ノートについて</h3>
+<p>Dot の種別・移動・サイズの詳細は <span class="missing">ノート種別 Dot</span> を参照。</p>
+<ul><li><strong>見た目</strong>: 小さい ● (塗り潰し円)。初期直径 14 px</li><li><strong>移動</strong>: 通常ノートと同じく <code>G</code> / ドラッグ / 矢印キー (1 px / <code>Shift</code> 16 px / <code>Ctrl</code> 64 px)</li><li><strong>サイズ変更</strong>: <code>S</code> 又は 8 方向リサイズハンドル (常に正方形 = 円、4–48 px)</li><li><strong>回転</strong>: 円なので意味なし。<code>R</code> は無効</li><li><strong>テキスト編集 / F2</strong>: 無効 (ラベルを持たない)</li><li><strong>Ctrl+P (親子化)</strong>: 無効 (Dot は親子関係に含められない)</li><li><strong>自動削除</strong>: Dot に接続するエッジが 0 本になると Dot 自身も自動削除される (ゴミ Dot 散乱防止)</li><li><strong>Ctrl+G</strong>: Dot を Container メンバーにできる (Container 移動で追従)</li></ul>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] ハンドルドラッグで 2 ノード接続</li><li>[ ] <code>Shift + ドラッグ</code> で矢印つきエッジ</li><li>[ ] エッジクリックで選択 → 色変更</li><li>[ ] エッジ端ドラッグで接続先変更</li><li>[ ] <code>Delete</code> で削除</li><li>[ ] エッジダブルクリック → ラベル編集</li><li>[ ] ノートを回転 → エッジが追従</li><li>[ ] 複数エッジ選択 → 一括色変更</li><li>[ ] <code>Shift + 右マウスドラッグ</code> で複数エッジを切断 → Dot 1 個 + リルート</li><li>[ ] <code>Esc</code> でナイフ中断 → 変化なし</li><li>[ ] Dot を <code>G</code> / <code>S</code> で移動・リサイズ、<code>R</code> は無効</li><li>[ ] 接続ノート削除後、孤立 Dot が自動削除される</li></ul>
+<p><span class="missing">← 04</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 06</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#05-エッジと接続">05 エッジと接続</a></li><li class="lvl-2"><a href="#エッジを引く">エッジを引く</a></li><li class="lvl-2"><a href="#キーボード">キーボード</a></li><li class="lvl-3"><a href="#親子関係の特殊な振る舞い-(v004-O-系)">親子関係の特殊な振る舞い (v0.0.4 O 系)</a></li><li class="lvl-2"><a href="#Semantic-Type-(意味)">Semantic Type (意味)</a></li><li class="lvl-2"><a href="#エッジのスタイル">エッジのスタイル</a></li><li class="lvl-3"><a href="#ラベル">ラベル</a></li><li class="lvl-2"><a href="#エッジの編集と削除">エッジの編集と削除</a></li><li class="lvl-2"><a href="#接続点-(Pin)">接続点 (Pin)</a></li><li class="lvl-2"><a href="#自動レイアウトとエッジ">自動レイアウトとエッジ</a></li><li class="lvl-2"><a href="#既存ノートの繋ぎ替え">既存ノートの繋ぎ替え</a></li><li class="lvl-2"><a href="#多対多">多対多</a></li><li class="lvl-2"><a href="#接続検証-(GSR-変形時)">接続検証 (G/S/R 変形時)</a></li><li class="lvl-2"><a href="#エッジの一括操作">エッジの一括操作</a></li><li class="lvl-2"><a href="#エッジ非表示">エッジ非表示</a></li><li class="lvl-2"><a href="#ナイフでエッジリルート-(Dot-中継)">ナイフでエッジリルート (Dot 中継)</a></li><li class="lvl-3"><a href="#切断前-→-切断後-(イメージ)">切断前 → 切断後 (イメージ)</a></li><li class="lvl-3"><a href="#操作">操作</a></li><li class="lvl-3"><a href="#仕様">仕様</a></li><li class="lvl-3"><a href="#中断-誤発動防止">中断 / 誤発動防止</a></li><li class="lvl-3"><a href="#Dot-ノートについて">Dot ノートについて</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">05 エッジと接続</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/03-edges-and-connections";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

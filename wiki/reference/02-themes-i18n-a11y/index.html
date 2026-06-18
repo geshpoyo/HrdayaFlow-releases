@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>12 テーマ・多言語・アクセシビリティ | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>12 テーマ・多言語・アクセシビリティ</h1><div class="note-meta">#manual · #theme · #i18n · #a11y</div><h1 id="12-テーマ・多言語・アクセシビリティ">12 テーマ・多言語・アクセシビリティ</h1>
+<p><span class="missing">← 11 ファイル</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13 ショートカット</span></p>
+<p>見やすく・誰にでも使える・どの言語の人にも使える、を支える章。</p>
+<h2 id="テーマ">テーマ</h2>
+<h3 id="ライト-ダーク-システム連動">ライト / ダーク / システム連動</h3>
+<p>設定 → 表示 → テーマ:</p>
+<div class="table-wrap"><table><thead><tr><th>値</th><th>動作</th></tr></thead><tbody><tr><td>Light</td><td>常に明るい</td></tr><tr><td>Dark</td><td>常に暗い</td></tr><tr><td>System</td><td>OS 設定に追従 (既定)</td></tr></tbody></table></div>
+<p>⌨ <code>Ctrl + Shift + T</code> で Light / Dark トグル。</p>
+<h3 id="カラーアクセント">カラーアクセント</h3>
+<p>主アクセント色 (ボタン・選択枠) を選べる:</p>
+<ul><li>Mandala Gold (既定) — <code>#C8A14C</code></li><li>Indigo / Teal / Coral / Forest / Plum</li></ul>
+<p>カスタム HEX も入力可。Settings で変更。</p>
+<h3 id="フォント">フォント</h3>
+<div class="table-wrap"><table><thead><tr><th>カテゴリ</th><th>既定</th><th>カスタマイズ</th></tr></thead><tbody><tr><td>UI</td><td>Noto Sans JP</td><td>システムフォント / カスタム</td></tr><tr><td>本文 (text/markdown)</td><td>Noto Sans JP</td><td>同上</td></tr><tr><td>コード (code)</td><td>JetBrains Mono</td><td>同上</td></tr><tr><td>数式 (math)</td><td>Latin Modern</td><td>(固定)</td></tr></tbody></table></div>
+<p>設定 → 表示 → フォント。サイズはノート単位で Inspector からも変更 (<span class="missing">06-inspector-and-formatting</span>)。</p>
+<h3 id="キャンバス背景">キャンバス背景</h3>
+<ul><li>単色 (既定: テーマ連動)</li><li>グラデーション</li><li>パターン (グリッド / ドット / 罫線)</li><li>画像 (背景画像)</li></ul>
+<p>設定 → 表示 → キャンバス背景。</p>
+<h2 id="多言語-(i18n)">多言語 (i18n)</h2>
+<h3 id="サポート言語">サポート言語</h3>
+<div class="table-wrap"><table><thead><tr><th>言語</th><th>状態</th><th>ARB ファイル</th></tr></thead><tbody><tr><td>日本語 (ja)</td><td>✅ メイン</td><td><code>app/lib/l10n/intl_ja.arb</code></td></tr><tr><td>英語 (en)</td><td>✅</td><td><code>app/lib/l10n/intl_en.arb</code></td></tr><tr><td>中文 (zh-CN)</td><td>🚧 一部</td><td><code>app/lib/l10n/intl_zh.arb</code></td></tr><tr><td>韓国語 (ko)</td><td>🚧 計画中</td><td>—</td></tr></tbody></table></div>
+<h3 id="切り替え">切り替え</h3>
+<p>設定 → 一般 → 言語 → 選択 → アプリ再起動 (再起動なし切替は将来予定)。</p>
+<h3 id="翻訳に貢献するには">翻訳に貢献するには</h3>
+<p><code>app/lib/l10n/</code> 下の ARB ファイルをコピーして翻訳 → PR。詳細は <span class="missing">04-developer-guide › i18n</span>。</p>
+<h2 id="アクセシビリティ-(a11y)">アクセシビリティ (a11y)</h2>
+<h3 id="スクリーンリーダー対応">スクリーンリーダー対応</h3>
+<p>すべての UI 要素に <code>Semantics</code> widget が付与され、Windows Narrator / NVDA / JAWS / VoiceOver などで読み上げられる。</p>
+<div class="table-wrap"><table><thead><tr><th>要素</th><th>読み上げ例</th></tr></thead><tbody><tr><td>ノート</td><td>&quot;テキストノート、内容: 顧客 A の住所、選択中&quot;</td></tr><tr><td>接続ハンドル</td><td>&quot;接続ハンドル、ドラッグして他のノートに接続&quot;</td></tr><tr><td>Inspector ボタン</td><td>&quot;太字、押すとオン&quot;</td></tr><tr><td>エラーダイアログ</td><td>&quot;エラー、保存に失敗しました、OK ボタン&quot;</td></tr></tbody></table></div>
+<h3 id="キーボード操作のみで完結">キーボード操作のみで完結</h3>
+<p>マウス無しで全機能にアクセス可能。<code>Tab</code> でフォーカス移動、<code>Enter</code> で選択、<code>Esc</code> でキャンセル。詳細: <span class="missing">01-keyboard-shortcuts</span>。</p>
+<h3 id="コントラスト">コントラスト</h3>
+<p>WCAG AA 準拠 (テキスト 4.5:1 / UI 要素 3:1) を目標。Dark / Light 共に検証済 (<code>docs/manual/a11y-verification.md</code>)。</p>
+<h3 id="フォントサイズ拡大">フォントサイズ拡大</h3>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>⌨ <code>Ctrl + +</code> (UI 全体)</td><td>UI スケール 100% → 110% → 120% → ...</td></tr><tr><td>⌨ <code>Ctrl + -</code></td><td>下げる</td></tr><tr><td>⌨ <code>Ctrl + 0</code></td><td>リセット</td></tr></tbody></table></div>
+<p>ノート内テキストは Inspector で個別変更。</p>
+<h3 id="モーション軽減">モーション軽減</h3>
+<p>OS の「アニメーション減らす」設定に追従。手動でも Settings → アクセシビリティ → 「モーション減らす」 で OFF 可。</p>
+<ul><li>✅ 折りたたみアニメ → 即時切替</li><li>✅ ズームのスムージング → カクつき</li><li>✅ 起動アニメ → スキップ</li></ul>
+<h3 id="高コントラストモード-🚧">高コントラストモード 🚧</h3>
+<p>Windows の High Contrast Theme を検出 → 専用パレットで描画。検証中。</p>
+<h3 id="色覚異常配慮">色覚異常配慮</h3>
+<p>エッジ / ノート色は <strong>色だけに頼らない</strong> 設計:</p>
+<ul><li>セマンティクスは形 (矢印形状) でも区別</li><li>警告は色 + アイコン + ラベル</li><li>カラーパレットの初期値は色覚多様性を考慮</li></ul>
+<h3 id="Tab-トラップ">Tab トラップ</h3>
+<p>ダイアログを開くと、<code>Tab</code> フォーカスがそのダイアログ内をループ。<code>Esc</code> でキャンセル、<code>Enter</code> で OK。</p>
+<h3 id="スクリーンリーダーで使うフロー-(一例)">スクリーンリーダーで使うフロー (一例)</h3>
+<ol><li>アプリ起動 → Narrator が「HṛdayaFlow、メインキャンバス、空のドキュメント」と読む</li><li>⌨ <code>Tab</code> で Outline → Inspector → Canvas を巡回</li><li>Canvas にフォーカス → ⌨ <code>Ctrl + Shift + N</code> でノード種別ピッカー → 矢印で選択 → Enter</li><li>ノート編集 → Esc → ⌨ <code>Tab</code> で次のノートへフォーカス移動</li><li>⌨ <code>Ctrl + S</code> で保存 → ステータスバーが「保存しました」と読み上げる</li></ol>
+<h2 id="プライバシー">プライバシー</h2>
+<p><code>docs/manual/privacy.md</code> 参照。要点:</p>
+<ul><li>✅ 既定でテレメトリ無効</li><li>✅ クラッシュレポートも opt-in</li><li>✅ AI は Ollama (ローカル) を推奨</li><li>⚠ PrudeLLM 利用時のみマップ内容が送信される (明示同意必要)</li></ul>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] テーマ切替: Light / Dark / System</li><li>[ ] アクセント色変更で UI が変わる</li><li>[ ] フォント変更で本文が変わる</li><li>[ ] 言語切替で UI 文言が変わる</li><li>[ ] スクリーンリーダーでノート内容が読まれる</li><li>[ ] <code>Tab</code> でフォーカスがダイアログ内ループする</li><li>[ ] モーション軽減 ON でアニメが消える</li><li>[ ] UI スケール 120% で全要素が大きくなる</li><li>[ ] テレメトリは既定 OFF (設定で確認)</li></ul>
+<p><span class="missing">← 11</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#12-テーマ・多言語・アクセシビリティ">12 テーマ・多言語・アクセシビリティ</a></li><li class="lvl-2"><a href="#テーマ">テーマ</a></li><li class="lvl-3"><a href="#ライト-ダーク-システム連動">ライト / ダーク / システム連動</a></li><li class="lvl-3"><a href="#カラーアクセント">カラーアクセント</a></li><li class="lvl-3"><a href="#フォント">フォント</a></li><li class="lvl-3"><a href="#キャンバス背景">キャンバス背景</a></li><li class="lvl-2"><a href="#多言語-(i18n)">多言語 (i18n)</a></li><li class="lvl-3"><a href="#サポート言語">サポート言語</a></li><li class="lvl-3"><a href="#切り替え">切り替え</a></li><li class="lvl-3"><a href="#翻訳に貢献するには">翻訳に貢献するには</a></li><li class="lvl-2"><a href="#アクセシビリティ-(a11y)">アクセシビリティ (a11y)</a></li><li class="lvl-3"><a href="#スクリーンリーダー対応">スクリーンリーダー対応</a></li><li class="lvl-3"><a href="#キーボード操作のみで完結">キーボード操作のみで完結</a></li><li class="lvl-3"><a href="#コントラスト">コントラスト</a></li><li class="lvl-3"><a href="#フォントサイズ拡大">フォントサイズ拡大</a></li><li class="lvl-3"><a href="#モーション軽減">モーション軽減</a></li><li class="lvl-3"><a href="#高コントラストモード-🚧">高コントラストモード 🚧</a></li><li class="lvl-3"><a href="#色覚異常配慮">色覚異常配慮</a></li><li class="lvl-3"><a href="#Tab-トラップ">Tab トラップ</a></li><li class="lvl-3"><a href="#スクリーンリーダーで使うフロー-(一例)">スクリーンリーダーで使うフロー (一例)</a></li><li class="lvl-2"><a href="#プライバシー">プライバシー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">12 テーマ・多言語</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/02-themes-i18n-a11y";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

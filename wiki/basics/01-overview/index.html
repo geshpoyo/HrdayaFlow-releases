@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>01 概要とアーキテクチャ | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>01 概要とアーキテクチャ</h1><div class="note-meta">#manual · #overview · #architecture</div><h1 id="01-概要とアーキテクチャ">01 概要とアーキテクチャ</h1>
+<p><a class="wikilink" href="../../00-INDEX/">← 目次に戻る</a> | <span class="missing">次の章: はじめに →</span></p>
+<h2 id="HṛdayaFlow-とは">HṛdayaFlow とは</h2>
+<blockquote><p>中心から智慧が流れ出す曼荼羅的マインドマップ。</p></blockquote>
+<p>HṛdayaFlow は、テキスト・画像・動画・音声・コード・Web 埋め込みを <strong>一枚に束ね、関係線で結ぶ</strong> デスクトップ型マインドマップです。フリーフォーム (どこにでも置ける) とオートレイアウト (整然と並べる) のハイブリッドで、フリーフォーム系のキャンバスの自由度と、X-Mind / FreeMind のような構造化を両立させます。</p>
+<h3 id="名前の由来">名前の由来</h3>
+<ul><li><strong>Hṛdaya (フリダヤ)</strong> — サンスクリットで「中心 / 心臓 / 本質」</li><li><strong>Flow</strong> — 流れ / 思考のフローネス</li><li>中央から智慧が放射状に拡がるマンダラのイメージを、UI のシンボルにしている</li></ul>
+<h3 id="競合との位置づけ">競合との位置づけ</h3>
+<div class="table-wrap"><table><thead><tr><th>製品</th><th>自由配置</th><th>構造化</th><th>マルチメディア</th><th>AI 連携</th><th>備考</th></tr></thead><tbody><tr><td>フリーフォーム系 MM</td><td>◎</td><td>△</td><td>×</td><td>×</td><td>自由度は強いが、構造もエクスポートも限定的</td></tr><tr><td>XMind / MindMeister</td><td>△</td><td>◎</td><td>△</td><td>△</td><td>構造化は強いが、自由配置やノートに弱い</td></tr><tr><td>Obsidian Canvas</td><td>◎</td><td>△</td><td>◎</td><td>△</td><td>Markdown 連携は強いが、デスクトップ専用ノードは限定的</td></tr><tr><td>Miro / Mural</td><td>◎</td><td>○</td><td>◎</td><td>△</td><td>コラボ前提で個人ローカル向きでない</td></tr><tr><td><strong>HṛdayaFlow</strong></td><td>◎</td><td>◎</td><td>◎</td><td>◎</td><td>全部入り。ローカル・オフライン優先</td></tr></tbody></table></div>
+<h2 id="アーキテクチャ">アーキテクチャ</h2>
+<pre><code>┌──────────────────────────────────────────────────────────┐
+│  Flutter Desktop (Dart)                                  │
+│  ├─ canvas / nodes / edges / panels / inspector          │
+│  ├─ ジェスチャー・ショートカット・テーマ                 │
+│  └─ Undo/Redo (canvas_undo_adapter)                       │
+└──────────────────────────────────────────────────────────┘
+                       ↑↓ FFI (flutter_rust_bridge 2.12)
+┌──────────────────────────────────────────────────────────┐
+│  Rust Core (hrdaya_core)                                 │
+│  ├─ graph / layout / io (.hrf v0.2 ZIP)                  │
+│  ├─ importers (Mermaid / OPML / XMind / FreeMind / ...)  │
+│  ├─ exporters (PDF / SVG / PNG / Markdown / JSON Canvas) │
+│  └─ JSON Patch (RFC 6902, json-patch crate)              │
+└──────────────────────────────────────────────────────────┘
+                       ↑↓ HTTP / WebSocket (port 8765)
+┌──────────────────────────────────────────────────────────┐
+│  Python AI Service (FastAPI)                             │
+│  ├─ /api/generate-map (テキスト → マップ)               │
+│  ├─ /api/summarize-map (マップ → テキスト)              │
+│  └─ Backend: stub / PrudeLLM / Ollama                    │
+└──────────────────────────────────────────────────────────┘</code></pre>
+<h3 id="各層の責務">各層の責務</h3>
+<div class="table-wrap"><table><thead><tr><th>層</th><th>技術</th><th>役割</th></tr></thead><tbody><tr><td><strong>UI</strong></td><td>Flutter Desktop (Dart 3.x)</td><td>キャンバス描画・ジェスチャー・ノード編集・パネル</td></tr><tr><td><strong>Core</strong></td><td>Rust (<code>flutter_rust_bridge</code>)</td><td>グラフ構造・レイアウト演算・I/O・形式変換・JSON Patch</td></tr><tr><td><strong>AI</strong></td><td>Python (FastAPI)</td><td>LLM 接続・テキスト ⇔ マップ変換・suggest</td></tr></tbody></table></div>
+<h3 id="なぜこの-3-層構成か">なぜこの 3 層構成か</h3>
+<ul><li><strong>UI に Flutter</strong> — Windows / macOS / Linux 同一コードベース、リッチ描画 (<code>CustomPaint</code>)、ホットリロードで反復速度</li><li><strong>Core に Rust</strong> — ZIP I/O、SHA256、JSON Patch、レイアウトアルゴリズムなど CPU バウンド処理を高速・安全に</li><li><strong>AI を Python に隔離</strong> — LLM ライブラリエコシステムが豊富、バージョン非依存、別プロセスでクラッシュ隔離</li></ul>
+<h2 id="システム要件">システム要件</h2>
+<h3 id="動作環境-(推奨)">動作環境 (推奨)</h3>
+<div class="table-wrap"><table><thead><tr><th>OS</th><th>状態</th><th>備考</th></tr></thead><tbody><tr><td>Windows 10/11 (x64)</td><td>✅ 主サポート</td><td><code>installer/</code> で MSI 提供</td></tr><tr><td>macOS 12+ (Apple Silicon / Intel)</td><td>🚧 動作するがインストーラ未配布</td><td><code>flutter build macos</code> で生成可</td></tr><tr><td>Ubuntu 22.04+ (x64)</td><td>🚧 動作するがパッケージ未配布</td><td><code>flutter build linux</code></td></tr></tbody></table></div>
+<h3 id="ハードウェア-(推奨)">ハードウェア (推奨)</h3>
+<ul><li>CPU: 4 コア以上 (Rust core はスレッドプール活用)</li><li>メモリ: 8 GB 以上 (1000 ノード前後で 500 MB 程度を消費)</li><li>GPU: なくても動くが、ズーム / アニメーションが滑らかになる</li><li>ストレージ: SSD 推奨 (起動 &lt; 2 秒、<code>.hrf</code> 保存 &lt; 200 ms 目標)</li></ul>
+<p>詳細予算は <span class="missing">performance-budgets.yaml</span> と budget gate (<span class="missing">04-developer-guide › budget-gate</span>) を参照。</p>
+<h3 id="外部サービス-(任意)">外部サービス (任意)</h3>
+<ul><li><strong>Ollama</strong> (ローカル LLM) — <code>localhost:11434</code> で動作中なら自動検出</li><li><strong>PrudeLLM</strong> (ホスト LLM) — API キー設定で利用可</li><li><strong>未設定</strong>でも全機能は動く (AI のみ stub にフォールバック)</li></ul>
+<h2 id="ファイル形式">ファイル形式</h2>
+<p>主形式は <strong><code>.hrf</code> v0.2</strong> (ZIP コンテナ)。詳細は <span class="missing">11-files-and-interop</span>。</p>
+<p>import / export 対応:</p>
+<div class="table-wrap"><table><thead><tr><th>形式</th><th>Import</th><th>Export</th></tr></thead><tbody><tr><td><code>.hrf</code> v0.2 (ZIP)</td><td>✅</td><td>✅</td></tr><tr><td><code>.hrf</code> v0.1 (最小 ZIP)</td><td>✅ (後方互換)</td><td>—</td></tr><tr><td>裸 JSON (拡張子 <code>.json</code>)</td><td>✅ (fallback)</td><td>✅</td></tr><tr><td>Markdown outline (<code>.md</code>)</td><td>✅</td><td>✅</td></tr><tr><td>Mermaid (<code>.mmd</code>)</td><td>✅</td><td>✅</td></tr><tr><td>JSON Canvas (<code>.canvas</code> / Obsidian)</td><td>✅</td><td>✅</td></tr><tr><td>OPML (<code>.opml</code>)</td><td>✅</td><td>—</td></tr><tr><td>XMind (<code>.xmind</code>)</td><td>✅</td><td>—</td></tr><tr><td>FreeMind / Freeplane (<code>.mm</code>)</td><td>✅</td><td>—</td></tr><tr><td>他のフリーフォーム MM (<code>.scap</code> 等)</td><td>✅</td><td>—</td></tr><tr><td>PDF</td><td>—</td><td>✅</td></tr><tr><td>PNG</td><td>—</td><td>✅</td></tr><tr><td>SVG</td><td>—</td><td>✅</td></tr></tbody></table></div>
+<h2 id="ライセンスと配布">ライセンスと配布</h2>
+<ul><li>本体ソース: 個人開発 (公開ライセンス未確定)</li><li>同梱 OSS: <code>LICENSE-THIRD-PARTY.md</code> を参照</li><li>配布形態: GitHub Releases (winget / scoop は検討中)</li></ul>
+<h2 id="関連章">関連章</h2>
+<ul><li><span class="missing">02 はじめに</span></li><li><span class="missing">11 ファイルと相互運用</span></li><li><span class="missing">14 開発者ガイド</span></li></ul>
+<p><a class="wikilink" href="../../00-INDEX/">← 目次</a> | <span class="missing">→ 02 はじめに</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#01-概要とアーキテクチャ">01 概要とアーキテクチャ</a></li><li class="lvl-2"><a href="#HṛdayaFlow-とは">HṛdayaFlow とは</a></li><li class="lvl-3"><a href="#名前の由来">名前の由来</a></li><li class="lvl-3"><a href="#競合との位置づけ">競合との位置づけ</a></li><li class="lvl-2"><a href="#アーキテクチャ">アーキテクチャ</a></li><li class="lvl-3"><a href="#各層の責務">各層の責務</a></li><li class="lvl-3"><a href="#なぜこの-3-層構成か">なぜこの 3 層構成か</a></li><li class="lvl-2"><a href="#システム要件">システム要件</a></li><li class="lvl-3"><a href="#動作環境-(推奨)">動作環境 (推奨)</a></li><li class="lvl-3"><a href="#ハードウェア-(推奨)">ハードウェア (推奨)</a></li><li class="lvl-3"><a href="#外部サービス-(任意)">外部サービス (任意)</a></li><li class="lvl-2"><a href="#ファイル形式">ファイル形式</a></li><li class="lvl-2"><a href="#ライセンスと配布">ライセンスと配布</a></li><li class="lvl-2"><a href="#関連章">関連章</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">01 概要とアーキテ</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="basics/01-overview";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

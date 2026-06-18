@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>09 検索と Outline | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>09 検索と Outline</h1><div class="note-meta">#manual · #search · #outline · #navigation</div><h1 id="09-検索と-Outline">09 検索と Outline</h1>
+<p><span class="missing">← 08 Undo</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 10 AI</span></p>
+<p>ノート数が増えても迷わないための、横断的な検索 / 階層ビュー / コマンドパレット。</p>
+<h2 id="Outline-パネル-(左)">Outline パネル (左)</h2>
+<p>ドキュメント全体の階層を見える化。ファイラ風。</p>
+<pre><code>▼ ルート (mymap.hrf)
+  ▼ 📦 営業部メモ (Container)
+    📝 顧客 A
+    📝 顧客 B
+    🖼 名刺画像
+  ▼ 📦 開発メモ
+    💾 コード片 (rust)
+    🔗 Issue #123
+  📝 単独メモ</code></pre>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 アイテムクリック</td><td>キャンバス側でその位置にジャンプ + 選択</td></tr><tr><td>🖱 ダブルクリック</td><td>キャンバスで編集モード</td></tr><tr><td>🖱 右クリック</td><td>コンテキストメニュー (削除・複製・移動など)</td></tr><tr><td>▶ / ▼</td><td>Container 展開 / 折りたたみ</td></tr><tr><td>🖱 D&amp;D</td><td>階層を変える (別 Container に移動)</td></tr></tbody></table></div>
+<h3 id="Layer-タブ">Layer タブ</h3>
+<p>Outline 上部に「Layer」リスト。各レイヤー:</p>
+<ul><li>☑ 表示 / 非表示</li><li>🔒 ロック / アンロック</li><li>色付け</li></ul>
+<h3 id="Filter-タブ">Filter タブ</h3>
+<p>種別・色・タグでフィルタ。例: 「Image ノートのみ」「赤色のみ」「未読 (Tag: todo) のみ」。</p>
+<p>⚠ 現状フィルタは限定的。将来的にはタグ完全対応予定。</p>
+<h3 id="検索ボックス-(Outline-内)">検索ボックス (Outline 内)</h3>
+<p>Outline パネルの上部にも検索欄。タイプすると Outline がリアルタイム filter。</p>
+<h2 id="Quick-Search-(Ctrl-+-F)">Quick Search (<code>Ctrl + F</code>)</h2>
+<p>キャンバス全体を横断検索。</p>
+<pre><code>┌─ 検索 ────────────────────┐
+│ 🔍 [          ] [▼ 種別] │
+│   [Aa 大小区別] [.* 正規] │
+│ ─────────────────────── │
+│ 12 件ヒット                │
+│   📝 顧客 A の住所          │
+│   📝 顧客 B の住所          │
+│   ...                      │
+└──────────────────────────┘</code></pre>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>⌨ <code>Enter</code></td><td>次のヒットへジャンプ</td></tr><tr><td>⌨ <code>Shift + Enter</code></td><td>前のヒットへ (ノート編集中の改行とは別動作)</td></tr><tr><td>⌨ <code>Esc</code></td><td>検索閉じる</td></tr><tr><td>⌨ <code>Ctrl + F</code> (再押下)</td><td>フォーカスを検索欄に戻す</td></tr></tbody></table></div>
+<h3 id="検索オプション">検索オプション</h3>
+<div class="table-wrap"><table><thead><tr><th>オプション</th><th>効果</th></tr></thead><tbody><tr><td>大小区別 (<code>Aa</code>)</td><td>OFF で case-insensitive</td></tr><tr><td>正規表現 (<code>.*</code>)</td><td>regex 入力モード</td></tr><tr><td>種別フィルタ</td><td>text / markdown / image / ... 限定</td></tr><tr><td>Container 内も</td><td>折りたたまれた中身も対象 (既定 ON)</td></tr></tbody></table></div>
+<h3 id="検索対象">検索対象</h3>
+<ul><li>ノート本文 (text / markdown / code / checklist items)</li><li>ノートラベル (Container.label / Frame.label)</li><li>メタ (originName / alt)</li><li>❌ 画像内 OCR は対象外</li></ul>
+<h2 id="Command-Palette-(Ctrl-+-K)">Command Palette (<code>Ctrl + K</code>)</h2>
+<p>VS Code 風のコマンド検索。すべての操作を文字で打って実行。</p>
+<pre><code>┌─ コマンド ────────────────────┐
+│ &gt; エクス_                      │
+│ ─────────────────────────── │
+│ ⚡ エクスポート: PDF...         │
+│ ⚡ エクスポート: Markdown...    │
+│ ⚡ エクスポート: Mermaid...     │
+│ ⚙ 設定: エクスポート既定先     │
+└──────────────────────────────┘</code></pre>
+<div class="table-wrap"><table><thead><tr><th>⌨</th><th>効果</th></tr></thead><tbody><tr><td><code>↑</code> / <code>↓</code></td><td>候補移動</td></tr><tr><td><code>Enter</code></td><td>実行</td></tr><tr><td><code>Esc</code></td><td>閉じる</td></tr></tbody></table></div>
+<h3 id="候補に出るもの">候補に出るもの</h3>
+<ul><li>メニュー全項目 (ファイル / 編集 / 表示 / エクスポート / ヘルプ)</li><li>パネル開閉 (Outline / Inspector / 検索 / AI)</li><li>設定項目 (テーマ切替 / 言語切替 / ...)</li><li>スニペット 🚧 (頻繁に使うパターンを呼び出し)</li></ul>
+<h2 id="QuickOpen-(ファイル-マップ切替)">QuickOpen (ファイル / マップ切替)</h2>
+<p>⌨ <code>Ctrl + P</code>:</p>
+<pre><code>┌─ ファイルを開く ──────────────┐
+│ &gt; ten_                        │
+│ ─────────────────────────── │
+│ 📄 顧客テンプレ.hrf            │
+│ 📄 開発テンプレ.hrf            │
+│ ─────────────────────────── │
+│ 📦 サブマップ: 営業部          │
+└──────────────────────────────┘</code></pre>
+<p>最近開いたファイル + 開いているサブマップが候補。</p>
+<h2 id="Mini-Map-(オーバービュー)">Mini Map (オーバービュー)</h2>
+<p>🚧 検討中。キャンバス全体を縮小表示し、ドラッグで一気に移動。Photoshop / Figma 風。</p>
+<h2 id="ジャンプ系ショートカット">ジャンプ系ショートカット</h2>
+<div class="table-wrap"><table><thead><tr><th>⌨</th><th>効果</th></tr></thead><tbody><tr><td><code>Ctrl + 9</code></td><td>Fit (全体表示)</td></tr><tr><td><code>Ctrl + 0</code></td><td>Zoom 100%</td></tr><tr><td><code>Home</code></td><td>原点 (0,0)</td></tr><tr><td><code>End</code></td><td>マップ重心</td></tr><tr><td><code>Ctrl + G</code> (検索ヒット中)</td><td>次ヒット</td></tr><tr><td><code>Ctrl + Shift + G</code></td><td>前ヒット</td></tr></tbody></table></div>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] Outline でノート階層が見える</li><li>[ ] Outline からクリックでキャンバス側ジャンプ</li><li>[ ] Outline で D&amp;D で階層変更</li><li>[ ] <code>Ctrl + F</code> で検索 → 12 件ヒット表示</li><li>[ ] <code>Enter</code> で次ヒット</li><li>[ ] 大小区別 ON で挙動が変わる</li><li>[ ] 正規表現で検索可能</li><li>[ ] Container 折りたたみ中の中身もヒット</li><li>[ ] <code>Ctrl + K</code> でコマンドパレット</li><li>[ ] <code>Ctrl + P</code> で QuickOpen</li><li>[ ] Layer 表示 / 非表示</li></ul>
+<p><span class="missing">← 08</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 10</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#09-検索と-Outline">09 検索と Outline</a></li><li class="lvl-2"><a href="#Outline-パネル-(左)">Outline パネル (左)</a></li><li class="lvl-3"><a href="#Layer-タブ">Layer タブ</a></li><li class="lvl-3"><a href="#Filter-タブ">Filter タブ</a></li><li class="lvl-3"><a href="#検索ボックス-(Outline-内)">検索ボックス (Outline 内)</a></li><li class="lvl-2"><a href="#Quick-Search-(Ctrl-+-F)">Quick Search (Ctrl + F)</a></li><li class="lvl-3"><a href="#検索オプション">検索オプション</a></li><li class="lvl-3"><a href="#検索対象">検索対象</a></li><li class="lvl-2"><a href="#Command-Palette-(Ctrl-+-K)">Command Palette (Ctrl + K)</a></li><li class="lvl-3"><a href="#候補に出るもの">候補に出るもの</a></li><li class="lvl-2"><a href="#QuickOpen-(ファイル-マップ切替)">QuickOpen (ファイル / マップ切替)</a></li><li class="lvl-2"><a href="#Mini-Map-(オーバービュー)">Mini Map (オーバービュー)</a></li><li class="lvl-2"><a href="#ジャンプ系ショートカット">ジャンプ系ショートカット</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">09 検索と Out</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/09-search-and-outline";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

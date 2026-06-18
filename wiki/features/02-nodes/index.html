@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>04 ノード 13 種 | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>04 ノード 13 種</h1><div class="note-meta">#manual · #nodes · #content</div><h1 id="04-ノード-13-種">04 ノード 13 種</h1>
+<p><span class="missing">← 03 キャンバス</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 05 エッジ</span></p>
+<p>HṛdayaFlow のキャンバスに置けるノートは <strong>13 種類</strong> (うち Dot はナイフで自動生成される中継ノート)。共通の Inspector で書式を変えられ、種別はいつでも切り替えられる。</p>
+<div class="table-wrap"><table><thead><tr><th>ノート種別</th><th>用途</th><th>主な操作</th></tr></thead><tbody><tr><td><strong>Dot</strong></td><td>エッジの中継 / 集約地。ナイフ (<span class="missing">03-edges-and-connections › ナイフでエッジリルート-dot-中継</span>) で自動生成</td><td>移動 (<code>G</code> / D&amp;D / 矢印)、サイズ変更 (<code>S</code> / リサイズハンドル)。テキスト編集 / F2 / Ctrl+P は無効</td></tr></tbody></table></div>
+<h2 id="共通プロパティ">共通プロパティ</h2>
+<p>すべてのノードに以下が備わる。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>説明</th></tr></thead><tbody><tr><td>位置 (x, y) / サイズ (width, height)</td><td>キャンバス座標と表示寸法</td></tr><tr><td>回転 (rotation)</td><td>度単位</td></tr><tr><td>Layer</td><td>表示レイヤー (lock / visibility)</td></tr><tr><td>Manual sized</td><td>自動サイズか手動か</td></tr><tr><td>Sticky</td><td>編集モードでもピンで固定 (移動不可)</td></tr><tr><td>Style ref / Style override</td><td>共通スタイルライブラリ参照 / 個別上書き</td></tr><tr><td>Meta</td><td>originName / originalFileName / 任意 key-value</td></tr><tr><td>Semantics (alt / role)</td><td>スクリーンリーダー用ラベル</td></tr></tbody></table></div>
+<h2 id="ノード種別の切り替え">ノード種別の切り替え</h2>
+<p>選択 → Inspector 上部の「種別」ドロップダウン → 切替。データは保たれる範囲で変換される。</p>
+<blockquote><p>⚠ text → image のように内容構造が変わる切替は確認ダイアログ。</p></blockquote>
+<hr>
+<h2 id="1-Text-—-プレーンテキスト">1. Text — プレーンテキスト</h2>
+<p>最もシンプル。1 行〜複数行のテキスト。</p>
+<div class="table-wrap"><table><thead><tr><th>用途</th><th>キーワード・短いラベル・ラベルだけのノード</th></tr></thead><tbody><tr><td>プロパティ</td><td>text / inlineMarks (B/I/U/S/range/color/link)</td></tr><tr><td>ショートカット</td><td>ダブルクリックで作成 (既定)</td></tr><tr><td>Inspector</td><td>フォント / 色 / サイズ / 配置 / 装飾</td></tr></tbody></table></div>
+<ul><li><strong>InlineMark</strong> で範囲指定の部分太字・部分色付けが可能</li><li><strong>改行</strong>: <code>Shift + Enter</code> で挿入、<code>Esc</code> で編集確定</li><li><strong>縦書きノート (<code>writingMode: vertical-rl/lr</code>) では</strong>: <code>Shift + Enter</code> は新しい列 (line) を <strong>左隣 / 右隣</strong> に作成する操作になる。横書きでの「次の行」が縦書きでは「次の列」に対応する。IME 変換確定中の <code>Shift + Enter</code> は予測変換確定として尊重されるため、改行は挿入されない</li></ul>
+<h2 id="2-Markdown">2. Markdown</h2>
+<p>CommonMark / GFM 準拠のリッチテキスト。長文ノート、AI回答の貼り付け、表やコードを含むメモ向け。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>body (インライン) または bodyRef (<code>assets/text/&lt;uuid&gt;.md</code>)</th></tr></thead><tbody><tr><td>対応記法</td><td>見出し / 段落 / リスト / コード / 引用 / 画像 / リンク / 表 / 太字 / 斜体</td></tr><tr><td>ライブラリ</td><td><code>flutter_markdown</code></td></tr><tr><td>表示設定</td><td>設定 → Markdown 表示プリセット（標準 / 読みやすい）</td></tr></tbody></table></div>
+<ul><li>64 KB 超は自動的に bodyRef (外部ファイル) に切り出し → <code>.hrf</code> ZIP 内の <code>assets/text/</code> に格納</li><li>ダブルクリックすると、キャンバス上のノートは装飾済みプレビューのまま残り、ノート直下に「Markdown 原文」編集面が開く</li><li>原文への入力はプレビューへ即時反映される</li><li><code>Enter</code> で確定、<code>Shift + Enter</code> で改行、<code>Esc</code> でキャンセル</li><li>長い Markdown を編集しても、プレビューの見た目を確認しながら本文を直せる</li></ul>
+<h2 id="3-Image">3. Image</h2>
+<p>PNG / JPG / GIF / WebP / SVG。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>asset (path) / originUrl / alt / crop (normalized rect)</th></tr></thead><tbody><tr><td>入力方法</td><td>D&amp;D ファイル / D&amp;D URL (ダウンロード) / クリップボード貼付</td></tr><tr><td>Crop</td><td>Inspector で 正規化座標 (0.0-1.0) で切り出し</td></tr></tbody></table></div>
+<ul><li>保存時 <code>assets/images/&lt;uuid&gt;.&lt;ext&gt;</code> に格納</li><li>50 MB を超える画像は <strong>外部リンク参照</strong> に自動切替 (settings で閾値変更可)</li></ul>
+<h2 id="4-Link-—-URL">4. Link — URL</h2>
+<p>URL を 1 枚のカードにする。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>url / title / description / favicon (auto-fetch)</th></tr></thead><tbody><tr><td>開く</td><td>クリック → 既定ブラウザ</td></tr><tr><td>favicon</td><td>初回読み込み時に取得 → cache</td></tr></tbody></table></div>
+<h2 id="5-Video-—-動画">5. Video — 動画</h2>
+<p>MP4 / WebM / MOV。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>asset / thumbnail / originUrl / durationSec / autoplay</th></tr></thead><tbody><tr><td>ライブラリ</td><td><code>video_player</code></td></tr><tr><td>表示</td><td>サムネイル + 再生ボタン</td></tr></tbody></table></div>
+<ul><li>ZIP 内 <code>assets/videos/&lt;uuid&gt;.&lt;ext&gt;</code> に格納</li><li>ファイルサイズが大きいので 50 MB 閾値推奨</li></ul>
+<h2 id="6-Audio-—-音声">6. Audio — 音声</h2>
+<p>MP3 / M4A / OGG / WAV。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>asset / durationSec / waveform (cached)</th></tr></thead><tbody><tr><td>ライブラリ</td><td><code>just_audio</code> + <code>audio_waveforms</code></td></tr><tr><td>表示</td><td>波形 + 再生ボタン + 時間</td></tr></tbody></table></div>
+<ul><li>波形は読み込み時に生成 → <code>assets/audio/&lt;uuid&gt;.waveform.json</code> にキャッシュ</li></ul>
+<h2 id="7-Checklist-—-チェックリスト">7. Checklist — チェックリスト</h2>
+<p>タスクリスト。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>items[] {id, text, done}</th></tr></thead><tbody><tr><td>操作</td><td>チェックボックスクリックで done 切替、<code>+</code> で追加、<code>Backspace</code> で削除</td></tr><tr><td>並べ替え</td><td>ドラッグハンドルで並べ替え</td></tr></tbody></table></div>
+<ul><li>Markdown ノードに「- [ ]」を書くのとは別物 (こちらはネイティブウィジェット)</li><li>Outline パネルにも進捗 (3/8 done) として表示</li></ul>
+<h2 id="8-Code-—-コード片">8. Code — コード片</h2>
+<p>シンタックスハイライト付き。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>code / language</th></tr></thead><tbody><tr><td>ライブラリ</td><td><code>flutter_highlight</code></td></tr><tr><td>言語</td><td>dart, rust, python, javascript, typescript, go, java, c, cpp, kotlin, swift, ruby, php, html, css, json, yaml, markdown, shell, sql, ... 100+</td></tr><tr><td>テーマ</td><td>アプリのライト/ダークに連動</td></tr></tbody></table></div>
+<ul><li>言語ピッカー (Inspector) で変更</li><li>タブ幅は <strong>2</strong> 固定 (将来は設定可)</li></ul>
+<h2 id="9-Embed-—-HTML-埋め込み">9. Embed — HTML 埋め込み</h2>
+<p>iframe で外部コンテンツ表示。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>html (sanitized) / sourceUrl</th></tr></thead><tbody><tr><td>用途</td><td>YouTube / Twitter (X) / CodePen / Figma 埋め込み</td></tr><tr><td>セキュリティ</td><td>CSP sandbox + HTML sanitizer (<span class="missing">03-troubleshooting › embed</span>)</td></tr></tbody></table></div>
+<ul><li>⚠ 信頼できないソースは要注意。初回は確認ダイアログ。</li></ul>
+<h2 id="10-Math-—-LaTeX-数式">10. Math — LaTeX 数式</h2>
+<p>KaTeX 風。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>latex (string) / displayMode (inline / block)</th></tr></thead><tbody><tr><td>ライブラリ</td><td><code>flutter_math_fork</code></td></tr><tr><td>用途</td><td>学術ノート、フォーミュラ</td></tr></tbody></table></div>
+<p>例: <code>\int_0^\infty e^{-x^2} dx = \frac{\sqrt{\pi}}{2}</code></p>
+<h2 id="11-Frame-—-装飾矩形">11. Frame — 装飾矩形</h2>
+<p>「枠」だけ。中身を持たず、背景・装飾用。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>label (任意) / fill / border / corner</th></tr></thead><tbody><tr><td>用途</td><td>領域名ラベル、視覚的グルーピング (実体グルーピングは Container)</td></tr><tr><td>操作</td><td>半透明、後ろに敷く</td></tr></tbody></table></div>
+<h2 id="12-Container-—-折りたたみ可能な箱">12. Container — 折りたたみ可能な箱</h2>
+<p>子ノードを内包し、折りたたみで一時的に隠せる。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>label / members[] (childIds) / collapsed (bool) / layoutHint</th></tr></thead><tbody><tr><td>操作</td><td>複数選択 → ⌨ <code>Ctrl + G</code> で Container 化、<code>Ctrl + Shift + G</code> で解除</td></tr><tr><td>サブマップ昇格</td><td>右クリック → サブマップとして開く</td></tr></tbody></table></div>
+<p>詳細は <span class="missing">04-groups-and-containers</span>。</p>
+<h2 id="13-Dot-—-エッジ中継">13. Dot — エッジ中継</h2>
+<p>ナイフ機能で切断したときに自動生成される小さな ● 円。ファンイン / ファンアウトを 1 点に集約する。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td>用途</td><td>エッジの中継・視覚的な集約地 (<span class="missing">03-edges-and-connections › ナイフでエッジリルート-dot-中継</span>)</td></tr><tr><td>生成</td><td>通常は <code>Shift + 右マウスドラッグ</code> のナイフで自動配置 (手動新規作成は v1 では想定外)</td></tr><tr><td>見た目</td><td>塗り潰し円。初期直径 14 px (<code>width</code> = <code>height</code>、4–48 px に clamp)</td></tr><tr><td>移動</td><td><code>G</code> / ドラッグ / 矢印キー (<code>Shift</code> 16 px / <code>Ctrl</code> 64 px)</td></tr><tr><td>サイズ</td><td><code>S</code> または 8 方向リサイズハンドル (中心固定・常に円)</td></tr><tr><td>回転</td><td><code>R</code> は無効</td></tr><tr><td>編集</td><td>F2 / ダブルタップ編集なし。Inspector は種別表示のみ (読み取り専用)</td></tr><tr><td>親子化</td><td><code>Ctrl + P</code> では選択から除外 (toast で通知)</td></tr><tr><td>削除</td><td>Dot を Delete → 接続エッジも削除。接続先ノート削除で孤立した Dot は自動削除</td></tr></tbody></table></div>
+<h2 id="番外-Shape-(汎用図形)">番外: Shape (汎用図形)</h2>
+<p><code>shape</code> ディレクトリは円/三角/六角形など装飾図形。Inspector の <strong>Shape Picker</strong> で選ぶ。Frame と組み合わせて使うことが多い。</p>
+<h2 id="ノード種別ピッカー-(新規作成)">ノード種別ピッカー (新規作成)</h2>
+<p>⌨ <code>Ctrl + Shift + N</code> でピッカー → 矢印選択 → Enter。各種別の最初の英字キーがアクセラレータ (<span class="missing">01-canvas-and-gestures › 新規作成</span> 参照)。</p>
+<h2 id="ノードのコピー-貼り付け">ノードのコピー / 貼り付け</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td><code>Ctrl + C</code></td><td>選択ノートを内部クリップボードに</td></tr><tr><td><code>Ctrl + V</code></td><td>カーソル位置に貼り付け</td></tr><tr><td><code>Ctrl + Shift + V</code></td><td>同位置 (重ねて) 貼り付け</td></tr><tr><td><code>Ctrl + D</code></td><td>選択を複製 (右下に少しずらして配置)</td></tr></tbody></table></div>
+<p>外部クリップボード (画像/テキスト) からの貼り付けも:</p>
+<ul><li>画像 → Image ノードを生成</li><li>URL 文字列 → Link ノードを生成 (タイトル auto-fetch)</li><li>プレーンテキスト → Text ノード</li><li>Markdown → Markdown ノード</li></ul>
+<h2 id="縦書きノートの最小幅制約">縦書きノートの最小幅制約</h2>
+<p>縦書きノート (<code>writingMode: vertical-rl/lr</code>) は <strong>1 列ぶんの幅を維持</strong> するため、フォントサイズに応じて <strong>自動的に最小幅が設定</strong> される。手動リサイズで 1 列幅を下回ろうとしても clamp される。</p>
+<h3 id="仕組み">仕組み</h3>
+<div class="table-wrap"><table><thead><tr><th>計算項目</th><th>値</th></tr></thead><tbody><tr><td>基準フォントサイズ</td><td><code>node.fontSize ?? 14</code> (Inspector の Font size)</td></tr><tr><td>1 列幅</td><td><code>fontSize × 1.5</code> (line-height + 左右余白を含む)</td></tr><tr><td>グローバル下限</td><td>32 px (<code>MIN_NOTE_WIDTH</code>)</td></tr><tr><td>実効最小幅</td><td><code>max(1列幅, 32px)</code></td></tr></tbody></table></div>
+<p>例: フォントサイズ 14 → 21 px と 32 px の大きい方 = <strong>32 px</strong>  
+例: フォントサイズ 24 → 36 px と 32 px の大きい方 = <strong>36 px</strong></p>
+<h3 id="適用される操作">適用される操作</h3>
+<ul><li><strong>リサイズハンドル (8 方向) ドラッグ</strong>: 最小幅を下回るとそこで止まる (clamp)</li><li><strong>コーナーリサイズ</strong>: 同上</li><li><strong>Inspector で width を数値入力</strong>: 最小幅未満は自動補正</li><li><strong>横書きノート</strong>: この制約は <strong>適用されない</strong> (任意の幅にできる)</li></ul>
+<h3 id="内部実装-(参考)">内部実装 (参考)</h3>
+<ul><li><code>app/lib/canvas/min_vertical_note_width.dart</code> で計算ロジック (<code>minVerticalNoteWidth(node)</code>, <code>resizeMinWidthForNode(node)</code>)</li><li><code>app/test/canvas/min_vertical_width_test.dart</code> で 4 ケース (fontSize=14 / 横書き非制約 / drag clamp / corner clamp) を保証</li></ul>
+<h3 id="動作確認">動作確認</h3>
+<ol><li>縦書きノートを作成、Inspector で fontSize=14 にする</li><li>リサイズハンドルで幅を縮める → 32 px 未満には縮まない</li><li>fontSize=24 に変更 → 最小幅が 36 px に上がる。現在 width が 36 未満なら自動で拡張される</li><li>横書きに切り替える → 制約が外れ、任意幅 (1 px 以上) にリサイズ可能</li></ol>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] 13 種すべてを 1 つずつ作って表示できる (Dot はナイフで生成)</li><li>[ ] Image は D&amp;D で取り込める</li><li>[ ] Video / Audio が再生できる</li><li>[ ] Checklist のチェックが永続化される</li><li>[ ] Code の言語切り替えで色が変わる</li><li>[ ] Embed で YouTube が表示される</li><li>[ ] Math で <code>E = mc^2</code> が描画される</li><li>[ ] Container に複数ノードを入れて折りたたみできる</li><li>[ ] 種別切替で text → markdown が動く</li></ul>
+<p><span class="missing">← 03</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 05</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#04-ノード-13-種">04 ノード 13 種</a></li><li class="lvl-2"><a href="#共通プロパティ">共通プロパティ</a></li><li class="lvl-2"><a href="#ノード種別の切り替え">ノード種別の切り替え</a></li><li class="lvl-2"><a href="#1-Text-—-プレーンテキスト">1. Text — プレーンテキスト</a></li><li class="lvl-2"><a href="#2-Markdown">2. Markdown</a></li><li class="lvl-2"><a href="#3-Image">3. Image</a></li><li class="lvl-2"><a href="#4-Link-—-URL">4. Link — URL</a></li><li class="lvl-2"><a href="#5-Video-—-動画">5. Video — 動画</a></li><li class="lvl-2"><a href="#6-Audio-—-音声">6. Audio — 音声</a></li><li class="lvl-2"><a href="#7-Checklist-—-チェックリスト">7. Checklist — チェックリスト</a></li><li class="lvl-2"><a href="#8-Code-—-コード片">8. Code — コード片</a></li><li class="lvl-2"><a href="#9-Embed-—-HTML-埋め込み">9. Embed — HTML 埋め込み</a></li><li class="lvl-2"><a href="#10-Math-—-LaTeX-数式">10. Math — LaTeX 数式</a></li><li class="lvl-2"><a href="#11-Frame-—-装飾矩形">11. Frame — 装飾矩形</a></li><li class="lvl-2"><a href="#12-Container-—-折りたたみ可能な箱">12. Container — 折りたたみ可能な箱</a></li><li class="lvl-2"><a href="#13-Dot-—-エッジ中継">13. Dot — エッジ中継</a></li><li class="lvl-2"><a href="#番外-Shape-(汎用図形)">番外: Shape (汎用図形)</a></li><li class="lvl-2"><a href="#ノード種別ピッカー-(新規作成)">ノード種別ピッカー (新規作成)</a></li><li class="lvl-2"><a href="#ノードのコピー-貼り付け">ノードのコピー / 貼り付け</a></li><li class="lvl-2"><a href="#縦書きノートの最小幅制約">縦書きノートの最小幅制約</a></li><li class="lvl-3"><a href="#仕組み">仕組み</a></li><li class="lvl-3"><a href="#適用される操作">適用される操作</a></li><li class="lvl-3"><a href="#内部実装-(参考)">内部実装 (参考)</a></li><li class="lvl-3"><a href="#動作確認">動作確認</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">04 ノード 13 </text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/02-nodes";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

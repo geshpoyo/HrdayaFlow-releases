@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03 キャンバスとジェスチャー | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>03 キャンバスとジェスチャー</h1><div class="note-meta">#manual · #canvas · #gestures · #navigation</div><h1 id="03-キャンバスとジェスチャー">03 キャンバスとジェスチャー</h1>
+<p><span class="missing">← 02 はじめに</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 04 ノード</span></p>
+<p>キャンバスは無限平面です。ノードを置く場所を気にせず、思考を広げていくのが思想。</p>
+<h2 id="左アクティビティバー">左アクティビティバー</h2>
+<p>画面左端にはモード切替用のアクティビティバーがあります。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>動作</th></tr></thead><tbody><tr><td><strong>マップ</strong></td><td>通常のマインドマップキャンバスを表示</td></tr><tr><td><strong>プランナー</strong></td><td>Calendar / Timeline / Task list を扱う Planner 画面を表示</td></tr><tr><td>折りたたみボタン</td><td>ラベルを隠し、アイコンだけの細いレールに切り替え</td></tr></tbody></table></div>
+<p>折りたたみ状態は保存され、次回起動時にも維持されます。キャンバスを広く使いたいときは折りたたみ、モード名を確認したいときだけ展開します。</p>
+<h2 id="移動-(パン)">移動 (パン)</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 中ボタンドラッグ</td><td>パン</td></tr><tr><td>🖱 スペース + 左ボタンドラッグ</td><td>パン (ノートエディット中に便利)</td></tr><tr><td>🖱 タッチパッド 2 本指スワイプ</td><td>パン</td></tr><tr><td>⌨ 矢印キー</td><td>16 px ずつパン</td></tr><tr><td>⌨ <code>Shift + 矢印</code></td><td>128 px ずつパン</td></tr></tbody></table></div>
+<h2 id="ズーム">ズーム</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 <code>Ctrl + マウスホイール</code></td><td>カーソル位置を中心にズーム</td></tr><tr><td>🖱 タッチパッド ピンチ</td><td>ズーム</td></tr><tr><td>⌨ <code>Ctrl + =</code> (または <code>Ctrl + ;</code>)</td><td>ズーム +</td></tr><tr><td>⌨ <code>Ctrl + -</code></td><td>ズーム −</td></tr><tr><td>⌨ <code>Ctrl + 0</code></td><td>100% に戻す</td></tr><tr><td>⌨ <code>Ctrl + 9</code></td><td>キャンバス全体が見えるように Fit</td></tr><tr><td>⌨ <code>Ctrl + 8</code></td><td>最小ズーム (5%)</td></tr></tbody></table></div>
+<p>ズーム範囲: <strong>5% 〜 800%</strong>。ステータスバーに現在のズーム率が表示されます。</p>
+<h2 id="選択">選択</h2>
+<h3 id="単一選択">単一選択</h3>
+<p>🖱 ノード本体をクリック → そのノードが選択 (青いハロー)。</p>
+<h3 id="複数選択">複数選択</h3>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 <code>Shift + クリック</code></td><td>選択に追加 / 解除</td></tr><tr><td>🖱 <code>Ctrl + クリック</code></td><td>同上 (Shift と同義)</td></tr><tr><td>🖱 空白からドラッグ (矩形)</td><td>矩形に <strong>完全に含まれる</strong> ノードを選択</td></tr><tr><td>🖱 <code>Alt + 矩形ドラッグ</code></td><td>矩形に <strong>触れる</strong> ノードを選択 (Crossing)</td></tr><tr><td>🖱 投げ縄 (<code>Shift + 矩形ドラッグ</code> 開始時に円弧)</td><td>自由形状で選択 🚧</td></tr><tr><td>⌨ <code>Ctrl + A</code></td><td>全選択</td></tr><tr><td>⌨ <code>Ctrl + Shift + A</code></td><td>選択反転</td></tr><tr><td>⌨ <code>Esc</code></td><td>選択解除</td></tr></tbody></table></div>
+<blockquote><p>🖱 矩形 / Crossing / 投げ縄 の挙動は CAD / Photoshop の慣例に倣う。</p></blockquote>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>🖱 <code>Shift + 右マウスドラッグ</code></td><td>ナイフでエッジ切断 → Dot リルート ([[03-edges-and-connections#ナイフでエッジリルート-dot-中継\</td><td>詳細]])</td></tr></tbody></table></div>
+<h2 id="ノートの幾何アライン（Pie、NA-01）">ノートの幾何アライン（Pie、NA-01）</h2>
+<p>複数ノートを選んだ状態で <strong>⌥ <code>A</code>（Windows は <code>Alt+A</code>）</strong> を押すと、カーソル付近に Pie メニューが開きます（基準は <strong>最後に選んだノート</strong>＝アクティブ。アクティブは動きません）。</p>
+<ul><li><strong>確定</strong>: 目的の方向にマウスを動かしたあと <strong><code>Alt</code> を離す</strong>（中心のデッドゾーンのまま離すとキャンセル）</li><li><strong>キャンセル</strong>: <code>Esc</code></li><li><strong>中身</strong>: 上下左右の <strong>Sides</strong> 揃え、水平／垂直センター、水平／垂直ディストリビュート（3 ノート以上）</li><li>接続線の <strong>Edge</strong> や枠線の <strong>Border</strong> とは別物です（用語の混同に注意）</li></ul>
+<p>選択が 1 件だけのときはトーストで案内のみです。ノートを編集中はショートカットは効きません。</p>
+<h3 id="種別フィルタ選択-🚧">種別フィルタ選択 🚧</h3>
+<p>将来的に「Image ノードだけ全選択」が Outline パネルから可能になる予定。</p>
+<h2 id="新規作成">新規作成</h2>
+<h3 id="ノート">ノート</h3>
+<p>🖱 キャンバス空白を <strong>ダブルクリック</strong> → 空のテキストノードが作られ、即編集モードへ。</p>
+<h3 id="種別を指定して新規">種別を指定して新規</h3>
+<p>⌨ <code>Ctrl + Shift + N</code> → ノード種別ピッカーが開く → 矢印で選択 → Enter</p>
+<div class="table-wrap"><table><thead><tr><th>キー</th><th>種別</th></tr></thead><tbody><tr><td><code>T</code></td><td>text</td></tr><tr><td><code>M</code></td><td>markdown</td></tr><tr><td><code>I</code></td><td>image</td></tr><tr><td><code>L</code></td><td>link</td></tr><tr><td><code>V</code></td><td>video</td></tr><tr><td><code>A</code></td><td>audio</td></tr><tr><td><code>K</code></td><td>checklist</td></tr><tr><td><code>C</code></td><td>code</td></tr><tr><td><code>E</code></td><td>embed</td></tr><tr><td><code>X</code></td><td>math</td></tr><tr><td><code>F</code></td><td>frame</td></tr><tr><td><code>G</code></td><td>container</td></tr></tbody></table></div>
+<h3 id="既存ノードから派生">既存ノードから派生</h3>
+<p>選択ノード上で ⌨ <code>Tab</code> → 子ノードを右側に作成、エッジで接続。</p>
+<h2 id="編集モードと選択モードの行き来">編集モードと選択モードの行き来</h2>
+<div class="table-wrap"><table><thead><tr><th>モード</th><th>入る</th><th>出る</th></tr></thead><tbody><tr><td>編集モード (テキスト入力)</td><td>ノートをダブルクリック / <code>F2</code> / Enter (選択中)</td><td><code>Esc</code> / 別所をクリック</td></tr><tr><td>選択モード (移動・整列)</td><td>ノートを 1 度クリック</td><td><code>Esc</code> で選択解除</td></tr></tbody></table></div>
+<blockquote><p>⚠ 編集モード中は <code>Tab</code> / <code>Shift+Tab</code> / 矢印キーがエディタに食われる。<code>Esc</code> で抜けてからショートカット使用。</p></blockquote>
+<h2 id="グリッドとスナップ">グリッドとスナップ</h2>
+<h3 id="グリッド">グリッド</h3>
+<p>⌨ <code>Ctrl + ;</code> で表示 / 非表示。</p>
+<p>設定:</p>
+<ul><li>グリッド単位: <strong>8 / 16 / 32 / 64 px</strong> から選択 (Settings)</li><li>既定: 16 px</li><li>スナップは ON でも、グリッド非表示 OK</li></ul>
+<h3 id="スナップ">スナップ</h3>
+<p>⌨ <code>Shift + ;</code> で ON / OFF。</p>
+<div class="table-wrap"><table><thead><tr><th>種類</th><th>効果</th></tr></thead><tbody><tr><td><strong>グリッドスナップ</strong></td><td>移動先がグリッド線にスナップ</td></tr><tr><td><strong>エッジスナップ (Magnetic)</strong></td><td>他ノードの辺と整合する位置に吸着 — <span class="missing">06-inspector-and-formatting › magnetic</span></td></tr><tr><td><strong>ガイド線スナップ</strong></td><td>既存ノートと中心 / 上端 / 下端を揃えると赤い補助線が出る</td></tr></tbody></table></div>
+<blockquote><p>一時的にスナップ無効にしたいときは <code>Alt</code> を押しながらドラッグ。</p></blockquote>
+<h2 id="移動・整列">移動・整列</h2>
+<h3 id="移動">移動</h3>
+<p>🖱 ノートをドラッグ → 新位置へ。複数選択時は <strong>全部まとめて移動</strong>。</p>
+<p>⌨ <code>矢印キー</code> で 1 px / <code>Shift + 矢印</code> で 16 px / <code>Ctrl + 矢印</code> で 64 px 移動。</p>
+<h3 id="整列-(Align)">整列 (Align)</h3>
+<p>複数選択して右クリック → <strong>整列</strong> → 選択肢:</p>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>左揃え / 中央揃え / 右揃え</td><td>X 軸</td></tr><tr><td>上揃え / 中央揃え / 下揃え</td><td>Y 軸</td></tr><tr><td>横方向均等配置</td><td>X 間隔を平均化</td></tr><tr><td>縦方向均等配置</td><td>Y 間隔を平均化</td></tr></tbody></table></div>
+<h3 id="重ね順-(Z-order)">重ね順 (Z-order)</h3>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>⌨ <code>Ctrl + ]</code></td><td>1 段上へ</td></tr><tr><td>⌨ <code>Ctrl + [</code></td><td>1 段下へ</td></tr><tr><td>⌨ <code>Ctrl + Shift + ]</code></td><td>最前面</td></tr><tr><td>⌨ <code>Ctrl + Shift + [</code></td><td>最背面</td></tr></tbody></table></div>
+<h2 id="変形-(Blender-風-GSR)">変形 (Blender 風 G/S/R)</h2>
+<p>選択中に ⌨ <code>G</code> / <code>S</code> / <code>R</code> を押すと変形モード。マウス移動 → クリックで確定 / <code>Esc</code> でキャンセル。</p>
+<div class="table-wrap"><table><thead><tr><th>キー</th><th>モード</th><th>軸固定</th></tr></thead><tbody><tr><td><code>G</code></td><td>Grab (移動)</td><td><code>X</code> / <code>Y</code> で軸固定</td></tr><tr><td><code>S</code></td><td>Scale (拡大縮小)</td><td><code>X</code> / <code>Y</code> で軸固定、数値タイプで倍率指定</td></tr><tr><td><code>R</code></td><td>Rotate (回転)</td><td>数値タイプで角度指定 (度)</td></tr></tbody></table></div>
+<blockquote><p>🚧 Scale / Rotate は K-gsr10 (2026-04 修正) で安定化。複数ノードを群として変形。</p></blockquote>
+<h2 id="エッジ作成">エッジ作成</h2>
+<p>🖱 ノードの上端/右端/下端/左端にホバー → <strong>接続ハンドル</strong> が出る → ドラッグで他のノードへ → エッジ生成。</p>
+<div class="table-wrap"><table><thead><tr><th>修飾</th><th>エッジ種別</th></tr></thead><tbody><tr><td>無</td><td>単純な線 (parent-child)</td></tr><tr><td><code>Shift</code></td><td>順序つき (cause-effect / arrow with arrowhead)</td></tr><tr><td><code>Alt</code></td><td>逆向き</td></tr><tr><td><code>Ctrl</code></td><td>双方向 (両端矢印)</td></tr></tbody></table></div>
+<p>詳細は <span class="missing">03-edges-and-connections</span>。</p>
+<h2 id="中央に戻る">中央に戻る</h2>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>⌨ <code>Ctrl + 9</code></td><td>全マップが収まるように zoom &amp; 中心合わせ</td></tr><tr><td>⌨ <code>Home</code></td><td>原点 (0,0) にジャンプ</td></tr><tr><td>⌨ <code>End</code></td><td>マップの中心 (重心) にジャンプ</td></tr></tbody></table></div>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] 中ボタンドラッグでパン</li><li>[ ] <code>Ctrl + マウスホイール</code> でズーム</li><li>[ ] <code>Ctrl + 9</code> で全体が見える</li><li>[ ] ダブルクリックでノード追加 → 編集</li><li>[ ] <code>Esc</code> で編集モード終了</li><li>[ ] 矩形ドラッグで複数選択</li><li>[ ] <code>Shift + クリック</code> で追加選択</li><li>[ ] <code>Ctrl + ;</code> でグリッド表示切替</li><li>[ ] <code>Shift + ;</code> でスナップ ON/OFF</li><li>[ ] 矢印キーでノート移動</li><li>[ ] <code>G</code> キーで Grab 変形</li><li>[ ] <code>S</code> キーで Scale 変形</li><li>[ ] <code>R</code> キーで Rotate 変形</li><li>[ ] ハンドルドラッグでエッジ作成 (<code>Shift</code> で矢印あり)</li></ul>
+<p><span class="missing">← 02</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 04 ノード</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#03-キャンバスとジェスチャー">03 キャンバスとジェスチャー</a></li><li class="lvl-2"><a href="#左アクティビティバー">左アクティビティバー</a></li><li class="lvl-2"><a href="#移動-(パン)">移動 (パン)</a></li><li class="lvl-2"><a href="#ズーム">ズーム</a></li><li class="lvl-2"><a href="#選択">選択</a></li><li class="lvl-3"><a href="#単一選択">単一選択</a></li><li class="lvl-3"><a href="#複数選択">複数選択</a></li><li class="lvl-2"><a href="#ノートの幾何アライン（Pie、NA-01）">ノートの幾何アライン（Pie、NA-01）</a></li><li class="lvl-3"><a href="#種別フィルタ選択-🚧">種別フィルタ選択 🚧</a></li><li class="lvl-2"><a href="#新規作成">新規作成</a></li><li class="lvl-3"><a href="#ノート">ノート</a></li><li class="lvl-3"><a href="#種別を指定して新規">種別を指定して新規</a></li><li class="lvl-3"><a href="#既存ノードから派生">既存ノードから派生</a></li><li class="lvl-2"><a href="#編集モードと選択モードの行き来">編集モードと選択モードの行き来</a></li><li class="lvl-2"><a href="#グリッドとスナップ">グリッドとスナップ</a></li><li class="lvl-3"><a href="#グリッド">グリッド</a></li><li class="lvl-3"><a href="#スナップ">スナップ</a></li><li class="lvl-2"><a href="#移動・整列">移動・整列</a></li><li class="lvl-3"><a href="#移動">移動</a></li><li class="lvl-3"><a href="#整列-(Align)">整列 (Align)</a></li><li class="lvl-3"><a href="#重ね順-(Z-order)">重ね順 (Z-order)</a></li><li class="lvl-2"><a href="#変形-(Blender-風-GSR)">変形 (Blender 風 G/S/R)</a></li><li class="lvl-2"><a href="#エッジ作成">エッジ作成</a></li><li class="lvl-2"><a href="#中央に戻る">中央に戻る</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">03 キャンバスとジ</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/01-canvas-and-gestures";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

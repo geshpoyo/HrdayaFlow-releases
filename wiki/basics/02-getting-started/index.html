@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 はじめに | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>02 はじめに</h1><div class="note-meta">#manual · #getting-started · #install</div><h1 id="02-はじめに">02 はじめに</h1>
+<p><span class="missing">← 01 概要</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 03 キャンバス</span></p>
+<h2 id="インストール">インストール</h2>
+<h3 id="Windows">Windows</h3>
+<ol><li>GitHub Releases から <code>HrdayaFlow-Setup-x.y.z.exe</code> (MSI/NSIS) をダウンロード</li><li>インストーラを起動 (SmartScreen が出たら「詳細情報」→「実行」)</li><li>既定で <code>C:\Users\&lt;user&gt;\AppData\Local\Programs\HrdayaFlow\</code> にインストール</li><li>スタートメニューから「HṛdayaFlow」を起動</li></ol>
+<blockquote><p>⚙ MSI のサイレントインストールは <code>msiexec /i HrdayaFlow.msi /quiet</code> で可。</p></blockquote>
+<h3 id="macOS-Linux">macOS / Linux</h3>
+<p>ビルド済みバイナリは未配布。開発リポジトリから <code>flutter build macos</code> / <code>flutter build linux</code> で生成してください。詳細は <span class="missing">04-developer-guide › セットアップ</span>。</p>
+<h2 id="初回起動">初回起動</h2>
+<p>初回起動時のみオンボーディングウィザードが出ます (現状は最小)。</p>
+<ol><li><strong>言語選択</strong> — 日本語 / English</li><li><strong>テーマ選択</strong> — Light / Dark / System</li><li><strong>データフォルダ</strong> — 既定: <code>&lt;Documents&gt;/HrdayaFlow/</code></li><li><strong>サンプルマップを開く</strong> — チェックすると <code>welcome.hrf</code> が起動</li></ol>
+<h2 id="画面の構成">画面の構成</h2>
+<pre><code>┌─────────────────────────────────────────────────────────┐
+│ ☰ ファイル | 編集 | 表示 | ノード | エクスポート | ヘルプ │  ← メニューバー
+├─────────────────────────────────────────────────────────┤
+│ [📄][📁][💾] [↶][↷] [+ノード] [Inspector ▶]      [🔍]  │  ← ツールバー
+├──────┬──────────────────────────────────────┬───────────┤
+│      │                                      │           │
+│ 📋   │                                      │  📐       │
+│Outline│         Canvas                      │ Inspector │
+│      │       (無限キャンバス)                │  (Format) │
+│      │                                      │           │
+│      │                                      │           │
+├──────┴──────────────────────────────────────┴───────────┤
+│ ステータス: 12 nodes / Zoom 100% / Saved 18:23           │  ← ステータスバー
+└─────────────────────────────────────────────────────────┘</code></pre>
+<div class="table-wrap"><table><thead><tr><th>領域</th><th>役割</th><th>主章</th></tr></thead><tbody><tr><td>メニューバー</td><td>ファイル・編集・表示・エクスポートなど全コマンド</td><td>各章</td></tr><tr><td>ツールバー</td><td>よく使うコマンドのアイコン化</td><td>各章</td></tr><tr><td><strong>Canvas (中央)</strong></td><td>ノードを配置・接続する無限平面</td><td><span class="missing">01-canvas-and-gestures</span></td></tr><tr><td><strong>Outline (左)</strong></td><td>階層ツリービュー / Container 入れ子表示</td><td><span class="missing">09-search-and-outline</span></td></tr><tr><td><strong>Inspector (右)</strong></td><td>選択ノードの書式・スタイル</td><td><span class="missing">06-inspector-and-formatting</span></td></tr><tr><td>ステータスバー</td><td>ノード数・ズーム率・保存状態</td><td>—</td></tr></tbody></table></div>
+<blockquote><p>🖱 左右パネルはタイトルバーをドラッグでサイズ調整、<code>✕</code> ボタンで折りたたみ可。</p></blockquote>
+<h2 id="5-分でわかる基本操作">5 分でわかる基本操作</h2>
+<h3 id="①-新規マップを作る">① 新規マップを作る</h3>
+<p>⌨ <code>Ctrl+N</code> または <strong>ファイル → 新規</strong></p>
+<h3 id="②-ノートを置く">② ノートを置く</h3>
+<p>🖱 キャンバスをダブルクリック → 空のテキストノードができる → そのままタイプ</p>
+<h3 id="③-ノートを繋ぐ">③ ノートを繋ぐ</h3>
+<p>🖱 ノードの右上端にホバー → ハンドルが出る → ドラッグして他のノードへ → エッジ完成</p>
+<h3 id="④-整える">④ 整える</h3>
+<p>⌨ <code>Ctrl+;</code> でグリッド表示、<code>Shift+;</code> でスナップ ON/OFF。複数選択して <strong>整列</strong> でビシッと揃う (<span class="missing">04-groups-and-containers</span>)。</p>
+<h3 id="⑤-保存する">⑤ 保存する</h3>
+<p>⌨ <code>Ctrl+S</code> で <code>.hrf</code> (ZIP) として保存。初回は保存先を聞かれる。以降は自動上書き (<span class="missing">11-files-and-interop</span>)。</p>
+<h3 id="⑥-共有する">⑥ 共有する</h3>
+<ul><li><strong>メール添付</strong> — <code>.hrf</code> を渡す (受け取り側も HrdayaFlow が必要)</li><li><strong>PDF / PNG / SVG</strong> — メニュー → エクスポート → 形式選択 (<span class="missing">11-files-and-interop › export</span>)</li><li><strong>Markdown</strong> — Obsidian や Notion にコピペ用 (<span class="missing">11-files-and-interop › export</span>)</li></ul>
+<h2 id="サンプルマップで遊ぶ">サンプルマップで遊ぶ</h2>
+<p><code>docs/user-manual/manual-demo.md</code> の手順で <code>welcome.hrf</code> を開くと、12 種のノードと 3 種のエッジを使ったサンプルが表示されます。各ノードを選んで Inspector でプロパティを触ると、書式の効きが体感できます。</p>
+<h2 id="よくある最初のつまずき">よくある最初のつまずき</h2>
+<div class="table-wrap"><table><thead><tr><th>症状</th><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>ダブルクリックしてもノードができない</td><td>グリッドにスナップ設定で離れた位置に作られている</td><td>ステータスバーで「Snap: OFF」を確認</td></tr><tr><td>文字を打ち始めると Tab で他へ飛ぶ</td><td>フォーカスが他フィールドに居る</td><td>キャンバスを 1 度クリックしてフォーカス取り直し</td></tr><tr><td><code>.hrf</code> が他 PC で開けない</td><td>バージョン不一致 (v0.2 → v0.1)</td><td>受信側を最新版に更新、または Markdown export で渡す</td></tr><tr><td>AI が応答しない</td><td>Python AI service が起動していない</td><td><span class="missing">10-ai-features › service-startup</span></td></tr><tr><td><code>flutter run</code> で <code>Cannot find Rust core</code></td><td>DLL 未ビルド</td><td><span class="missing">04-developer-guide › rust-core</span></td></tr></tbody></table></div>
+<p>詳細は <span class="missing">03-troubleshooting</span>。</p>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] 起動 → 画面 3 領域が表示される</li><li>[ ] ⌨ <code>Ctrl+N</code> で新規マップ</li><li>[ ] 🖱 ダブルクリックでノード追加 → タイプして文字入力</li><li>[ ] 🖱 ハンドルドラッグでノード接続</li><li>[ ] ⌨ <code>Ctrl+S</code> で保存先指定 → <code>.hrf</code> ファイルが作られる</li><li>[ ] ⌨ <code>Ctrl+W</code> (またはタブ ✕) でマップを閉じる</li><li>[ ] ⌨ <code>Ctrl+O</code> で同 <code>.hrf</code> を再オープン → 内容が一致</li></ul>
+<p>すべて ✓ なら基本系は OK。次は <span class="missing">03 キャンバスとジェスチャー</span> へ。</p>
+<p><span class="missing">← 01</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 03</span></p></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#02-はじめに">02 はじめに</a></li><li class="lvl-2"><a href="#インストール">インストール</a></li><li class="lvl-3"><a href="#Windows">Windows</a></li><li class="lvl-3"><a href="#macOS-Linux">macOS / Linux</a></li><li class="lvl-2"><a href="#初回起動">初回起動</a></li><li class="lvl-2"><a href="#画面の構成">画面の構成</a></li><li class="lvl-2"><a href="#5-分でわかる基本操作">5 分でわかる基本操作</a></li><li class="lvl-3"><a href="#①-新規マップを作る">① 新規マップを作る</a></li><li class="lvl-3"><a href="#②-ノートを置く">② ノートを置く</a></li><li class="lvl-3"><a href="#③-ノートを繋ぐ">③ ノートを繋ぐ</a></li><li class="lvl-3"><a href="#④-整える">④ 整える</a></li><li class="lvl-3"><a href="#⑤-保存する">⑤ 保存する</a></li><li class="lvl-3"><a href="#⑥-共有する">⑥ 共有する</a></li><li class="lvl-2"><a href="#サンプルマップで遊ぶ">サンプルマップで遊ぶ</a></li><li class="lvl-2"><a href="#よくある最初のつまずき">よくある最初のつまずき</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">02 はじめに</text>
+    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="basics/02-getting-started";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>

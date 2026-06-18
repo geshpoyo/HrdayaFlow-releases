@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>03-startup-on-windows | HṛdayaFlow Manual</title>
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+<link rel="stylesheet" href="../../_site/site.css">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="../../">HṛdayaFlow Manual</a>
+  <input class="search-box" id="q" type="search" placeholder="検索…">
+</header>
+<main class="layout">
+  <nav class="sidebar" id="nav"></nav>
+  <article class="content"><h1>03-startup-on-windows</h1><div class="note-meta"></div><h1 id="HṛdayaFlow-—-開発時起動マニュアル">HṛdayaFlow — 開発時起動マニュアル</h1>
+<blockquote><p>環境構築済みの前提で、毎日の開発で使う起動手順をまとめたものです。  
+初回セットアップは <a href="../開発環境セットアップ_Windows.md"><code>開発環境セットアップ_Windows.md</code></a> を参照してください。</p></blockquote>
+<hr>
+<h2 id="構成の全体像">構成の全体像</h2>
+<pre><code>[Flutter アプリ]  ←FFI（将来）→  [Rust コア]
+      ↕ HTTP / WebSocket
+[Python AI サービス]  ←→  PrudeLLM / Ollama</code></pre>
+<p>現状（Phase 1）は Flutter アプリ単体で動きます。  
+AI 機能を使うときだけ Python サービスも起動してください。</p>
+<hr>
+<h2 id="Flutter-アプリの起動（メイン）">Flutter アプリの起動（メイン）</h2>
+<pre><code class="language-powershell">cd C:\Users\geshtalt\dev\HrdayaFlow\app
+flutter run -d windows</code></pre>
+<p><strong>よく使うオプション:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>コマンド</th><th>説明</th></tr></thead><tbody><tr><td><code>flutter run -d windows</code></td><td>Windows デスクトップで起動</td></tr><tr><td><code>flutter run -d windows --debug</code></td><td>デバッグモード（デフォルト）</td></tr><tr><td><code>flutter run -d windows --release</code></td><td>リリースビルドで起動（描画が速い）</td></tr><tr><td><code>flutter run -d windows --profile</code></td><td>パフォーマンス計測用</td></tr></tbody></table></div>
+<p><strong>起動中のショートカット（ターミナル上）:</strong></p>
+<div class="table-wrap"><table><thead><tr><th>キー</th><th>操作</th></tr></thead><tbody><tr><td><code>r</code></td><td>ホットリロード（コード変更を即反映）</td></tr><tr><td><code>R</code></td><td>ホットリスタート（状態をリセットして再起動）</td></tr><tr><td><code>q</code></td><td>終了</td></tr><tr><td><code>h</code></td><td>ヘルプ表示</td></tr></tbody></table></div>
+<blockquote><p><strong>ヒント:</strong> コードを変更したら <code>r</code> を押すだけで再起動不要で反映されます。</p></blockquote>
+<hr>
+<h2 id="Python-AI-サービスの起動（AI-機能を使うとき）">Python AI サービスの起動（AI 機能を使うとき）</h2>
+<pre><code class="language-powershell">cd C:\Users\geshtalt\dev\HrdayaFlow\ai_service
+.\.venv\Scripts\Activate.ps1        # 仮想環境を有効化
+uvicorn main:app --reload --host 127.0.0.1 --port 8765 --app-dir src</code></pre>
+<ul><li><code>--reload</code> により、<code>src/</code> 内のコードを変更すると自動で再起動します</li><li>Flutter アプリからは <code>http://127.0.0.1:8765</code> で通信します</li></ul>
+<p><strong>起動確認:</strong></p>
+<pre><code class="language-powershell"># 別の PowerShell で
+curl http://127.0.0.1:8765/health
+# → {&quot;status&quot;:&quot;ok&quot;} が返れば正常</code></pre>
+<hr>
+<h2 id="Rust-コアのビルド（コアのコードを変更したとき）">Rust コアのビルド（コアのコードを変更したとき）</h2>
+<p>現状 Flutter と直接つながっていないため、変更を確認したいときは単体でビルドします。</p>
+<pre><code class="language-powershell">cd C:\Users\geshtalt\dev\HrdayaFlow\core
+cargo build           # デバッグビルド
+cargo test            # テスト実行
+cargo build --release # リリースビルド</code></pre>
+<hr>
+<h2 id="まとめ：毎日の開発フロー">まとめ：毎日の開発フロー</h2>
+<pre><code class="language-powershell"># 1. Flutter アプリを起動（これだけで開発できる）
+cd C:\Users\geshtalt\dev\HrdayaFlow\app
+flutter run -d windows
+
+# 2. AI 機能も触るとき：別の PowerShell タブで
+cd C:\Users\geshtalt\dev\HrdayaFlow\ai_service
+.\.venv\Scripts\Activate.ps1
+uvicorn main:app --reload --host 127.0.0.1 --port 8765 --app-dir src</code></pre>
+<hr>
+<h2 id="トラブルシューティング">トラブルシューティング</h2>
+<div class="table-wrap"><table><thead><tr><th>現象</th><th>対処</th></tr></thead><tbody><tr><td><code>flutter: command not found</code></td><td>Flutter SDK の <code>bin</code> が PATH にない → 環境変数を確認</td></tr><tr><td>ビルドエラー <code>link.exe not found</code></td><td>MSVC C++ ビルドツール未インストール → セットアップ手順 §1</td></tr><tr><td><code>flutter run</code> が遅い</td><td>初回はパッケージ取得があるため正常。2回目以降は速くなる</td></tr><tr><td>AI サービスに繋がらない</td><td>Python サービスが起動しているか確認。ポート 8765 が使われていないか確認</td></tr><tr><td>ホットリロード（<code>r</code>）が効かない</td><td><code>R</code>（ホットリスタート）を試す。それも効かなければ <code>q</code> で終了して再起動</td></tr></tbody></table></div>
+<hr>
+<h2 id="保存ファイルについて">保存ファイルについて</h2>
+<ul><li>保存形式: <code>.hrf</code>（ZIP アーカイブ、内部に <code>map.json</code>）</li><li>デフォルト保存先: ファイルダイアログで任意の場所を選択</li><li>バックアップ: 保存時に <code>.hrf.bak</code> が同じフォルダに自動生成されます（Phase 1 以降）</li></ul><section class="backlinks"><h3>Backlinks</h3><ul><li><a href="../../basics/04-install-warning/">インストール時の警告 (SmartScreen) について</a></li></ul></section></article>
+  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#HṛdayaFlow-—-開発時起動マニュアル">HṛdayaFlow — 開発時起動マニュアル</a></li><li class="lvl-2"><a href="#構成の全体像">構成の全体像</a></li><li class="lvl-2"><a href="#Flutter-アプリの起動（メイン）">Flutter アプリの起動（メイン）</a></li><li class="lvl-2"><a href="#Python-AI-サービスの起動（AI-機能を使うとき）">Python AI サービスの起動（AI 機能を使うとき）</a></li><li class="lvl-2"><a href="#Rust-コアのビルド（コアのコードを変更したとき）">Rust コアのビルド（コアのコードを変更したとき）</a></li><li class="lvl-2"><a href="#まとめ：毎日の開発フロー">まとめ：毎日の開発フロー</a></li><li class="lvl-2"><a href="#トラブルシューティング">トラブルシューティング</a></li><li class="lvl-2"><a href="#保存ファイルについて">保存ファイルについて</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
+    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
+    <circle cx="170" cy="150" r="11" class="g-center"></circle>
+    <text x="170" y="174" text-anchor="middle" class="g-center-label">03-startup</text>
+    <a href="../../basics/04-install-warning/"><circle cx="170" cy="50" r="6" class="g-back"></circle><title>インストール時の警告 (SmartScreen) について</title></a><text x="170" y="66" text-anchor="middle">インストール時の</text>
+  </svg></div></aside>
+</main>
+<div class="search-results" id="sr" hidden></div>
+<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="basics/03-startup-on-windows";window.__ROOT__="../../";</script>
+<script src="../../_site/site.js" defer></script>
+
+<script>
+  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+</script>
+</body>
+</html>
