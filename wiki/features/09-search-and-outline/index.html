@@ -1,10 +1,12 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-theme="light">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>09 検索と Outline | HṛdayaFlow Manual</title>
 <meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
+
+<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
 <link rel="stylesheet" href="../../_site/site.css">
 
 
@@ -13,7 +15,7 @@
 <body>
 <header class="topbar">
   <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <input class="search-box" id="q" type="search" placeholder="検索…">
+  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
 </header>
 <main class="layout">
   <nav class="sidebar" id="nav"></nav>
@@ -104,7 +106,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
 <script type="module">
   import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:"neutral"});
+  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
 </script>
 </body>
 </html>

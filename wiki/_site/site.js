@@ -2,6 +2,8 @@
   function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
   // links are relative to the wiki root so the site works at "/" or any subpath like "/wiki"
   const ROOT=window.__ROOT__||'./';
+  // theme toggle（既定は <head> インラインで適用済み。ここはボタンの配線のみ）
+  (function(){var btn=document.getElementById('themeToggle');if(!btn)return;function cur(){return document.documentElement.getAttribute('data-theme')||((window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light');}btn.addEventListener('click',function(){var next=cur()==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',next);try{localStorage.setItem('senpub-theme',next);}catch(e){}});})();
   // sidebar nav (client-rendered from nav.json)
   const navEl=document.getElementById('nav');
   if(navEl&&window.__NAV__){
