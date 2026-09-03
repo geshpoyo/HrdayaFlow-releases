@@ -1,0 +1,11 @@
+# hrdayaflow.geshtalt.jp — Cloudflare Pages redirects
+# Keep existing /wiki/ and /api/ files in the public repository.
+/manual/*  https://hrdayaflow.geshtalt.jp/wiki/  302
+/manual    https://hrdayaflow.geshtalt.jp/wiki/  302
+/privacy   https://hrdayaflow.geshtalt.jp/wiki/privacy/  302
+
+# Alpha releases are prereleases: do not depend on /releases/latest.
+/download/*       https://github.com/geshpoyo/HrdayaFlow-releases/releases  302
+/download         https://github.com/geshpoyo/HrdayaFlow-releases/releases  302
+/release-notes/*  https://github.com/geshpoyo/HrdayaFlow-releases/releases  302
+/release-notes    https://github.com/geshpoyo/HrdayaFlow-releases/releases  302

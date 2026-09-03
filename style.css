@@ -198,6 +198,26 @@ button:focus-visible,
   border-bottom: 1px solid var(--divider);
 }
 
+.brand-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  gap: var(--space-1);
+}
+
+.portal-link {
+  font-size: 0.875rem;
+  color: var(--fg-muted);
+  padding-block: var(--space-1);
+}
+
+.portal-link:hover,
+.portal-link:focus-visible {
+  color: var(--fg);
+  text-decoration: underline;
+}
+
 .brand {
   display: flex;
   align-items: center;
@@ -219,8 +239,11 @@ button:focus-visible,
 
 .site-nav {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
   align-items: center;
   gap: clamp(var(--space-4), 3vw, var(--space-8));
+  row-gap: var(--space-2);
   font-family: var(--ff-en);
   font-size: var(--text-sm);
   letter-spacing: var(--tracking-wider);
@@ -228,6 +251,7 @@ button:focus-visible,
 }
 
 .site-nav a {
+  white-space: nowrap;
   color: var(--fg-muted);
 }
 

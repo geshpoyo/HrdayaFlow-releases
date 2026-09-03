@@ -4,12 +4,14 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>HṛdayaFlow — 思考に、流れを。</title>
-<meta name="description" content="HṛdayaFlow は、テキスト・画像・動画・音声・コード・Web 埋め込みまでを一枚に束ね、関係線で結ぶマインドマップキャンバス。Markdown / JSON Canvas / OPML / Mermaid / XMind / FreeMind への相互運用、PDF 出力、Rust + Flutter によるハイブリッド構成。" />
+<meta name="description" content="HṛdayaFlow は、多形式ノート・日本語縦書き・AI連携を備えるマインドマップキャンバス。カレンダーとタスクリストも開発中。Windows向けアルファ公開に向けて準備を進めています。" />
 <meta name="theme-color" content="#0C0C10" />
 <meta property="og:title" content="HṛdayaFlow — 思考に、流れを。" />
 <meta property="og:description" content="テキスト・画像・動画・音声・コード・Web 埋め込みを一枚に束ね、関係線で結ぶマインドマップキャンバス。" />
 <meta property="og:type" content="website" />
-<meta property="og:image" content="./assets/mandala.png" />
+<meta property="og:url" content="https://hrdayaflow.geshtalt.jp/" />
+<meta property="og:image" content="https://hrdayaflow.geshtalt.jp/assets/mandala.png" />
+<link rel="canonical" href="https://hrdayaflow.geshtalt.jp/" />
 <link rel="icon" type="image/png" href="./assets/mandala.png" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -30,19 +32,23 @@
      HEADER (sticky, minimal)
 ============================================================ -->
 <header class="site-header" id="siteHeader">
-  <a href="#top" class="brand">
-    <img src="./assets/mandala.png" alt="" class="brand-mark" />
-    <span class="brand-text">Hṛdaya<span class="brand-accent">Flow</span></span>
-  </a>
+  <div class="brand-group">
+    <a href="https://geshtalt.jp/" class="portal-link" aria-label="geshtalt.jp 開発者ポータルへ">← geshtalt.jp</a>
+    <a href="#top" class="brand">
+      <img src="./assets/mandala.png" alt="" class="brand-mark" />
+      <span class="brand-text">Hṛdaya<span class="brand-accent">Flow</span></span>
+    </a>
+  </div>
   <nav class="site-nav">
     <a href="#what">What</a>
-    <a href="#nodes">Nodes</a>
+    <a href="#nodes">Notes</a>
     <a href="#canvas">Canvas</a>
     <a href="#media">Media</a>
+    <a href="#workspace">AI / Planner</a>
     <a href="#format">Format</a>
     <a href="#interop">Interop</a>
     <a href="#core">Core</a>
-    <a href="#roadmap">Roadmap</a>
+    <a href="#roadmap">Status</a>
     <a href="#download">Download</a>
   </nav>
 </header>
@@ -64,17 +70,17 @@
     <p class="hero-sub">
       テキスト・画像・動画・音声・コード・Web 埋め込み。<br />
       思考の素材をすべて一枚に束ね、関係線で結ぶ。<br />
-      <span class="muted">HṛdayaFlow は、アイデアの輪郭を描きながら考えるためのマインドマップキャンバスです。</span>
+      <span class="muted">AIと一緒にマップを育て、プランナーで予定やタスクも整理。考えることと、実行することを支えるデスクトップアプリです。</span>
     </p>
     <div class="hero-ctas">
-      <a href="#download" class="btn btn-primary">ダウンロード</a>
-      <a href="#what" class="btn btn-ghost">詳しく見る</a>
+      <a href="#download" class="btn btn-primary">アルファ版の公開状況</a>
+      <a href="https://hrdayaflow.geshtalt.jp/wiki/" class="btn btn-ghost">マニュアルを読む</a>
     </div>
     <ul class="hero-tags">
-      <li>10 種のノート形式</li>
-      <li>.hrf 形式 + 7 形式と相互運用</li>
-      <li>Rust + Flutter ハイブリッド</li>
-      <li>Windows 10 / 11 対応</li>
+      <li>多形式ノート・日本語縦書き</li>
+      <li>AI・MCP連携</li>
+      <li>カレンダー・タスクリスト</li>
+      <li>Windows向けアルファ準備中</li>
     </ul>
   </div>
   <a href="#what" class="scroll-hint" aria-label="スクロール">
@@ -99,7 +105,7 @@
     <div class="what-grid">
       <div class="what-copy">
         <p>
-          HṛdayaFlow（フリダヤフロー）は、サンスクリット語の
+          HṛdayaFlow（フルダヤフロー）は、サンスクリット語の
           <em>hṛdaya</em>（心・核）と、英語の <em>flow</em>（流れ）から名付けた
           デスクトップ向けのマインドマップキャンバスです。
         </p>
@@ -118,12 +124,12 @@
         <div class="pillar">
           <span class="pillar-num">∞</span>
           <strong>無限キャンバス</strong>
-          <span>パン・ズームで自在に広がる作業空間。大規模マップも軽快に描画。</span>
+          <span>パン・ズームで自在に広がる作業空間。自由配置とオートレイアウトで整理。</span>
         </div>
         <div class="pillar">
           <span class="pillar-num">◆</span>
           <strong>多形式ノート</strong>
-          <span>テキスト・画像・動画・音声・コード・Web 埋め込みの 10 種類。</span>
+          <span>テキスト・Markdown・画像・動画・音声・コード・数式・ファイル参照など。</span>
         </div>
         <div class="pillar">
           <span class="pillar-num">◇</span>
@@ -133,7 +139,7 @@
         <div class="pillar">
           <span class="pillar-num">⟷</span>
           <strong>相互運用</strong>
-          <span>Markdown / JSON Canvas / OPML / Mermaid / XMind 等と双方向変換。</span>
+          <span>Markdown / JSON Canvas / OPML / Mermaid / XMind 等の入出力に対応。</span>
         </div>
         <div class="pillar">
           <span class="pillar-num">⬢</span>
@@ -146,13 +152,13 @@
 </section>
 
 <!-- ============================================================
-     02 NODE TYPES (10 kinds)
+     02 NOTE TYPES (representative formats)
 ============================================================ -->
 <section id="nodes" class="section section-nodes reveal">
   <div class="section-inner">
     <div class="section-label">
       <span class="section-num">02</span>
-      <span class="section-name">NODE TYPES</span>
+      <span class="section-name">NOTE TYPES</span>
     </div>
     <h2 class="section-title">
       思考の素材を、<br />
@@ -160,14 +166,14 @@
     </h2>
     <p class="section-lead">
       文字だけで足りないことはよくあります。HṛdayaFlow は、キャンバス上で扱える
-      ノート形式を最初から 10 種類用意しています。何をつなげても、同じ一枚に収まります。
+      ノート形式を素材に合わせて選べます。以下は主な種類です。何をつなげても、同じ一枚に収まります。
     </p>
 
     <div class="nodes-grid">
       <article class="node-card">
         <div class="node-glyph">Aa</div>
         <h3>テキストノート</h3>
-        <p>基本のノート。フォント・配色・影・境界線を細かく指定でき、Markdown 風インライン記法も解釈します。</p>
+        <p>基本のノート。フォント・配色・影・枠線を調整でき、日本語の縦書きにも対応。インライン装飾で読みやすく整えます。</p>
         <ul class="node-tags">
           <li>B / I / U / 打消し</li>
           <li>揃え・色・影</li>
@@ -222,7 +228,7 @@
       <article class="node-card">
         <div class="node-glyph">♫</div>
         <h3>音声ノート</h3>
-        <p>just_audio + audio_waveforms で波形表示 + シーク。録音ファイルや講義録を視覚的に扱えます。</p>
+        <p>動画と共通の media_kit / libmpv で再生。波形表示とシークで、録音ファイルや講義録を視覚的に扱えます。</p>
         <ul class="node-tags">
           <li>波形 UI</li>
           <li>タップでシーク</li>
@@ -233,7 +239,7 @@
       <article class="node-card">
         <div class="node-glyph">¶</div>
         <h3>Markdown ノート</h3>
-        <p>見出し・リスト・表・コードブロックをフル GFM 拡張で描画。長めの文章はこちらで。</p>
+        <p>見出し・リスト・表・コードに加え、LaTeX数式やMermaid図も描画。日本語縦書きの表示にも対応します。</p>
         <ul class="node-tags">
           <li>表 / 取り消し線</li>
           <li>タスクリスト</li>
@@ -247,7 +253,7 @@
         <p>項目ごとに優先度・期限・メモを持たせられる TODO。ドラッグで並び替え、インライン編集可能。</p>
         <ul class="node-tags">
           <li>優先度 / 期限</li>
-          <li>ReorderableListView</li>
+          <li>ドラッグで並び替え</li>
           <li>Markdown 往復</li>
         </ul>
       </article>
@@ -266,7 +272,7 @@
       <article class="node-card">
         <div class="node-glyph">⊞</div>
         <h3>埋め込みノート</h3>
-        <p>任意の HTML / iframe を配置可能。ホスト信頼リストで未信頼ソースを遮断、CSP 付き描画。</p>
+        <p>HTMLやiframeの素材を配置。一般のHTML埋め込みは、Windowsでは静的表示が基本です。YouTube動画の埋め込みとは別の機能です。</p>
         <ul class="node-tags">
           <li>ホスト信頼レジストリ</li>
           <li>CSP 付き iframe</li>
@@ -274,6 +280,10 @@
         </ul>
       </article>
     </div>
+    <p class="section-lead">
+      このほか、LaTeX数式ノート、ローカルファイル参照、背景フレーム、
+      接続線の中継点（ドット）を利用できます。ノートをまとめるスタックや、再利用できるプリセットも備えています。
+    </p>
   </div>
 </section>
 
@@ -327,7 +337,7 @@
         <p>
           関連ノートをコンテナで抱えて折りたたみ可能に、
           背景フレームで大きく「領域」として扱うこともできます。
-          深い階層を持たず、浅く・広く・柔らかく整理できる構造です。
+          親子関係やスタックを使い、まとまりごとに移動・整理できます。
         </p>
         <ul class="feat-list">
           <li>コンテナ = 折りたたみ可・メンバー管理</li>
@@ -336,7 +346,7 @@
         </ul>
       </div>
       <div class="split-block">
-        <h3>操作はすべてキーボードでも</h3>
+        <h3>よく使う操作をキーボードでも</h3>
         <p>
           Ctrl+B / I / U / Shift+X で太字・斜体・下線・打消し、
           Ctrl+Shift+L/E/R/J で揃え、Ctrl+[ / ] でフォントサイズ。
@@ -396,12 +406,12 @@
           <h3>波形でシーク、透き通った操作感</h3>
         </div>
         <p>
-          <strong>just_audio + audio_waveforms</strong> で、ノート内に波形を描画。
+          動画と共通の <strong>media_kit / libmpv</strong> で音声を再生し、ノート内に波形を描画。
           波形タップでシーク、スペースキーで再生/一時停止。
           録音された会議ログ、取材音源、ポッドキャストを「視覚的に」扱えるようになります。
         </p>
         <div class="spec-list">
-          <div><span>波形</span><span>PlayerWaveStyle ベース / .peaks.json キャッシュ</span></div>
+          <div><span>波形</span><span>ピークデータを使った波形表示とシーク</span></div>
           <div><span>埋め込み</span><span>小容量は .hrf に内包 / 大容量は file URI 参照</span></div>
           <div><span>メタ</span><span>alt テキスト / transcript / 色</span></div>
         </div>
@@ -427,15 +437,15 @@
       <article class="media-card">
         <div class="media-title">
           <span class="media-badge">Web</span>
-          <h3>Web ページそのものを、キャンバスに</h3>
+          <h3>Web由来の素材も、キャンバスに</h3>
         </div>
         <p>
-          リンクノートの発展型として、任意の HTML / iframe をキャンバス上で表示できる
-          <strong>埋め込みノート</strong>を用意。既定は「未信頼」で静的フォールバック描画、
-          ユーザがホストを信頼登録すると実 iframe が走る仕組みです。
+          URLをカードにするリンクノートに加え、HTMLやiframeの素材を扱う
+          <strong>埋め込みノート</strong>を用意しています。
+          Windowsの一般HTML埋め込みは静的表示で、すべてのWebページの操作を再現するものではありません。
         </p>
         <div class="spec-list">
-          <div><span>描画経路</span><span>iOS/Android/macOS = WebView / 他 = flutter_html</span></div>
+          <div><span>Windows</span><span>一般HTMLは静的表示 / YouTubeは専用の動画埋め込み</span></div>
           <div><span>安全</span><span>ホスト信頼レジストリ / CSP 付き / スクリプト検知</span></div>
           <div><span>貼り付け</span><span>HTML ファイル D&D / iframe タグ直貼り</span></div>
         </div>
@@ -445,12 +455,68 @@
 </section>
 
 <!-- ============================================================
-     05 FORMAT & SHORTCUTS
+     05 AI & PLANNER
+============================================================ -->
+<section id="workspace" class="section reveal">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-num">05</span>
+      <span class="section-name">AI & PLANNER</span>
+    </div>
+    <h2 class="section-title">考えを育てる。<br />予定とタスクを動かす。</h2>
+    <p class="section-lead">
+      マップ作成を助けるAI連携に加え、予定やタスクを扱うプランナーを開発しています。
+      以下は現在の開発版の機能です。アルファ配布版への収録内容と制約は、公開時のリリース案内でお知らせします。
+    </p>
+    <div class="split-grid">
+      <div class="split-block">
+        <h3>AIによるマップ生成・整理</h3>
+        <p>文章や指示からマインドマップを生成し、既存マップの整理も支援します。PrudeLLM・Ollamaなど、利用するAIの接続設定が必要です。</p>
+        <ul class="feat-list">
+          <li>テキストからノートと接続線を生成</li>
+          <li>現在のマップをもとに編集を依頼</li>
+          <li>接続先によって処理場所・送信先が変わります</li>
+        </ul>
+      </div>
+      <div class="split-block">
+        <h3>Claude・Cursorから操作</h3>
+        <p>内蔵MCPサーバーを通じて、外部AIからマップの読み取り・ノート編集・接続線操作ができます。MCPは将来予定ではなく、既に実装されています。</p>
+        <ul class="feat-list">
+          <li>マップの取得・一括編集・画像出力</li>
+          <li>タブを指定して編集対象を選択</li>
+          <li>利用前に接続とアクセス許可を設定</li>
+        </ul>
+      </div>
+      <div class="split-block">
+        <h3>カレンダー</h3>
+        <p>月・週・日の表示で、予定と期限を確認できます。「明日15時 会議」のような入力や、基本的な繰り返し予定に対応しています。</p>
+        <ul class="feat-list">
+          <li>予定とタスクを同じカレンダーで表示</li>
+          <li>日本語・英語の日時入力を簡易解析</li>
+          <li>データは .hrf とは別に、このPCのプランナーへ保存</li>
+        </ul>
+      </div>
+      <div class="split-block">
+        <h3>タスクリスト — 基本機能を実装</h3>
+        <p>受信トレイ・今日・次の7日間・リスト別にタスクを整理。クイック追加、並び替え、繰り返しタスクの完了時に次回へ進める機能を備えています。</p>
+        <ul class="feat-list">
+          <li>カレンダーとタスクの変更を共有</li>
+          <li>トレイのQuick Entryからタスクを追加</li>
+          <li>MCPで一覧取得・タスク追加・完了操作</li>
+        </ul>
+      </div>
+    </div>
+    <p class="section-lead">タスクリストは実装直後で実機確認中です。Timeline / Gantt、クラウド同期、共同編集は現在利用できる機能として案内していません。</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     06 FORMAT & SHORTCUTS
 ============================================================ -->
 <section id="format" class="section section-format reveal">
   <div class="section-inner">
     <div class="section-label">
-      <span class="section-num">05</span>
+      <span class="section-num">06</span>
       <span class="section-name">FORMAT & SHORTCUTS</span>
     </div>
     <h2 class="section-title">
@@ -467,6 +533,7 @@
         <h3>Format Panel (共通)</h3>
         <ul class="tick-list">
           <li><strong>書体</strong> — B / I / U / 打消し / フォントサイズ</li>
+          <li><strong>日本語縦書き</strong> — テキスト・Markdownの縦書き表示</li>
           <li><strong>配置</strong> — 左揃え / 中央 / 右揃え / 両端</li>
           <li><strong>配色</strong> — テキスト / 塗り / 境界線 / 影</li>
           <li><strong>境界線</strong> — 太さ / スタイル (実線・破線・点線)</li>
@@ -496,12 +563,12 @@
 </section>
 
 <!-- ============================================================
-     06 FILE FORMAT & INTEROP
+     07 FILE FORMAT & INTEROP
 ============================================================ -->
 <section id="interop" class="section section-interop reveal">
   <div class="section-inner">
     <div class="section-label">
-      <span class="section-num">06</span>
+      <span class="section-num">07</span>
       <span class="section-name">.hrf FORMAT & INTEROP</span>
     </div>
     <h2 class="section-title">
@@ -511,7 +578,8 @@
     <p class="section-lead">
       データを特定のアプリに囲い込まないことを、最初から前提にしています。
       HṛdayaFlow 独自の <strong>.hrf</strong> 形式に加えて、
-      主要なマインドマップ / ノート形式と双方向変換します。
+      主要なマインドマップ / ノート形式の読み込み・書き出しに対応しています。
+      形式によって保持できる情報が異なるため、編集用の原本は .hrf で保存してください。
     </p>
 
     <div class="interop-grid">
@@ -525,7 +593,7 @@
             エントリ解決で、ファイルが壊れにくく移動もしやすい設計です。
           </p>
           <ul class="tick-list tight">
-            <li>ZIP コンテナに document.json + assets/</li>
+            <li>ZIP コンテナに manifest.json + map.json + assets/</li>
             <li>SHA256 整合性チェック + tmp → rename アトミック書き出し</li>
             <li>asset extractor でフォルダ展開も可能</li>
             <li>履歴データは JSON patch 形式で差分のみ保持</li>
@@ -534,7 +602,7 @@
       </div>
 
       <div class="interop-formats">
-        <h3>双方向変換 (7 形式)</h3>
+        <h3>主な対応形式</h3>
         <div class="fmt-grid">
           <div class="fmt">
             <div class="fmt-name">Markdown</div>
@@ -582,12 +650,12 @@
 </section>
 
 <!-- ============================================================
-     07 UNDER THE HOOD
+     08 UNDER THE HOOD
 ============================================================ -->
 <section id="core" class="section section-core reveal">
   <div class="section-inner">
     <div class="section-label">
-      <span class="section-num">07</span>
+      <span class="section-num">08</span>
       <span class="section-name">UNDER THE HOOD</span>
     </div>
     <h2 class="section-title">
@@ -607,8 +675,8 @@
           <h3>Rust コア (hrdaya_core)</h3>
         </div>
         <p>
-          ZIP 読み書き、SHA256 検証、JSON patch 計算、大量ノード処理といった
-          「重い仕事」はすべて Rust で実装。flutter_rust_bridge を介して Flutter 側から呼び出します。
+          ZIP読み書き、SHA256検証、JSON patch計算、レイアウト演算などを
+          Rustで実装。Flutter側の処理と分担し、flutter_rust_bridgeで接続しています。
         </p>
         <ul class="tick-list">
           <li>flutter_rust_bridge 2.x による型安全な橋渡し</li>
@@ -653,16 +721,16 @@
       <div class="core-card">
         <div class="core-head">
           <span class="core-num">04</span>
-          <h3>CI / 予算ゲート</h3>
+          <h3>品質確認とアルファ準備</h3>
         </div>
         <p>
-          パフォーマンスと配布サイズに予算を設定し、超過したら CI でブロック。
-          長期運用で「少しずつ重くなる」のを防ぎます。
+          自動テストと実機確認を進めています。機能の実装と配布品質の確認は分けて扱い、
+          保存・再読込、インストール、更新時のデータ保護を公開前の確認対象にしています。
         </p>
         <ul class="tick-list">
-          <li><code>.senastra/budgets.yaml</code> でメトリクス定義</li>
-          <li>GitHub Actions <code>budget-gate.yml</code> で強制</li>
-          <li>history jsonl で推移を可視化</li>
+          <li>開発中の機能には未検証の動作があります</li>
+          <li>不具合報告は公開GitHubのIssuesへ</li>
+          <li>配布時の注意事項は各リリースに掲載</li>
         </ul>
       </div>
     </div>
@@ -670,12 +738,12 @@
 </section>
 
 <!-- ============================================================
-     08 PREVIEW (visual section)
+     09 PREVIEW (visual section)
 ============================================================ -->
 <section id="preview" class="section section-preview reveal">
   <div class="section-inner">
     <div class="section-label">
-      <span class="section-num">08</span>
+      <span class="section-num">09</span>
       <span class="section-name">PREVIEW</span>
     </div>
     <h2 class="section-title">
@@ -707,22 +775,22 @@
 </section>
 
 <!-- ============================================================
-     09 ROADMAP
+     10 DEVELOPMENT STATUS
 ============================================================ -->
 <section id="roadmap" class="section section-roadmap reveal">
   <div class="section-inner">
     <div class="section-label">
-      <span class="section-num">09</span>
-      <span class="section-name">ROADMAP</span>
+      <span class="section-num">10</span>
+      <span class="section-name">DEVELOPMENT STATUS</span>
     </div>
     <h2 class="section-title">
-      開発は、<br />
-      公開されています。
+      できていること。<br />
+      これから確かめること。
     </h2>
     <p class="section-lead">
-      HṛdayaFlow は、個人開発でも「見える化」を大事にしています。
-      マイルストーンごとに何を目指しているかを公開し、
-      フィードバックがそのまま次の設計に反映される循環を作ります。
+      アルファ公開に向けて開発・検証を進めています。アプリ本体のソースコードは非公開で、
+      公式サイト・マニュアル・配布用GitHubを公開しています。
+      実装済みであっても、配布前の検証が完了したことを意味するものではありません。
     </p>
 
     <ol class="timeline">
@@ -730,12 +798,12 @@
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-head">
-            <span class="tl-label">現在</span>
-            <h3>v0.0.3 — 開発プレビュー</h3>
+            <span class="tl-label">開発版に実装済み</span>
+            <h3>キャンバス・多形式ノート・AI連携</h3>
           </div>
           <p>
-            主要 10 ノート種別、関係線 D&D、Format Panel、.hrf 相互運用、
-            PDF 出力、K11-bis 差分 Undo、video/audio 基盤 — ここまで実装済み。
+            ノートと接続線、オートレイアウト、スタック、日本語縦書き、.hrf保存と各種入出力、
+            メディア再生、Undo / Redo、AI生成とMCP操作を実装しています。
           </p>
         </div>
       </li>
@@ -744,13 +812,12 @@
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-head">
-            <span class="tl-label">2026年 6 月末</span>
-            <h3>v0.1.0 — 初版 MVP リリース</h3>
+            <span class="tl-label">新規実装・確認中</span>
+            <h3>プランナーのタスクリスト</h3>
           </div>
           <p>
-            Windows 向け MSI パッケージ配布、コード署名、ユーザマニュアル、
-            OCR インポート、10k ノード性能、a11y ナレータ、i18n (JP/EN)、
-            AI suggestion (text-to-mindmap 他) — 配布ブロッカーを全て解消。
+            カレンダーに加え、タスクリストの基本機能とMCPからのタスク操作を追加しました。
+            実機での動作確認と、初回配布版へ含める範囲の確認を進めています。
           </p>
         </div>
       </li>
@@ -759,13 +826,12 @@
         <div class="tl-dot"></div>
         <div class="tl-body">
           <div class="tl-head">
-            <span class="tl-label">2026年 7 月</span>
-            <h3>v0.1.1 — MCP 統合</h3>
+            <span class="tl-label">公開前の確認</span>
+            <h3>Windows向けアルファ配布の準備</h3>
           </div>
           <p>
-            Claude Desktop / Cursor / Claude CLI が MCP プロトコル経由で
-            HṛdayaFlow を呼び出し、LLM とキャンバスを双方向につなぐ 1 ヶ月。
-            fine + bulk の両粒度でノード追加 / 編集、render_png で逆方向の画像返し。
+            インストール・起動・保存再読込・更新時のデータ保護を確認します。
+            自動更新と配布経路は整備中です。公開日程と配布状況は下の案内をご確認ください。
           </p>
         </div>
       </li>
@@ -775,11 +841,11 @@
         <div class="tl-body">
           <div class="tl-head">
             <span class="tl-label">以降</span>
-            <h3>v0.2.0 → v1.0 GA</h3>
+            <h3>安定化を優先し、対応範囲を広げる</h3>
           </div>
           <p>
-            macOS / Linux 展開、クラウド同期、共同編集、プラグイン API 拡張、
-            API 安定宣言 (1.0)。ロードマップは公開リポジトリで日々更新されます。
+            アルファ利用者からのフィードバックをもとに改善します。
+            macOS / Linux配布やプランナーの拡張は今後の検討対象で、提供時期は未定です。
           </p>
         </div>
       </li>
@@ -788,12 +854,12 @@
 </section>
 
 <!-- ============================================================
-     10 DOWNLOAD
+     11 DOWNLOAD
 ============================================================ -->
 <section id="download" class="section section-download reveal">
   <div class="section-inner">
     <div class="section-label">
-      <span class="section-num">10</span>
+      <span class="section-num">11</span>
       <span class="section-name">DOWNLOAD</span>
     </div>
     <h2 class="section-title">
@@ -802,25 +868,26 @@
     </h2>
     <div class="download-grid">
       <div class="dl-card">
-        <div class="dl-meta">Windows — v0.1.0 (Beta)</div>
+        <div class="dl-meta">Windows x64 — 開発版 0.0.7+1 / Alpha準備中</div>
         <div class="dl-status">
           <span class="dot-pulse"></span>
-          <span>2026 年 8 月 ベータテスト公開予定</span>
+          <span>2026年9月5日（土）アルファ公開を目標に準備中</span>
         </div>
         <p>
-          Windows 10 / 11 対応の MSI インストーラを準備中。
-          Rust + Flutter のハイブリッド構成で、大規模マップでも軽快に動作します。
-          HEVC 拡張も OS 設定なしで動作します。
-          初回はベータテスターとして、フィードバックをもとに正式版へ仕上げていきます。
+          Windows向けMSIインストーラーの配布準備を進めています。
+          現在、一般向けのダウンロードはまだ開始していません。
+          公開前の確認結果によって日程・収録機能が変わる場合があります。
+          配布開始後は、下のGitHub Releasesにインストーラーと注意事項を掲載します。
         </p>
-        <a href="#" class="btn btn-primary btn-disabled" aria-disabled="true">ベータ公開待ち</a>
+        <a href="https://github.com/geshpoyo/HrdayaFlow-releases/releases" class="btn btn-primary">GitHubで配布状況を確認</a>
+        <p class="muted">掲載内容の確認日：<time datetime="2026-09-03">2026年9月3日</time></p>
       </div>
       <div class="dl-card secondary">
         <div class="dl-meta">Later — macOS / Linux</div>
-        <div class="dl-status"><span>対応予定</span></div>
+        <div class="dl-status"><span>配布時期未定</span></div>
         <p>
           Flutter 基盤で開発しているため、macOS / Linux への展開も視野に入れています。
-          コア機能の安定化後、順次対応予定。
+          今回のアルファ配布対象には含めず、Windows版の安定化を優先します。
         </p>
         <span class="btn btn-ghost btn-disabled" aria-disabled="true">Coming later</span>
       </div>
@@ -830,16 +897,17 @@
       <div><span>ファイル形式</span><span>.hrf (ZIP ベース独自形式)</span></div>
       <div><span>相互運用</span><span>Markdown / JSON Canvas / OPML / Mermaid / XMind / FreeMind</span></div>
       <div><span>ライセンス</span><span>アプリ: プロプライエタリ (評価利用無料) / libmpv / FFmpeg: LGPL (同梱 NOTICE 参照)</span></div>
-      <div><span>動作要件</span><span>Windows 10 1803 以降、WebView2 Runtime (Win10 標準 / Win11 標準搭載)</span></div>
+      <div><span>配布対象</span><span>Windows x64。OS要件・WebView2などの必要条件は配布時の案内で確認してください。</span></div>
     </div>
 
     <aside class="beta-notice">
-      <strong>🚧 Beta 期のお知らせ</strong>
+      <strong>🚧 アルファ版をご利用になる前に</strong>
       <p>
-        v0.x (beta) は コード署名証明書 未取得のため、インストール時に Windows SmartScreen の警告が表示されます。
-        「詳細情報」→「実行」で進めばインストール可能です。
-        改竄検知は SHA256 ハッシュ照合で担保しています。
-        <a href="https://vet-scopius.wiki/%E7%8D%A3%E5%8C%BB%E5%BF%97Scopius/%E9%96%8B%E7%99%BA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/HrdayaFlow/basics/04-install-warning" target="_blank" rel="noopener">詳細手順 →</a>
+        初回は未署名での配布を予定しており、Windowsの保護機能が警告を表示する場合があります。
+        保護機能は無効にせず、公式の配布元と公開時の注意事項をご確認ください。
+        開発途中のため、重要なファイルはバックアップし、コピーでお試しください。
+        <a href="https://hrdayaflow.geshtalt.jp/wiki/">マニュアル →</a>
+        <a href="https://github.com/geshpoyo/HrdayaFlow-releases/issues">不具合を報告 →</a>
       </p>
     </aside>
   </div>
@@ -859,18 +927,20 @@
     </div>
     <nav class="footer-nav">
       <a href="#what">What</a>
-      <a href="#nodes">Nodes</a>
+      <a href="#nodes">Notes</a>
       <a href="#canvas">Canvas</a>
       <a href="#media">Media</a>
+      <a href="#workspace">AI / Planner</a>
       <a href="#format">Format</a>
       <a href="#interop">Interop</a>
       <a href="#core">Core</a>
-      <a href="#roadmap">Roadmap</a>
+      <a href="#roadmap">Status</a>
       <a href="#download">Download</a>
     </nav>
     <nav class="footer-nav footer-nav--external" aria-label="関連サイト">
-      <a href="https://vet-scopius.wiki/%E7%8D%A3%E5%8C%BB%E5%BF%97Scopius/%E9%96%8B%E7%99%BA%E3%82%A2%E3%83%97%E3%83%AA%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3/Index" target="_blank" rel="noopener">📖 マニュアル</a>
-      <a href="https://github.com/geshpoyo/HrdayaFlow-releases" target="_blank" rel="noopener">💾 GitHub (Releases)</a>
+      <a href="https://geshtalt.jp/">← geshtalt.jp（開発者ポータル）</a>
+      <a href="https://hrdayaflow.geshtalt.jp/wiki/">📖 マニュアル</a>
+      <a href="https://github.com/geshpoyo/HrdayaFlow-releases/releases" target="_blank" rel="noopener">💾 GitHub Releases</a>
       <a href="https://github.com/geshpoyo/HrdayaFlow-releases/issues" target="_blank" rel="noopener">🐛 Issues / Feedback</a>
     </nav>
     <div class="footer-bottom muted">
