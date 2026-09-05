@@ -73,14 +73,14 @@
       <span class="muted">AIと一緒にマップを育て、プランナーで予定やタスクも整理。考えることと、実行することを支えるデスクトップアプリです。</span>
     </p>
     <div class="hero-ctas">
-      <a href="#download" class="btn btn-primary">アルファ版の公開状況</a>
+      <a href="#download" class="btn btn-primary">アルファ版をダウンロード</a>
       <a href="https://hrdayaflow.geshtalt.jp/wiki/" class="btn btn-ghost">マニュアルを読む</a>
     </div>
     <ul class="hero-tags">
       <li>多形式ノート・日本語縦書き</li>
       <li>AI・MCP連携</li>
       <li>カレンダー・タスクリスト</li>
-      <li>Windows向けアルファ準備中</li>
+      <li>Windows向けアルファ公開中</li>
     </ul>
   </div>
   <a href="#what" class="scroll-hint" aria-label="スクロール">
@@ -854,33 +854,102 @@
 </section>
 
 <!-- ============================================================
+     RELEASE STAGES
+============================================================ -->
+<section id="release-stages" class="section reveal" aria-labelledby="release-stages-title">
+  <div class="section-inner">
+    <div class="section-label">
+      <span class="section-name">RELEASE STAGES</span>
+    </div>
+    <h2 id="release-stages-title" class="section-title">リリース段階について</h2>
+    <p class="section-lead">
+      組み立てるアルファ、使って磨くベータ、日常利用に向けた正式版。
+      HṛdayaFlowは、次の考え方で開発と公開を進めます。
+    </p>
+    <div class="release-stages-grid">
+      <article class="dl-card">
+        <h3>アルファ版</h3>
+        <strong>組み立てながら公開しています</strong>
+        <p>未完成の機能や工事中の画面を含む、開発途中のバージョンです。機能の追加や変更を積極的に行っており、操作方法や保存形式が変わる場合があります。</p>
+      </article>
+      <article class="dl-card">
+        <h3>ベータ版</h3>
+        <strong>実際の利用を通じて磨いています</strong>
+        <p>正式版に向けた主な機能が揃い、使い勝手や安定性を改善しているバージョンです。不具合や調整中の部分が残るため、大切なデータはバックアップを取りながらお試しください。</p>
+      </article>
+      <article class="dl-card">
+        <h3>正式版</h3>
+        <strong>日常的な利用に向けて提供します</strong>
+        <p>主な機能と基本的な利用手順の動作確認を終えたバージョンです。公開後も、不具合の修正と機能の改善を続けます。</p>
+      </article>
+    </div>
+    <p class="release-stages-note">ベータ版は、将来の構想がすべて完成した状態ではありません。今回の正式版に含める主な機能が揃った段階で、開発の重点を機能の追加から品質の改善へ移します。</p>
+  </div>
+</section>
+
+<!-- ============================================================
      11 DOWNLOAD
 ============================================================ -->
 <section id="download" class="section section-download reveal">
   <div class="section-inner">
+    <!--
+      Alpha download meta — edit in one place:
+      data-version / data-date drive visible labels below.
+    -->
+    <div id="alpha-download-meta"
+         data-version="0.0.7+4"
+         data-date="2026-09-05"
+         data-channel="Alpha"
+         hidden></div>
     <div class="section-label">
       <span class="section-num">11</span>
       <span class="section-name">DOWNLOAD</span>
     </div>
     <h2 class="section-title">
-      まもなく、<br />
+      いま、<br />
       お手元に。
     </h2>
     <div class="download-grid">
       <div class="dl-card">
-        <div class="dl-meta">Windows x64 — 開発版 0.0.7+1 / Alpha準備中</div>
+        <div class="dl-meta">Windows x64 — <span data-alpha-label>Alpha 0.0.7+4</span></div>
         <div class="dl-status">
           <span class="dot-pulse"></span>
-          <span>2026年9月5日（土）アルファ公開を目標に準備中</span>
+          <span>アルファ版（Windows のみ）</span>
         </div>
         <p>
-          Windows向けMSIインストーラーの配布準備を進めています。
-          現在、一般向けのダウンロードはまだ開始していません。
-          公開前の確認結果によって日程・収録機能が変わる場合があります。
-          配布開始後は、下のGitHub Releasesにインストーラーと注意事項を掲載します。
+          下のボタンを押すとインストーラー（<code>.msi</code>）のダウンロードが始まります。
+          ダウンロードしたファイルをダブルクリックして、画面の指示どおりに進めてください。
         </p>
-        <a href="https://github.com/geshpoyo/HrdayaFlow-releases/releases" class="btn btn-primary">GitHubで配布状況を確認</a>
-        <p class="muted">掲載内容の確認日：<time datetime="2026-09-03">2026年9月3日</time></p>
+        <a href="https://github.com/geshpoyo/HrdayaFlow-releases/releases/download/v0.0.7.4/HrdayaFlow-0.0.7.4-x64.msi"
+           class="btn btn-primary btn-download" download>
+          Windows 版をダウンロード
+          <span class="btn-sub">HrdayaFlow 0.0.7+4 ・ 85 MB ・ Windows 10/11 (64bit)</span>
+        </a>
+
+        <ol class="dl-steps">
+          <li><strong>ダウンロード</strong> — 上のボタンを押します。</li>
+          <li><strong>実行</strong> — 保存された <code>HrdayaFlow-0.0.7.4-x64.msi</code> をダブルクリックします。</li>
+          <li>
+            <strong>「WindowsによってPCが保護されました」と出たら</strong> —
+            <em>詳細情報</em> → <em>実行</em> の順に押してください。
+            まだ開発者署名を取得していないため出る警告で、中身の問題ではありません。
+            気になる場合は下のチェックサムで確認できます。
+          </li>
+          <li><strong>インストール後</strong> — スタートメニューから HrdayaFlow を起動できます。</li>
+        </ol>
+
+        <p class="muted">
+          念のため確認したい方へ — PowerShell で
+          <code>Get-FileHash &lt;ダウンロードしたファイル&gt; -Algorithm SHA256</code> を実行すると
+          <code>ab751191c2f1d4ca53607200bc69158445c6dd6e0fba9555b96f15859f826798</code>
+          と一致します。
+        </p>
+        <p class="muted">
+          過去の版・詳細: <a href="https://github.com/geshpoyo/HrdayaFlow-releases/releases">GitHub Releases</a>
+          （英語）· 不具合報告: <a href="https://github.com/geshpoyo/HrdayaFlow-releases/issues">Issues</a>
+          · <a href="https://hrdayaflow.geshtalt.jp/wiki/">日本語マニュアル</a>
+        </p>
+        <p class="muted">掲載内容の確認日：<time datetime="2026-09-05">2026年9月5日</time></p>
       </div>
       <div class="dl-card secondary">
         <div class="dl-meta">Later — macOS / Linux</div>
@@ -897,15 +966,15 @@
       <div><span>ファイル形式</span><span>.hrf (ZIP ベース独自形式)</span></div>
       <div><span>相互運用</span><span>Markdown / JSON Canvas / OPML / Mermaid / XMind / FreeMind</span></div>
       <div><span>ライセンス</span><span>アプリ: プロプライエタリ (評価利用無料) / libmpv / FFmpeg: LGPL (同梱 NOTICE 参照)</span></div>
-      <div><span>配布対象</span><span>Windows x64。OS要件・WebView2などの必要条件は配布時の案内で確認してください。</span></div>
+      <div><span>配布対象</span><span>Windows 10 / 11 の 64bit。必要なランタイムはインストーラーに同梱しています。</span></div>
     </div>
 
     <aside class="beta-notice">
       <strong>🚧 アルファ版をご利用になる前に</strong>
       <p>
-        初回は未署名での配布を予定しており、Windowsの保護機能が警告を表示する場合があります。
-        保護機能は無効にせず、公式の配布元と公開時の注意事項をご確認ください。
-        開発途中のため、重要なファイルはバックアップし、コピーでお試しください。
+        現在は未署名で配布しているため、Windows の SmartScreen が警告を表示します。
+        保護機能は無効にせず、上のダウンロードボタン（公式配布元）から入手してください。
+        開発途中のアルファ版です。重要なファイルはバックアップを取り、コピーでお試しください。
         <a href="https://hrdayaflow.geshtalt.jp/wiki/">マニュアル →</a>
         <a href="https://github.com/geshpoyo/HrdayaFlow-releases/issues">不具合を報告 →</a>
       </p>

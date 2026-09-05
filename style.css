@@ -795,6 +795,36 @@ button:focus-visible,
 /* ==========================================================================
    Section: Download
    ========================================================================== */
+/* Release stages reuse the existing site cards and Senastra tokens. */
+.release-stages-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-6);
+}
+
+.release-stages-grid .dl-card {
+  padding: var(--space-6);
+}
+
+.release-stages-grid h3 {
+  color: var(--accent);
+}
+
+.release-stages-grid .dl-card p,
+.release-stages-note {
+  font-size: 1rem;
+  line-height: var(--leading-relaxed);
+}
+
+.release-stages-note {
+  margin-top: var(--space-6);
+  color: var(--fg-muted);
+}
+
+@media (max-width: 900px) {
+  .release-stages-grid { grid-template-columns: 1fr; }
+}
+
 .download-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1848,4 +1878,40 @@ button:focus-visible,
   .preview-edges .edge {
     animation: none !important;
   }
+}
+
+/* ---- ダウンロードボタンと手順（2026-09-05 アルファ公開） ---- */
+.btn-download {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding-block: 14px;
+  line-height: 1.3;
+}
+.btn-download .btn-sub {
+  font-size: 0.72em;
+  font-weight: 400;
+  opacity: 0.75;
+  letter-spacing: 0.02em;
+}
+.dl-steps {
+  margin: 20px 0 16px;
+  padding-left: 1.35em;
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  line-height: 1.85;
+}
+.dl-steps li { margin-bottom: 6px; }
+.dl-steps strong { color: var(--fg); font-weight: 600; }
+.dl-steps em { color: var(--accent); font-style: normal; font-weight: 600; }
+.dl-card code,
+.dl-steps code {
+  font-family: var(--ff-en), monospace;
+  font-size: 0.88em;
+  background: var(--bg-elevated);
+  border: 1px solid var(--divider);
+  border-radius: 4px;
+  padding: 1px 5px;
+  word-break: break-all;
 }
