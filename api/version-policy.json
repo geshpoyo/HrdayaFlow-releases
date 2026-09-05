@@ -1,15 +1,6 @@
-﻿{
+{
   "schemaVersion": 1,
-  "updatedAt": "2026-09-05T00:00:00Z",
+  "updatedAt": "2026-09-03T00:00:00Z",
   "signature": "",
-  "rules": [
-    {
-      "id": "test-block-0.0.7-4",
-      "match": { "versions": ["0.0.7+4"], "below": "" },
-      "action": "block",
-      "allowReadOnly": true,
-      "message": "【テスト】このバージョンには重大な問題が確認されたため利用を停止しています。",
-      "moreInfoUrl": "https://hrdayaflow.geshtalt.jp/#download"
-    }
-  ]
+  "rules": []
 }
