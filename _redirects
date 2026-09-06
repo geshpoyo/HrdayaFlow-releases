@@ -9,3 +9,8 @@
 /download         https://github.com/geshpoyo/HrdayaFlow-releases/releases  302
 /release-notes/*  https://github.com/geshpoyo/HrdayaFlow-releases/releases  302
 /release-notes    https://github.com/geshpoyo/HrdayaFlow-releases/releases  302
+
+# サポート Discord。招待コードはここだけで管理し、アプリやページには直書きしない。
+# 招待を差し替えるときはこの 2 行だけ直す（有効期限なし・使用回数無制限で発行すること）。
+/discord/*  https://discord.gg/TKvNfVCsak  302
+/discord    https://discord.gg/TKvNfVCsak  302
