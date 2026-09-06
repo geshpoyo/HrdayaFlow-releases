@@ -1915,3 +1915,16 @@ button:focus-visible,
   padding: 1px 5px;
   word-break: break-all;
 }
+
+/* ---- 困ったときの導線（2026-09-06 Discord 追加） ---- */
+.dl-help {
+  margin: 16px 0 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--accent-line);
+  border-radius: 8px;
+  background: var(--bg-elevated);
+  color: var(--fg-muted);
+  font-size: 0.9rem;
+  line-height: 1.8;
+}
+.dl-help strong { color: var(--fg); }
