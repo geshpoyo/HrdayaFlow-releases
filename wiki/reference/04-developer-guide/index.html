@@ -1,29 +1,41 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>14 開発者ガイド | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #developer · #build · #cli · #mcp 14 開発者ガイド ← 13 ショートカット | 目次 | → 15 トラブル ソースから動かす / 拡張する人向け。CLI ツール、ビルド、MCP サーバ、CI、寄稿フロー。 セットアップ 詳細:…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="14 開発者ガイド | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #developer · #build · #cli · #mcp 14 開発者ガイド ← 13 ショートカット | 目次 | → 15 トラブル ソースから動かす / 拡張する人向け。CLI ツール、ビルド、MCP サーバ、CI、寄稿フロー。 セットアップ 詳細:…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>14 開発者ガイド</h1><div class="note-meta">#manual · #developer · #build · #cli · #mcp</div><h1 id="14-開発者ガイド">14 開発者ガイド</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:reference"><span data-pagefind-meta="title" hidden aria-hidden="true">14 開発者ガイド</span><div class="note-meta">#manual · #developer · #build · #cli · #mcp</div><h1 id="14-開発者ガイド">14 開発者ガイド</h1>
 <p><span class="missing">← 13 ショートカット</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 15 トラブル</span></p>
 <p>ソースから動かす / 拡張する人向け。CLI ツール、ビルド、MCP サーバ、CI、寄稿フロー。</p>
 <h2 id="セットアップ">セットアップ</h2>
-<p>詳細: <span class="missing">開発環境セットアップ_Windows.md</span></p>
+<p>詳細: <code>開発環境セットアップ_Windows.md</code>（開発リポジトリ。この vault には未収録）</p>
 <p>最低限:</p>
 <div class="table-wrap"><table><thead><tr><th>必要</th><th>バージョン</th><th>入手</th></tr></thead><tbody><tr><td>Flutter SDK</td><td>3.27+</td><td>flutter.dev</td></tr><tr><td>Rust toolchain</td><td>1.78+ (stable)</td><td>rustup</td></tr><tr><td>Python</td><td>3.11+</td><td>python.org</td></tr><tr><td>Visual Studio Build Tools</td><td>2022 (Windows)</td><td>visualstudio.microsoft.com</td></tr><tr><td>Git</td><td>任意</td><td>git-scm.com</td></tr></tbody></table></div>
 <pre><code class="language-powershell">git clone https://github.com/&lt;owner&gt;/HrdayaFlow.git
@@ -85,8 +97,8 @@ dart run lib/main.dart --baseline baseline.json --current current.json</code></p
   }
 }</code></pre>
 <h3 id="公開ツール">公開ツール</h3>
-<div class="table-wrap"><table><thead><tr><th>ツール</th><th>用途</th></tr></thead><tbody><tr><td><code>read()</code></td><td>現在開いているマップ全体 (map.json)</td></tr><tr><td><code>find_node(id)</code></td><td>1 ノート取得</td></tr><tr><td><code>find_edge(from, to)</code></td><td>エッジ取得</td></tr><tr><td><code>bulk_apply(operations)</code></td><td>操作配列を一括実行</td></tr><tr><td><code>bulk_patch(patch)</code></td><td>RFC 6902 JSON Patch 適用</td></tr><tr><td><code>screenshot(area)</code></td><td>領域スクショ取得</td></tr></tbody></table></div>
-<p>詳細仕様: <code>docs/v0-1-1/c-mcp-tools/</code>。</p>
+<div class="table-wrap"><table><thead><tr><th>ツール</th><th>用途</th></tr></thead><tbody><tr><td><code>read()</code></td><td>現在開いているマップ全体 (map.json)</td></tr><tr><td><code>find_node(id)</code></td><td>1 ノート取得</td></tr><tr><td><code>find_edge(from, to)</code></td><td>エッジ取得</td></tr><tr><td><code>bulk_apply(operations)</code></td><td>操作配列を一括実行</td></tr><tr><td><code>bulk_patch(patch)</code></td><td>RFC 6902 JSON Patch 適用</td></tr><tr><td><code>screenshot(area)</code></td><td>領域スクショ取得</td></tr><tr><td><code>list_task_lists</code></td><td>プランナー: リスト一覧</td></tr><tr><td><code>list_tasks</code></td><td>プランナー: スマートリスト / リスト別 / 完了済み</td></tr><tr><td><code>add_task</code></td><td>プランナー: タスク追加（自然文可）</td></tr><tr><td><code>complete_task</code></td><td>プランナー: 完了 / ロール / undo</td></tr></tbody></table></div>
+<p>プランナー操作の使い方は <span class="missing">12 Planner</span>。マップ系の詳細仕様: <code>docs/v0-1-1/c-mcp-tools/</code>。</p>
 <h3 id="設定-hand-rolled-JSON-RPC">設定: hand-rolled JSON-RPC</h3>
 <p>メモリにあるとおり、<strong>rmcp crate は使わない</strong>。<code>rust/hrdayaflow-mcp/</code> で hand-rolled JSON-RPC proxy。理由: 依存最小、Rust core との型共有。</p>
 <h2 id="Budget-Gate-(CI-性能ガード)-budget-gate">Budget Gate (CI 性能ガード) {#budget-gate}</h2>
@@ -104,7 +116,7 @@ dart run lib/main.dart --baseline baseline.json --current current.json</code></p
 <div class="table-wrap"><table><thead><tr><th>状態</th><th>exit code</th><th>PR ステータス</th></tr></thead><tbody><tr><td>全て target 内</td><td>0</td><td>✅ pass</td></tr><tr><td>target 超 / hard_limit 内</td><td>1</td><td>⚠ warning (merge 可)</td></tr><tr><td>hard_limit 超</td><td>2</td><td>❌ fail (merge 不可)</td></tr><tr><td>baseline 不在</td><td>3</td><td>🚧 baseline 生成のみ</td></tr><tr><td>設定エラー</td><td>4</td><td>エラー</td></tr></tbody></table></div>
 <p><code>STRICT_OVERRIDE=1</code> 環境変数で warning も fail に昇格。</p>
 <h2 id="アーキテクチャ-Lint-(senastra_architect)-🔌">アーキテクチャ Lint (senastra_architect) 🔌</h2>
-<p>Senastra 側に依頼中 (<span class="missing">../may-2026/senastra-requests/01-delta-pattern-lint</span>)。完了後 CI に組込:</p>
+<p>Senastra 側に依頼中 (Senastra への要望メモ（別資料・現在は未整備）)。完了後 CI に組込:</p>
 <ul><li>循環依存検出</li><li>god-module 警告 (1500 LOC / 40 public API 超)</li><li>shared/ 肥大化警告</li></ul>
 <h2 id="i18n-(翻訳寄稿)-i18n">i18n (翻訳寄稿) {#i18n}</h2>
 <ol><li><code>app/lib/l10n/intl_ja.arb</code> を origin として参照</li><li><code>intl_&lt;lang&gt;.arb</code> を新規作成 (例: <code>intl_zh.arb</code>)</li><li>すべての key を翻訳</li><li><code>flutter gen-l10n</code> で <code>lib/l10n/intl_*.g.dart</code> を再生成</li><li>テスト: <code>flutter run -d windows</code> で言語切替して確認</li><li>PR</li></ol>
@@ -133,24 +145,14 @@ dart run lib/main.dart --baseline baseline.json --current current.json</code></p
 ├── tools/           ← 開発用 CLI (budget_check 等)
 └── rust/hrdayaflow-mcp/  ← MCP server</code></pre>
 <p><span class="missing">← 13</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 15</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#14-開発者ガイド">14 開発者ガイド</a></li><li class="lvl-2"><a href="#セットアップ">セットアップ</a></li><li class="lvl-2"><a href="#ビルドと起動">ビルドと起動</a></li><li class="lvl-3"><a href="#Flutter-app-(UI)">Flutter app (UI)</a></li><li class="lvl-3"><a href="#Rust-core">Rust core</a></li><li class="lvl-3"><a href="#Python-AI-service">Python AI service</a></li><li class="lvl-3"><a href="#FFI-コード生成">FFI コード生成</a></li><li class="lvl-2"><a href="#CLI-ツール-cli">CLI ツール {#cli}</a></li><li class="lvl-3"><a href="#hrf-(汎用)">hrf (汎用)</a></li><li class="lvl-3"><a href="#bench_k11_gate">benchk11gate</a></li><li class="lvl-3"><a href="#budget_checkdart">budgetcheck.dart</a></li><li class="lvl-2"><a href="#MCP-Server-(HrdayaFlow-を-Claude-Cursor-から操作)">MCP Server (HrdayaFlow を Claude / Cursor から操作)</a></li><li class="lvl-3"><a href="#起動">起動</a></li><li class="lvl-3"><a href="#公開ツール">公開ツール</a></li><li class="lvl-3"><a href="#設定-hand-rolled-JSON-RPC">設定: hand-rolled JSON-RPC</a></li><li class="lvl-2"><a href="#Budget-Gate-(CI-性能ガード)-budget-gate">Budget Gate (CI 性能ガード) {#budget-gate}</a></li><li class="lvl-3"><a href="#計測対象">計測対象</a></li><li class="lvl-3"><a href="#違反時の挙動">違反時の挙動</a></li><li class="lvl-2"><a href="#アーキテクチャ-Lint-(senastra_architect)-🔌">アーキテクチャ Lint (senastraarchitect) 🔌</a></li><li class="lvl-2"><a href="#i18n-(翻訳寄稿)-i18n">i18n (翻訳寄稿) {#i18n}</a></li><li class="lvl-2"><a href="#テスト">テスト</a></li><li class="lvl-2"><a href="#寄稿フロー">寄稿フロー</a></li><li class="lvl-2"><a href="#デバッグ-Tips">デバッグ Tips</a></li><li class="lvl-2"><a href="#リリースフロー">リリースフロー</a></li><li class="lvl-2"><a href="#ディレクトリ構成-(再掲)">ディレクトリ構成 (再掲)</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">14 開発者ガイド</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+  <aside class="rightcol"><div class="graph" data-slug="reference/04-developer-guide/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#14-開発者ガイド">14 開発者ガイド</a></li><li class="lvl-2"><a href="#セットアップ">セットアップ</a></li><li class="lvl-2"><a href="#ビルドと起動">ビルドと起動</a></li><li class="lvl-3"><a href="#Flutter-app-(UI)">Flutter app (UI)</a></li><li class="lvl-3"><a href="#Rust-core">Rust core</a></li><li class="lvl-3"><a href="#Python-AI-service">Python AI service</a></li><li class="lvl-3"><a href="#FFI-コード生成">FFI コード生成</a></li><li class="lvl-2"><a href="#CLI-ツール-cli">CLI ツール {#cli}</a></li><li class="lvl-3"><a href="#hrf-(汎用)">hrf (汎用)</a></li><li class="lvl-3"><a href="#bench_k11_gate">benchk11gate</a></li><li class="lvl-3"><a href="#budget_checkdart">budgetcheck.dart</a></li><li class="lvl-2"><a href="#MCP-Server-(HrdayaFlow-を-Claude-Cursor-から操作)">MCP Server (HrdayaFlow を Claude / Cursor から操作)</a></li><li class="lvl-3"><a href="#起動">起動</a></li><li class="lvl-3"><a href="#公開ツール">公開ツール</a></li><li class="lvl-3"><a href="#設定-hand-rolled-JSON-RPC">設定: hand-rolled JSON-RPC</a></li><li class="lvl-2"><a href="#Budget-Gate-(CI-性能ガード)-budget-gate">Budget Gate (CI 性能ガード) {#budget-gate}</a></li><li class="lvl-3"><a href="#計測対象">計測対象</a></li><li class="lvl-3"><a href="#違反時の挙動">違反時の挙動</a></li><li class="lvl-2"><a href="#アーキテクチャ-Lint-(senastra_architect)-🔌">アーキテクチャ Lint (senastraarchitect) 🔌</a></li><li class="lvl-2"><a href="#i18n-(翻訳寄稿)-i18n">i18n (翻訳寄稿) {#i18n}</a></li><li class="lvl-2"><a href="#テスト">テスト</a></li><li class="lvl-2"><a href="#寄稿フロー">寄稿フロー</a></li><li class="lvl-2"><a href="#デバッグ-Tips">デバッグ Tips</a></li><li class="lvl-2"><a href="#リリースフロー">リリースフロー</a></li><li class="lvl-2"><a href="#ディレクトリ構成-(再掲)">ディレクトリ構成 (再掲)</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/04-developer-guide";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="reference/04-developer-guide";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

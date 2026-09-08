@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>11 ファイルと相互運用 | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #files · #hrf · #import · #export · #interop 11 ファイルと相互運用 ← 10 AI | 目次 | → 12 テーマ 主形式 .hrf v0.2 と、外部形式 7 種との往復。PDF / PNG / SVG での書き出し。…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="11 ファイルと相互運用 | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #files · #hrf · #import · #export · #interop 11 ファイルと相互運用 ← 10 AI | 目次 | → 12 テーマ 主形式 .hrf v0.2 と、外部形式 7 種との往復。PDF / PNG / SVG での書き出し。…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>11 ファイルと相互運用</h1><div class="note-meta">#manual · #files · #hrf · #import · #export · #interop</div><h1 id="11-ファイルと相互運用">11 ファイルと相互運用</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">11 ファイルと相互運用</span><div class="note-meta">#manual · #files · #hrf · #import · #export · #interop</div><h1 id="11-ファイルと相互運用">11 ファイルと相互運用</h1>
 <p><span class="missing">← 10 AI</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 12 テーマ</span></p>
 <p>主形式 <code>.hrf</code> v0.2 と、外部形式 7 種との往復。PDF / PNG / SVG での書き出し。</p>
 <h2 id="ネイティブ形式-hrf-v02">ネイティブ形式: <code>.hrf</code> v0.2</h2>
@@ -87,7 +99,9 @@
 <p>既存の <code>.hrf</code> を開いているタブで <strong>名前を付けて保存</strong> を実行すると、保存ダイアログのファイル名欄には現在のタブ名（例: <code>project_restore.hrf</code>）が入ります。新規の無題タブだけ <code>untitled.hrf</code> になります。</p>
 <h2 id="開く">開く</h2>
 <h3 id="Windows-ファイル関連付け">Windows ファイル関連付け</h3>
-<p>MSI でインストールした Windows 版では、Explorer で <code>.hrf</code> をダブルクリックすると HrdayaFlow が起動し、そのファイルを現在のタブへ読み込みます。起動後に「無題」のままになる場合は、ファイルパス引き渡しまたは起動引数処理の不具合として扱います。</p>
+<p>MSI でインストールした Windows 版では、Explorer で <code>.hrf</code> をダブルクリックすると <strong>常に同じ HrdayaFlow ウィンドウ</strong> のタブで開きます。</p>
+<ul><li><strong>アプリ未起動時</strong>: 1 ウィンドウが起動し、タブでファイルを開く。</li><li><strong>すでに起動中</strong>: 新しいウィンドウは作らず、既存ウィンドウにタブを追加（または空の無題タブを再利用）して開く。</li><li><strong>同じファイルを再度開いた場合</strong>: 重複タブは作らず、既に開いているタブへ切り替える（ディスクから再読み込みしないため、未保存の編集内容は保持される）。</li></ul>
+<p>macOS も Finder からのダブルクリックは同様に <strong>1 ウィンドウ・タブ</strong> で開きます（OS が単一インスタンスを保証）。</p>
 <div class="table-wrap"><table><thead><tr><th>⌨</th><th>効果</th></tr></thead><tbody><tr><td><code>Ctrl + O</code></td><td>ファイルダイアログ</td></tr><tr><td><code>Ctrl + P</code></td><td>QuickOpen (<span class="missing">09-search-and-outline › quickopen</span>)</td></tr></tbody></table></div>
 <p>D&amp;D で <code>.hrf</code> / <code>.json</code> をウィンドウへ → HrdayaFlow ドキュメントとして開く。空の無題タブならそのタブを再利用し、既に作業中のタブなら新しいタブで開く。</p>
 <blockquote><p><code>.hrf</code> / <code>.json</code> は添付ファイルノートにはなりません。Markdown や画像などの通常ファイルだけが、埋め込み / 外部リンクを選んでキャンバス上のファイルノートになります。</p></blockquote>
@@ -131,6 +145,22 @@
 <h2 id="大きなアセットの扱い">大きなアセットの扱い</h2>
 <div class="table-wrap"><table><thead><tr><th>状況</th><th>動作</th></tr></thead><tbody><tr><td>50 MB 以下</td><td><code>.hrf</code> 内に埋め込み</td></tr><tr><td>50 MB 超 (既定)</td><td>外部リンク参照 (originUrl のみ) を推奨ダイアログ</td></tr></tbody></table></div>
 <p>閾値は Settings で変更可 (10〜500 MB)。</p>
+<h2 id="マップリンクノード（マップ間リンク）">マップリンクノード（マップ間リンク）</h2>
+<p>別の <code>.hrf</code> を<strong>現在のマップのキャンバス上にリンクとして置く</strong>機能です。リンクは通常のファイルノード（<code>NodeKind.file</code>）として保存され、<code>meta.mapLink</code> で識別されます。</p>
+<h3 id="作り方">作り方</h3>
+<ol><li>エクスプローラーから <code>.hrf</code> をキャンバスへドラッグ＆ドロップする</li><li>ドロップ位置に<strong>マップリンクノード</strong>が 1 つできる（<strong>現在のタブの内容は変わらない</strong>）</li><li><code>.json</code>（裸の map JSON）をドロップした場合は従来どおり<strong>新しいタブで開く</strong>（リンクノードにはならない）</li></ol>
+<h3 id="開き方">開き方</h3>
+<ul><li>リンクノードを<strong>ダブルクリック</strong> → リンク先が<strong>タブで開く</strong></li><li>既に同じ <code>.hrf</code> が開いていれば<strong>そのタブへ切り替え</strong>（タブは増えない）</li><li>リンク先で編集・保存したあとタブを閉じれば、元のマップに戻れる</li></ul>
+<h3 id="リンク先が移動したとき（自己修復-ML-05）">リンク先が移動したとき（自己修復 ML-05）</h3>
+<p>リンク先の <code>.hrf</code> をエクスプローラーで別フォルダへ移動しても、ダブルクリック時に HrdayaFlow が<strong>ファイル名を手がかりに再探索</strong>し、見つかればリンクを自動更新します（<code>Ctrl+S</code> で保存が必要）。</p>
+<p>探索の順序:</p>
+<ol><li>記録されている旧パス</li><li>同じフォルダ内</li><li><strong>設定 &gt; マップリンクの探索フォルダ</strong>に登録したフォルダ（および最近使った <code>.hrf</code> の親フォルダ等）</li><li>ドライブ全体（設定で OFF にできる）</li></ol>
+<p>同名の <code>.hrf</code> が複数見つかった場合は<strong>自動では選ばず</strong>、一覧から選ぶダイアログが出ます。</p>
+<h3 id="設定">設定</h3>
+<p><strong>設定</strong> ダイアログ → <strong>マップリンクの探索フォルダ</strong></p>
+<ul><li>探索フォルダの追加・削除（再起動後も保持）</li><li><strong>ドライブ全体の探索を許可する</strong> トグル（既定 ON）</li></ul>
+<blockquote><p>MCP の「読み取り許可フォルダ」とは別物です。こちらはリンク切れ時の<strong>探索範囲</strong>の設定です。</p></blockquote>
+<p>インスペクタ（リンクノード選択時）では、リンク先パス・状態（正常 / リンク切れ）・最終解決時刻・<code>mapId</code>（あれば）を確認できます。</p>
 <h2 id="ファイル比較・履歴">ファイル比較・履歴</h2>
 <p>CLI ツール:</p>
 <pre><code class="language-powershell">hrdaya diff before.hrf after.hrf &gt; patch.json
@@ -138,26 +168,39 @@ hrdaya apply-patch base.hrf patch.json --output result.hrf
 hrdaya hash mymap.hrf  # SHA256 一覧</code></pre>
 <p>詳細: <span class="missing">04-developer-guide › cli</span></p>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
-<ul><li>[ ] <code>Ctrl + S</code> で <code>.hrf</code> 保存 → ファイルが ZIP として開ける (7-Zip 等)</li><li>[ ] <code>manifest.json</code> / <code>map.json</code> / <code>assets/</code> が含まれる</li><li>[ ] <code>.hrf</code> を別 PC に持って行って開ける</li><li>[ ] <code>.hrf</code> v0.1 (古い形式) を開ける</li><li>[ ] 裸 <code>.json</code> を開ける</li><li>[ ] Mermaid <code>.mmd</code> → import → ノートとして見える</li><li>[ ] Markdown <code>.md</code> → import</li><li>[ ] JSON Canvas → 往復 (export → import で同じ)</li><li>[ ] OPML / XMind / FreeMind / その他形式 それぞれ import</li><li>[ ] PDF export → 開ける、リンクが動く</li><li>[ ] PNG export → 解像度指定が効く</li><li>[ ] SVG export → Inkscape で開ける</li><li>[ ] Asset Extractor で画像取り出し</li><li>[ ] SHA256 不一致時は書き込まれない (M7 確認)</li></ul>
-<p><span class="missing">← 10</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 12</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#11-ファイルと相互運用">11 ファイルと相互運用</a></li><li class="lvl-2"><a href="#ネイティブ形式-hrf-v02">ネイティブ形式: .hrf v0.2</a></li><li class="lvl-3"><a href="#物理レイアウト">物理レイアウト</a></li><li class="lvl-3"><a href="#manifestjson">manifest.json</a></li><li class="lvl-3"><a href="#アセット重複排除（CE-04、2026-05-21〜）">アセット重複排除（CE-04、2026-05-21〜）</a></li><li class="lvl-3"><a href="#mapjson-構造">map.json 構造</a></li><li class="lvl-3"><a href="#後方互換">後方互換</a></li><li class="lvl-2"><a href="#保存">保存</a></li><li class="lvl-3"><a href="#自動保存">自動保存</a></li><li class="lvl-3"><a href="#保存先">保存先</a></li><li class="lvl-3"><a href="#名前を付けて保存の初期ファイル名">名前を付けて保存の初期ファイル名</a></li><li class="lvl-2"><a href="#開く">開く</a></li><li class="lvl-3"><a href="#Windows-ファイル関連付け">Windows ファイル関連付け</a></li><li class="lvl-2"><a href="#Import-他形式-→-HrdayaFlow">Import: 他形式 → HrdayaFlow</a></li><li class="lvl-3"><a href="#Auto-detect">Auto-detect</a></li><li class="lvl-3"><a href="#取り込み後の整形">取り込み後の整形</a></li><li class="lvl-2"><a href="#Export-HrdayaFlow-→-他形式">Export: HrdayaFlow → 他形式</a></li><li class="lvl-3"><a href="#PDF-PNG-SVG-の細かい設定">PDF / PNG / SVG の細かい設定</a></li><li class="lvl-3"><a href="#PDF-出力">PDF 出力</a></li><li class="lvl-3"><a href="#Print">Print</a></li><li class="lvl-2"><a href="#Asset-Extractor-(アセット取り出し)">Asset Extractor (アセット取り出し)</a></li><li class="lvl-3"><a href="#信頼して展開-(Trust)">信頼して展開 (Trust)</a></li><li class="lvl-2"><a href="#Naked-JSON-Fallback">Naked JSON Fallback</a></li><li class="lvl-2"><a href="#大きなアセットの扱い">大きなアセットの扱い</a></li><li class="lvl-2"><a href="#ファイル比較・履歴">ファイル比較・履歴</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">11 ファイルと相互</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+<ul><li>[ ] <code>Ctrl + S</code> で <code>.hrf</code> 保存 → ファイルが ZIP として開ける (7-Zip 等)</li><li>[ ] <code>manifest.json</code> / <code>map.json</code> / <code>assets/</code> が含まれる</li><li>[ ] <code>.hrf</code> を別 PC に持って行って開ける</li><li>[ ] <code>.hrf</code> v0.1 (古い形式) を開ける</li><li>[ ] 裸 <code>.json</code> を開ける</li><li>[ ] Mermaid <code>.mmd</code> → import → ノートとして見える</li><li>[ ] Markdown <code>.md</code> → import</li><li>[ ] JSON Canvas → 往復 (export → import で同じ)</li><li>[ ] OPML / XMind / FreeMind / その他形式 それぞれ import</li><li>[ ] PDF export → 開ける、リンクが動く</li><li>[ ] PNG export → 解像度指定が効く</li><li>[ ] SVG export → Inkscape で開ける</li><li>[ ] Asset Extractor で画像取り出し</li><li>[ ] SHA256 不一致時は書き込まれない (M7 確認)</li><li>[ ] <code>.hrf</code> をキャンバスへ D&amp;D してマップリンクノードができる</li><li>[ ] リンクノードのダブルクリックで別タブが開き、保存後に元マップへ戻れる</li><li>[ ] リンク先を移動しても再探索で追従する（同名複数時は選択ダイアログ）</li></ul>
+<p><span class="missing">← 10</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 12</span></p>
+<hr>
+<h2 id="メニューにあるが、これまで書かれていなかったインポート">メニューにあるが、これまで書かれていなかったインポート</h2>
+<p>ファイル ▸ インポート には次も並んでいます。</p>
+<h3 id="クリップボードから（Ctrl+Shift+V）">クリップボードから（<code>Ctrl+Shift+V</code>）</h3>
+<p>コピーした<strong>テキストの形式を自動判定</strong>してノート化します。判定できるのは 5 種類。</p>
+<div class="table-wrap"><table><thead><tr><th>判定される形式</th><th>例</th></tr></thead><tbody><tr><td>マインドマップ JSON</td><td>他ツールや AI が吐いた JSON</td></tr><tr><td>Mermaid mindmap</td><td><code> mindmap</code> で始まる記法</td></tr><tr><td>Markdown</td><td>見出しや箇条書きの階層</td></tr><tr><td>項目テキスト</td><td>記号付きの列挙</td></tr><tr><td>プレーンテキスト</td><td>ただの文章</td></tr></tbody></table></div>
+<p>どれとも判定できないときは<strong>何も起きません</strong>（エラーも出ません）。<br>解析は別スレッドで行うため、大きなテキストでも画面が固まりません。</p>
+<p>AI に「マインドマップの JSON を出して」と頼み、その出力をそのまま貼るのが想定用途です。</p>
+<h3 id="Scapple（scap）">Scapple（<code>.scap</code>）</h3>
+<p>Scapple のファイルをノートとエッジに変換します。</p>
+<blockquote><p>⚠ <strong>Rust コアが必要です。</strong> 初期化に失敗していると<br>「Scapple インポートには Rust コアが必要です」と出て中断します（<span class="missing">03-troubleshooting › rust-core-dll</span>）。</p></blockquote>
+<h3 id="プレーンテキスト（txt）">プレーンテキスト（<code>.txt</code>）</h3>
+<p>取り込み方を選べます。</p>
+<div class="table-wrap"><table><thead><tr><th>モード</th><th>結果</th></tr></thead><tbody><tr><td>インデント／箇条書きツリー</td><td>字下げや <code>-</code> の階層をそのままノートの親子関係にする</td></tr><tr><td>1 行 = 1 ノート（フラット）</td><td>階層を作らず、行ごとに独立したノートを並べる</td></tr></tbody></table></div>
+<p>こちらも <strong>Rust コアが必要</strong>です。</p>
+<h3 id="画像-OCR（画像のみ）">画像 OCR（画像のみ）</h3>
+<blockquote><p>🚧 <strong>文字認識はまだ動きません。</strong> メニューにはありますが、実際に行われるのは<br><strong>選んだ画像を画像ノートとして 1 枚置くこと</strong>だけです。<br>実行するとその旨の確認ダイアログが出ます。</p>
+<p>画像の中の文字をノートにしたい場合、現状の手段はありません。</p></blockquote>
+<p>対応拡張子: <code>.png</code> <code>.jpg</code> <code>.jpeg</code> <code>.bmp</code> <code>.webp</code> <code>.gif</code></p>
+<h3 id="SVG-図形（path）">SVG 図形（path）</h3>
+<p><strong>選択中のノートの形を、SVG の図形に差し替えます。</strong> マップに図を読み込む機能では<br>ありません。</p>
+<ul><li>先に<strong>ノートを選択</strong>しておく必要があります（未選択だと「先にノートを選択してください」）</li><li>取り込むのは SVG 内の<strong>単一の <code>&lt;path d=&quot;...&quot;&gt;</code></strong> です</li><li>閲覧のみモードでは実行できません</li></ul>
+<p>星型や矢印など、既定の図形にない形をノートに与えるときに使います。</p></article>
+  <aside class="rightcol"><div class="graph" data-slug="features/11-files-and-interop/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#11-ファイルと相互運用">11 ファイルと相互運用</a></li><li class="lvl-2"><a href="#ネイティブ形式-hrf-v02">ネイティブ形式: .hrf v0.2</a></li><li class="lvl-3"><a href="#物理レイアウト">物理レイアウト</a></li><li class="lvl-3"><a href="#manifestjson">manifest.json</a></li><li class="lvl-3"><a href="#アセット重複排除（CE-04、2026-05-21〜）">アセット重複排除（CE-04、2026-05-21〜）</a></li><li class="lvl-3"><a href="#mapjson-構造">map.json 構造</a></li><li class="lvl-3"><a href="#後方互換">後方互換</a></li><li class="lvl-2"><a href="#保存">保存</a></li><li class="lvl-3"><a href="#自動保存">自動保存</a></li><li class="lvl-3"><a href="#保存先">保存先</a></li><li class="lvl-3"><a href="#名前を付けて保存の初期ファイル名">名前を付けて保存の初期ファイル名</a></li><li class="lvl-2"><a href="#開く">開く</a></li><li class="lvl-3"><a href="#Windows-ファイル関連付け">Windows ファイル関連付け</a></li><li class="lvl-2"><a href="#Import-他形式-→-HrdayaFlow">Import: 他形式 → HrdayaFlow</a></li><li class="lvl-3"><a href="#Auto-detect">Auto-detect</a></li><li class="lvl-3"><a href="#取り込み後の整形">取り込み後の整形</a></li><li class="lvl-2"><a href="#Export-HrdayaFlow-→-他形式">Export: HrdayaFlow → 他形式</a></li><li class="lvl-3"><a href="#PDF-PNG-SVG-の細かい設定">PDF / PNG / SVG の細かい設定</a></li><li class="lvl-3"><a href="#PDF-出力">PDF 出力</a></li><li class="lvl-3"><a href="#Print">Print</a></li><li class="lvl-2"><a href="#Asset-Extractor-(アセット取り出し)">Asset Extractor (アセット取り出し)</a></li><li class="lvl-3"><a href="#信頼して展開-(Trust)">信頼して展開 (Trust)</a></li><li class="lvl-2"><a href="#Naked-JSON-Fallback">Naked JSON Fallback</a></li><li class="lvl-2"><a href="#大きなアセットの扱い">大きなアセットの扱い</a></li><li class="lvl-2"><a href="#マップリンクノード（マップ間リンク）">マップリンクノード（マップ間リンク）</a></li><li class="lvl-3"><a href="#作り方">作り方</a></li><li class="lvl-3"><a href="#開き方">開き方</a></li><li class="lvl-3"><a href="#リンク先が移動したとき（自己修復-ML-05）">リンク先が移動したとき（自己修復 ML-05）</a></li><li class="lvl-3"><a href="#設定">設定</a></li><li class="lvl-2"><a href="#ファイル比較・履歴">ファイル比較・履歴</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li><li class="lvl-2"><a href="#メニューにあるが、これまで書かれていなかったインポート">メニューにあるが、これまで書かれていなかったインポート</a></li><li class="lvl-3"><a href="#クリップボードから（Ctrl+Shift+V）">クリップボードから（Ctrl+Shift+V）</a></li><li class="lvl-3"><a href="#Scapple（scap）">Scapple（.scap）</a></li><li class="lvl-3"><a href="#プレーンテキスト（txt）">プレーンテキスト（.txt）</a></li><li class="lvl-3"><a href="#画像-OCR（画像のみ）">画像 OCR（画像のみ）</a></li><li class="lvl-3"><a href="#SVG-図形（path）">SVG 図形（path）</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/11-files-and-interop";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/11-files-and-interop";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>06 グループと Container | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #groups · #containers · #hierarchy 06 グループと Container ← 05 エッジ | 目次 | → 07 Inspector 複数ノートを「箱」にまとめる仕組みが Container (実体グループ)、視覚的なまとまりだけが…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="06 グループと Container | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #groups · #containers · #hierarchy 06 グループと Container ← 05 エッジ | 目次 | → 07 Inspector 複数ノートを「箱」にまとめる仕組みが Container (実体グループ)、視覚的なまとまりだけが…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>06 グループと Container</h1><div class="note-meta">#manual · #groups · #containers · #hierarchy</div><h1 id="06-グループと-Container">06 グループと Container</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">06 グループと Container</span><div class="note-meta">#manual · #groups · #containers · #hierarchy</div><h1 id="06-グループと-Container">06 グループと Container</h1>
 <p><span class="missing">← 05 エッジ</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 07 Inspector</span></p>
 <p>複数ノートを「箱」にまとめる仕組みが Container (実体グループ)、視覚的なまとまりだけが Frame (装飾)。サブマップ昇格でテーマ別マップを切り出せる。</p>
 <blockquote><p><strong>v0.0.4 親子関係再設計 (2026-05-17)</strong>: Container と Frame の「子の所有」は <strong><code>EdgeKind.hierarchy</code> の親子関係 Edge</strong> で表現されるようになりました。</p>
@@ -65,25 +77,24 @@
 <p>ノートとエッジはレイヤーに所属。新規作成時は <strong>アクティブレイヤー</strong> に入る。</p>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
 <ul><li>[ ] 複数選択 → <code>Ctrl + G</code> で Container 化</li><li>[ ] Container を折りたたみ → 中身が消える</li><li>[ ] Container をドラッグ → 子も動く</li><li>[ ] 子をドラッグで Container 外へ → members から外れる</li><li>[ ] <code>Ctrl + Shift + G</code> で Container 解除</li><li>[ ] サブマップとして開く → 新タブで表示</li><li>[ ] サブマップ内の編集を保存 → 親側の Container にも反映</li><li>[ ] Outline パネルで階層が見える</li><li>[ ] Layer で表示 / 非表示切替</li></ul>
-<p><span class="missing">← 05</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 07</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#06-グループと-Container">06 グループと Container</a></li><li class="lvl-2"><a href="#用語の整理">用語の整理</a></li><li class="lvl-2"><a href="#Container-を作る">Container を作る</a></li><li class="lvl-3"><a href="#既存ノートをまとめる">既存ノートをまとめる</a></li><li class="lvl-3"><a href="#空の-Container-を作る">空の Container を作る</a></li><li class="lvl-3"><a href="#解除">解除</a></li><li class="lvl-2"><a href="#Container-の操作">Container の操作</a></li><li class="lvl-2"><a href="#Container-プロパティ">Container プロパティ</a></li><li class="lvl-2"><a href="#Container-の追従動作">Container の追従動作</a></li><li class="lvl-2"><a href="#サブマップ-(Submap)-昇格">サブマップ (Submap) 昇格</a></li><li class="lvl-3"><a href="#昇格手順">昇格手順</a></li><li class="lvl-3"><a href="#サブマップを再び親に">サブマップを再び親に</a></li><li class="lvl-3"><a href="#注意">注意</a></li><li class="lvl-2"><a href="#折りたたみと検索">折りたたみと検索</a></li><li class="lvl-2"><a href="#ネスト">ネスト</a></li><li class="lvl-2"><a href="#レイアウトヒント">レイアウトヒント</a></li><li class="lvl-2"><a href="#グループ化-(Frame-との使い分け)">グループ化 (Frame との使い分け)</a></li><li class="lvl-2"><a href="#レイヤー-(Layer)">レイヤー (Layer)</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">06 グループと C</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+<p><span class="missing">← 05</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 07</span></p>
+<hr>
+<h2 id="分配とサイズ揃え">分配とサイズ揃え</h2>
+<p>レイアウトメニューの「分配」「サイズ」は、基準を選べます。</p>
+<h3 id="分配（間隔を揃える）">分配（間隔を揃える）</h3>
+<div class="table-wrap"><table><thead><tr><th>基準</th><th>何を等しくするか</th></tr></thead><tbody><tr><td>縁ギャップ</td><td>ノートとノートの<strong>隙間</strong></td></tr><tr><td>中心間隔</td><td>ノートの<strong>中心どうしの距離</strong></td></tr><tr><td>指定間隔</td><td>数値で指定した固定の隙間</td></tr></tbody></table></div>
+<p>大きさがばらばらのノートを並べるとき、「縁ギャップ」だと見た目の間隔が揃い、<br>「中心間隔」だとリズムが揃います。<strong>普通は縁ギャップ</strong>が自然に見えます。</p>
+<h3 id="サイズを揃える">サイズを揃える</h3>
+<div class="table-wrap"><table><thead><tr><th>基準</th><th>合わせる相手</th></tr></thead><tbody><tr><td>アクティブノート</td><td>最後に選んだノート</td></tr><tr><td>最大</td><td>選択の中でいちばん大きいもの</td></tr><tr><td>最小</td><td>選択の中でいちばん小さいもの</td></tr></tbody></table></div>
+<p><strong>幅だけ / 高さだけ / 両方</strong>を選べます。表のような並びを作るときは「幅だけ」が便利です。</p></article>
+  <aside class="rightcol"><div class="graph" data-slug="features/04-groups-and-containers/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#06-グループと-Container">06 グループと Container</a></li><li class="lvl-2"><a href="#用語の整理">用語の整理</a></li><li class="lvl-2"><a href="#Container-を作る">Container を作る</a></li><li class="lvl-3"><a href="#既存ノートをまとめる">既存ノートをまとめる</a></li><li class="lvl-3"><a href="#空の-Container-を作る">空の Container を作る</a></li><li class="lvl-3"><a href="#解除">解除</a></li><li class="lvl-2"><a href="#Container-の操作">Container の操作</a></li><li class="lvl-2"><a href="#Container-プロパティ">Container プロパティ</a></li><li class="lvl-2"><a href="#Container-の追従動作">Container の追従動作</a></li><li class="lvl-2"><a href="#サブマップ-(Submap)-昇格">サブマップ (Submap) 昇格</a></li><li class="lvl-3"><a href="#昇格手順">昇格手順</a></li><li class="lvl-3"><a href="#サブマップを再び親に">サブマップを再び親に</a></li><li class="lvl-3"><a href="#注意">注意</a></li><li class="lvl-2"><a href="#折りたたみと検索">折りたたみと検索</a></li><li class="lvl-2"><a href="#ネスト">ネスト</a></li><li class="lvl-2"><a href="#レイアウトヒント">レイアウトヒント</a></li><li class="lvl-2"><a href="#グループ化-(Frame-との使い分け)">グループ化 (Frame との使い分け)</a></li><li class="lvl-2"><a href="#レイヤー-(Layer)">レイヤー (Layer)</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li><li class="lvl-2"><a href="#分配とサイズ揃え">分配とサイズ揃え</a></li><li class="lvl-3"><a href="#分配（間隔を揃える）">分配（間隔を揃える）</a></li><li class="lvl-3"><a href="#サイズを揃える">サイズを揃える</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/04-groups-and-containers";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/04-groups-and-containers";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

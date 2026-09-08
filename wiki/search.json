@@ -3,138 +3,2152 @@
     "wiki": "hrdayaflow-manual",
     "title": "HṛdayaFlow ユーザーマニュアル",
     "description": "",
-    "url": "/00-INDEX/"
+    "url": "/00-INDEX/",
+    "headings": [
+      {
+        "text": "HṛdayaFlow ユーザーマニュアル",
+        "id": "HṛdayaFlow-ユーザーマニュアル"
+      },
+      {
+        "text": "📘 入門 (basics)",
+        "id": "📘-入門-(basics)"
+      },
+      {
+        "text": "🛠 機能 (features)",
+        "id": "🛠-機能-(features)"
+      },
+      {
+        "text": "📚 リファレンス (reference)",
+        "id": "📚-リファレンス-(reference)"
+      },
+      {
+        "text": "🔧 内部資料 (internal)",
+        "id": "🔧-内部資料-(_internal)"
+      },
+      {
+        "text": "⚙ 自動生成される節について",
+        "id": "⚙-自動生成される節について"
+      },
+      {
+        "text": "凡例",
+        "id": "凡例"
+      },
+      {
+        "text": "このマニュアルを使うコツ",
+        "id": "このマニュアルを使うコツ"
+      },
+      {
+        "text": "バージョン",
+        "id": "バージョン"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "01 概要とアーキテクチャ",
     "description": "",
-    "url": "/basics/01-overview/"
+    "url": "/basics/01-overview/",
+    "headings": [
+      {
+        "text": "01 概要とアーキテクチャ",
+        "id": "01-概要とアーキテクチャ"
+      },
+      {
+        "text": "HṛdayaFlow とは",
+        "id": "HṛdayaFlow-とは"
+      },
+      {
+        "text": "名前の由来",
+        "id": "名前の由来"
+      },
+      {
+        "text": "競合との位置づけ",
+        "id": "競合との位置づけ"
+      },
+      {
+        "text": "アーキテクチャ",
+        "id": "アーキテクチャ"
+      },
+      {
+        "text": "各層の責務",
+        "id": "各層の責務"
+      },
+      {
+        "text": "なぜこの 3 層構成か",
+        "id": "なぜこの-3-層構成か"
+      },
+      {
+        "text": "システム要件",
+        "id": "システム要件"
+      },
+      {
+        "text": "動作環境 (推奨)",
+        "id": "動作環境-(推奨)"
+      },
+      {
+        "text": "ハードウェア (推奨)",
+        "id": "ハードウェア-(推奨)"
+      },
+      {
+        "text": "外部サービス (任意)",
+        "id": "外部サービス-(任意)"
+      },
+      {
+        "text": "ファイル形式",
+        "id": "ファイル形式"
+      },
+      {
+        "text": "ライセンスと配布",
+        "id": "ライセンスと配布"
+      },
+      {
+        "text": "関連章",
+        "id": "関連章"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "02 はじめに",
     "description": "",
-    "url": "/basics/02-getting-started/"
+    "url": "/basics/02-getting-started/",
+    "headings": [
+      {
+        "text": "02 はじめに",
+        "id": "02-はじめに"
+      },
+      {
+        "text": "インストール",
+        "id": "インストール"
+      },
+      {
+        "text": "Windows",
+        "id": "Windows"
+      },
+      {
+        "text": "macOS / Linux",
+        "id": "macOS-Linux"
+      },
+      {
+        "text": "初回起動",
+        "id": "初回起動"
+      },
+      {
+        "text": "画面の構成",
+        "id": "画面の構成"
+      },
+      {
+        "text": "5 分でわかる基本操作",
+        "id": "5-分でわかる基本操作"
+      },
+      {
+        "text": "① 新規マップを作る",
+        "id": "①-新規マップを作る"
+      },
+      {
+        "text": "② ノートを置く",
+        "id": "②-ノートを置く"
+      },
+      {
+        "text": "③ ノートを繋ぐ",
+        "id": "③-ノートを繋ぐ"
+      },
+      {
+        "text": "④ 整える",
+        "id": "④-整える"
+      },
+      {
+        "text": "⑤ 保存する",
+        "id": "⑤-保存する"
+      },
+      {
+        "text": "⑥ 共有する",
+        "id": "⑥-共有する"
+      },
+      {
+        "text": "サンプルマップで遊ぶ",
+        "id": "サンプルマップで遊ぶ"
+      },
+      {
+        "text": "よくある最初のつまずき",
+        "id": "よくある最初のつまずき"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
-    "title": "03-startup-on-windows",
+    "title": "開発時の起動手順（開発者向け）",
     "description": "",
-    "url": "/basics/03-startup-on-windows/"
+    "url": "/basics/03-startup-on-windows/",
+    "headings": [
+      {
+        "text": "開発時の起動手順（開発者向け）",
+        "id": "開発時の起動手順（開発者向け）"
+      },
+      {
+        "text": "構成の全体像",
+        "id": "構成の全体像"
+      },
+      {
+        "text": "Flutter アプリの起動（メイン）",
+        "id": "Flutter-アプリの起動（メイン）"
+      },
+      {
+        "text": "Python AI サービスの起動（AI 機能を使うとき）",
+        "id": "Python-AI-サービスの起動（AI-機能を使うとき）"
+      },
+      {
+        "text": "Rust コアのビルド（コアのコードを変更したとき）",
+        "id": "Rust-コアのビルド（コアのコードを変更したとき）"
+      },
+      {
+        "text": "まとめ：毎日の開発フロー",
+        "id": "まとめ：毎日の開発フロー"
+      },
+      {
+        "text": "トラブルシューティング",
+        "id": "トラブルシューティング"
+      },
+      {
+        "text": "保存ファイルについて",
+        "id": "保存ファイルについて"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "インストール時の警告 (SmartScreen) について",
     "description": "",
-    "url": "/basics/04-install-warning/"
+    "url": "/basics/04-install-warning/",
+    "headings": [
+      {
+        "text": "インストール時の警告 (SmartScreen) について",
+        "id": "インストール時の警告-(SmartScreen)-について"
+      },
+      {
+        "text": "なぜ警告が出るのか",
+        "id": "なぜ警告が出るのか"
+      },
+      {
+        "text": "回避手順 (Windows 10 / 11)",
+        "id": "回避手順-(Windows-10-11)"
+      },
+      {
+        "text": "視覚的な手順",
+        "id": "視覚的な手順"
+      },
+      {
+        "text": "安全性について",
+        "id": "安全性について"
+      },
+      {
+        "text": "SmartScreen 警告がいつ消えるか",
+        "id": "SmartScreen-警告がいつ消えるか"
+      },
+      {
+        "text": "それでも警告が怖い場合",
+        "id": "それでも警告が怖い場合"
+      },
+      {
+        "text": "トラブルシューティング",
+        "id": "トラブルシューティング"
+      },
+      {
+        "text": "関連",
+        "id": "関連"
+      }
+    ]
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "更新・停止・診断・サポート",
+    "description": "",
+    "url": "/basics/05-updates-and-support/",
+    "headings": [
+      {
+        "text": "更新・停止・診断・サポート",
+        "id": "更新・停止・診断・サポート"
+      },
+      {
+        "text": "自動更新の流れ",
+        "id": "自動更新の流れ"
+      },
+      {
+        "text": "手動で確認する",
+        "id": "手動で確認する"
+      },
+      {
+        "text": "⚠ 更新が届かないとき（既知の制約）",
+        "id": "⚠-更新が届かないとき（既知の制約）"
+      },
+      {
+        "text": "閲覧のみモード（リモート停止）",
+        "id": "閲覧のみモード（リモート停止）"
+      },
+      {
+        "text": "ネットに繋がらないときは制限しません",
+        "id": "ネットに繋がらないときは制限しません"
+      },
+      {
+        "text": "診断とフィードバック",
+        "id": "診断とフィードバック"
+      },
+      {
+        "text": "何が入るか",
+        "id": "何が入るか"
+      },
+      {
+        "text": "何が入らないか",
+        "id": "何が入らないか"
+      },
+      {
+        "text": "自動送信はしません",
+        "id": "自動送信はしません"
+      },
+      {
+        "text": "困ったときの窓口",
+        "id": "困ったときの窓口"
+      },
+      {
+        "text": "同梱チュートリアル",
+        "id": "同梱チュートリアル"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "03 キャンバスとジェスチャー",
     "description": "",
-    "url": "/features/01-canvas-and-gestures/"
+    "url": "/features/01-canvas-and-gestures/",
+    "headings": [
+      {
+        "text": "03 キャンバスとジェスチャー",
+        "id": "03-キャンバスとジェスチャー"
+      },
+      {
+        "text": "左アクティビティバー",
+        "id": "左アクティビティバー"
+      },
+      {
+        "text": "移動 (パン)",
+        "id": "移動-(パン)"
+      },
+      {
+        "text": "ズーム",
+        "id": "ズーム"
+      },
+      {
+        "text": "キャンバスズーム（マップ内容）",
+        "id": "キャンバスズーム（マップ内容）"
+      },
+      {
+        "text": "UIズーム（クロームのみ）",
+        "id": "UIズーム（クロームのみ）"
+      },
+      {
+        "text": "選択",
+        "id": "選択"
+      },
+      {
+        "text": "単一選択",
+        "id": "単一選択"
+      },
+      {
+        "text": "複数選択",
+        "id": "複数選択"
+      },
+      {
+        "text": "ノートの幾何アライン（Pie、NA-01）",
+        "id": "ノートの幾何アライン（Pie、NA-01）"
+      },
+      {
+        "text": "種別フィルタ選択 🚧",
+        "id": "種別フィルタ選択-🚧"
+      },
+      {
+        "text": "新規作成",
+        "id": "新規作成"
+      },
+      {
+        "text": "ノート",
+        "id": "ノート"
+      },
+      {
+        "text": "種別を指定して新規",
+        "id": "種別を指定して新規"
+      },
+      {
+        "text": "既存ノードから派生",
+        "id": "既存ノードから派生"
+      },
+      {
+        "text": "編集モードと選択モードの行き来",
+        "id": "編集モードと選択モードの行き来"
+      },
+      {
+        "text": "グリッドとスナップ",
+        "id": "グリッドとスナップ"
+      },
+      {
+        "text": "グリッド",
+        "id": "グリッド"
+      },
+      {
+        "text": "スナップ",
+        "id": "スナップ"
+      },
+      {
+        "text": "移動・整列",
+        "id": "移動・整列"
+      },
+      {
+        "text": "移動",
+        "id": "移動"
+      },
+      {
+        "text": "整列 (Align)",
+        "id": "整列-(Align)"
+      },
+      {
+        "text": "重ね順 (Z-order)",
+        "id": "重ね順-(Z-order)"
+      },
+      {
+        "text": "変形 (Blender 風 G/S/R)",
+        "id": "変形-(Blender-風-GSR)"
+      },
+      {
+        "text": "エッジ作成",
+        "id": "エッジ作成"
+      },
+      {
+        "text": "中央に戻る",
+        "id": "中央に戻る"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "G / S / R 変形とリセット",
+        "id": "G-S-R-変形とリセット"
+      },
+      {
+        "text": "キャンバスの見た目",
+        "id": "キャンバスの見た目"
+      },
+      {
+        "text": "グリッド表示",
+        "id": "グリッド表示"
+      },
+      {
+        "text": "質感（テクスチャ）",
+        "id": "質感（テクスチャ）"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
-    "title": "04 ノード 13 種",
+    "title": "04 ノート 14 種",
     "description": "",
-    "url": "/features/02-nodes/"
+    "url": "/features/02-nodes/",
+    "headings": [
+      {
+        "text": "04 ノート 14 種",
+        "id": "04-ノート-14-種"
+      },
+      {
+        "text": "共通プロパティ",
+        "id": "共通プロパティ"
+      },
+      {
+        "text": "ノード種別の切り替え",
+        "id": "ノード種別の切り替え"
+      },
+      {
+        "text": "1. Text — プレーンテキスト",
+        "id": "1-Text-—-プレーンテキスト"
+      },
+      {
+        "text": "2. Markdown",
+        "id": "2-Markdown"
+      },
+      {
+        "text": "変更理由（2026-09）",
+        "id": "変更理由（2026-09）"
+      },
+      {
+        "text": "3. Image",
+        "id": "3-Image"
+      },
+      {
+        "text": "4. Link — URL",
+        "id": "4-Link-—-URL"
+      },
+      {
+        "text": "5. Video — 動画",
+        "id": "5-Video-—-動画"
+      },
+      {
+        "text": "6. Audio — 音声",
+        "id": "6-Audio-—-音声"
+      },
+      {
+        "text": "7. Checklist — チェックリスト",
+        "id": "7-Checklist-—-チェックリスト"
+      },
+      {
+        "text": "8. Code — コード片",
+        "id": "8-Code-—-コード片"
+      },
+      {
+        "text": "9. Embed — HTML 埋め込み",
+        "id": "9-Embed-—-HTML-埋め込み"
+      },
+      {
+        "text": "10. Math — LaTeX 数式",
+        "id": "10-Math-—-LaTeX-数式"
+      },
+      {
+        "text": "11. Frame — 装飾矩形",
+        "id": "11-Frame-—-装飾矩形"
+      },
+      {
+        "text": "12. Container — 折りたたみ可能な箱",
+        "id": "12-Container-—-折りたたみ可能な箱"
+      },
+      {
+        "text": "13. Dot — エッジ中継",
+        "id": "13-Dot-—-エッジ中継"
+      },
+      {
+        "text": "14. File — ファイル参照",
+        "id": "14-File-—-ファイル参照"
+      },
+      {
+        "text": ".hrf を落としたときはマップリンクになる",
+        "id": "hrf-を落としたときはマップリンクになる"
+      },
+      {
+        "text": "ノートの図形（10 種）",
+        "id": "ノートの図形（10-種）"
+      },
+      {
+        "text": "ノード種別ピッカー (新規作成)",
+        "id": "ノード種別ピッカー-(新規作成)"
+      },
+      {
+        "text": "ノードのコピー / 貼り付け",
+        "id": "ノードのコピー-貼り付け"
+      },
+      {
+        "text": "貼り付けの 3 モード",
+        "id": "貼り付けの-3-モード"
+      },
+      {
+        "text": "縦書きノートの最小幅制約",
+        "id": "縦書きノートの最小幅制約"
+      },
+      {
+        "text": "仕組み",
+        "id": "仕組み"
+      },
+      {
+        "text": "適用される操作",
+        "id": "適用される操作"
+      },
+      {
+        "text": "内部実装 (参考)",
+        "id": "内部実装-(参考)"
+      },
+      {
+        "text": "動作確認",
+        "id": "動作確認"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "05 エッジと接続",
     "description": "",
-    "url": "/features/03-edges-and-connections/"
+    "url": "/features/03-edges-and-connections/",
+    "headings": [
+      {
+        "text": "05 エッジと接続",
+        "id": "05-エッジと接続"
+      },
+      {
+        "text": "エッジを引く",
+        "id": "エッジを引く"
+      },
+      {
+        "text": "キーボード",
+        "id": "キーボード"
+      },
+      {
+        "text": "親子関係の特殊な振る舞い (v0.0.4 O 系)",
+        "id": "親子関係の特殊な振る舞い-(v004-O-系)"
+      },
+      {
+        "text": "接続の種類（意味）",
+        "id": "接続の種類（意味）"
+      },
+      {
+        "text": "エッジのスタイル",
+        "id": "エッジのスタイル"
+      },
+      {
+        "text": "線スタイル（8 種）",
+        "id": "線スタイル（8-種）"
+      },
+      {
+        "text": "矢印の端の形（10 種）",
+        "id": "矢印の端の形（10-種）"
+      },
+      {
+        "text": "エッジプリセット",
+        "id": "エッジプリセット"
+      },
+      {
+        "text": "エッジのアニメーション（LFO）",
+        "id": "エッジのアニメーション（LFO）"
+      },
+      {
+        "text": "ラベル",
+        "id": "ラベル"
+      },
+      {
+        "text": "エッジの編集と削除",
+        "id": "エッジの編集と削除"
+      },
+      {
+        "text": "接続点 (Pin)",
+        "id": "接続点-(Pin)"
+      },
+      {
+        "text": "自動レイアウトとエッジ",
+        "id": "自動レイアウトとエッジ"
+      },
+      {
+        "text": "既存ノートの繋ぎ替え",
+        "id": "既存ノートの繋ぎ替え"
+      },
+      {
+        "text": "多対多",
+        "id": "多対多"
+      },
+      {
+        "text": "接続検証 (G/S/R 変形時)",
+        "id": "接続検証-(GSR-変形時)"
+      },
+      {
+        "text": "エッジの一括操作",
+        "id": "エッジの一括操作"
+      },
+      {
+        "text": "エッジ非表示",
+        "id": "エッジ非表示"
+      },
+      {
+        "text": "ナイフでエッジリルート (Dot 中継)",
+        "id": "ナイフでエッジリルート-(Dot-中継)"
+      },
+      {
+        "text": "切断前 → 切断後 (イメージ)",
+        "id": "切断前-→-切断後-(イメージ)"
+      },
+      {
+        "text": "操作",
+        "id": "操作"
+      },
+      {
+        "text": "仕様",
+        "id": "仕様"
+      },
+      {
+        "text": "中断 / 誤発動防止",
+        "id": "中断-誤発動防止"
+      },
+      {
+        "text": "Dot ノートについて",
+        "id": "Dot-ノートについて"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "ルーティング（経路の決め方）",
+        "id": "ルーティング（経路の決め方）"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "06 グループと Container",
     "description": "",
-    "url": "/features/04-groups-and-containers/"
+    "url": "/features/04-groups-and-containers/",
+    "headings": [
+      {
+        "text": "06 グループと Container",
+        "id": "06-グループと-Container"
+      },
+      {
+        "text": "用語の整理",
+        "id": "用語の整理"
+      },
+      {
+        "text": "Container を作る",
+        "id": "Container-を作る"
+      },
+      {
+        "text": "既存ノートをまとめる",
+        "id": "既存ノートをまとめる"
+      },
+      {
+        "text": "空の Container を作る",
+        "id": "空の-Container-を作る"
+      },
+      {
+        "text": "解除",
+        "id": "解除"
+      },
+      {
+        "text": "Container の操作",
+        "id": "Container-の操作"
+      },
+      {
+        "text": "Container プロパティ",
+        "id": "Container-プロパティ"
+      },
+      {
+        "text": "Container の追従動作",
+        "id": "Container-の追従動作"
+      },
+      {
+        "text": "サブマップ (Submap) 昇格",
+        "id": "サブマップ-(Submap)-昇格"
+      },
+      {
+        "text": "昇格手順",
+        "id": "昇格手順"
+      },
+      {
+        "text": "サブマップを再び親に",
+        "id": "サブマップを再び親に"
+      },
+      {
+        "text": "注意",
+        "id": "注意"
+      },
+      {
+        "text": "折りたたみと検索",
+        "id": "折りたたみと検索"
+      },
+      {
+        "text": "ネスト",
+        "id": "ネスト"
+      },
+      {
+        "text": "レイアウトヒント",
+        "id": "レイアウトヒント"
+      },
+      {
+        "text": "グループ化 (Frame との使い分け)",
+        "id": "グループ化-(Frame-との使い分け)"
+      },
+      {
+        "text": "レイヤー (Layer)",
+        "id": "レイヤー-(Layer)"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "分配とサイズ揃え",
+        "id": "分配とサイズ揃え"
+      },
+      {
+        "text": "分配（間隔を揃える）",
+        "id": "分配（間隔を揃える）"
+      },
+      {
+        "text": "サイズを揃える",
+        "id": "サイズを揃える"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "05-note-stacks",
     "description": "",
-    "url": "/features/05-note-stacks/"
+    "url": "/features/05-note-stacks/",
+    "headings": [
+      {
+        "text": "ノート Stack (NS-01)",
+        "id": "ノート-Stack-(NS-01)"
+      },
+      {
+        "text": "関連",
+        "id": "関連"
+      },
+      {
+        "text": "使い方",
+        "id": "使い方"
+      },
+      {
+        "text": "ショートカット",
+        "id": "ショートカット"
+      },
+      {
+        "text": "インスペクタ（Stack 状態のとき）",
+        "id": "インスペクタ（Stack-状態のとき）"
+      },
+      {
+        "text": "永続化",
+        "id": "永続化"
+      },
+      {
+        "text": "親ノートを削除したとき",
+        "id": "親ノートを削除したとき"
+      },
+      {
+        "text": "並べ方（寄せ）",
+        "id": "並べ方（寄せ）"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "07 Inspector と書式",
     "description": "",
-    "url": "/features/06-inspector-and-formatting/"
+    "url": "/features/06-inspector-and-formatting/",
+    "headings": [
+      {
+        "text": "07 Inspector と書式",
+        "id": "07-Inspector-と書式"
+      },
+      {
+        "text": "Inspector 全体構成",
+        "id": "Inspector-全体構成"
+      },
+      {
+        "text": "親子・階層パネル (v0.0.4 O 系)",
+        "id": "親子・階層パネル-(v004-O-系)"
+      },
+      {
+        "text": "利点",
+        "id": "利点"
+      },
+      {
+        "text": "1. テキスト書式 (Format Panel)",
+        "id": "1-テキスト書式-(Format-Panel)"
+      },
+      {
+        "text": "Bold / Italic / Underline / Strikethrough",
+        "id": "Bold-Italic-Underline-Strikethrough"
+      },
+      {
+        "text": "フォントサイズ",
+        "id": "フォントサイズ"
+      },
+      {
+        "text": "配置",
+        "id": "配置"
+      },
+      {
+        "text": "Alignment ボタンの writingMode 適応",
+        "id": "Alignment-ボタンの-writingMode-適応"
+      },
+      {
+        "text": "テキスト色",
+        "id": "テキスト色"
+      },
+      {
+        "text": "2. 図形 (Shape)",
+        "id": "2-図形-(Shape)"
+      },
+      {
+        "text": "CornerRadius",
+        "id": "CornerRadius"
+      },
+      {
+        "text": "3. 枠線 (Border)",
+        "id": "3-枠線-(Border)"
+      },
+      {
+        "text": "4. 塗り (Fill)",
+        "id": "4-塗り-(Fill)"
+      },
+      {
+        "text": "5. エフェクト (Effects)",
+        "id": "5-エフェクト-(Effects)"
+      },
+      {
+        "text": "Drop Shadow",
+        "id": "Drop-Shadow"
+      },
+      {
+        "text": "Opacity",
+        "id": "Opacity"
+      },
+      {
+        "text": "Magnetic Snap",
+        "id": "Magnetic-Snap"
+      },
+      {
+        "text": "6. ノート種別切替 (Kind Switcher)",
+        "id": "6-ノート種別切替-(Kind-Switcher)"
+      },
+      {
+        "text": "7. 共通スタイルライブラリ (Style Library) 🚧",
+        "id": "7-共通スタイルライブラリ-(Style-Library)-🚧"
+      },
+      {
+        "text": "8. エッジ Inspector",
+        "id": "8-エッジ-Inspector"
+      },
+      {
+        "text": "9. Container Inspector",
+        "id": "9-Container-Inspector"
+      },
+      {
+        "text": "10. Meta セクション",
+        "id": "10-Meta-セクション"
+      },
+      {
+        "text": "複数選択時の Inspector",
+        "id": "複数選択時の-Inspector"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "枠線のスタイル",
+        "id": "枠線のスタイル"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "07-note-presets",
     "description": "",
-    "url": "/features/07-note-presets/"
+    "url": "/features/07-note-presets/",
+    "headings": [
+      {
+        "text": "ノートプリセット (NP-01)",
+        "id": "ノートプリセット-(NP-01)"
+      },
+      {
+        "text": "関連",
+        "id": "関連"
+      },
+      {
+        "text": "プリセットの作成",
+        "id": "プリセットの作成"
+      },
+      {
+        "text": "適用とデフォルト",
+        "id": "適用とデフォルト"
+      },
+      {
+        "text": "🔐 ロック",
+        "id": "🔐-ロック"
+      },
+      {
+        "text": "スタイルのコピー／貼り付け",
+        "id": "スタイルのコピー／貼り付け"
+      },
+      {
+        "text": "折りたたみ",
+        "id": "折りたたみ"
+      },
+      {
+        "text": "プリセットの保存先",
+        "id": "プリセットの保存先"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "08 Undo / 履歴",
     "description": "",
-    "url": "/features/08-undo-history/"
+    "url": "/features/08-undo-history/",
+    "headings": [
+      {
+        "text": "08 Undo / 履歴",
+        "id": "08-Undo-履歴"
+      },
+      {
+        "text": "基本操作",
+        "id": "基本操作"
+      },
+      {
+        "text": "仕組み: JSON Patch ベース",
+        "id": "仕組み-JSON-Patch-ベース"
+      },
+      {
+        "text": "Coalesce (連続操作のマージ)",
+        "id": "Coalesce-(連続操作のマージ)"
+      },
+      {
+        "text": "履歴ビューア (Time Machine)",
+        "id": "履歴ビューア-(Time-Machine)"
+      },
+      {
+        "text": "履歴の永続化",
+        "id": "履歴の永続化"
+      },
+      {
+        "text": "履歴の上限",
+        "id": "履歴の上限"
+      },
+      {
+        "text": "Coalesce 設計の勘所",
+        "id": "Coalesce-設計の勘所"
+      },
+      {
+        "text": "やり直しできない操作",
+        "id": "やり直しできない操作"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "09 検索と Outline",
     "description": "",
-    "url": "/features/09-search-and-outline/"
+    "url": "/features/09-search-and-outline/",
+    "headings": [
+      {
+        "text": "09 検索と Outline",
+        "id": "09-検索と-Outline"
+      },
+      {
+        "text": "Outline パネル (左)",
+        "id": "Outline-パネル-(左)"
+      },
+      {
+        "text": "Layer タブ",
+        "id": "Layer-タブ"
+      },
+      {
+        "text": "Filter タブ",
+        "id": "Filter-タブ"
+      },
+      {
+        "text": "検索ボックス (Outline 内)",
+        "id": "検索ボックス-(Outline-内)"
+      },
+      {
+        "text": "Quick Search (Ctrl + F)",
+        "id": "Quick-Search-(Ctrl-+-F)"
+      },
+      {
+        "text": "検索オプション",
+        "id": "検索オプション"
+      },
+      {
+        "text": "検索対象",
+        "id": "検索対象"
+      },
+      {
+        "text": "Command Palette (Ctrl + K)",
+        "id": "Command-Palette-(Ctrl-+-K)"
+      },
+      {
+        "text": "候補に出るもの",
+        "id": "候補に出るもの"
+      },
+      {
+        "text": "QuickOpen (ファイル / マップ切替)",
+        "id": "QuickOpen-(ファイル-マップ切替)"
+      },
+      {
+        "text": "Mini Map (オーバービュー)",
+        "id": "Mini-Map-(オーバービュー)"
+      },
+      {
+        "text": "ジャンプ系ショートカット",
+        "id": "ジャンプ系ショートカット"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "10 AI 機能",
     "description": "",
-    "url": "/features/10-ai-features/"
+    "url": "/features/10-ai-features/",
+    "headings": [
+      {
+        "text": "10 AI 機能",
+        "id": "10-AI-機能"
+      },
+      {
+        "text": "AI 機能一覧",
+        "id": "AI-機能一覧"
+      },
+      {
+        "text": "バックエンド",
+        "id": "バックエンド"
+      },
+      {
+        "text": "バックエンド一覧",
+        "id": "バックエンド一覧"
+      },
+      {
+        "text": "切り替え",
+        "id": "切り替え"
+      },
+      {
+        "text": "サービス起動 {#service-startup}",
+        "id": "サービス起動-service-startup"
+      },
+      {
+        "text": "自動起動 (既定)",
+        "id": "自動起動-(既定)"
+      },
+      {
+        "text": "手動起動",
+        "id": "手動起動"
+      },
+      {
+        "text": "接続確認",
+        "id": "接続確認"
+      },
+      {
+        "text": "テキスト → マップ {#text-to-map}",
+        "id": "テキスト-→-マップ-text-to-map"
+      },
+      {
+        "text": "使い方",
+        "id": "使い方"
+      },
+      {
+        "text": "ストリーミング",
+        "id": "ストリーミング"
+      },
+      {
+        "text": "入力形式の例",
+        "id": "入力形式の例"
+      },
+      {
+        "text": "詳細フォーマット仕様",
+        "id": "詳細フォーマット仕様"
+      },
+      {
+        "text": "マップ → 要約 {#summarize}",
+        "id": "マップ-→-要約-summarize"
+      },
+      {
+        "text": "使い方",
+        "id": "使い方"
+      },
+      {
+        "text": "内部処理",
+        "id": "内部処理"
+      },
+      {
+        "text": "Suggest Edges {#suggest-edges}",
+        "id": "Suggest-Edges-suggest-edges"
+      },
+      {
+        "text": "使い方",
+        "id": "使い方"
+      },
+      {
+        "text": "Suggest Children {#suggest-children}",
+        "id": "Suggest-Children-suggest-children"
+      },
+      {
+        "text": "使い方",
+        "id": "使い方"
+      },
+      {
+        "text": "Diff (構造比較) {#diff}",
+        "id": "Diff-(構造比較)-diff"
+      },
+      {
+        "text": "用途",
+        "id": "用途"
+      },
+      {
+        "text": "CLI",
+        "id": "CLI"
+      },
+      {
+        "text": "MCP Server",
+        "id": "MCP-Server"
+      },
+      {
+        "text": "何ができるか",
+        "id": "何ができるか"
+      },
+      {
+        "text": "接続の設定",
+        "id": "接続の設定"
+      },
+      {
+        "text": "注意",
+        "id": "注意"
+      },
+      {
+        "text": "外部 AI の出力を取り込む",
+        "id": "外部-AI-の出力を取り込む"
+      },
+      {
+        "text": "エッジ候補を出す範囲",
+        "id": "エッジ候補を出す範囲"
+      },
+      {
+        "text": "プロンプトテンプレート",
+        "id": "プロンプトテンプレート"
+      },
+      {
+        "text": "エラーとフォールバック",
+        "id": "エラーとフォールバック"
+      },
+      {
+        "text": "プライバシー",
+        "id": "プライバシー"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "11 ファイルと相互運用",
     "description": "",
-    "url": "/features/11-files-and-interop/"
+    "url": "/features/11-files-and-interop/",
+    "headings": [
+      {
+        "text": "11 ファイルと相互運用",
+        "id": "11-ファイルと相互運用"
+      },
+      {
+        "text": "ネイティブ形式: .hrf v0.2",
+        "id": "ネイティブ形式-hrf-v02"
+      },
+      {
+        "text": "物理レイアウト",
+        "id": "物理レイアウト"
+      },
+      {
+        "text": "manifest.json",
+        "id": "manifestjson"
+      },
+      {
+        "text": "アセット重複排除（CE-04、2026-05-21〜）",
+        "id": "アセット重複排除（CE-04、2026-05-21〜）"
+      },
+      {
+        "text": "map.json 構造",
+        "id": "mapjson-構造"
+      },
+      {
+        "text": "後方互換",
+        "id": "後方互換"
+      },
+      {
+        "text": "保存",
+        "id": "保存"
+      },
+      {
+        "text": "自動保存",
+        "id": "自動保存"
+      },
+      {
+        "text": "保存先",
+        "id": "保存先"
+      },
+      {
+        "text": "名前を付けて保存の初期ファイル名",
+        "id": "名前を付けて保存の初期ファイル名"
+      },
+      {
+        "text": "開く",
+        "id": "開く"
+      },
+      {
+        "text": "Windows ファイル関連付け",
+        "id": "Windows-ファイル関連付け"
+      },
+      {
+        "text": "Import: 他形式 → HrdayaFlow",
+        "id": "Import-他形式-→-HrdayaFlow"
+      },
+      {
+        "text": "Auto-detect",
+        "id": "Auto-detect"
+      },
+      {
+        "text": "取り込み後の整形",
+        "id": "取り込み後の整形"
+      },
+      {
+        "text": "Export: HrdayaFlow → 他形式",
+        "id": "Export-HrdayaFlow-→-他形式"
+      },
+      {
+        "text": "PDF / PNG / SVG の細かい設定",
+        "id": "PDF-PNG-SVG-の細かい設定"
+      },
+      {
+        "text": "PDF 出力",
+        "id": "PDF-出力"
+      },
+      {
+        "text": "Print",
+        "id": "Print"
+      },
+      {
+        "text": "Asset Extractor (アセット取り出し)",
+        "id": "Asset-Extractor-(アセット取り出し)"
+      },
+      {
+        "text": "信頼して展開 (Trust)",
+        "id": "信頼して展開-(Trust)"
+      },
+      {
+        "text": "Naked JSON Fallback",
+        "id": "Naked-JSON-Fallback"
+      },
+      {
+        "text": "大きなアセットの扱い",
+        "id": "大きなアセットの扱い"
+      },
+      {
+        "text": "マップリンクノード（マップ間リンク）",
+        "id": "マップリンクノード（マップ間リンク）"
+      },
+      {
+        "text": "作り方",
+        "id": "作り方"
+      },
+      {
+        "text": "開き方",
+        "id": "開き方"
+      },
+      {
+        "text": "リンク先が移動したとき（自己修復 ML-05）",
+        "id": "リンク先が移動したとき（自己修復-ML-05）"
+      },
+      {
+        "text": "設定",
+        "id": "設定"
+      },
+      {
+        "text": "ファイル比較・履歴",
+        "id": "ファイル比較・履歴"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "メニューにあるが、これまで書かれていなかったインポート",
+        "id": "メニューにあるが、これまで書かれていなかったインポート"
+      },
+      {
+        "text": "クリップボードから（Ctrl+Shift+V）",
+        "id": "クリップボードから（Ctrl+Shift+V）"
+      },
+      {
+        "text": "Scapple（.scap）",
+        "id": "Scapple（scap）"
+      },
+      {
+        "text": "プレーンテキスト（.txt）",
+        "id": "プレーンテキスト（txt）"
+      },
+      {
+        "text": "画像 OCR（画像のみ）",
+        "id": "画像-OCR（画像のみ）"
+      },
+      {
+        "text": "SVG 図形（path）",
+        "id": "SVG-図形（path）"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
-    "title": "12 Planner / Calendar",
+    "title": "12 Planner / Calendar / Task list",
     "description": "",
-    "url": "/features/12-planner-calendar/"
+    "url": "/features/12-planner-calendar/",
+    "headings": [
+      {
+        "text": "12 Planner / Calendar / Task list",
+        "id": "12-Planner-Calendar-Task-list"
+      },
+      {
+        "text": "データの考え方",
+        "id": "データの考え方"
+      },
+      {
+        "text": "Task list",
+        "id": "Task-list"
+      },
+      {
+        "text": "左ナビ",
+        "id": "左ナビ"
+      },
+      {
+        "text": "クイック追加",
+        "id": "クイック追加"
+      },
+      {
+        "text": "行の操作",
+        "id": "行の操作"
+      },
+      {
+        "text": "リストの管理",
+        "id": "リストの管理"
+      },
+      {
+        "text": "Calendar ビュー",
+        "id": "Calendar-ビュー"
+      },
+      {
+        "text": "予定・タスクの追加（Calendar）",
+        "id": "予定・タスクの追加（Calendar）"
+      },
+      {
+        "text": "繰り返しと完了ロール",
+        "id": "繰り返しと完了ロール"
+      },
+      {
+        "text": "Quick Entry（トレイ）のタスクモード",
+        "id": "Quick-Entry（トレイ）のタスクモード"
+      },
+      {
+        "text": "MCP ツール（planner）",
+        "id": "MCP-ツール（planner）"
+      },
+      {
+        "text": "マインドマップとの関係",
+        "id": "マインドマップとの関係"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "カレンダーの表示切替",
+        "id": "カレンダーの表示切替"
+      },
+      {
+        "text": "優先度",
+        "id": "優先度"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "privacy",
     "description": "",
-    "url": "/privacy/"
+    "url": "/privacy/",
+    "headings": [
+      {
+        "text": "プライバシー方針（自動更新）",
+        "id": "プライバシー方針（自動更新）"
+      },
+      {
+        "text": "送信する情報",
+        "id": "送信する情報"
+      },
+      {
+        "text": "送信しない情報",
+        "id": "送信しない情報"
+      },
+      {
+        "text": "停止方法",
+        "id": "停止方法"
+      },
+      {
+        "text": "利用停止ポリシー確認",
+        "id": "利用停止ポリシー確認"
+      },
+      {
+        "text": "備考",
+        "id": "備考"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "13 ショートカット早見表",
     "description": "",
-    "url": "/reference/01-keyboard-shortcuts/"
+    "url": "/reference/01-keyboard-shortcuts/",
+    "headings": [
+      {
+        "text": "13 ショートカット早見表",
+        "id": "13-ショートカット早見表"
+      },
+      {
+        "text": "全ショートカット（自動生成）",
+        "id": "全ショートカット（自動生成）"
+      },
+      {
+        "text": "メニューに出ないキー割り当て（自動生成）",
+        "id": "メニューに出ないキー割り当て（自動生成）"
+      },
+      {
+        "text": "文脈つき早見表（手書き）",
+        "id": "文脈つき早見表（手書き）"
+      },
+      {
+        "text": "ファイル",
+        "id": "ファイル"
+      },
+      {
+        "text": "編集",
+        "id": "編集"
+      },
+      {
+        "text": "ノード作成",
+        "id": "ノード作成"
+      },
+      {
+        "text": "表示・移動",
+        "id": "表示・移動"
+      },
+      {
+        "text": "配置・整列",
+        "id": "配置・整列"
+      },
+      {
+        "text": "マウス操作（キャンバス）",
+        "id": "マウス操作（キャンバス）"
+      },
+      {
+        "text": "エッジ（接続）",
+        "id": "エッジ（接続）"
+      },
+      {
+        "text": "Blender 風変形",
+        "id": "Blender-風変形"
+      },
+      {
+        "text": "書式 (テキスト編集中)",
+        "id": "書式-(テキスト編集中)"
+      },
+      {
+        "text": "テキスト編集 (ノート編集中)",
+        "id": "テキスト編集-(ノート編集中)"
+      },
+      {
+        "text": "グループ・Container",
+        "id": "グループ・Container"
+      },
+      {
+        "text": "検索・パネル",
+        "id": "検索・パネル"
+      },
+      {
+        "text": "AI",
+        "id": "AI"
+      },
+      {
+        "text": "エクスポート",
+        "id": "エクスポート"
+      },
+      {
+        "text": "タブ",
+        "id": "タブ"
+      },
+      {
+        "text": "アプリ全体",
+        "id": "アプリ全体"
+      },
+      {
+        "text": "カスタマイズ",
+        "id": "カスタマイズ"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "12 テーマ・多言語・アクセシビリティ",
     "description": "",
-    "url": "/reference/02-themes-i18n-a11y/"
+    "url": "/reference/02-themes-i18n-a11y/",
+    "headings": [
+      {
+        "text": "12 テーマ・多言語・アクセシビリティ",
+        "id": "12-テーマ・多言語・アクセシビリティ"
+      },
+      {
+        "text": "テーマ",
+        "id": "テーマ"
+      },
+      {
+        "text": "ライト / ダーク / システム連動",
+        "id": "ライト-ダーク-システム連動"
+      },
+      {
+        "text": "カラーアクセント",
+        "id": "カラーアクセント"
+      },
+      {
+        "text": "フォント",
+        "id": "フォント"
+      },
+      {
+        "text": "キャンバス背景",
+        "id": "キャンバス背景"
+      },
+      {
+        "text": "多言語 (i18n)",
+        "id": "多言語-(i18n)"
+      },
+      {
+        "text": "サポート言語",
+        "id": "サポート言語"
+      },
+      {
+        "text": "切り替え",
+        "id": "切り替え"
+      },
+      {
+        "text": "翻訳に貢献するには",
+        "id": "翻訳に貢献するには"
+      },
+      {
+        "text": "アクセシビリティ (a11y)",
+        "id": "アクセシビリティ-(a11y)"
+      },
+      {
+        "text": "スクリーンリーダー対応",
+        "id": "スクリーンリーダー対応"
+      },
+      {
+        "text": "キーボード操作のみで完結",
+        "id": "キーボード操作のみで完結"
+      },
+      {
+        "text": "コントラスト",
+        "id": "コントラスト"
+      },
+      {
+        "text": "フォントサイズ拡大",
+        "id": "フォントサイズ拡大"
+      },
+      {
+        "text": "モーション軽減",
+        "id": "モーション軽減"
+      },
+      {
+        "text": "高コントラストモード 🚧",
+        "id": "高コントラストモード-🚧"
+      },
+      {
+        "text": "色覚異常配慮",
+        "id": "色覚異常配慮"
+      },
+      {
+        "text": "Tab トラップ",
+        "id": "Tab-トラップ"
+      },
+      {
+        "text": "スクリーンリーダーで使うフロー (一例)",
+        "id": "スクリーンリーダーで使うフロー-(一例)"
+      },
+      {
+        "text": "プライバシー",
+        "id": "プライバシー"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "ハイコントラストの扱い",
+        "id": "ハイコントラストの扱い"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "15 トラブルシューティング",
     "description": "",
-    "url": "/reference/03-troubleshooting/"
+    "url": "/reference/03-troubleshooting/",
+    "headings": [
+      {
+        "text": "15 トラブルシューティング",
+        "id": "15-トラブルシューティング"
+      },
+      {
+        "text": "アプリが起動しない",
+        "id": "アプリが起動しない"
+      },
+      {
+        "text": "Windows: SmartScreen で止まる",
+        "id": "Windows-SmartScreen-で止まる"
+      },
+      {
+        "text": "Rust コア（hrdayacore.dll）未検出 {#rust-core-dll}",
+        "id": "Rust-コア（hrdaya_coredll）未検出-rust-core-dll"
+      },
+      {
+        "text": "flutter run でクラッシュ即終了",
+        "id": "flutter-run-でクラッシュ即終了"
+      },
+      {
+        "text": "インストールと更新",
+        "id": "インストールと更新"
+      },
+      {
+        "text": "インストーラーが「変更 / 修復 / 削除」の画面になる",
+        "id": "インストーラーが「変更-修復-削除」の画面になる"
+      },
+      {
+        "text": "インストール完了時にブラウザが開こうとする / 「この 'https' リンクを開くことができません」",
+        "id": "インストール完了時にブラウザが開こうとする-「この-'https'-リンクを開くことができません」"
+      },
+      {
+        "text": "起動直後に VCRUNTIME140.dll が見つかりません / 0xc000007b",
+        "id": "起動直後に-VCRUNTIME140dll-が見つかりません-0xc000007b"
+      },
+      {
+        "text": "更新が来ない {#no-update}",
+        "id": "更新が来ない-no-update"
+      },
+      {
+        "text": "「利用を停止しています」と出て編集できない",
+        "id": "「利用を停止しています」と出て編集できない"
+      },
+      {
+        "text": "更新の途中で「未保存の変更を保存できませんでした」と出て止まった",
+        "id": "更新の途中で「未保存の変更を保存できませんでした」と出て止まった"
+      },
+      {
+        "text": "ダウンロードした MSI が本物か確かめたい",
+        "id": "ダウンロードした-MSI-が本物か確かめたい"
+      },
+      {
+        "text": "ファイル関係",
+        "id": "ファイル関係"
+      },
+      {
+        "text": "ファイル整合性エラー（CE-03） {#map-validation}",
+        "id": "ファイル整合性エラー（CE-03）-map-validation"
+      },
+      {
+        "text": ".hrf が開けない",
+        "id": "hrf-が開けない"
+      },
+      {
+        "text": "自動保存が効かない",
+        "id": "自動保存が効かない"
+      },
+      {
+        "text": ".hrf を開いた直後に「アセットの整合性が確認できません」 {#hash-mismatch}",
+        "id": "hrf-を開いた直後に「アセットの整合性が確認できません」-hash-mismatch"
+      },
+      {
+        "text": "naked JSON を保存したのに .hrf になる",
+        "id": "naked-JSON-を保存したのに-hrf-になる"
+      },
+      {
+        "text": "キャンバス操作",
+        "id": "キャンバス操作"
+      },
+      {
+        "text": "ノートが画面外に消えた",
+        "id": "ノートが画面外に消えた"
+      },
+      {
+        "text": "ドラッグしてもノートが動かない",
+        "id": "ドラッグしてもノートが動かない"
+      },
+      {
+        "text": "Dot が勝手に消える",
+        "id": "Dot-が勝手に消える"
+      },
+      {
+        "text": "スナップが意図しない位置で吸着する",
+        "id": "スナップが意図しない位置で吸着する"
+      },
+      {
+        "text": "Tab キーが pie メニューを呼ばない",
+        "id": "Tab-キーが-pie-メニューを呼ばない"
+      },
+      {
+        "text": "エッジ関係",
+        "id": "エッジ関係"
+      },
+      {
+        "text": "エッジが引けない",
+        "id": "エッジが引けない"
+      },
+      {
+        "text": "エッジ端が外れる",
+        "id": "エッジ端が外れる"
+      },
+      {
+        "text": "Inspector / 書式",
+        "id": "Inspector-書式"
+      },
+      {
+        "text": "書式変更が効かない",
+        "id": "書式変更が効かない"
+      },
+      {
+        "text": "Format Panel が出ない",
+        "id": "Format-Panel-が出ない"
+      },
+      {
+        "text": "Undo / 履歴",
+        "id": "Undo-履歴"
+      },
+      {
+        "text": "Ctrl + Z が効かない",
+        "id": "Ctrl-+-Z-が効かない"
+      },
+      {
+        "text": "履歴ビューアが空",
+        "id": "履歴ビューアが空"
+      },
+      {
+        "text": "検索",
+        "id": "検索"
+      },
+      {
+        "text": "Ctrl + F でヒットしない",
+        "id": "Ctrl-+-F-でヒットしない"
+      },
+      {
+        "text": "AI",
+        "id": "AI"
+      },
+      {
+        "text": "AI Panel で「stub のみ」と出る",
+        "id": "AI-Panel-で「stub-のみ」と出る"
+      },
+      {
+        "text": "AI service 自体が動かない",
+        "id": "AI-service-自体が動かない"
+      },
+      {
+        "text": "LLM の応答が JSON 不正",
+        "id": "LLM-の応答が-JSON-不正"
+      },
+      {
+        "text": "印刷 / PDF",
+        "id": "印刷-PDF"
+      },
+      {
+        "text": "PDF の日本語が文字化け",
+        "id": "PDF-の日本語が文字化け"
+      },
+      {
+        "text": "PDF サイズが大きすぎる",
+        "id": "PDF-サイズが大きすぎる"
+      },
+      {
+        "text": "パフォーマンス",
+        "id": "パフォーマンス"
+      },
+      {
+        "text": "マップを開いた直後に「大規模マップ」の注意が出た",
+        "id": "マップを開いた直後に「大規模マップ」の注意が出た"
+      },
+      {
+        "text": "1000 ノートで重い",
+        "id": "1000-ノートで重い"
+      },
+      {
+        "text": "キャンバスのスクロールがカクつく",
+        "id": "キャンバスのスクロールがカクつく"
+      },
+      {
+        "text": "開発時のログノイズ",
+        "id": "開発時のログノイズ"
+      },
+      {
+        "text": "[ERROR] Failed to update ui::AXTree がコンソールに溢れる",
+        "id": "ERROR-Failed-to-update-uiAXTree-がコンソールに溢れる"
+      },
+      {
+        "text": "ログの場所",
+        "id": "ログの場所"
+      },
+      {
+        "text": "Windows",
+        "id": "Windows"
+      },
+      {
+        "text": "macOS",
+        "id": "macOS"
+      },
+      {
+        "text": "Linux",
+        "id": "Linux"
+      },
+      {
+        "text": "バグ報告",
+        "id": "バグ報告"
+      },
+      {
+        "text": "まだ解決しない",
+        "id": "まだ解決しない"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "14 開発者ガイド",
     "description": "",
-    "url": "/reference/04-developer-guide/"
+    "url": "/reference/04-developer-guide/",
+    "headings": [
+      {
+        "text": "14 開発者ガイド",
+        "id": "14-開発者ガイド"
+      },
+      {
+        "text": "セットアップ",
+        "id": "セットアップ"
+      },
+      {
+        "text": "ビルドと起動",
+        "id": "ビルドと起動"
+      },
+      {
+        "text": "Flutter app (UI)",
+        "id": "Flutter-app-(UI)"
+      },
+      {
+        "text": "Rust core",
+        "id": "Rust-core"
+      },
+      {
+        "text": "Python AI service",
+        "id": "Python-AI-service"
+      },
+      {
+        "text": "FFI コード生成",
+        "id": "FFI-コード生成"
+      },
+      {
+        "text": "CLI ツール {#cli}",
+        "id": "CLI-ツール-cli"
+      },
+      {
+        "text": "hrf (汎用)",
+        "id": "hrf-(汎用)"
+      },
+      {
+        "text": "benchk11gate",
+        "id": "bench_k11_gate"
+      },
+      {
+        "text": "budgetcheck.dart",
+        "id": "budget_checkdart"
+      },
+      {
+        "text": "MCP Server (HrdayaFlow を Claude / Cursor から操作)",
+        "id": "MCP-Server-(HrdayaFlow-を-Claude-Cursor-から操作)"
+      },
+      {
+        "text": "起動",
+        "id": "起動"
+      },
+      {
+        "text": "公開ツール",
+        "id": "公開ツール"
+      },
+      {
+        "text": "設定: hand-rolled JSON-RPC",
+        "id": "設定-hand-rolled-JSON-RPC"
+      },
+      {
+        "text": "Budget Gate (CI 性能ガード) {#budget-gate}",
+        "id": "Budget-Gate-(CI-性能ガード)-budget-gate"
+      },
+      {
+        "text": "計測対象",
+        "id": "計測対象"
+      },
+      {
+        "text": "違反時の挙動",
+        "id": "違反時の挙動"
+      },
+      {
+        "text": "アーキテクチャ Lint (senastraarchitect) 🔌",
+        "id": "アーキテクチャ-Lint-(senastra_architect)-🔌"
+      },
+      {
+        "text": "i18n (翻訳寄稿) {#i18n}",
+        "id": "i18n-(翻訳寄稿)-i18n"
+      },
+      {
+        "text": "テスト",
+        "id": "テスト"
+      },
+      {
+        "text": "寄稿フロー",
+        "id": "寄稿フロー"
+      },
+      {
+        "text": "デバッグ Tips",
+        "id": "デバッグ-Tips"
+      },
+      {
+        "text": "リリースフロー",
+        "id": "リリースフロー"
+      },
+      {
+        "text": "ディレクトリ構成 (再掲)",
+        "id": "ディレクトリ構成-(再掲)"
+      }
+    ]
   },
   {
     "wiki": "hrdayaflow-manual",
     "title": "15 アプリ設定",
     "description": "",
-    "url": "/reference/05-app-settings/"
+    "url": "/reference/05-app-settings/",
+    "headings": [
+      {
+        "text": "15 アプリ設定",
+        "id": "15-アプリ設定"
+      },
+      {
+        "text": "画像キャッシュ (ImageCache)",
+        "id": "画像キャッシュ-(ImageCache)"
+      },
+      {
+        "text": "Markdown 表示",
+        "id": "Markdown-表示"
+      },
+      {
+        "text": "AI ライブターゲット",
+        "id": "AI-ライブターゲット"
+      },
+      {
+        "text": "AI 追従",
+        "id": "AI-追従"
+      },
+      {
+        "text": "トレイからクイック追加",
+        "id": "トレイからクイック追加"
+      },
+      {
+        "text": "左アクティビティバー",
+        "id": "左アクティビティバー"
+      },
+      {
+        "text": "マップリンクの探索フォルダ",
+        "id": "マップリンクの探索フォルダ"
+      },
+      {
+        "text": "動作確認チェックリスト",
+        "id": "動作確認チェックリスト"
+      },
+      {
+        "text": "保存される設定キー一覧（自動生成）",
+        "id": "保存される設定キー一覧（自動生成）"
+      }
+    ]
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "16 メニュー全リファレンス",
+    "description": "",
+    "url": "/reference/06-menu-reference/",
+    "headings": [
+      {
+        "text": "16 メニュー全リファレンス",
+        "id": "16-メニュー全リファレンス"
+      },
+      {
+        "text": "AI",
+        "id": "AI"
+      },
+      {
+        "text": "ファイル",
+        "id": "ファイル"
+      },
+      {
+        "text": "編集",
+        "id": "編集"
+      },
+      {
+        "text": "表示",
+        "id": "表示"
+      },
+      {
+        "text": "ノート",
+        "id": "ノート"
+      },
+      {
+        "text": "レイアウト",
+        "id": "レイアウト"
+      },
+      {
+        "text": "フォーマット",
+        "id": "フォーマット"
+      },
+      {
+        "text": "ウィンドウ",
+        "id": "ウィンドウ"
+      },
+      {
+        "text": "ヘルプ",
+        "id": "ヘルプ"
+      },
+      {
+        "text": "実行時に中身が決まる階層",
+        "id": "実行時に中身が決まる階層"
+      },
+      {
+        "text": "補足",
+        "id": "補足"
+      }
+    ]
+  },
+  {
+    "wiki": "hrdayaflow-manual",
+    "title": "17 MCP ツール一覧",
+    "description": "",
+    "url": "/reference/07-mcp-tools/",
+    "headings": [
+      {
+        "text": "17 MCP ツール一覧",
+        "id": "17-MCP-ツール一覧"
+      },
+      {
+        "text": "AI が危ないことをしようとしたときの確認",
+        "id": "AI-が危ないことをしようとしたときの確認"
+      },
+      {
+        "text": "使うときの注意",
+        "id": "使うときの注意"
+      }
+    ]
   }
 ]

@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>10 AI 機能 | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #ai · #llm · #prudellm · #ollama 10 AI 機能 ← 09 検索 | 目次 | → 11 ファイル テキスト ⇔ マップの双方向変換、関連エッジ提案、子ノート提案。LLM (PrudeLLM / Ollama) と組み合わせるか、ローカルの…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="10 AI 機能 | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #ai · #llm · #prudellm · #ollama 10 AI 機能 ← 09 検索 | 目次 | → 11 ファイル テキスト ⇔ マップの双方向変換、関連エッジ提案、子ノート提案。LLM (PrudeLLM / Ollama) と組み合わせるか、ローカルの…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>10 AI 機能</h1><div class="note-meta">#manual · #ai · #llm · #prudellm · #ollama</div><h1 id="10-AI-機能">10 AI 機能</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">10 AI 機能</span><div class="note-meta">#manual · #ai · #llm · #prudellm · #ollama</div><h1 id="10-AI-機能">10 AI 機能</h1>
 <p><span class="missing">← 09 検索</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 11 ファイル</span></p>
 <p>テキスト ⇔ マップの双方向変換、関連エッジ提案、子ノート提案。LLM (PrudeLLM / Ollama) と組み合わせるか、ローカルの rule-based stub だけでも動く。</p>
 <h2 id="AI-機能一覧">AI 機能一覧</h2>
@@ -105,10 +117,28 @@ python -m uvicorn main:app --host 127.0.0.1 --port 8765 --app-dir src</code></pr
 <pre><code class="language-powershell">hrdaya diff before.hrf after.hrf &gt; patch.json
 hrdaya apply-patch base.hrf patch.json --output result.hrf</code></pre>
 <p>詳細: <code>core/src/api.rs</code> の <code>generate_map_json_patch</code> / <code>apply_map_json_patch</code>。</p>
-<h2 id="MCP-Server-(将来)">MCP Server (将来)</h2>
-<p><code>app/lib/mcp/</code> で <strong>HTTP ベースの MCP</strong> をホスト中 (v0.1.1 計画)。Claude Desktop / Cursor などから:</p>
-<ul><li><code>read()</code> — マップ全体取得</li><li><code>find_node(id)</code> — ノート 1 件取得</li><li><code>find_edge(from, to)</code> — エッジ取得</li><li><code>bulk_apply(operations)</code> — 一括変更</li><li><code>bulk_patch(json_patch)</code> — JSON Patch 適用</li></ul>
-<p>詳細: <code>docs/v0-1-1/c-mcp-tools/</code>。</p>
+<h2 id="MCP-Server">MCP Server</h2>
+<p><strong>出荷済みで、既定で有効です。</strong> Claude Desktop や Cursor から、開いているマップを<br>直接読み書きできます。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>値</th></tr></thead><tbody><tr><td>既定の状態</td><td><strong>有効</strong>（設定で OFF にできます）</td></tr><tr><td>既定ポート</td><td><code>8766</code>（使用中なら空きポートへ退避。実際の値は設定画面に出ます）</td></tr><tr><td>公開ツール数</td><td><strong>28</strong></td></tr><tr><td>接続方式</td><td>アプリが待ち受け、<code>hrdayaflow-mcp</code> が MCP クライアントとの橋渡しをします</td></tr></tbody></table></div>
+<h3 id="何ができるか">何ができるか</h3>
+<p>ノートやエッジの追加・更新・削除、マップ全体やアウトラインの取得、条件を指定した<br>ノート検索、JSON Patch の一括適用、整列・分配、タブ操作、プランナーのタスク操作、<br>PNG 書き出しまで。</p>
+<p><strong>ツールごとの名前・必須引数・説明は <span class="missing">07-mcp-tools</span> に全件あります</strong><br>（実装から自動生成しているので、常に最新です）。</p>
+<h3 id="接続の設定">接続の設定</h3>
+<p>開発リポジトリの <code>setup_mcp.ps1</code> が、MCP クライアント側の設定ファイルに<br>HrdayaFlow を登録します。手順の詳細は <span class="missing">04-developer-guide</span>。</p>
+<h3 id="注意">注意</h3>
+<ul><li><strong>閲覧のみモードでは書き込み系ツールが失敗します。</strong> リモート停止された版、</li></ul>
+<p>  または配布チュートリアルを開いているときが該当します（<span class="missing">05-updates-and-support</span>）</p>
+<ul><li>アプリが起動していないと接続できません。常駐させておく必要があります</li><li>ツールはローカルでのみ待ち受けます。外部から叩かれることはありません</li></ul>
+<h2 id="外部-AI-の出力を取り込む">外部 AI の出力を取り込む</h2>
+<p><strong>AI ▸ 外部 AI から貼り付け…</strong>（<code>Ctrl+Shift+Alt+I</code>）で、ChatGPT などの出力を貼り付けて<br>マップにできます。形式は <strong>自動 / JSON / Mermaid / Markdown / プレーンテキスト</strong> から選べ、<br>既定の「自動」で判定します。</p>
+<p>取り込み先を 3 つから選びます。</p>
+<div class="table-wrap"><table><thead><tr><th>選択</th><th>結果</th></tr></thead><tbody><tr><td><strong>現在のマップに追加</strong>（既定）</td><td>いまのマップを残したまま、解析結果を足す</td></tr><tr><td>置き換え</td><td>いまのマップの内容を解析結果で置き換える</td></tr><tr><td>新規マップ</td><td>新しいタブを開いてそこに作る</td></tr></tbody></table></div>
+<blockquote><p>⚠ 「置き換え」は現在の内容を失います。試すときは「新規マップ」が安全です。<br>なお取り込みは Undo できます。</p></blockquote>
+<h2 id="エッジ候補を出す範囲">エッジ候補を出す範囲</h2>
+<p><strong>AI エッジ候補…</strong>（<code>Alt+E</code>）のダイアログでは、どのノートを対象にするかを選べます。</p>
+<div class="table-wrap"><table><thead><tr><th>範囲</th><th>対象</th></tr></thead><tbody><tr><td>マップ全体</td><td>全ノート。多いときはサーバー側で分割して処理します</td></tr><tr><td>選択のみ</td><td>いま選択しているノートだけ</td></tr><tr><td>表示範囲</td><td>画面に見えているノートだけ</td></tr></tbody></table></div>
+<p>大きなマップでは「マップ全体」は時間がかかります。**関係を整理したい一角を選択してから<br>「選択のみ」**で回す方が、速いうえに的外れな候補が減ります。</p>
+<p>候補は既定で最大 12 件まで出ます。ホバーすると、そのエッジがキャンバス上で<br>プレビューされます。</p>
 <h2 id="プロンプトテンプレート">プロンプトテンプレート</h2>
 <p><code>ai_service/src/prompts/</code> に json/jp テンプレート群。Settings → AI → プロンプト編集 で個別カスタマイズ可。</p>
 <p>例: 「文体は丁寧体」「絵文字を 1 ノートに 1 つ入れる」など。</p>
@@ -119,24 +149,14 @@ hrdaya apply-patch base.hrf patch.json --output result.hrf</code></pre>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
 <ul><li>[ ] AI service が起動 (<code>http://127.0.0.1:8765/health</code> が ok)</li><li>[ ] AI バッジが 🟢 か 🟡</li><li>[ ] AI Panel で stub 選択 → テキスト → マップ生成</li><li>[ ] Ollama で同じテキストを生成 → 結果が違う</li><li>[ ] PrudeLLM で生成 (API キーあれば)</li><li>[ ] 要約 → クリップボードにコピー</li><li>[ ] エッジ提案 → 候補が出る</li><li>[ ] 子提案 → 候補が出る</li><li>[ ] LLM タイムアウトで stub にフォールバック</li><li>[ ] AI service 停止時に AI Panel が無効化される</li></ul>
 <p><span class="missing">← 09</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 11</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#10-AI-機能">10 AI 機能</a></li><li class="lvl-2"><a href="#AI-機能一覧">AI 機能一覧</a></li><li class="lvl-2"><a href="#バックエンド">バックエンド</a></li><li class="lvl-3"><a href="#バックエンド一覧">バックエンド一覧</a></li><li class="lvl-3"><a href="#切り替え">切り替え</a></li><li class="lvl-2"><a href="#サービス起動-service-startup">サービス起動 {#service-startup}</a></li><li class="lvl-3"><a href="#自動起動-(既定)">自動起動 (既定)</a></li><li class="lvl-3"><a href="#手動起動">手動起動</a></li><li class="lvl-3"><a href="#接続確認">接続確認</a></li><li class="lvl-2"><a href="#テキスト-→-マップ-text-to-map">テキスト → マップ {#text-to-map}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-3"><a href="#ストリーミング">ストリーミング</a></li><li class="lvl-3"><a href="#入力形式の例">入力形式の例</a></li><li class="lvl-3"><a href="#詳細フォーマット仕様">詳細フォーマット仕様</a></li><li class="lvl-2"><a href="#マップ-→-要約-summarize">マップ → 要約 {#summarize}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-3"><a href="#内部処理">内部処理</a></li><li class="lvl-2"><a href="#Suggest-Edges-suggest-edges">Suggest Edges {#suggest-edges}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#Suggest-Children-suggest-children">Suggest Children {#suggest-children}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#Diff-(構造比較)-diff">Diff (構造比較) {#diff}</a></li><li class="lvl-3"><a href="#用途">用途</a></li><li class="lvl-3"><a href="#CLI">CLI</a></li><li class="lvl-2"><a href="#MCP-Server-(将来)">MCP Server (将来)</a></li><li class="lvl-2"><a href="#プロンプトテンプレート">プロンプトテンプレート</a></li><li class="lvl-2"><a href="#エラーとフォールバック">エラーとフォールバック</a></li><li class="lvl-2"><a href="#プライバシー">プライバシー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">10 AI 機能</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+  <aside class="rightcol"><div class="graph" data-slug="features/10-ai-features/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#10-AI-機能">10 AI 機能</a></li><li class="lvl-2"><a href="#AI-機能一覧">AI 機能一覧</a></li><li class="lvl-2"><a href="#バックエンド">バックエンド</a></li><li class="lvl-3"><a href="#バックエンド一覧">バックエンド一覧</a></li><li class="lvl-3"><a href="#切り替え">切り替え</a></li><li class="lvl-2"><a href="#サービス起動-service-startup">サービス起動 {#service-startup}</a></li><li class="lvl-3"><a href="#自動起動-(既定)">自動起動 (既定)</a></li><li class="lvl-3"><a href="#手動起動">手動起動</a></li><li class="lvl-3"><a href="#接続確認">接続確認</a></li><li class="lvl-2"><a href="#テキスト-→-マップ-text-to-map">テキスト → マップ {#text-to-map}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-3"><a href="#ストリーミング">ストリーミング</a></li><li class="lvl-3"><a href="#入力形式の例">入力形式の例</a></li><li class="lvl-3"><a href="#詳細フォーマット仕様">詳細フォーマット仕様</a></li><li class="lvl-2"><a href="#マップ-→-要約-summarize">マップ → 要約 {#summarize}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-3"><a href="#内部処理">内部処理</a></li><li class="lvl-2"><a href="#Suggest-Edges-suggest-edges">Suggest Edges {#suggest-edges}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#Suggest-Children-suggest-children">Suggest Children {#suggest-children}</a></li><li class="lvl-3"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#Diff-(構造比較)-diff">Diff (構造比較) {#diff}</a></li><li class="lvl-3"><a href="#用途">用途</a></li><li class="lvl-3"><a href="#CLI">CLI</a></li><li class="lvl-2"><a href="#MCP-Server">MCP Server</a></li><li class="lvl-3"><a href="#何ができるか">何ができるか</a></li><li class="lvl-3"><a href="#接続の設定">接続の設定</a></li><li class="lvl-3"><a href="#注意">注意</a></li><li class="lvl-2"><a href="#外部-AI-の出力を取り込む">外部 AI の出力を取り込む</a></li><li class="lvl-2"><a href="#エッジ候補を出す範囲">エッジ候補を出す範囲</a></li><li class="lvl-2"><a href="#プロンプトテンプレート">プロンプトテンプレート</a></li><li class="lvl-2"><a href="#エラーとフォールバック">エラーとフォールバック</a></li><li class="lvl-2"><a href="#プライバシー">プライバシー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/10-ai-features";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/10-ai-features";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

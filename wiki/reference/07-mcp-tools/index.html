@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="iroha">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>17 MCP ツール一覧 | HṛdayaFlow Manual</title>
+<meta name="description" content="#manual · #mcp · #ai · #reference · #autogen 17 MCP ツール一覧 ← 16 メニュー | 目次 HṛdayaFlow は MCP サーバーを内蔵していて、Claude Desktop や Cursor から マップを直接操作できる。接続手順は…">
+<meta name="robots" content="noai, noimageai">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="17 MCP ツール一覧 | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #mcp · #ai · #reference · #autogen 17 MCP ツール一覧 ← 16 メニュー | 目次 HṛdayaFlow は MCP サーバーを内蔵していて、Claude Desktop や Cursor から マップを直接操作できる。接続手順は…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
+</head>
+<body>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
+<main class="layout">
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:reference"><span data-pagefind-meta="title" hidden aria-hidden="true">17 MCP ツール一覧</span><div class="note-meta">#manual · #mcp · #ai · #reference · #autogen</div><h1 id="17-MCP-ツール一覧">17 MCP ツール一覧</h1>
+<p><span class="missing">← 16 メニュー</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p>
+<p>HṛdayaFlow は MCP サーバーを内蔵していて、Claude Desktop や Cursor から<br>マップを直接操作できる。接続手順は <span class="missing">04-developer-guide</span>、<br>AI 機能の使い方は <span class="missing">10-ai-features</span> を参照。</p>
+<blockquote><p>⚙ <strong>自動生成</strong>。正本は <code>app/lib/mcp/tools/*.dart</code>。ここを手で書き換えても次の生成で消える。<br>追記したい説明は AUTOGEN 区間の外に書く。</p></blockquote>
+<div class="table-wrap"><table><thead><tr><th>ツール</th><th>必須引数</th><th>説明</th></tr></thead><tbody><tr><td><code>add_edge</code></td><td><code>sourceId</code>, <code>targetId</code></td><td>Connect two nodes with a directed edge. Returns the new edge id.</td></tr><tr><td><code>add_node</code></td><td><code>text</code></td><td>Add a new node to the canvas. Returns the created node id. Placement: prefer get_map(detail=&quot;outline&quot;) then add_node(nearNodeId=…) to place beside an anchor wit…</td></tr><tr><td><code>add_task</code></td><td>—</td><td>Add a planner task. <code>text</code> goes through quickParse; explicit fields win.</td></tr><tr><td><code>align_nodes</code></td><td><code>ids</code>, <code>action</code></td><td>Align nodes by side or center. reference is selectionBounds (default), activeNode, or parentFrame. Stack, container, and group members move as one unit.</td></tr><tr><td><code>apply_mindmap_json</code></td><td>—</td><td>Replace or merge the canvas with a MindMap JSON document. mode=&quot;merge&quot; (default): adds nodes/edges to the leased tab. mode=&quot;replace&quot;: overwrites target tab (emp…</td></tr><tr><td><code>apply_outline</code></td><td><code>outline</code></td><td>Apply an outline tree to the active map: parent/child structure is updated, then auto-layout repositions nodes. Existing note bodies/styles are preserved by id.…</td></tr><tr><td><code>apply_patch</code></td><td><code>ops</code></td><td>Apply a batch of HrdayaFlow DiffOps to the canvas. Each op must have an &quot;op&quot; field: add_node, update_node, remove_node, add_edge, update_edge, remove_edge. Inva…</td></tr><tr><td><code>complete_task</code></td><td><code>id</code></td><td>Complete or undo a planner task. Recurring tasks roll to the next occurrence.</td></tr><tr><td><code>distribute_nodes</code></td><td><code>ids</code>, <code>axis</code></td><td>Distribute nodes horizontally or vertically. mode is edgeGap (default, 3+), centerSpacing (3+), or fixedGap (2+, requires gap). Stack, container, and group memb…</td></tr><tr><td><code>get_ai_target</code></td><td>—</td><td>Return the current AI target tab (the tab MCP reads/writes resolve to by default). Returns {tabId, title, ...} or {tabId: null} if none set.</td></tr><tr><td><code>get_map</code></td><td>—</td><td>Return the full canvas state as JSON. Use detail=&quot;outline&quot; for a lightweight layout overview (id, short title, x/y, kind, parentId — no body text; use for place…</td></tr><tr><td><code>get_selection</code></td><td>—</td><td>Return the IDs and details of currently selected nodes and edges.</td></tr><tr><td><code>list_presets</code></td><td>—</td><td>List saved note and edge style presets (id, name, scope, default flag). Use the returned id or name with add_node / update_node / add_edge preset argument.</td></tr><tr><td><code>list_tabs</code></td><td>—</td><td>List all open canvas tabs with metadata (id, index, title, filePath, nodeCount, edgeCount, generation, isActive, isAiTarget). isAiTarget marks the tab MCP reads…</td></tr><tr><td><code>list_task_lists</code></td><td>—</td><td>List planner task lists (Inbox + user lists) with open-task counts.</td></tr><tr><td><code>list_tasks</code></td><td>—</td><td>List planner tasks by view: inbox</td><td>today</td><td>next7</td><td>list</td><td>completed.</td></tr><tr><td><code>move_node</code></td><td><code>id</code>, <code>x</code>, <code>y</code></td><td>Move a node to a specific (x, y) position.</td></tr><tr><td><code>new_map</code></td><td>—</td><td>Create a new empty canvas in a new tab when the active tab has content. Confirmation required when replacing non-empty active tab workflow.</td></tr><tr><td><code>open_hrf</code></td><td>—</td><td>Open a .hrf file in a tab. Reuses an existing tab when the same path is already open (no duplicate tabs). Sets the opened tab as AI target.</td></tr><tr><td><code>query_nodes</code></td><td>—</td><td>Search nodes by text content, kind, or parentId. Returns matched nodes with id, text, kind, x, y, parentId.</td></tr><tr><td><code>remove_edge</code></td><td><code>id</code></td><td>Remove an edge by id.</td></tr><tr><td><code>remove_node</code></td><td><code>id</code></td><td>Remove a node (and its connected edges) from the canvas.</td></tr><tr><td><code>render_png</code></td><td>—</td><td>Capture the current canvas as a PNG image and return it as base64. fit=&quot;viewport&quot; (default): capture only the current viewport. fit=&quot;all&quot;: zoom to fit all nodes…</td></tr><tr><td><code>save_hrf</code></td><td>—</td><td>Save the current canvas to a .hrf file. If path is omitted, saves to the currently open file path.</td></tr><tr><td><code>set_ai_target</code></td><td>—</td><td>Set the AI target tab so subsequent MCP reads/writes resolve to it. Pass tabId from list_tabs. Pass null/omit to clear the target.</td></tr><tr><td><code>switch_tab</code></td><td>—</td><td>Switch the active UI tab by index or tabId. Waits until the tab canvas is registered before returning.</td></tr><tr><td><code>update_edge</code></td><td><code>id</code></td><td>Update fields of an existing edge (label, arrow, shape, strokeStyle).</td></tr><tr><td><code>update_node</code></td><td><code>id</code></td><td>Update fields of an existing node. Only supplied fields are changed (shallow merge).</td></tr></tbody></table></div>
+<p>公開ツール: <strong>28</strong> 件</p>
+<hr>
+<h2 id="AI-が危ないことをしようとしたときの確認">AI が危ないことをしようとしたときの確認</h2>
+<p><strong>すべてのツールが黙って実行されるわけではありません。</strong> 影響の大きい操作は、<br>実行前にアプリ側で確認ダイアログが出ます。</p>
+<div class="table-wrap"><table><thead><tr><th>ボタン</th><th>意味</th></tr></thead><tbody><tr><td><strong>許可</strong></td><td>今回だけ実行する</td></tr><tr><td><strong>このセッション中は聞かない</strong></td><td>同じツールについて、アプリを閉じるまで確認を省く</td></tr><tr><td><strong>拒否</strong></td><td>実行しない</td></tr></tbody></table></div>
+<p>確認が出るかどうかは<strong>ツール名ではなく引数で決まります</strong>。たとえば一括変更でも、<br>影響するノート数が小さければ黙って通り、大きければ確認になります。<br>ファイル操作やアウトラインの一括置換も同様です。</p>
+<p>ダイアログには、これから何が起きるかの要約が箇条書きで出ます。**中身を読まずに<br>「聞かない」を押さない**でください。押した効果はアプリを閉じるまで続きます。</p>
+<h2 id="使うときの注意">使うときの注意</h2>
+<ul><li><strong>閲覧のみモードでは書き込み系ツールが失敗する</strong>。キルスイッチで停止された版、</li></ul>
+<p>  または配布チュートリアルを開いているときが該当。</p>
+<ul><li>引数の完全な形（省略可能な引数・既定値）は各ツールの <code>inputSchema</code> が正本。</li></ul>
+<p>  MCP クライアント側でツール定義を表示すると全項目が見える。</p></article>
+  <aside class="rightcol"><div class="graph" data-slug="reference/07-mcp-tools/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#17-MCP-ツール一覧">17 MCP ツール一覧</a></li><li class="lvl-2"><a href="#AI-が危ないことをしようとしたときの確認">AI が危ないことをしようとしたときの確認</a></li><li class="lvl-2"><a href="#使うときの注意">使うときの注意</a></li></ul></div></aside>
+</main>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="reference/07-mcp-tools";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
+
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
+</body>
+</html>

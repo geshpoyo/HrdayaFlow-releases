@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>12 テーマ・多言語・アクセシビリティ | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #theme · #i18n · #a11y 12 テーマ・多言語・アクセシビリティ ← 11 ファイル | 目次 | → 13 ショートカット 見やすく・誰にでも使える・どの言語の人にも使える、を支える章。 テーマ ライト / ダーク / システム連動 設定 → 表示 →…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="12 テーマ・多言語・アクセシビリティ | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #theme · #i18n · #a11y 12 テーマ・多言語・アクセシビリティ ← 11 ファイル | 目次 | → 13 ショートカット 見やすく・誰にでも使える・どの言語の人にも使える、を支える章。 テーマ ライト / ダーク / システム連動 設定 → 表示 →…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>12 テーマ・多言語・アクセシビリティ</h1><div class="note-meta">#manual · #theme · #i18n · #a11y</div><h1 id="12-テーマ・多言語・アクセシビリティ">12 テーマ・多言語・アクセシビリティ</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:reference"><span data-pagefind-meta="title" hidden aria-hidden="true">12 テーマ・多言語・アクセシビリティ</span><div class="note-meta">#manual · #theme · #i18n · #a11y</div><h1 id="12-テーマ・多言語・アクセシビリティ">12 テーマ・多言語・アクセシビリティ</h1>
 <p><span class="missing">← 11 ファイル</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13 ショートカット</span></p>
 <p>見やすく・誰にでも使える・どの言語の人にも使える、を支える章。</p>
 <h2 id="テーマ">テーマ</h2>
@@ -39,9 +51,11 @@
 <p>設定 → 表示 → キャンバス背景。</p>
 <h2 id="多言語-(i18n)">多言語 (i18n)</h2>
 <h3 id="サポート言語">サポート言語</h3>
-<div class="table-wrap"><table><thead><tr><th>言語</th><th>状態</th><th>ARB ファイル</th></tr></thead><tbody><tr><td>日本語 (ja)</td><td>✅ メイン</td><td><code>app/lib/l10n/intl_ja.arb</code></td></tr><tr><td>英語 (en)</td><td>✅</td><td><code>app/lib/l10n/intl_en.arb</code></td></tr><tr><td>中文 (zh-CN)</td><td>🚧 一部</td><td><code>app/lib/l10n/intl_zh.arb</code></td></tr><tr><td>韓国語 (ko)</td><td>🚧 計画中</td><td>—</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>言語</th><th>状態</th><th>ARB ファイル</th></tr></thead><tbody><tr><td>日本語 (ja)</td><td>✅ メイン</td><td><code>app/lib/l10n/app_ja.arb</code></td></tr><tr><td>英語 (en)</td><td>✅</td><td><code>app/lib/l10n/app_en.arb</code></td></tr></tbody></table></div>
+<p><strong>現在この 2 言語だけです。</strong> 中国語・韓国語の翻訳ファイルは存在しません。</p>
 <h3 id="切り替え">切り替え</h3>
-<p>設定 → 一般 → 言語 → 選択 → アプリ再起動 (再起動なし切替は将来予定)。</p>
+<p>設定 ▸ 言語 で <strong>「OS 設定に従う」/「日本語」/「English」</strong> の 3 択。</p>
+<p>切り替えると <strong>その場でほとんどの表示が変わります</strong>。ただしダイアログや一部の画面は<br>生成済みのため古い言語のまま残ることがあり、アプリはその場で<br>「言語を切り替えました。ダイアログや一部画面に反映するにはアプリの再起動を推奨します」<br>と案内します。<strong>再起動は必須ではありません。</strong></p>
 <h3 id="翻訳に貢献するには">翻訳に貢献するには</h3>
 <p><code>app/lib/l10n/</code> 下の ARB ファイルをコピーして翻訳 → PR。詳細は <span class="missing">04-developer-guide › i18n</span>。</p>
 <h2 id="アクセシビリティ-(a11y)">アクセシビリティ (a11y)</h2>
@@ -72,25 +86,20 @@
 <ul><li>✅ 既定でテレメトリ無効</li><li>✅ クラッシュレポートも opt-in</li><li>✅ AI は Ollama (ローカル) を推奨</li><li>⚠ PrudeLLM 利用時のみマップ内容が送信される (明示同意必要)</li></ul>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
 <ul><li>[ ] テーマ切替: Light / Dark / System</li><li>[ ] アクセント色変更で UI が変わる</li><li>[ ] フォント変更で本文が変わる</li><li>[ ] 言語切替で UI 文言が変わる</li><li>[ ] スクリーンリーダーでノート内容が読まれる</li><li>[ ] <code>Tab</code> でフォーカスがダイアログ内ループする</li><li>[ ] モーション軽減 ON でアニメが消える</li><li>[ ] UI スケール 120% で全要素が大きくなる</li><li>[ ] テレメトリは既定 OFF (設定で確認)</li></ul>
-<p><span class="missing">← 11</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#12-テーマ・多言語・アクセシビリティ">12 テーマ・多言語・アクセシビリティ</a></li><li class="lvl-2"><a href="#テーマ">テーマ</a></li><li class="lvl-3"><a href="#ライト-ダーク-システム連動">ライト / ダーク / システム連動</a></li><li class="lvl-3"><a href="#カラーアクセント">カラーアクセント</a></li><li class="lvl-3"><a href="#フォント">フォント</a></li><li class="lvl-3"><a href="#キャンバス背景">キャンバス背景</a></li><li class="lvl-2"><a href="#多言語-(i18n)">多言語 (i18n)</a></li><li class="lvl-3"><a href="#サポート言語">サポート言語</a></li><li class="lvl-3"><a href="#切り替え">切り替え</a></li><li class="lvl-3"><a href="#翻訳に貢献するには">翻訳に貢献するには</a></li><li class="lvl-2"><a href="#アクセシビリティ-(a11y)">アクセシビリティ (a11y)</a></li><li class="lvl-3"><a href="#スクリーンリーダー対応">スクリーンリーダー対応</a></li><li class="lvl-3"><a href="#キーボード操作のみで完結">キーボード操作のみで完結</a></li><li class="lvl-3"><a href="#コントラスト">コントラスト</a></li><li class="lvl-3"><a href="#フォントサイズ拡大">フォントサイズ拡大</a></li><li class="lvl-3"><a href="#モーション軽減">モーション軽減</a></li><li class="lvl-3"><a href="#高コントラストモード-🚧">高コントラストモード 🚧</a></li><li class="lvl-3"><a href="#色覚異常配慮">色覚異常配慮</a></li><li class="lvl-3"><a href="#Tab-トラップ">Tab トラップ</a></li><li class="lvl-3"><a href="#スクリーンリーダーで使うフロー-(一例)">スクリーンリーダーで使うフロー (一例)</a></li><li class="lvl-2"><a href="#プライバシー">プライバシー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">12 テーマ・多言語</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+<p><span class="missing">← 11</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13</span></p>
+<hr>
+<h2 id="ハイコントラストの扱い">ハイコントラストの扱い</h2>
+<p>Windows の「ハイコントラスト」設定に、アプリがどう追従するかを選べます。</p>
+<div class="table-wrap"><table><thead><tr><th>設定</th><th>動作</th></tr></thead><tbody><tr><td>自動（既定）</td><td>OS の設定に従う。OS が ON なら ON</td></tr><tr><td>常に ON</td><td>OS の設定に関係なくハイコントラスト表示</td></tr><tr><td>常に OFF</td><td>OS が ON でも通常表示のまま</td></tr></tbody></table></div>
+<p>OS 側を切り替えると<strong>再起動なしで追従</strong>します。<br>「常に OFF」は、OS をハイコントラストにしているが<br>このアプリだけは通常配色で使いたい、というときに使います。</p></article>
+  <aside class="rightcol"><div class="graph" data-slug="reference/02-themes-i18n-a11y/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#12-テーマ・多言語・アクセシビリティ">12 テーマ・多言語・アクセシビリティ</a></li><li class="lvl-2"><a href="#テーマ">テーマ</a></li><li class="lvl-3"><a href="#ライト-ダーク-システム連動">ライト / ダーク / システム連動</a></li><li class="lvl-3"><a href="#カラーアクセント">カラーアクセント</a></li><li class="lvl-3"><a href="#フォント">フォント</a></li><li class="lvl-3"><a href="#キャンバス背景">キャンバス背景</a></li><li class="lvl-2"><a href="#多言語-(i18n)">多言語 (i18n)</a></li><li class="lvl-3"><a href="#サポート言語">サポート言語</a></li><li class="lvl-3"><a href="#切り替え">切り替え</a></li><li class="lvl-3"><a href="#翻訳に貢献するには">翻訳に貢献するには</a></li><li class="lvl-2"><a href="#アクセシビリティ-(a11y)">アクセシビリティ (a11y)</a></li><li class="lvl-3"><a href="#スクリーンリーダー対応">スクリーンリーダー対応</a></li><li class="lvl-3"><a href="#キーボード操作のみで完結">キーボード操作のみで完結</a></li><li class="lvl-3"><a href="#コントラスト">コントラスト</a></li><li class="lvl-3"><a href="#フォントサイズ拡大">フォントサイズ拡大</a></li><li class="lvl-3"><a href="#モーション軽減">モーション軽減</a></li><li class="lvl-3"><a href="#高コントラストモード-🚧">高コントラストモード 🚧</a></li><li class="lvl-3"><a href="#色覚異常配慮">色覚異常配慮</a></li><li class="lvl-3"><a href="#Tab-トラップ">Tab トラップ</a></li><li class="lvl-3"><a href="#スクリーンリーダーで使うフロー-(一例)">スクリーンリーダーで使うフロー (一例)</a></li><li class="lvl-2"><a href="#プライバシー">プライバシー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li><li class="lvl-2"><a href="#ハイコントラストの扱い">ハイコントラストの扱い</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/02-themes-i18n-a11y";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="reference/02-themes-i18n-a11y";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

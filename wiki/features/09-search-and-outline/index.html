@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>09 検索と Outline | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #search · #outline · #navigation 09 検索と Outline ← 08 Undo | 目次 | → 10 AI ノート数が増えても迷わないための、横断的な検索 / 階層ビュー / コマンドパレット。 Outline パネル (左)…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="09 検索と Outline | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #search · #outline · #navigation 09 検索と Outline ← 08 Undo | 目次 | → 10 AI ノート数が増えても迷わないための、横断的な検索 / 階層ビュー / コマンドパレット。 Outline パネル (左)…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>09 検索と Outline</h1><div class="note-meta">#manual · #search · #outline · #navigation</div><h1 id="09-検索と-Outline">09 検索と Outline</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">09 検索と Outline</span><div class="note-meta">#manual · #search · #outline · #navigation</div><h1 id="09-検索と-Outline">09 検索と Outline</h1>
 <p><span class="missing">← 08 Undo</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 10 AI</span></p>
 <p>ノート数が増えても迷わないための、横断的な検索 / 階層ビュー / コマンドパレット。</p>
 <h2 id="Outline-パネル-(左)">Outline パネル (左)</h2>
@@ -89,24 +101,14 @@
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
 <ul><li>[ ] Outline でノート階層が見える</li><li>[ ] Outline からクリックでキャンバス側ジャンプ</li><li>[ ] Outline で D&amp;D で階層変更</li><li>[ ] <code>Ctrl + F</code> で検索 → 12 件ヒット表示</li><li>[ ] <code>Enter</code> で次ヒット</li><li>[ ] 大小区別 ON で挙動が変わる</li><li>[ ] 正規表現で検索可能</li><li>[ ] Container 折りたたみ中の中身もヒット</li><li>[ ] <code>Ctrl + K</code> でコマンドパレット</li><li>[ ] <code>Ctrl + P</code> で QuickOpen</li><li>[ ] Layer 表示 / 非表示</li></ul>
 <p><span class="missing">← 08</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 10</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#09-検索と-Outline">09 検索と Outline</a></li><li class="lvl-2"><a href="#Outline-パネル-(左)">Outline パネル (左)</a></li><li class="lvl-3"><a href="#Layer-タブ">Layer タブ</a></li><li class="lvl-3"><a href="#Filter-タブ">Filter タブ</a></li><li class="lvl-3"><a href="#検索ボックス-(Outline-内)">検索ボックス (Outline 内)</a></li><li class="lvl-2"><a href="#Quick-Search-(Ctrl-+-F)">Quick Search (Ctrl + F)</a></li><li class="lvl-3"><a href="#検索オプション">検索オプション</a></li><li class="lvl-3"><a href="#検索対象">検索対象</a></li><li class="lvl-2"><a href="#Command-Palette-(Ctrl-+-K)">Command Palette (Ctrl + K)</a></li><li class="lvl-3"><a href="#候補に出るもの">候補に出るもの</a></li><li class="lvl-2"><a href="#QuickOpen-(ファイル-マップ切替)">QuickOpen (ファイル / マップ切替)</a></li><li class="lvl-2"><a href="#Mini-Map-(オーバービュー)">Mini Map (オーバービュー)</a></li><li class="lvl-2"><a href="#ジャンプ系ショートカット">ジャンプ系ショートカット</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">09 検索と Out</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+  <aside class="rightcol"><div class="graph" data-slug="features/09-search-and-outline/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#09-検索と-Outline">09 検索と Outline</a></li><li class="lvl-2"><a href="#Outline-パネル-(左)">Outline パネル (左)</a></li><li class="lvl-3"><a href="#Layer-タブ">Layer タブ</a></li><li class="lvl-3"><a href="#Filter-タブ">Filter タブ</a></li><li class="lvl-3"><a href="#検索ボックス-(Outline-内)">検索ボックス (Outline 内)</a></li><li class="lvl-2"><a href="#Quick-Search-(Ctrl-+-F)">Quick Search (Ctrl + F)</a></li><li class="lvl-3"><a href="#検索オプション">検索オプション</a></li><li class="lvl-3"><a href="#検索対象">検索対象</a></li><li class="lvl-2"><a href="#Command-Palette-(Ctrl-+-K)">Command Palette (Ctrl + K)</a></li><li class="lvl-3"><a href="#候補に出るもの">候補に出るもの</a></li><li class="lvl-2"><a href="#QuickOpen-(ファイル-マップ切替)">QuickOpen (ファイル / マップ切替)</a></li><li class="lvl-2"><a href="#Mini-Map-(オーバービュー)">Mini Map (オーバービュー)</a></li><li class="lvl-2"><a href="#ジャンプ系ショートカット">ジャンプ系ショートカット</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/09-search-and-outline";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/09-search-and-outline";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

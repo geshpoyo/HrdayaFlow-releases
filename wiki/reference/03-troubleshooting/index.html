@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>15 トラブルシューティング | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #troubleshooting · #faq 15 トラブルシューティング ← 14 開発者 | 目次 困ったときに最初に見る章。FAQ・既知の問題・ログの場所。 アプリが起動しない Windows: SmartScreen で止まる…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="15 トラブルシューティング | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #troubleshooting · #faq 15 トラブルシューティング ← 14 開発者 | 目次 困ったときに最初に見る章。FAQ・既知の問題・ログの場所。 アプリが起動しない Windows: SmartScreen で止まる…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>15 トラブルシューティング</h1><div class="note-meta">#manual · #troubleshooting · #faq</div><h1 id="15-トラブルシューティング">15 トラブルシューティング</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:reference"><span data-pagefind-meta="title" hidden aria-hidden="true">15 トラブルシューティング</span><div class="note-meta">#manual · #troubleshooting · #faq</div><h1 id="15-トラブルシューティング">15 トラブルシューティング</h1>
 <p><span class="missing">← 14 開発者</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p>
 <p>困ったときに最初に見る章。FAQ・既知の問題・ログの場所。</p>
 <h2 id="アプリが起動しない">アプリが起動しない</h2>
@@ -38,6 +50,32 @@ flutter run -d windows</code></pre>
 <p>詳細: リポジトリ内 <code>docs/debug/rust-ffi-init.md</code></p>
 <h3 id="flutter-run-でクラッシュ即終了"><code>flutter run</code> でクラッシュ即終了</h3>
 <p>Flutter SDK の version 不一致。<code>flutter doctor</code> で確認。3.27 系を推奨。</p>
+<h2 id="インストールと更新">インストールと更新</h2>
+<h3 id="インストーラーが「変更-修復-削除」の画面になる">インストーラーが「変更 / 修復 / 削除」の画面になる</h3>
+<p><strong>同じ版が既に入っています。</strong> MSI は同一版数に上書きできません。</p>
+<ul><li>新しい版を入れたい → その版のインストーラーを使う（自動で上書きされます）</li><li>同じ版を入れ直したい → いったんアンインストール → もう一度インストール</li></ul>
+<p><strong>アンインストールしてもユーザーデータは残ります</strong>（マップ・プランナー・設定・自動保存）。<br>消えるのは <code>C:\Program Files\HrdayaFlow</code> の中身だけです。</p>
+<h3 id="インストール完了時にブラウザが開こうとする-「この-'https'-リンクを開くことができません」">インストール完了時にブラウザが開こうとする / 「この &#039;https&#039; リンクを開くことができません」</h3>
+<p>WebView2 ランタイムが見つからないとき、導入案内のページを開こうとします。<br>既定ブラウザが設定されていない環境（Windows サンドボックスなど）では、<br>Windows 側が「このリンクを開くために新しいアプリが必要です」と出します。</p>
+<p><strong>アプリの不具合ではありません。</strong> 閉じて構いません。通常の PC には Edge があるため、<br>この画面自体が出ません。</p>
+<h3 id="起動直後に-VCRUNTIME140dll-が見つかりません-0xc000007b">起動直後に <code>VCRUNTIME140.dll が見つかりません</code> / <code>0xc000007b</code></h3>
+<p>0.0.7+4 以降は VC++ ランタイムを同梱しているため、本来は出ません。<br>出た場合はインストールが壊れているので、<strong>修復インストール</strong>（インストーラーを実行して<br>［修復］）を試してください。</p>
+<p>インストール先に次の 3 つがあるか確認できます。</p>
+<pre><code class="language-powershell">&#039;msvcp140.dll&#039;,&#039;vcruntime140.dll&#039;,&#039;vcruntime140_1.dll&#039; |
+  ForEach-Object { [pscustomobject]@{ dll=$_; ある=Test-Path &quot;C:\Program Files\HrdayaFlow\$_&quot; } }</code></pre>
+<h3 id="更新が来ない-no-update">更新が来ない {#no-update}</h3>
+<p><strong>既知の制約です。</strong> アプリの既定チャンネルは <code>stable</code> ですが、アルファ版は <code>beta</code><br>チャンネルにのみ配信しています。既定のままだと更新が見つかりません。</p>
+<ul><li>設定でチャンネルを <strong>beta</strong> に切り替える</li><li>または<a href="https://hrdayaflow.geshtalt.jp/#download" target="_blank" rel="noopener noreferrer">サイト</a>から新しいインストーラーを</li></ul>
+<p>  直接取得して上書きインストールする</p>
+<p>自動更新を OFF にしている場合も、当然ながら通知は来ません。</p>
+<h3 id="「利用を停止しています」と出て編集できない">「利用を停止しています」と出て編集できない</h3>
+<p>配信側から<strong>その版の利用が止められています</strong>（重大な不具合が見つかったときの措置）。<br>［閲覧のみで続行］で開いて、必要なマップを退避してください。<br>解除は配信側で行われ、次の起動時に反映されます。詳しくは <span class="missing">05-updates-and-support</span>。</p>
+<h3 id="更新の途中で「未保存の変更を保存できませんでした」と出て止まった">更新の途中で「未保存の変更を保存できませんでした」と出て止まった</h3>
+<p><strong>保存ガードが働いた正常な動作です。</strong> 未保存の作業を保存できなかったため、<br>インストーラーを起動せずに中止しました。<strong>作業は失われていません。</strong><br>手動で保存してから、もう一度更新してください。</p>
+<h3 id="ダウンロードした-MSI-が本物か確かめたい">ダウンロードした MSI が本物か確かめたい</h3>
+<p>サイトのダウンロード欄に sha256 が載っています。</p>
+<pre><code class="language-powershell">Get-FileHash &lt;ダウンロードしたファイル&gt; -Algorithm SHA256</code></pre>
+<p>アプリ内の自動更新では、この照合を毎回自動で行っています。<br>ハッシュが空、または一致しない配布物は受け取りません。</p>
 <h2 id="ファイル関係">ファイル関係</h2>
 <h3 id="ファイル整合性エラー（CE-03）-map-validation">ファイル整合性エラー（CE-03） {#map-validation}</h3>
 <p>読み込み直後、または保存前に Rust コアが <code>map.json</code> の整合性を検査します。問題があるとダイアログが表示されます（<strong>自動修復はしません</strong>）。</p>
@@ -62,10 +100,9 @@ flutter run -d windows</code></pre>
 <h3 id="Dot-が勝手に消える">Dot が勝手に消える</h3>
 <p>Dot に接続するエッジが 0 本になると Dot は <strong>自動削除</strong> される (ゴミ Dot 散乱防止)。ノート削除やエッジ単独削除のあとに起きることがある。意図しない場合は <code>Ctrl + Z</code> で戻す。仕様の詳細は <span class="missing">03-edges-and-connections › ナイフでエッジリルート-dot-中継</span>。</p>
 <h3 id="スナップが意図しない位置で吸着する">スナップが意図しない位置で吸着する</h3>
-<p>Magnetic Snap が ON のノートが多い。要らないノートは Inspector → Effects → Magnetic OFF。
-一時的にスナップ無効: <code>Alt + ドラッグ</code> 。</p>
+<p>Magnetic Snap が ON のノートが多い。要らないノートは Inspector → Effects → Magnetic OFF。<br>一時的にスナップ無効: <code>Alt + ドラッグ</code> 。</p>
 <h3 id="Tab-キーが-pie-メニューを呼ばない"><code>Tab</code> キーが pie メニューを呼ばない</h3>
-<p>🚧 pie integration (#5) は <strong>未実装</strong> (<span class="missing">pie-integration.md</span>)。<code>Tab</code> は子ノート派生だけが動く。</p>
+<p>🚧 pie integration (#5) は <strong>未実装</strong> (<code>docs/may-2026/pie-integration.md</code>（開発リポジトリ）)。<code>Tab</code> は子ノート派生だけが動く。</p>
 <h2 id="エッジ関係">エッジ関係</h2>
 <h3 id="エッジが引けない">エッジが引けない</h3>
 <p>接続ハンドルはノードの <strong>エッジ部分にホバー</strong> で出る。中央にホバーしても出ない。</p>
@@ -101,6 +138,10 @@ flutter run -d windows</code></pre>
 <h3 id="PDF-サイズが大きすぎる">PDF サイズが大きすぎる</h3>
 <div class="table-wrap"><table><thead><tr><th>原因</th><th>対応</th></tr></thead><tbody><tr><td>画像が大量</td><td>画像を「外部参照」に変える (50 MB 閾値)</td></tr><tr><td>フォント埋め込み</td><td>OFF にすると 1〜10 MB 程度に</td></tr></tbody></table></div>
 <h2 id="パフォーマンス">パフォーマンス</h2>
+<h3 id="マップを開いた直後に「大規模マップ」の注意が出た">マップを開いた直後に「大規模マップ」の注意が出た</h3>
+<p>ノート数に応じて 2 段階の警告が出ます。<strong>不具合ではありません。</strong></p>
+<div class="table-wrap"><table><thead><tr><th>ノート数</th><th>出るもの</th></tr></thead><tbody><tr><td>5,000 以上</td><td>「ノート数が多いマップ」— 動作が重くなる可能性の案内</td></tr><tr><td>10,000 以上</td><td>「大規模マップ」— より強い警告</td></tr></tbody></table></div>
+<p>開くこと自体はできます。重く感じるときは下の対処を試してください。</p>
 <h3 id="1000-ノートで重い">1000 ノートで重い</h3>
 <div class="table-wrap"><table><thead><tr><th>試して</th><th>効果</th></tr></thead><tbody><tr><td>Layer で表示を絞る</td><td>レンダリング負荷減</td></tr><tr><td>編集中の Container だけ展開、他は折りたたみ</td><td>同上</td></tr><tr><td>Settings → 表示 → 「画像のサムネイル化」 ON</td><td>メモリ削減</td></tr><tr><td>Release ビルド (<code>flutter run --release</code>)</td><td>描画 3〜5 倍速</td></tr></tbody></table></div>
 <h3 id="キャンバスのスクロールがカクつく">キャンバスのスクロールがカクつく</h3>
@@ -128,30 +169,22 @@ pwsh scripts/dev-run.ps1 --release</code></pre>
 <h3 id="Linux">Linux</h3>
 <p><code>~/.local/share/HrdayaFlow/logs/</code></p>
 <h2 id="バグ報告">バグ報告</h2>
+<blockquote><p>📋 <strong>まず診断情報をコピーしてください。</strong> 設定 ▸ 診断とフィードバック ▸<br>［診断情報をコピー］で、版数・OS・インストール形態・クラッシュログ件数が<br>Markdown で組み立てられます。マップの中身は含まれず、ユーザー名は <code>~</code> に<br>置き換えられます。自動送信はしません。</p>
+<p>報告先は 2 つ。日本語で気軽に聞くなら<br><a href="https://hrdayaflow.geshtalt.jp/discord" target="_blank" rel="noopener noreferrer">Discord</a>、<br>再現手順のある不具合なら<br><a href="https://github.com/geshpoyo/HrdayaFlow-releases/issues" target="_blank" rel="noopener noreferrer">Issues</a>（英語）。</p></blockquote>
 <p>GitHub Issues に:</p>
 <ol><li>再現手順 (3 ステップ以内が理想)</li><li>期待動作 vs 実動作</li><li>環境 (OS / バージョン)</li><li>ログ (該当箇所のみ)</li><li>スクリーンショット / 動画</li></ol>
 <p><code>.hrf</code> を添付できる場合は zip でアタッチ (機微情報があれば抽象化して再現用 fixture を)。</p>
 <h2 id="まだ解決しない">まだ解決しない</h2>
-<ul><li>⚠ <code>docs/qa-checklist.md</code> の手動 QA 一覧を 1 周してみる</li><li>⚠ <code>docs/qa-kgsr10-win11-30min.md</code> (Win11 30 分シナリオ) で症状再現確認</li><li>⚠ <code>docs/manual/release-channel-flow.md</code> の release ノート確認</li><li>最終手段: <code>Ctrl + Q</code> で終了 → アプリ再起動 (履歴メモリ揮発 OFF 時はマップ復元)</li></ul>
+<ul><li>⚠ <code>docs/qa-checklist.md</code> の手動 QA 一覧を 1 周してみる</li><li>⚠ <code>docs/qa-kgsr10-win11-30min.md</code> (Win11 30 分シナリオ) で症状再現確認</li><li>⚠ <code>_internal/release-channel-flow.md</code> の release ノート確認</li><li>最終手段: <code>Ctrl + Q</code> で終了 → アプリ再起動 (履歴メモリ揮発 OFF 時はマップ復元)</li></ul>
 <p><span class="missing">← 14</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#15-トラブルシューティング">15 トラブルシューティング</a></li><li class="lvl-2"><a href="#アプリが起動しない">アプリが起動しない</a></li><li class="lvl-3"><a href="#Windows-SmartScreen-で止まる">Windows: SmartScreen で止まる</a></li><li class="lvl-3"><a href="#Rust-コア（hrdaya_coredll）未検出-rust-core-dll">Rust コア（hrdayacore.dll）未検出 {#rust-core-dll}</a></li><li class="lvl-3"><a href="#flutter-run-でクラッシュ即終了">flutter run でクラッシュ即終了</a></li><li class="lvl-2"><a href="#ファイル関係">ファイル関係</a></li><li class="lvl-3"><a href="#ファイル整合性エラー（CE-03）-map-validation">ファイル整合性エラー（CE-03） {#map-validation}</a></li><li class="lvl-3"><a href="#hrf-が開けない">.hrf が開けない</a></li><li class="lvl-3"><a href="#自動保存が効かない">自動保存が効かない</a></li><li class="lvl-3"><a href="#hrf-を開いた直後に「アセットの整合性が確認できません」-hash-mismatch">.hrf を開いた直後に「アセットの整合性が確認できません」 {#hash-mismatch}</a></li><li class="lvl-3"><a href="#naked-JSON-を保存したのに-hrf-になる">naked JSON を保存したのに .hrf になる</a></li><li class="lvl-2"><a href="#キャンバス操作">キャンバス操作</a></li><li class="lvl-3"><a href="#ノートが画面外に消えた">ノートが画面外に消えた</a></li><li class="lvl-3"><a href="#ドラッグしてもノートが動かない">ドラッグしてもノートが動かない</a></li><li class="lvl-3"><a href="#Dot-が勝手に消える">Dot が勝手に消える</a></li><li class="lvl-3"><a href="#スナップが意図しない位置で吸着する">スナップが意図しない位置で吸着する</a></li><li class="lvl-3"><a href="#Tab-キーが-pie-メニューを呼ばない">Tab キーが pie メニューを呼ばない</a></li><li class="lvl-2"><a href="#エッジ関係">エッジ関係</a></li><li class="lvl-3"><a href="#エッジが引けない">エッジが引けない</a></li><li class="lvl-3"><a href="#エッジ端が外れる">エッジ端が外れる</a></li><li class="lvl-2"><a href="#Inspector-書式">Inspector / 書式</a></li><li class="lvl-3"><a href="#書式変更が効かない">書式変更が効かない</a></li><li class="lvl-3"><a href="#Format-Panel-が出ない">Format Panel が出ない</a></li><li class="lvl-2"><a href="#Undo-履歴">Undo / 履歴</a></li><li class="lvl-3"><a href="#Ctrl-+-Z-が効かない">Ctrl + Z が効かない</a></li><li class="lvl-3"><a href="#履歴ビューアが空">履歴ビューアが空</a></li><li class="lvl-2"><a href="#検索">検索</a></li><li class="lvl-3"><a href="#Ctrl-+-F-でヒットしない">Ctrl + F でヒットしない</a></li><li class="lvl-2"><a href="#AI">AI</a></li><li class="lvl-3"><a href="#AI-Panel-で「stub-のみ」と出る">AI Panel で「stub のみ」と出る</a></li><li class="lvl-3"><a href="#AI-service-自体が動かない">AI service 自体が動かない</a></li><li class="lvl-3"><a href="#LLM-の応答が-JSON-不正">LLM の応答が JSON 不正</a></li><li class="lvl-2"><a href="#印刷-PDF">印刷 / PDF</a></li><li class="lvl-3"><a href="#PDF-の日本語が文字化け">PDF の日本語が文字化け</a></li><li class="lvl-3"><a href="#PDF-サイズが大きすぎる">PDF サイズが大きすぎる</a></li><li class="lvl-2"><a href="#パフォーマンス">パフォーマンス</a></li><li class="lvl-3"><a href="#1000-ノートで重い">1000 ノートで重い</a></li><li class="lvl-3"><a href="#キャンバスのスクロールがカクつく">キャンバスのスクロールがカクつく</a></li><li class="lvl-2"><a href="#開発時のログノイズ">開発時のログノイズ</a></li><li class="lvl-3"><a href="#ERROR-Failed-to-update-uiAXTree-がコンソールに溢れる">[ERROR] Failed to update ui::AXTree がコンソールに溢れる</a></li><li class="lvl-2"><a href="#ログの場所">ログの場所</a></li><li class="lvl-3"><a href="#Windows">Windows</a></li><li class="lvl-3"><a href="#macOS">macOS</a></li><li class="lvl-3"><a href="#Linux">Linux</a></li><li class="lvl-2"><a href="#バグ報告">バグ報告</a></li><li class="lvl-2"><a href="#まだ解決しない">まだ解決しない</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">15 トラブルシュー</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+  <aside class="rightcol"><div class="graph" data-slug="reference/03-troubleshooting/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#15-トラブルシューティング">15 トラブルシューティング</a></li><li class="lvl-2"><a href="#アプリが起動しない">アプリが起動しない</a></li><li class="lvl-3"><a href="#Windows-SmartScreen-で止まる">Windows: SmartScreen で止まる</a></li><li class="lvl-3"><a href="#Rust-コア（hrdaya_coredll）未検出-rust-core-dll">Rust コア（hrdayacore.dll）未検出 {#rust-core-dll}</a></li><li class="lvl-3"><a href="#flutter-run-でクラッシュ即終了">flutter run でクラッシュ即終了</a></li><li class="lvl-2"><a href="#インストールと更新">インストールと更新</a></li><li class="lvl-3"><a href="#インストーラーが「変更-修復-削除」の画面になる">インストーラーが「変更 / 修復 / 削除」の画面になる</a></li><li class="lvl-3"><a href="#インストール完了時にブラウザが開こうとする-「この-'https'-リンクを開くことができません」">インストール完了時にブラウザが開こうとする / 「この &#039;https&#039; リンクを開くことができません」</a></li><li class="lvl-3"><a href="#起動直後に-VCRUNTIME140dll-が見つかりません-0xc000007b">起動直後に VCRUNTIME140.dll が見つかりません / 0xc000007b</a></li><li class="lvl-3"><a href="#更新が来ない-no-update">更新が来ない {#no-update}</a></li><li class="lvl-3"><a href="#「利用を停止しています」と出て編集できない">「利用を停止しています」と出て編集できない</a></li><li class="lvl-3"><a href="#更新の途中で「未保存の変更を保存できませんでした」と出て止まった">更新の途中で「未保存の変更を保存できませんでした」と出て止まった</a></li><li class="lvl-3"><a href="#ダウンロードした-MSI-が本物か確かめたい">ダウンロードした MSI が本物か確かめたい</a></li><li class="lvl-2"><a href="#ファイル関係">ファイル関係</a></li><li class="lvl-3"><a href="#ファイル整合性エラー（CE-03）-map-validation">ファイル整合性エラー（CE-03） {#map-validation}</a></li><li class="lvl-3"><a href="#hrf-が開けない">.hrf が開けない</a></li><li class="lvl-3"><a href="#自動保存が効かない">自動保存が効かない</a></li><li class="lvl-3"><a href="#hrf-を開いた直後に「アセットの整合性が確認できません」-hash-mismatch">.hrf を開いた直後に「アセットの整合性が確認できません」 {#hash-mismatch}</a></li><li class="lvl-3"><a href="#naked-JSON-を保存したのに-hrf-になる">naked JSON を保存したのに .hrf になる</a></li><li class="lvl-2"><a href="#キャンバス操作">キャンバス操作</a></li><li class="lvl-3"><a href="#ノートが画面外に消えた">ノートが画面外に消えた</a></li><li class="lvl-3"><a href="#ドラッグしてもノートが動かない">ドラッグしてもノートが動かない</a></li><li class="lvl-3"><a href="#Dot-が勝手に消える">Dot が勝手に消える</a></li><li class="lvl-3"><a href="#スナップが意図しない位置で吸着する">スナップが意図しない位置で吸着する</a></li><li class="lvl-3"><a href="#Tab-キーが-pie-メニューを呼ばない">Tab キーが pie メニューを呼ばない</a></li><li class="lvl-2"><a href="#エッジ関係">エッジ関係</a></li><li class="lvl-3"><a href="#エッジが引けない">エッジが引けない</a></li><li class="lvl-3"><a href="#エッジ端が外れる">エッジ端が外れる</a></li><li class="lvl-2"><a href="#Inspector-書式">Inspector / 書式</a></li><li class="lvl-3"><a href="#書式変更が効かない">書式変更が効かない</a></li><li class="lvl-3"><a href="#Format-Panel-が出ない">Format Panel が出ない</a></li><li class="lvl-2"><a href="#Undo-履歴">Undo / 履歴</a></li><li class="lvl-3"><a href="#Ctrl-+-Z-が効かない">Ctrl + Z が効かない</a></li><li class="lvl-3"><a href="#履歴ビューアが空">履歴ビューアが空</a></li><li class="lvl-2"><a href="#検索">検索</a></li><li class="lvl-3"><a href="#Ctrl-+-F-でヒットしない">Ctrl + F でヒットしない</a></li><li class="lvl-2"><a href="#AI">AI</a></li><li class="lvl-3"><a href="#AI-Panel-で「stub-のみ」と出る">AI Panel で「stub のみ」と出る</a></li><li class="lvl-3"><a href="#AI-service-自体が動かない">AI service 自体が動かない</a></li><li class="lvl-3"><a href="#LLM-の応答が-JSON-不正">LLM の応答が JSON 不正</a></li><li class="lvl-2"><a href="#印刷-PDF">印刷 / PDF</a></li><li class="lvl-3"><a href="#PDF-の日本語が文字化け">PDF の日本語が文字化け</a></li><li class="lvl-3"><a href="#PDF-サイズが大きすぎる">PDF サイズが大きすぎる</a></li><li class="lvl-2"><a href="#パフォーマンス">パフォーマンス</a></li><li class="lvl-3"><a href="#マップを開いた直後に「大規模マップ」の注意が出た">マップを開いた直後に「大規模マップ」の注意が出た</a></li><li class="lvl-3"><a href="#1000-ノートで重い">1000 ノートで重い</a></li><li class="lvl-3"><a href="#キャンバスのスクロールがカクつく">キャンバスのスクロールがカクつく</a></li><li class="lvl-2"><a href="#開発時のログノイズ">開発時のログノイズ</a></li><li class="lvl-3"><a href="#ERROR-Failed-to-update-uiAXTree-がコンソールに溢れる">[ERROR] Failed to update ui::AXTree がコンソールに溢れる</a></li><li class="lvl-2"><a href="#ログの場所">ログの場所</a></li><li class="lvl-3"><a href="#Windows">Windows</a></li><li class="lvl-3"><a href="#macOS">macOS</a></li><li class="lvl-3"><a href="#Linux">Linux</a></li><li class="lvl-2"><a href="#バグ報告">バグ報告</a></li><li class="lvl-2"><a href="#まだ解決しない">まだ解決しない</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/03-troubleshooting";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="reference/03-troubleshooting";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

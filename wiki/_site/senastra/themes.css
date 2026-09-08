@@ -1,0 +1,1012 @@
+/**
+ * Theme System — Senastra Design System
+ * ========================================
+ * Version: 1.0.0
+ *
+ * 使い方:
+ *   <html data-theme="iroha">        ← プリセットテーマ
+ *   <html data-theme="iroha-dark">   ← プリセットテーマ（ダーク）
+ *   <html data-theme="custom">       ← カスタムカラー（CSS変数を上書き）
+ *
+ * タイポグラフィ（色と独立した軸）:
+ *   typography-presets.css を先に読み込み、<html data-typeface="mincho-mixed"> で切替。
+ *   詳細は同フォルダ typography-presets.css の先頭コメント参照。
+ *
+ * 構成:
+ *   - 11 プリセットテーマ（各 light / dark）
+ *   - 重色目シャドウ（kasane-irome shadow）
+ *   - カスタムカラーパレット変数
+ *
+ * 各テーマの色には和名（Japanese color name）が付与されています。
+ * 変数名: --theme-{role}  → セマンティック変数にマッピング
+ *
+ * セマンティックマッピング:
+ *   palette-1  → bg（背景）       最も明るい色
+ *   palette-2  → bg-subtle        薄い背景
+ *   palette-3  → surface          カード/パネル
+ *   palette-4  → border           境界線
+ *   palette-5  → text-tertiary    補助テキスト
+ *   palette-6  → text-secondary   副テキスト
+ *   palette-7  → text-primary     主テキスト（最も暗い色）
+ *   palette-8  → accent           アクセント
+ *   palette-9  → accent-hover     アクセント強調
+ *   shadow     → 重色目シャドウ    テーマに連動した色付きシャドウ
+ */
+
+/* ═════════════════════════════════════════════
+   THEME: いろは (Iroha)
+   春の華やぎ — 珊瑚ピンク系
+   ═════════════════════════════════════════════ */
+[data-theme="iroha"] {
+  /* パレット（和名付き） */
+  --palette-1: #F5DDD0;  /* 薄香 うすこう */
+  --palette-2: #F2C4B8;  /* 薄紅 うすべに */
+  --palette-3: #FAEAE4;  /* 桜色 さくらいろ */
+  --palette-4: #E0B0A0;  /* 珊瑚 さんご */
+  --palette-5: #C4877A;  /* 鴇色 ときいろ */
+  --palette-6: #A86060;  /* 蘇芳 すおう */
+  --palette-7: #6B3035;  /* 臙脂 えんじ */
+  --palette-8: #E08B8B;  /* 紅梅 こうばい */
+  --palette-9: #B8963E;  /* 鶯茶 うぐいすちゃ */
+
+  /* セマンティックマッピング */
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #FDF2EE;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #C87070;
+  --color-accent-subtle:  #FAEAE4;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 12deg 40% 60%;
+  --shadow-kasane: 0 4px 16px rgba(224, 139, 139, 0.15);
+}
+
+[data-theme="iroha-dark"] {
+  --palette-1: #2A1A18;
+  --palette-2: #3D2420;
+  --palette-3: #4A2E28;
+  --palette-4: #6B4040;
+  --palette-5: #A86060;
+  --palette-6: #D4A0A0;
+  --palette-7: #F5DDD0;
+  --palette-8: #E08B8B;
+  --palette-9: #B8963E;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #553835;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #F0A0A0;
+  --color-accent-subtle:  #3D2420;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 12deg 30% 10%;
+  --shadow-kasane: 0 4px 16px rgba(224, 139, 139, 0.10);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 雷神 (Raijin)
+   荒々しい力 — 金茶〜藍系
+   ═════════════════════════════════════════════ */
+[data-theme="raijin"] {
+  --palette-1: #EDEADC;  /* 雷神 らいじん */
+  --palette-2: #CFC1B7;  /* 天神 てんじん */
+  --palette-3: #F2EDE6;  /* 生成 きなり */
+  --palette-4: #B8AFA4;  /* 灰桜 はいざくら */
+  --palette-5: #889086;  /* 雷雲 らいうん */
+  --palette-6: #6A6560;  /* 鼠色 ねずみいろ */
+  --palette-7: #413730;  /* 鬼門 きもん */
+  --palette-8: #D6AF5C;  /* 駱駝色 らくだいろ */
+  --palette-9: #B28532;  /* 狐色 きつねいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F5F0E9;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   var(--palette-9);
+  --color-accent-subtle:  #F0E8D0;
+  --color-text-on-accent: #413730;
+  --shadow-color: 35deg 30% 50%;
+  --shadow-kasane: 0 4px 16px rgba(214, 175, 92, 0.15);
+}
+
+[data-theme="raijin-dark"] {
+  --palette-1: #1A1610;
+  --palette-2: #272018;
+  --palette-3: #302820;
+  --palette-4: #504838;
+  --palette-5: #889086;
+  --palette-6: #CFC1B7;
+  --palette-7: #EDEADC;
+  --palette-8: #D6AF5C;
+  --palette-9: #B28532;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #3A3028;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #E6C070;
+  --color-accent-subtle:  #302818;
+  --color-text-on-accent: #1A1610;
+  --shadow-color: 35deg 25% 8%;
+  --shadow-kasane: 0 4px 16px rgba(214, 175, 92, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 風神 (Fuujin)
+   森と風 — 苔緑〜丹系
+   ═════════════════════════════════════════════ */
+[data-theme="fuujin"] {
+  --palette-1: #E5E5D3;  /* 胡粉色 ごふんいろ */
+  --palette-2: #C8D0C0;  /* 若葉 わかば */
+  --palette-3: #EAE8DD;  /* 象牙 ぞうげ */
+  --palette-4: #A0A890;  /* 柳色 やなぎいろ */
+  --palette-5: #738F5F;  /* 風神 ふうじん */
+  --palette-6: #606734;  /* 古事記 こじき */
+  --palette-7: #343734;  /* 鉛色 なまりいろ */
+  --palette-8: #D26834;  /* 丹色 にいろ */
+  --palette-9: #AE4E21;  /* 錆色 さびいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #EEEcE0;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   var(--palette-9);
+  --color-accent-subtle:  #F0E0D0;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 120deg 20% 40%;
+  --shadow-kasane: 0 4px 16px rgba(210, 104, 52, 0.12);
+}
+
+[data-theme="fuujin-dark"] {
+  --palette-1: #141814;
+  --palette-2: #1E241C;
+  --palette-3: #262E24;
+  --palette-4: #404840;
+  --palette-5: #738F5F;
+  --palette-6: #B0B8A0;
+  --palette-7: #E5E5D3;
+  --palette-8: #D26834;
+  --palette-9: #AE4E21;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #303830;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #E07844;
+  --color-accent-subtle:  #2E201A;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 120deg 15% 8%;
+  --shadow-kasane: 0 4px 16px rgba(210, 104, 52, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 雨水 (Usui / Rain)
+   雪解けの清涼 — 草緑〜水色系
+   ═════════════════════════════════════════════ */
+[data-theme="usui"] {
+  --palette-1: #F1F6FA;  /* 寒の戻り かんのもどり */
+  --palette-2: #E1EDD5;  /* 萌野 もえの */
+  --palette-3: #F4F8F0;  /* 淡雪 あわゆき */
+  --palette-4: #BAC9A8;  /* 春一番 はるいちばん */
+  --palette-5: #86B055;  /* 三寒四温 さんかんしおん */
+  --palette-6: #7D744A;  /* 憩 いこい */
+  --palette-7: #3A4030;  /* 深緑 ふかみどり */
+  --palette-8: #558860;  /* 常盤木 ときわぎ */
+  --palette-9: #86B055;  /* 三寒四温 さんかんしおん */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F0F5EC;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #467048;
+  --color-accent-subtle:  #E6F0E0;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 140deg 25% 50%;
+  --shadow-kasane: 0 4px 16px rgba(85, 136, 96, 0.12);
+}
+
+[data-theme="usui-dark"] {
+  --palette-1: #101810;
+  --palette-2: #182018;
+  --palette-3: #1E2A1E;
+  --palette-4: #384838;
+  --palette-5: #7D744A;
+  --palette-6: #BAC9A8;
+  --palette-7: #F1F6FA;
+  --palette-8: #86B055;
+  --palette-9: #558860;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #283428;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #98C068;
+  --color-accent-subtle:  #1E2A18;
+  --color-text-on-accent: #101810;
+  --shadow-color: 140deg 15% 8%;
+  --shadow-kasane: 0 4px 16px rgba(85, 136, 96, 0.06);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 小満 (Shouman)
+   麦秋の陽光 — 黄金〜青系
+   ═════════════════════════════════════════════ */
+[data-theme="shouman"] {
+  --palette-1: #F7F7CC;  /* 卯の花色 うのはないろ */
+  --palette-2: #F7F1D8;  /* 絹の糸 きぬのいと */
+  --palette-3: #FEFCE8;  /* 淡黄 たんこう */
+  --palette-4: #D8D0A8;  /* 麦藁 むぎわら */
+  --palette-5: #B3A578;  /* 薄茶色 うすちゃいろ */
+  --palette-6: #947343;  /* 桑染 くわぞめ */
+  --palette-7: #4A3A20;  /* 焦茶 こげちゃ */
+  --palette-8: #F7B749;  /* 黄金色 こがねいろ */
+  --palette-9: #C87F59;  /* 雀色 すずめいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #FDFBE0;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   var(--palette-9);
+  --color-accent-subtle:  #FFF5D8;
+  --color-text-on-accent: #4A3A20;
+  --shadow-color: 42deg 40% 55%;
+  --shadow-kasane: 0 4px 16px rgba(247, 183, 73, 0.15);
+}
+
+[data-theme="shouman-dark"] {
+  --palette-1: #1A1608;
+  --palette-2: #282010;
+  --palette-3: #302818;
+  --palette-4: #504020;
+  --palette-5: #947343;
+  --palette-6: #D8D0A8;
+  --palette-7: #F7F7CC;
+  --palette-8: #F7B749;
+  --palette-9: #C87F59;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #3A3020;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #FFC860;
+  --color-accent-subtle:  #302810;
+  --color-text-on-accent: #1A1608;
+  --shadow-color: 42deg 30% 8%;
+  --shadow-kasane: 0 4px 16px rgba(247, 183, 73, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 白露 (Hakuro)
+   秋露の静寂 — 灰紫〜ピンク系
+   ═════════════════════════════════════════════ */
+[data-theme="hakuro"] {
+  --palette-1: #EAE5ED;  /* 露華 ろか */
+  --palette-2: #E6D5DD;  /* 小町鼠 こまちねず */
+  --palette-3: #F0ECF2;  /* 白藤 しらふじ */
+  --palette-4: #D4CEDB;  /* 銀灰色 ぎんかいしょく */
+  --palette-5: #B99CB9;  /* 新玉 あらたま */
+  --palette-6: #75668C;  /* 切磋琢磨 せっさたくま */
+  --palette-7: #3A3040;  /* 濃紫 こむらさき */
+  --palette-8: #F3ADCB;  /* 撫子色 なでしこいろ */
+  --palette-9: #717D9A;  /* 野分 のわき */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #EDE8F0;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #E090B0;
+  --color-accent-subtle:  #F5E8F0;
+  --color-text-on-accent: #3A3040;
+  --shadow-color: 290deg 20% 55%;
+  --shadow-kasane: 0 4px 16px rgba(243, 173, 203, 0.15);
+}
+
+[data-theme="hakuro-dark"] {
+  --palette-1: #18141A;
+  --palette-2: #221C28;
+  --palette-3: #2A2430;
+  --palette-4: #443850;
+  --palette-5: #75668C;
+  --palette-6: #D4CEDB;
+  --palette-7: #EAE5ED;
+  --palette-8: #F3ADCB;
+  --palette-9: #717D9A;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #342E3A;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #F5C0D8;
+  --color-accent-subtle:  #2A1C28;
+  --color-text-on-accent: #18141A;
+  --shadow-color: 290deg 15% 8%;
+  --shadow-kasane: 0 4px 16px rgba(243, 173, 203, 0.06);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 月見 (Tsukimi)
+   月夜 — 金〜藍系
+   ═════════════════════════════════════════════ */
+[data-theme="tsukimi"] {
+  --palette-1: #F4F2DE;  /* 月見団子 つきみだんご */
+  --palette-2: #EAE6BF;  /* 芒 すすき */
+  --palette-3: #F8F6E8;  /* 月白 げっぱく */
+  --palette-4: #D0C898;  /* 黄朽葉 きくちば */
+  --palette-5: #CAA156;  /* 月餅 げっぺい */
+  --palette-6: #634630;  /* 栗皮色 くりかわいろ */
+  --palette-7: #34373A;  /* 宵闇 よいやみ */
+  --palette-8: #F2E872;  /* 女郎花 おみなえし */
+  --palette-9: #C39A71;  /* 土器色 かわらけいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F5F3E4;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #E0D060;
+  --color-accent-subtle:  #FBF8E0;
+  --color-text-on-accent: #34373A;
+  --shadow-color: 50deg 35% 50%;
+  --shadow-kasane: 0 4px 16px rgba(242, 232, 114, 0.15);
+}
+
+[data-theme="tsukimi-dark"] {
+  --palette-1: #1A1810;
+  --palette-2: #242018;
+  --palette-3: #2C2820;
+  --palette-4: #504830;
+  --palette-5: #CAA156;
+  --palette-6: #EAE6BF;
+  --palette-7: #F4F2DE;
+  --palette-8: #F2E872;
+  --palette-9: #C39A71;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #363020;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #F5F088;
+  --color-accent-subtle:  #2C2810;
+  --color-text-on-accent: #1A1810;
+  --shadow-color: 50deg 25% 8%;
+  --shadow-kasane: 0 4px 16px rgba(242, 232, 114, 0.06);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 霜降 (Soukou)
+   晩秋の冷暖 — 灰青〜柿色系
+   ═════════════════════════════════════════════ */
+[data-theme="soukou"] {
+  --palette-1: #E0C6BF;  /* 喜色 きしょく */
+  --palette-2: #D0D2BF;  /* 素人 しろうと */
+  --palette-3: #EAE0DA;  /* 薄香 うすこう */
+  --palette-4: #949AA9;  /* 木枯らし こがらし */
+  --palette-5: #5D6566;  /* 玄人 くろうと */
+  --palette-6: #3D566F;  /* 静寂 しじま */
+  --palette-7: #233145;  /* 夜の帳 よるのとばり */
+  --palette-8: #D97455;  /* 柿色 かきいろ */
+  --palette-9: #F1AC5F;  /* 金木犀 きんもくせい */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #ECE4DE;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #C06040;
+  --color-accent-subtle:  #F0DDD0;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 210deg 25% 40%;
+  --shadow-kasane: 0 4px 16px rgba(217, 116, 85, 0.15);
+}
+
+[data-theme="soukou-dark"] {
+  --palette-1: #141820;
+  --palette-2: #1C2230;
+  --palette-3: #242C3A;
+  --palette-4: #3D4A5A;
+  --palette-5: #949AA9;
+  --palette-6: #D0D2BF;
+  --palette-7: #E0C6BF;
+  --palette-8: #D97455;
+  --palette-9: #F1AC5F;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #2E3648;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #E88868;
+  --color-accent-subtle:  #2C2018;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 210deg 20% 8%;
+  --shadow-kasane: 0 4px 16px rgba(217, 116, 85, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 大雪 (Taisetsu / Snow)
+   冬の凛 — 白灰〜茶系
+   ═════════════════════════════════════════════ */
+[data-theme="taisetsu"] {
+  --palette-1: #F4F5F1;  /* 粉雪 こなゆき */
+  --palette-2: #DBDCD1;  /* 雪見 ゆきみ */
+  --palette-3: #F2F2EA;  /* 細雪 ささめゆき */
+  --palette-4: #CAC4AB;  /* 銀煤竹 ぎんすすたけ */
+  --palette-5: #87786D;  /* 栗鼠色 りすいろ */
+  --palette-6: #566268;  /* 熨斗目色 のしめいろ */
+  --palette-7: #38322B;  /* 濡羽色 ぬればいろ */
+  --palette-8: #C59663;  /* 渋紙色 しぶがみいろ */
+  --palette-9: #936452;  /* 海老色 えびいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F0F0E8;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   var(--palette-9);
+  --color-accent-subtle:  #EEE6D8;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 30deg 15% 45%;
+  --shadow-kasane: 0 4px 16px rgba(197, 150, 99, 0.12);
+}
+
+[data-theme="taisetsu-dark"] {
+  --palette-1: #18160F;
+  --palette-2: #201E16;
+  --palette-3: #28261E;
+  --palette-4: #484030;
+  --palette-5: #87786D;
+  --palette-6: #CAC4AB;
+  --palette-7: #F4F5F1;
+  --palette-8: #C59663;
+  --palette-9: #936452;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #302E26;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #D8A878;
+  --color-accent-subtle:  #282018;
+  --color-text-on-accent: #18160F;
+  --shadow-color: 30deg 12% 8%;
+  --shadow-kasane: 0 4px 16px rgba(197, 150, 99, 0.06);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 白川郷 (Shirakawago)
+   雪霧の静けさ — ベージュ〜灰青系
+   ═════════════════════════════════════════════ */
+[data-theme="shirakawago"] {
+  --palette-1: #FFFBF1;  /* 繭 まゆ */
+  --palette-2: #F2E2CE;  /* 灯 ともしび */
+  --palette-3: #FAF6F0;  /* 白練 しろねり */
+  --palette-4: #C0B9B2;  /* 適材適所 てきざいてきしょ */
+  --palette-5: #998A7D;  /* 栗の木 くりのき */
+  --palette-6: #7B6153;  /* 合掌造り がっしょうづくり */
+  --palette-7: #4A3A2E;  /* 焦茶 こげちゃ */
+  --palette-8: #9CAEBC;  /* 雪曇り ゆきぐもり */
+  --palette-9: #BECCDC;  /* 豪雪 ごうせつ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F6F2EC;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #8898A8;
+  --color-accent-subtle:  #E8F0F4;
+  --color-text-on-accent: #4A3A2E;
+  --shadow-color: 25deg 15% 50%;
+  --shadow-kasane: 0 4px 16px rgba(156, 174, 188, 0.15);
+}
+
+[data-theme="shirakawago-dark"] {
+  --palette-1: #1A1612;
+  --palette-2: #24201A;
+  --palette-3: #2C2822;
+  --palette-4: #4A4438;
+  --palette-5: #998A7D;
+  --palette-6: #C0B9B2;
+  --palette-7: #FFFBF1;
+  --palette-8: #9CAEBC;
+  --palette-9: #BECCDC;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #343028;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #B0C0D0;
+  --color-accent-subtle:  #1A2228;
+  --color-text-on-accent: #1A1612;
+  --shadow-color: 25deg 10% 8%;
+  --shadow-kasane: 0 4px 16px rgba(156, 174, 188, 0.06);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 琉球 (Ryukyu)
+   南国の鮮烈 — 赤・青・黄・紫系
+   ═════════════════════════════════════════════ */
+[data-theme="ryukyu"] {
+  --palette-1: #FFF8E8;  /* 紅型白 びんがたしろ */
+  --palette-2: #FACA66;  /* 紅型 びんがた */
+  --palette-3: #FFFAF0;  /* 卵色 たまごいろ */
+  --palette-4: #D8C080;  /* 月桃 げっとう */
+  --palette-5: #B27854;  /* 獅子 しーさー */
+  --palette-6: #866B31;  /* 黒糖 こくとう */
+  --palette-7: #3A2810;  /* 泡盛 あわもり */
+  --palette-8: #E9544B;  /* 首里城 しゅりじょう */
+  --palette-9: #51B0BB;  /* 花笠 はなかさ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #FFF5E0;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #D04040;
+  --color-accent-subtle:  #FCE8E8;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 5deg 45% 55%;
+  --shadow-kasane: 0 4px 16px rgba(233, 84, 75, 0.15);
+}
+
+[data-theme="ryukyu-dark"] {
+  --palette-1: #1A1408;
+  --palette-2: #281E10;
+  --palette-3: #302618;
+  --palette-4: #504020;
+  --palette-5: #B27854;
+  --palette-6: #FACA66;
+  --palette-7: #FFF8E8;
+  --palette-8: #E9544B;
+  --palette-9: #51B0BB;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #3A3020;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #F06860;
+  --color-accent-subtle:  #2A1818;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 5deg 30% 8%;
+  --shadow-kasane: 0 4px 16px rgba(233, 84, 75, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 鳥獣戯画 (Chojugiga)
+   墨と和紙 — 12世紀の戯れ墨絵
+   ─────────────────────────────────────────────
+   甲巻の兎・蛙・猿が遊ぶ世界。
+   和紙の温かみと墨の濃淡、朱印の赤を表現。
+   ═════════════════════════════════════════════ */
+[data-theme="chojugiga"] {
+  --palette-1: #FFF1DC;  /* 鳥の子色 とりのこいろ — 和紙の地 */
+  --palette-2: #EAD8C0;  /* 白茶 しらちゃ — 古紙の黄ばみ */
+  --palette-3: #FAF2E8;  /* 生成り きなり — カード面 */
+  --palette-4: #CDB89A;  /* 亜麻色 あまいろ — 境界 */
+  --palette-5: #8A8478;  /* 利休鼠 りきゅうねず — 薄墨 */
+  --palette-6: #5C5650;  /* 墨色 すみいろ — 中墨 */
+  --palette-7: #302C28;  /* 墨 すみ — 濃墨 */
+  --palette-8: #C04C28;  /* 朱色 しゅいろ — 落款の朱（濃） */
+  --palette-9: #983C18;  /* 丹色 にいろ — 深い朱 */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F5ECE0;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   var(--palette-9);
+  --color-accent-subtle:  #F8E8D8;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 30deg 25% 45%;
+  --shadow-kasane: 0 4px 16px rgba(192, 76, 40, 0.12);
+}
+
+[data-theme="chojugiga-dark"] {
+  --palette-1: #1C1A16;  /* 消炭 けしずみ */
+  --palette-2: #28241E;  /* 焦茶 こげちゃ */
+  --palette-3: #302C26;  /* 煤竹色 すすたけいろ */
+  --palette-4: #504838;  /* 朽葉色 くちばいろ */
+  --palette-5: #8A8478;  /* 利休鼠 りきゅうねず */
+  --palette-6: #CDB89A;  /* 亜麻色 あまいろ */
+  --palette-7: #FFF1DC;  /* 鳥の子色 とりのこいろ */
+  --palette-8: #E07048;  /* 朱色 しゅいろ — 明るい朱 */
+  --palette-9: #C05830;  /* 丹色 にいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #3A3430;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #F08058;
+  --color-accent-subtle:  #302018;
+  --color-text-on-accent: #1C1A16;
+  --shadow-color: 30deg 20% 8%;
+  --shadow-kasane: 0 4px 16px rgba(224, 112, 72, 0.10);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: 葛飾北斎 (Hokusai)
+   神奈川沖浪裏 — ベロ藍の大波
+   ─────────────────────────────────────────────
+   世界で最も有名な浮世絵。プルシアンブルー（ベロ藍）の
+   濃淡で表現される大波と富士を、伝統色の藍系で再現。
+   ═════════════════════════════════════════════ */
+[data-theme="hokusai"] {
+  --palette-1: #E8F0F6;  /* 月白 げっぱく — 遠くの空 */
+  --palette-2: #C8D8EA;  /* 白藍 しらあい — 波の泡沫 */
+  --palette-3: #F0F4F8;  /* 瓶覗 かめのぞき — カード面 */
+  --palette-4: #88AACC;  /* 花浅葱 はなあさぎ — 波間の境界 */
+  --palette-5: #5A86A8;  /* 花色 はないろ — 薄いベロ藍 */
+  --palette-6: #2C5478;  /* 藍色 あいいろ — 中間のベロ藍 */
+  --palette-7: #0E2840;  /* 鉄紺 てつこん — 深い波底 */
+  --palette-8: #2E78B8;  /* 縹色 はなだいろ — 波頭の藍 */
+  --palette-9: #48A0C0;  /* 浅葱色 あさぎいろ — 明るい波 */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #E4ECF2;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #1C6098;
+  --color-accent-subtle:  #D8E8F4;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 210deg 35% 50%;
+  --shadow-kasane: 0 4px 16px rgba(46, 120, 184, 0.15);
+}
+
+[data-theme="hokusai-dark"] {
+  --palette-1: #0A1420;  /* 暗黒 あんこく — 深海 */
+  --palette-2: #101E2E;  /* 褐返 かちかえし — 暗い藍 */
+  --palette-3: #182838;  /* 紺色 こんいろ — カード面 */
+  --palette-4: #284060;  /* 紺鉄 こんてつ — 境界 */
+  --palette-5: #5A86A8;  /* 花色 はないろ */
+  --palette-6: #88AACC;  /* 花浅葱 はなあさぎ */
+  --palette-7: #E8F0F6;  /* 月白 げっぱく */
+  --palette-8: #48A0C0;  /* 浅葱色 あさぎいろ */
+  --palette-9: #2E78B8;  /* 縹色 はなだいろ */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #203848;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #60B8D8;
+  --color-accent-subtle:  #102030;
+  --color-text-on-accent: #0A1420;
+  --shadow-color: 210deg 30% 6%;
+  --shadow-kasane: 0 4px 16px rgba(72, 160, 192, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   THEME: ゴッホ (Gogh)
+   星月夜 — 伝統色で描く西洋の渦巻く夜空
+   ─────────────────────────────────────────────
+   日本の伝統色で、フィンセント・ファン・ゴッホの
+   「星月夜」(1889) を表現。渦巻く藍紫の空を主軸に、
+   星と月の黄金を差し色として。伝統色パレットの
+   国際的な表現力を示すテーマ。
+   ═════════════════════════════════════════════ */
+[data-theme="gogh"] {
+  --palette-1: #E0E0F0;  /* 白菫色 しろすみれいろ — 淡い夜明けの空 */
+  --palette-2: #C4C8E0;  /* 藤鼠 ふじねず — 霞む星空 */
+  --palette-3: #EAEAF4;  /* 白藤色 しらふじいろ — カード面 */
+  --palette-4: #9098C0;  /* 紅掛空色 べにかけそらいろ — 渦の境界 */
+  --palette-5: #6068A0;  /* 藤紫 ふじむらさき — 渦巻く空 */
+  --palette-6: #3A4478;  /* 紺青 こんじょう — 深い夜空 */
+  --palette-7: #181830;  /* 鉄黒 てつぐろ — 糸杉の闇 */
+  --palette-8: #4050A0;  /* 瑠璃色 るりいろ — 夜空のアクセント */
+  --palette-9: #C89818;  /* 山吹色 やまぶきいろ — 星と月の光 */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #E4E4F0;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #303C88;
+  --color-accent-subtle:  #D8D8F0;
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 240deg 25% 50%;
+  --shadow-kasane: 0 4px 16px rgba(64, 80, 160, 0.15);
+}
+
+[data-theme="gogh-dark"] {
+  --palette-1: #121220;  /* 漆黒 しっこく — 深夜の闇 */
+  --palette-2: #1A1A30;  /* 鉄紺 てつこん — 暗い夜空 */
+  --palette-3: #222238;  /* 紺色 こんいろ — カード面 */
+  --palette-4: #383860;  /* 茄子紺 なすこん — 境界 */
+  --palette-5: #6068A0;  /* 藤紫 ふじむらさき */
+  --palette-6: #9098C0;  /* 紅掛空色 べにかけそらいろ */
+  --palette-7: #E0E0F0;  /* 白菫色 しろすみれいろ */
+  --palette-8: #7080D0;  /* 露草色 つゆくさいろ — 明るい夜空 */
+  --palette-9: #E8B020;  /* 黄金色 こがねいろ — 輝く星 */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #2C2C48;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #8898E0;
+  --color-accent-subtle:  #1A1A38;
+  --color-text-on-accent: #121220;
+  --shadow-color: 240deg 20% 6%;
+  --shadow-kasane: 0 4px 16px rgba(112, 128, 208, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   CUSTOM COLOR PALETTE
+   ═════════════════════════════════════════════
+   ユーザーが独自の色を指定するためのカスタムテーマ。
+   JavaScript から CSS 変数を上書きして使用する。
+
+   使い方:
+     document.documentElement.setAttribute('data-theme', 'custom');
+     document.documentElement.style.setProperty('--palette-1', '#F5F5F0');
+     // ... 各色を設定
+   ═════════════════════════════════════════════ */
+[data-theme="custom"] {
+  /* デフォルト値（上書き前提） */
+  --palette-1: #FAFAF9;
+  --palette-2: #F0F0EE;
+  --palette-3: #FFFFFF;
+  --palette-4: #E4E4E0;
+  --palette-5: #9898A8;
+  --palette-6: #52526A;
+  --palette-7: #0C0C10;
+  --palette-8: #5B5BD6;
+  --palette-9: #4848C4;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  var(--palette-2);
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   var(--palette-9);
+  --color-accent-subtle:  color-mix(in srgb, var(--palette-8) 10%, var(--palette-1) 90%);
+  --color-text-on-accent: #FFFFFF;
+  --shadow-color: 0deg 0% 50%;
+  --shadow-kasane: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ═════════════════════════════════════════════
+   KASANE-IROME SHADOW UTILITY
+   重色目シャドウ ユーティリティクラス
+   ═════════════════════════════════════════════ */
+.shadow-kasane-sm  { box-shadow: 0 2px 8px  var(--shadow-kasane, rgba(0,0,0,0.06)); }
+.shadow-kasane     { box-shadow: 0 4px 16px var(--shadow-kasane, rgba(0,0,0,0.08)); }
+.shadow-kasane-lg  { box-shadow: 0 8px 32px var(--shadow-kasane, rgba(0,0,0,0.12)); }
+
+/* ============================================================
+   THEME: geshtalt (teal x gold x cream)
+   geshtalt.jp portal theme. accent/text/border match the portal's
+   current hex exactly (look preserved). gold(palette-9) is a
+   secondary accent for future multi-accent support.
+   ============================================================ */
+[data-theme="geshtalt"] {
+  --palette-1: #F7F2EA;  /* cream  - section bg */
+  --palette-2: #E8EEE9;  /* muted  - surface-muted */
+  --palette-3: #FFFDF8;  /* white  - card */
+  --palette-4: #CFD8D2;  /* line   - border */
+  --palette-5: #5A6763;  /* gray   - muted text */
+  --palette-6: #14201F;  /* ink    - body text */
+  --palette-7: #0F1718;  /* black  - darkest */
+  --palette-8: #186C6B;  /* teal   - accent */
+  --palette-9: #B88A3D;  /* gold   - secondary accent */
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #F0ECE2;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-6);
+  --color-text-secondary: var(--palette-5);
+  --color-text-tertiary:  #7A847F;
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #0F5454;
+  --color-accent-subtle:  #DFF1EF;
+  --color-text-on-accent: #FFFDF8;
+  --shadow-color: 174deg 30% 28%;
+  --shadow-kasane: 0 4px 16px rgba(23, 108, 107, 0.14);
+}
+
+[data-theme="geshtalt-dark"] {
+  --palette-1: #0F1718;
+  --palette-2: #152222;
+  --palette-3: #18211F;
+  --palette-4: #2A3A36;
+  --palette-5: #7A847F;
+  --palette-6: #C8D2CD;
+  --palette-7: #F7F2EA;
+  --palette-8: #3FB0A6;
+  --palette-9: #D7A95A;
+
+  --color-bg:             var(--palette-1);
+  --color-bg-subtle:      var(--palette-2);
+  --color-surface:        var(--palette-3);
+  --color-surface-hover:  #1F2A27;
+  --color-border:         var(--palette-4);
+  --color-border-strong:  var(--palette-5);
+  --color-text-primary:   var(--palette-7);
+  --color-text-secondary: var(--palette-6);
+  --color-text-tertiary:  var(--palette-5);
+  --color-accent:         var(--palette-8);
+  --color-accent-hover:   #5BC4BA;
+  --color-accent-subtle:  #0E2422;
+  --color-text-on-accent: #0F1718;
+  --shadow-color: 174deg 30% 6%;
+  --shadow-kasane: 0 4px 16px rgba(63, 176, 166, 0.10);
+}

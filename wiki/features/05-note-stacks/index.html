@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>05-note-stacks | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="ノート Stack (NS-01) 複数選択したノートを、 最後に選択した（アクティブ）ノートを固定 し、残りをその 右（横） または 下（縦） に隙間を空けて並べます。整列ガイド（Align）とは別機能です。 関連 キャンバス全般: 01-canvas-and-gestures…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="05-note-stacks | HṛdayaFlow Manual">
+<meta property="og:description" content="ノート Stack (NS-01) 複数選択したノートを、 最後に選択した（アクティブ）ノートを固定 し、残りをその 右（横） または 下（縦） に隙間を空けて並べます。整列ガイド（Align）とは別機能です。 関連 キャンバス全般: 01-canvas-and-gestures…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>05-note-stacks</h1><div class="note-meta"></div><h1 id="ノート-Stack-(NS-01)">ノート Stack (NS-01)</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">05-note-stacks</span><h1>05-note-stacks</h1><h1 id="ノート-Stack-(NS-01)">ノート Stack (NS-01)</h1>
 <p>複数選択したノートを、<strong>最後に選択した（アクティブ）ノートを固定</strong>し、残りをその <strong>右（横）</strong> または <strong>下（縦）</strong> に隙間を空けて並べます。整列ガイド（Align）とは別機能です。</p>
 <h2 id="関連">関連</h2>
 <ul><li>キャンバス全般: <span class="missing">01-canvas-and-gestures</span></li><li>ノートプリセット: <a class="wikilink" href="../../features/07-note-presets/">07-note-presets</a></li></ul>
@@ -28,8 +40,7 @@
 <h2 id="ショートカット">ショートカット</h2>
 <p>ノートを <strong>テキスト編集中にしていない</strong> ときのみ有効です。</p>
 <div class="table-wrap"><table><thead><tr><th>操作</th><th>キー</th></tr></thead><tbody><tr><td>Stack（縦）</td><td><code>Ctrl+Alt+V</code>（Mac は <code>Cmd+Alt+V</code>）</td></tr><tr><td>Stack（横）</td><td><code>Ctrl+Alt+H</code>（Mac は <code>Cmd+Alt+H</code>）</td></tr></tbody></table></div>
-<p><strong>別名保存</strong>は <code>Ctrl+Alt+S</code>（Mac は <code>Cmd+Alt+S</code>）です。  
-<strong>クリップボードからのインポート</strong>は <code>Ctrl+Shift+Alt+V</code>（Mac は <code>Cmd+Shift+Alt+V</code>）です。</p>
+<p><strong>別名保存</strong>は <code>Ctrl+Alt+S</code>（Mac は <code>Cmd+Alt+S</code>）です。  <br><strong>クリップボードからのインポート</strong>は <code>Ctrl+Shift+Alt+V</code>（Mac は <code>Cmd+Shift+Alt+V</code>）です。</p>
 <h2 id="インスペクタ（Stack-状態のとき）">インスペクタ（Stack 状態のとき）</h2>
 <p>同一 Stack に属するノートだけをまとめて選ぶと:</p>
 <ul><li><strong>Alignment</strong>（先頭 / 中央 / 末尾 / 両端）を変えて即再整列できます。連続操作は Undo が 1 まとまりになります。</li><li><strong>Margin</strong> スライダーで子どうしの間隔を変えられます。ドラッグ中は Undo が <code>coalesce</code> されます。</li><li><strong>Stack 解除</strong>で <code>stackGroupId</code> などの状態を消します。</li></ul>
@@ -37,25 +48,20 @@
 <h2 id="永続化">永続化</h2>
 <p>Stack の状態は <code>map.json</code> 上の各ノードに保存されます。<code>.hrf</code> を保存して再度開くと復元されます。フィールドがない古いファイルもそのまま開けます。</p>
 <h2 id="親ノートを削除したとき">親ノートを削除したとき</h2>
-<p>同一 Stack に子が残り、削除されたのが親だけだった場合、<strong>もっとも先頭側にあった子が新しい親</strong>になります（グループは維持）。</p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#ノート-Stack-(NS-01)">ノート Stack (NS-01)</a></li><li class="lvl-2"><a href="#関連">関連</a></li><li class="lvl-2"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#ショートカット">ショートカット</a></li><li class="lvl-2"><a href="#インスペクタ（Stack-状態のとき）">インスペクタ（Stack 状態のとき）</a></li><li class="lvl-2"><a href="#永続化">永続化</a></li><li class="lvl-2"><a href="#親ノートを削除したとき">親ノートを削除したとき</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">05-note-st</text>
-    <a href="../../features/07-note-presets/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>07-note-presets</title></a><text x="170" y="66" text-anchor="middle">07-note-</text>
-  </svg></div></aside>
+<p>同一 Stack に子が残り、削除されたのが親だけだった場合、<strong>もっとも先頭側にあった子が新しい親</strong>になります（グループは維持）。</p>
+<hr>
+<h2 id="並べ方（寄せ）">並べ方（寄せ）</h2>
+<p>スタックに入れたノートの揃え方を選べます。</p>
+<div class="table-wrap"><table><thead><tr><th>寄せ</th><th>結果</th></tr></thead><tbody><tr><td>先頭寄せ</td><td>上（横並びなら左）に揃える</td></tr><tr><td>中央</td><td>中心線に揃える</td></tr><tr><td>末尾寄せ</td><td>下（横並びなら右）に揃える</td></tr><tr><td>均等</td><td>端から端まで等間隔に配置する</td></tr></tbody></table></div>
+<p>「均等」だけは間隔が中身の数で変わります。他の 3 つは間隔を保ったまま位置だけ動かします。</p><div data-pagefind-ignore><section class="backlinks"><h3>Backlinks</h3><ul><li><a href="../../00-INDEX/">HṛdayaFlow ユーザーマニュアル</a></li></ul></section></div></article>
+  <aside class="rightcol"><div class="graph" data-slug="features/05-note-stacks/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#ノート-Stack-(NS-01)">ノート Stack (NS-01)</a></li><li class="lvl-2"><a href="#関連">関連</a></li><li class="lvl-2"><a href="#使い方">使い方</a></li><li class="lvl-2"><a href="#ショートカット">ショートカット</a></li><li class="lvl-2"><a href="#インスペクタ（Stack-状態のとき）">インスペクタ（Stack 状態のとき）</a></li><li class="lvl-2"><a href="#永続化">永続化</a></li><li class="lvl-2"><a href="#親ノートを削除したとき">親ノートを削除したとき</a></li><li class="lvl-2"><a href="#並べ方（寄せ）">並べ方（寄せ）</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/05-note-stacks";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/05-note-stacks";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

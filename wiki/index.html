@@ -1,64 +1,71 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>HṛdayaFlow ユーザーマニュアル | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="./_site/site.css">
+<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual. HṛdayaFlow ユーザーマニュアル 中心から智慧が流れ出す曼荼羅的マインドマップ — 全機能リファレンス このマニュアルは Obsidian で開くことを想定しています。 [[]] の wikilink で章間を行き来できます。…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="HṛdayaFlow ユーザーマニュアル | HṛdayaFlow Manual">
+<meta property="og:description" content="HṛdayaFlow ユーザーマニュアル / Manual. HṛdayaFlow ユーザーマニュアル 中心から智慧が流れ出す曼荼羅的マインドマップ — 全機能リファレンス このマニュアルは Obsidian で開くことを想定しています。 [[]] の wikilink で章間を行き来できます。…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="/_site/senastra/variables.css">
+<link rel="stylesheet" href="/_site/senastra/themes.css">
+<link rel="stylesheet" href="/_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="/_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="./">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>HṛdayaFlow Manual</h1><p>HṛdayaFlow ユーザーマニュアル / Manual.</p><p><img alt="160" src="./_assets/_assets/HrdayaFlow-icon.png" loading="lazy"></p>
+  <aside class="sidebar"><a class="nav-brand" href="/">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:00-INDEX"><span data-pagefind-meta="title" hidden aria-hidden="true">HṛdayaFlow ユーザーマニュアル</span><h1>HṛdayaFlow Manual</h1><p>HṛdayaFlow ユーザーマニュアル / Manual.</p><p><img alt="HrdayaFlow-icon.png" src="/_assets/_assets/HrdayaFlow-icon.png" loading="lazy" width="160"></p>
 <h1 id="HṛdayaFlow-ユーザーマニュアル">HṛdayaFlow ユーザーマニュアル</h1>
 <blockquote><p>中心から智慧が流れ出す曼荼羅的マインドマップ — 全機能リファレンス</p></blockquote>
 <p>このマニュアルは Obsidian で開くことを想定しています。<code>[[]]</code> の wikilink で章間を行き来できます。</p>
 <hr>
 <h2 id="📘-入門-(basics)">📘 入門 (basics)</h2>
-<div class="table-wrap"><table><thead><tr><th>章</th><th>ファイル</th><th>主題</th></tr></thead><tbody><tr><td>01</td><td>[[01-overview\</td><td>概要とアーキテクチャ]]</td><td>製品コンセプト・3 層構成・対応 OS</td></tr><tr><td>02</td><td>[[02-getting-started\</td><td>はじめに]]</td><td>インストール・初回起動・サンプルマップ</td></tr><tr><td>03</td><td>[[03-startup-on-windows\</td><td>Windows 起動マニュアル]]</td><td>Windows 環境での起動手順 (旧 起動マニュアル)</td></tr><tr><td>04</td><td>[[04-install-warning\</td><td>インストール時の警告について]]</td><td>SmartScreen 警告の回避手順 (beta 期、未署名のため)</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>章</th><th>ファイル</th><th>主題</th></tr></thead><tbody><tr><td>01</td><td><span class="missing">概要とアーキテクチャ</span></td><td>製品コンセプト・3 層構成・対応 OS</td></tr><tr><td>02</td><td><span class="missing">はじめに</span></td><td>インストール・初回起動・サンプルマップ</td></tr><tr><td>03</td><td><span class="missing">Windows 起動マニュアル</span></td><td>Windows 環境での起動手順 (旧 起動マニュアル)</td></tr><tr><td>04</td><td><span class="missing">インストール時の警告について</span></td><td>SmartScreen 警告の回避手順 (beta 期、未署名のため)</td></tr><tr><td>05</td><td><span class="missing">更新・停止・診断・サポート</span></td><td>自動更新の流れ・閲覧のみモード・診断情報・Discord・同梱チュートリアル</td></tr></tbody></table></div>
 <h2 id="🛠-機能-(features)">🛠 機能 (features)</h2>
-<div class="table-wrap"><table><thead><tr><th>章</th><th>ファイル</th><th>主題</th></tr></thead><tbody><tr><td>01</td><td>[[01-canvas-and-gestures\</td><td>キャンバスとジェスチャー]]</td><td>パン・ズーム・選択・スナップ・グリッド・左アクティビティバー</td></tr><tr><td>02</td><td>[[02-nodes\</td><td>ノート 13 種]]</td><td>text / markdown / image / … / frame / container / <strong>dot</strong> + Markdown プレビュー編集</td></tr><tr><td>03</td><td>[[03-edges-and-connections\</td><td>エッジと接続]]</td><td>ハンドルドラッグ・semantic type・ナイフ + Dot リルート</td></tr><tr><td>04</td><td>[[04-groups-and-containers\</td><td>グループと Container]]</td><td>Ctrl+G・折りたたみ・サブマップ</td></tr><tr><td>05</td><td>[[05-note-stacks\</td><td>ノートスタック]]</td><td>NS-01 によるノート整列・スタック</td></tr><tr><td>06</td><td>[[06-inspector-and-formatting\</td><td>Inspector と書式]]</td><td>Format Panel (B/I/U/S・色・枠線・影・Magnetic) + writingMode/textDirection に応じた Alignment 適応</td></tr><tr><td>07</td><td>[[07-note-presets\</td><td>ノートプリセット]]</td><td>スタイル束 (テキストは保持、見た目のみ適用)</td></tr><tr><td>08</td><td>[[08-undo-history\</td><td>Undo / 履歴]]</td><td>JSON patch undo・coalesce・履歴ビューア</td></tr><tr><td>09</td><td>[[09-search-and-outline\</td><td>検索と Outline]]</td><td>Ctrl+F・Ctrl+K・Outline パネル</td></tr><tr><td>10</td><td>[[10-ai-features\</td><td>AI 機能]]</td><td>テキスト → マップ・要約・Suggest Edges・Backend</td></tr><tr><td>11</td><td>[[11-files-and-interop\</td><td>ファイルと相互運用]]</td><td><code>.hrf</code> v0.2・Save As・DnD・Mermaid・JSON Canvas・OPML・XMind・FreeMind・PDF/PNG/SVG</td></tr><tr><td>12</td><td>[[12-planner-calendar\</td><td>Planner / Calendar]]</td><td>左アクティビティバー・月/週/日カレンダー・クイック追加・RRULE</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>章</th><th>ファイル</th><th>主題</th></tr></thead><tbody><tr><td>01</td><td><span class="missing">キャンバスとジェスチャー</span></td><td>パン・ズーム・選択・スナップ・グリッド・左アクティビティバー</td></tr><tr><td>02</td><td><span class="missing">ノート 14 種</span></td><td>text / markdown / image / video / audio / link / checklist / code / embed / math / frame / container / <strong>dot</strong> / <strong>file</strong></td></tr><tr><td>03</td><td><span class="missing">エッジと接続</span></td><td>ハンドルドラッグ・semantic type・ナイフ + Dot リルート</td></tr><tr><td>04</td><td><span class="missing">グループと Container</span></td><td>Ctrl+G・折りたたみ・サブマップ</td></tr><tr><td>05</td><td><a class="wikilink" href="/features/05-note-stacks/">ノートスタック</a></td><td>NS-01 によるノート整列・スタック</td></tr><tr><td>06</td><td><span class="missing">Inspector と書式</span></td><td>Format Panel (B/I/U/S・色・枠線・影・Magnetic) + writingMode/textDirection に応じた Alignment 適応</td></tr><tr><td>07</td><td><a class="wikilink" href="/features/07-note-presets/">ノートプリセット</a></td><td>スタイル束 (テキストは保持、見た目のみ適用)</td></tr><tr><td>08</td><td><span class="missing">Undo / 履歴</span></td><td>JSON patch undo・coalesce・履歴ビューア</td></tr><tr><td>09</td><td><span class="missing">検索と Outline</span></td><td>Ctrl+F・Ctrl+K・Outline パネル</td></tr><tr><td>10</td><td><span class="missing">AI 機能</span></td><td>テキスト → マップ・要約・Suggest Edges・Backend</td></tr><tr><td>11</td><td><span class="missing">ファイルと相互運用</span></td><td><code>.hrf</code> v0.2・Save As・DnD・Mermaid・JSON Canvas・OPML・XMind・FreeMind・PDF/PNG/SVG</td></tr><tr><td>12</td><td><span class="missing">Planner / Calendar / Task list</span></td><td>Task list（受信トレイ/今日/次の7日/リスト）・Calendar・Quick Entry タスク・planner MCP</td></tr></tbody></table></div>
 <h2 id="📚-リファレンス-(reference)">📚 リファレンス (reference)</h2>
-<div class="table-wrap"><table><thead><tr><th>章</th><th>ファイル</th><th>主題</th></tr></thead><tbody><tr><td>01</td><td>[[01-keyboard-shortcuts\</td><td>ショートカット早見表]]</td><td>全キーボード操作の一覧</td></tr><tr><td>02</td><td>[[02-themes-i18n-a11y\</td><td>テーマ・多言語・アクセシビリティ]]</td><td>ライト/ダーク・ja/en・スクリーンリーダー</td></tr><tr><td>03</td><td>[[03-troubleshooting\</td><td>トラブルシューティング]]</td><td>FAQ・既知の問題・ログの見方</td></tr><tr><td>04</td><td>[[04-developer-guide\</td><td>開発者ガイド]]</td><td>CLI・MCP server・FFI・ビルド</td></tr><tr><td>05</td><td>[[05-app-settings\</td><td>アプリ設定]]</td><td>ImageCache・Markdown表示・AIターゲット・トレイクイック追加</td></tr></tbody></table></div>
+<div class="table-wrap"><table><thead><tr><th>章</th><th>ファイル</th><th>主題</th></tr></thead><tbody><tr><td>01</td><td><span class="missing">ショートカット早見表</span></td><td>全キーボード操作の一覧</td></tr><tr><td>02</td><td><span class="missing">テーマ・多言語・アクセシビリティ</span></td><td>ライト/ダーク・ja/en・スクリーンリーダー</td></tr><tr><td>03</td><td><span class="missing">トラブルシューティング</span></td><td>FAQ・既知の問題・ログの見方</td></tr><tr><td>04</td><td><span class="missing">開発者ガイド</span></td><td>CLI・MCP server・FFI・ビルド</td></tr><tr><td>05</td><td><span class="missing">アプリ設定</span></td><td>ImageCache・Markdown表示・AIターゲット・トレイクイック追加</td></tr><tr><td>06</td><td><span class="missing">メニュー全リファレンス</span></td><td>メニュー 147 項目を実装から自動生成 ⚙</td></tr><tr><td>07</td><td><span class="missing">MCP ツール一覧</span></td><td>AI から操作できる 28 ツールを自動生成 ⚙</td></tr></tbody></table></div>
 <h2 id="🔧-内部資料-(_internal)">🔧 内部資料 (_internal)</h2>
 <p>Obsidian Publish 公開対象外。開発者向けの検証手順・運用フロー。</p>
 <ul><li>a11y-verification — アクセシビリティ検証手順</li><li>opml-import-verification — OPML インポート検証</li><li>release-channel-flow — リリース channel 運用フロー</li></ul>
 <hr>
+<h2 id="⚙-自動生成される節について">⚙ 自動生成される節について</h2>
+<p>一部の表は <strong>実装から機械生成</strong>しています。<code>&lt;!-- AUTOGEN:xxx START --&gt;</code> 〜 <code>END</code> で<br>囲まれた範囲がそれで、<strong>手で書き換えても次の生成で消えます</strong>。補足したいことは区間の外に書いてください。</p>
+<p>生成元と対象:</p>
+<div class="table-wrap"><table><thead><tr><th>生成される表</th><th>正本</th></tr></thead><tbody><tr><td>ショートカット全一覧・メニュー外のキー割り当て</td><td><code>app/lib/canvas/hrdaya_desktop_menu_bar.dart</code> / <code>app/lib/**/*.dart</code></td></tr><tr><td>メニュー全リファレンス</td><td><code>app/lib/canvas/hrdaya_desktop_menu_bar.dart</code></td></tr><tr><td>保存される設定キー</td><td><code>app/lib/services/app_settings.dart</code></td></tr><tr><td>MCP ツール</td><td><code>app/lib/mcp/tools/*.dart</code></td></tr></tbody></table></div>
+<p>更新は開発リポジトリで <code>python scripts/manual/gen_manual_reference.py</code>。<br><strong>リリース時に自動で検査され、ズレていると公開が止まります</strong>（<code>publish-release.ps1</code>）。</p>
 <h2 id="凡例">凡例</h2>
 <div class="table-wrap"><table><thead><tr><th>記号</th><th>意味</th></tr></thead><tbody><tr><td>⌨</td><td>キーボード操作</td></tr><tr><td>🖱</td><td>マウス操作</td></tr><tr><td>⚙</td><td>設定</td></tr><tr><td>💾</td><td>ファイル形式</td></tr><tr><td>⚠</td><td>注意・既知の制約</td></tr><tr><td>🚧</td><td>実装途中 / 限定的</td></tr><tr><td>🔌</td><td>拡張・外部連携</td></tr></tbody></table></div>
 <h2 id="このマニュアルを使うコツ">このマニュアルを使うコツ</h2>
 <ul><li><strong>動作チェック用</strong>: 章末の「動作確認チェックリスト」に従って手元で操作。手順どおりに動かなければバグ報告対象</li><li><strong>Cursor へ流すとき</strong>: 章ごと丸ごと貼り付け → 「この機能を改良して」と指示すると、コンテキストが引き継がれて精度が上がる</li><li><strong>Obsidian 表示時</strong>: 左サイドバーで <code>HrdayaFlow/</code> フォルダを開き、<code>00-INDEX.md</code> をピン止め。<code>[[]]</code> をホバーするとプレビュー</li></ul>
 <hr>
 <h2 id="バージョン">バージョン</h2>
-<ul><li>対応バージョン: v0.0.4 開発中</li><li>最終更新: 2026-06-18</li><li>編集者: Cowork session (CP-02 で構成再編)</li></ul><section class="backlinks"><h3>Backlinks</h3><ul><li><a href="./basics/01-overview/">01 概要とアーキテクチャ</a></li><li><a href="./basics/02-getting-started/">02 はじめに</a></li><li><a href="./basics/04-install-warning/">インストール時の警告 (SmartScreen) について</a></li><li><a href="./features/01-canvas-and-gestures/">03 キャンバスとジェスチャー</a></li><li><a href="./features/02-nodes/">04 ノード 13 種</a></li><li><a href="./features/03-edges-and-connections/">05 エッジと接続</a></li><li><a href="./features/04-groups-and-containers/">06 グループと Container</a></li><li><a href="./features/06-inspector-and-formatting/">07 Inspector と書式</a></li><li><a href="./features/08-undo-history/">08 Undo / 履歴</a></li><li><a href="./features/09-search-and-outline/">09 検索と Outline</a></li><li><a href="./features/10-ai-features/">10 AI 機能</a></li><li><a href="./features/11-files-and-interop/">11 ファイルと相互運用</a></li><li><a href="./features/12-planner-calendar/">12 Planner / Calendar</a></li><li><a href="./reference/01-keyboard-shortcuts/">13 ショートカット早見表</a></li><li><a href="./reference/02-themes-i18n-a11y/">12 テーマ・多言語・アクセシビリティ</a></li><li><a href="./reference/03-troubleshooting/">15 トラブルシューティング</a></li><li><a href="./reference/04-developer-guide/">14 開発者ガイド</a></li><li><a href="./reference/05-app-settings/">15 アプリ設定</a></li></ul></section></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#HṛdayaFlow-ユーザーマニュアル">HṛdayaFlow ユーザーマニュアル</a></li><li class="lvl-2"><a href="#📘-入門-(basics)">📘 入門 (basics)</a></li><li class="lvl-2"><a href="#🛠-機能-(features)">🛠 機能 (features)</a></li><li class="lvl-2"><a href="#📚-リファレンス-(reference)">📚 リファレンス (reference)</a></li><li class="lvl-2"><a href="#🔧-内部資料-(_internal)">🔧 内部資料 (internal)</a></li><li class="lvl-2"><a href="#凡例">凡例</a></li><li class="lvl-2"><a href="#このマニュアルを使うコツ">このマニュアルを使うコツ</a></li><li class="lvl-2"><a href="#バージョン">バージョン</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">HṛdayaFlow</text>
-    
-  </svg></div></aside>
+<ul><li>対応バージョン: <strong>0.0.7+4</strong>（2026-09-05 初回アルファ公開）</li><li>最終更新: 2026-09-08（リファレンス自動生成の導入）</li><li>編集者: Cowork session (CP-02 で構成再編) / Cursor (T1)</li></ul><div data-pagefind-ignore><section class="backlinks"><h3>Backlinks</h3><ul><li><a href="/basics/01-overview/">01 概要とアーキテクチャ</a></li><li><a href="/basics/02-getting-started/">02 はじめに</a></li><li><a href="/basics/03-startup-on-windows/">開発時の起動手順（開発者向け）</a></li><li><a href="/basics/04-install-warning/">インストール時の警告 (SmartScreen) について</a></li><li><a href="/basics/05-updates-and-support/">更新・停止・診断・サポート</a></li><li><a href="/features/01-canvas-and-gestures/">03 キャンバスとジェスチャー</a></li><li><a href="/features/02-nodes/">04 ノート 14 種</a></li><li><a href="/features/03-edges-and-connections/">05 エッジと接続</a></li><li><a href="/features/04-groups-and-containers/">06 グループと Container</a></li><li><a href="/features/06-inspector-and-formatting/">07 Inspector と書式</a></li><li><a href="/features/08-undo-history/">08 Undo / 履歴</a></li><li><a href="/features/09-search-and-outline/">09 検索と Outline</a></li><li><a href="/features/10-ai-features/">10 AI 機能</a></li><li><a href="/features/11-files-and-interop/">11 ファイルと相互運用</a></li><li><a href="/features/12-planner-calendar/">12 Planner / Calendar / Task list</a></li><li><a href="/reference/01-keyboard-shortcuts/">13 ショートカット早見表</a></li><li><a href="/reference/02-themes-i18n-a11y/">12 テーマ・多言語・アクセシビリティ</a></li><li><a href="/reference/03-troubleshooting/">15 トラブルシューティング</a></li><li><a href="/reference/04-developer-guide/">14 開発者ガイド</a></li><li><a href="/reference/05-app-settings/">15 アプリ設定</a></li><li><a href="/reference/06-menu-reference/">16 メニュー全リファレンス</a></li><li><a href="/reference/07-mcp-tools/">17 MCP ツール一覧</a></li></ul></section></div></article>
+  <aside class="rightcol"><div class="graph" data-slug="00-INDEX/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#HṛdayaFlow-ユーザーマニュアル">HṛdayaFlow ユーザーマニュアル</a></li><li class="lvl-2"><a href="#📘-入門-(basics)">📘 入門 (basics)</a></li><li class="lvl-2"><a href="#🛠-機能-(features)">🛠 機能 (features)</a></li><li class="lvl-2"><a href="#📚-リファレンス-(reference)">📚 リファレンス (reference)</a></li><li class="lvl-2"><a href="#🔧-内部資料-(_internal)">🔧 内部資料 (internal)</a></li><li class="lvl-2"><a href="#⚙-自動生成される節について">⚙ 自動生成される節について</a></li><li class="lvl-2"><a href="#凡例">凡例</a></li><li class="lvl-2"><a href="#このマニュアルを使うコツ">このマニュアルを使うコツ</a></li><li class="lvl-2"><a href="#バージョン">バージョン</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="./search.json";window.__NAV__="./nav.json";window.__CUR__="";window.__ROOT__="./";</script>
-<script src="./_site/site.js" defer></script>
+<script>window.__SEARCH__="/search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="/nav.json";window.__CUR__="";window.__ROOT__="/";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="/_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

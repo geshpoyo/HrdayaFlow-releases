@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>15 アプリ設定 | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #settings · #image-cache · #markdown · #mcp · #tray 15 アプリ設定 ← 14 開発者 | 目次 設定ダイアログでは、表示・Markdown・画像キャッシュ・MCP / AI ターゲットなど、アプリ全体の挙動を調整できます。…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="15 アプリ設定 | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #settings · #image-cache · #markdown · #mcp · #tray 15 アプリ設定 ← 14 開発者 | 目次 設定ダイアログでは、表示・Markdown・画像キャッシュ・MCP / AI ターゲットなど、アプリ全体の挙動を調整できます。…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>15 アプリ設定</h1><div class="note-meta">#manual · #settings · #image-cache · #markdown · #mcp · #tray</div><h1 id="15-アプリ設定">15 アプリ設定</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:reference"><span data-pagefind-meta="title" hidden aria-hidden="true">15 アプリ設定</span><div class="note-meta">#manual · #settings · #image-cache · #markdown · #mcp · #tray</div><h1 id="15-アプリ設定">15 アプリ設定</h1>
 <p><span class="missing">← 14 開発者</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p>
 <p>設定ダイアログでは、表示・Markdown・画像キャッシュ・MCP / AI ターゲットなど、アプリ全体の挙動を調整できます。</p>
 <h2 id="画像キャッシュ-(ImageCache)">画像キャッシュ (ImageCache)</h2>
@@ -39,27 +51,28 @@
 <ul><li>追加先は AI バッジの付いた AI ターゲットタブです。</li><li>AI ターゲットが無い場合は、新しいタブを作って自動的にターゲット化します。</li><li>ターゲット内でノートが選択されていればその近く、未選択なら末尾ノートの近くへ配置します。</li><li>トレイを利用できない環境では項目自体が表示されず、通常のアプリ動作には影響しません。</li></ul>
 <h2 id="左アクティビティバー">左アクティビティバー</h2>
 <p>左端のアクティビティバーは、展開 / 折りたたみ状態を保存します。アイコンだけに畳むとキャンバスを広く使えます。</p>
+<h2 id="マップリンクの探索フォルダ">マップリンクの探索フォルダ</h2>
+<p>リンク先の <code>.hrf</code> が見つからないとき、ここに登録したフォルダから自己修復探索（ML-05）を行います。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>動作</th></tr></thead><tbody><tr><td>探索フォルダ</td><td>追加・削除。空のときは最近使った <code>.hrf</code> の親フォルダ等の既定ルートを使用</td></tr><tr><td>ドライブ全体の探索を許可する</td><td>ON（既定）なら最後にドライブ全体を探索。OFF なら登録フォルダと既定ルートのみ</td></tr></tbody></table></div>
+<p>詳細な使い方は <span class="missing">11-files-and-interop › マップリンクノードマップ間リンク</span> を参照。</p>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
-<ul><li>[ ] ImageCache の上限を変更して即時反映される</li><li>[ ] Markdown 表示プリセットを切り替えるとノート表示が変わる</li><li>[ ] AI ターゲットをタブ右クリックで設定 / 解除できる</li><li>[ ] トレイのクイック追加で AI ターゲットタブへノートが追加される</li><li>[ ] 左アクティビティバーの折りたたみ状態が次回起動でも維持される</li></ul>
-<p><span class="missing">← 14</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#15-アプリ設定">15 アプリ設定</a></li><li class="lvl-2"><a href="#画像キャッシュ-(ImageCache)">画像キャッシュ (ImageCache)</a></li><li class="lvl-2"><a href="#Markdown-表示">Markdown 表示</a></li><li class="lvl-2"><a href="#AI-ライブターゲット">AI ライブターゲット</a></li><li class="lvl-3"><a href="#AI-追従">AI 追従</a></li><li class="lvl-2"><a href="#トレイからクイック追加">トレイからクイック追加</a></li><li class="lvl-2"><a href="#左アクティビティバー">左アクティビティバー</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">15 アプリ設定</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+<ul><li>[ ] ImageCache の上限を変更して即時反映される</li><li>[ ] Markdown 表示プリセットを切り替えるとノート表示が変わる</li><li>[ ] AI ターゲットをタブ右クリックで設定 / 解除できる</li><li>[ ] トレイのクイック追加で AI ターゲットタブへノートが追加される</li><li>[ ] 左アクティビティバーの折りたたみ状態が次回起動でも維持される</li><li>[ ] マップリンクの探索フォルダを追加して再起動後も残る</li><li>[ ] ドライブ全体探索トグルがリンク自己修復に反映される</li></ul>
+<p><span class="missing">← 14</span> | <a class="wikilink" href="../../00-INDEX/">目次</a></p>
+<hr>
+<h2 id="保存される設定キー一覧（自動生成）">保存される設定キー一覧（自動生成）</h2>
+<p>設定は <code>shared_preferences.json</code> に保存される。トラブル時にどのキーを消せばよいかを引くための表。</p>
+<blockquote><p>⚙ <strong>自動生成</strong>。正本は <code>app/lib/services/app_settings.dart</code>。ここを手で書き換えても次の生成で消える。<br>追記したい説明は AUTOGEN 区間の外に書く。</p></blockquote>
+<div class="table-wrap"><table><thead><tr><th>設定名</th><th>保存キー</th></tr></thead><tbody><tr><td>A11yMode</td><td><code>hrdaya_settings_a11y_mode</code></td></tr><tr><td>AutoUpdateEnabled</td><td><code>hrdaya_update_auto_check_enabled</code></td></tr><tr><td>AutosaveIntervalSec</td><td><code>hrdaya_settings_autosave_interval_sec</code></td></tr><tr><td>CanvasAlignMode</td><td><code>hrdaya_canvas_align_mode</code></td></tr><tr><td>CanvasGridMode</td><td><code>hrdaya_canvas_grid_mode</code></td></tr><tr><td>CanvasGridSnap</td><td><code>hrdaya_canvas_grid_snap</code></td></tr><tr><td>CanvasGridSpacing</td><td><code>hrdaya_canvas_grid_spacing</code></td></tr><tr><td>CanvasToolbarState</td><td><code>canvas_toolbar_state</code></td></tr><tr><td>EdgePresetDefaultId</td><td><code>hrdaya_edge_preset_default_id_v1</code></td></tr><tr><td>FeedbackMute</td><td><code>hrdaya_settings_feedback_mute</code></td></tr><tr><td>HighContrastPolicy</td><td><code>hrdaya_settings_hc_policy</code></td></tr><tr><td>ImageCacheCustomBytes</td><td><code>hrdaya_image_cache_custom_bytes_v1</code></td></tr><tr><td>ImageCachePreset</td><td><code>hrdaya_image_cache_preset_v1</code></td></tr><tr><td>InspectorFavoriteFontFamilies</td><td><code>hrdaya_inspector_favorite_font_families_v1</code></td></tr><tr><td>LargeMapWarningDismissed</td><td><code>hrdaya_perf_large_map_warning_dismissed</code></td></tr><tr><td>LocaleTag</td><td><code>hrdaya_settings_locale</code></td></tr><tr><td>MapLinkAllowDriveWideScan</td><td><code>hrdaya_map_link_allow_drive_wide_scan_v1</code></td></tr><tr><td>MapLinkSearchRoots</td><td><code>hrdaya_map_link_search_roots_v1</code></td></tr><tr><td>MarkdownDisplayProfile</td><td><code>hrdaya_markdown_display_profile_v1</code></td></tr><tr><td>MarkdownRasterCache</td><td><code>hrdaya_markdown_raster_cache_enabled_v1</code></td></tr><tr><td>NoteAlignReference</td><td><code>hrdaya_note_align_reference_v1</code></td></tr><tr><td>NotePresetDefaultId</td><td><code>hrdaya_note_preset_default_id_v1</code></td></tr><tr><td>NotePresetSectionsCollapsed</td><td><code>hrdaya_note_preset_sections_collapsed_v1</code></td></tr><tr><td>NotePresetsApp</td><td><code>hrdaya_note_presets_v1</code></td></tr><tr><td>Phase3StaticPictureExperiment</td><td><code>hrdaya_perf_phase3_static_picture_experiment</code></td></tr><tr><td>PlannerLastTab</td><td><code>hrdaya_planner_last_tab_v1</code></td></tr><tr><td>QuickEntryMode</td><td><code>hrdaya_quick_entry_mode_v1</code></td></tr><tr><td>RecentFiles</td><td><code>hrdaya_recent_files_v1</code></td></tr><tr><td>SemanticsEditingBoost</td><td><code>hrdaya_settings_semantics_editing_boost</code></td></tr><tr><td>StylePasteLastApply</td><td><code>hrdaya_style_paste_last_apply_v1</code></td></tr><tr><td>ThemeMode</td><td><code>hrdaya_settings_theme_mode</code></td></tr><tr><td>TutorialAutoOpenCompleted</td><td><code>hrdaya_tutorial_auto_open_completed_v1</code></td></tr><tr><td>TutorialAutoOpenEnabled</td><td><code>hrdaya_tutorial_auto_open_enabled_v1</code></td></tr><tr><td>UiZoomFactor</td><td><code>hrdaya_settings_ui_zoom_factor</code></td></tr><tr><td>UpdateChannel</td><td><code>hrdaya_update_channel</code></td></tr><tr><td>UpdateLastCheckedAt</td><td><code>hrdaya_update_last_checked_at</code></td></tr><tr><td>UpdateSnoozeUntil</td><td><code>hrdaya_update_snooze_until</code></td></tr><tr><td>VersionPolicyFetchedAt</td><td><code>hrdaya_version_policy_fetched_at_v1</code></td></tr><tr><td>VersionPolicyJson</td><td><code>hrdaya_version_policy_json_v1</code></td></tr><tr><td>YouTubeAutoSkipAds</td><td><code>hrdaya_settings_youtube_auto_skip_ads</code></td></tr></tbody></table></div>
+<p>永続化されている設定: <strong>40</strong> 件</p>
+<blockquote><p>実体は <code>shared_preferences.json</code>。アンインストールしても消えない。</p></blockquote></article>
+  <aside class="rightcol"><div class="graph" data-slug="reference/05-app-settings/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#15-アプリ設定">15 アプリ設定</a></li><li class="lvl-2"><a href="#画像キャッシュ-(ImageCache)">画像キャッシュ (ImageCache)</a></li><li class="lvl-2"><a href="#Markdown-表示">Markdown 表示</a></li><li class="lvl-2"><a href="#AI-ライブターゲット">AI ライブターゲット</a></li><li class="lvl-3"><a href="#AI-追従">AI 追従</a></li><li class="lvl-2"><a href="#トレイからクイック追加">トレイからクイック追加</a></li><li class="lvl-2"><a href="#左アクティビティバー">左アクティビティバー</a></li><li class="lvl-2"><a href="#マップリンクの探索フォルダ">マップリンクの探索フォルダ</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li><li class="lvl-2"><a href="#保存される設定キー一覧（自動生成）">保存される設定キー一覧（自動生成）</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="reference/05-app-settings";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="reference/05-app-settings";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

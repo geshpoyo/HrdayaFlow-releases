@@ -1,72 +1,98 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>12 Planner / Calendar | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<title>12 Planner / Calendar / Task list | HṛdayaFlow Manual</title>
+<meta name="description" content="Updated 2026-09-03 · #manual · #planner · #calendar · #tasks · #rrule · #tasklist · #mcp 12 Planner / Calendar / Task list ← 11 ファイル | 目次 | → 13 テーマ…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="12 Planner / Calendar / Task list | HṛdayaFlow Manual">
+<meta property="og:description" content="Updated 2026-09-03 · #manual · #planner · #calendar · #tasks · #rrule · #tasklist · #mcp 12 Planner / Calendar / Task list ← 11 ファイル | 目次 | → 13 テーマ…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>12 Planner / Calendar</h1><div class="note-meta">#manual · #planner · #calendar · #tasks · #rrule</div><h1 id="12-Planner-Calendar">12 Planner / Calendar</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">12 Planner / Calendar / Task list</span><div class="note-meta">Updated 2026-09-03 · #manual · #planner · #calendar · #tasks · #rrule · #tasklist · #mcp</div><h1 id="12-Planner-Calendar-Task-list">12 Planner / Calendar / Task list</h1>
 <p><span class="missing">← 11 ファイル</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13 テーマ</span></p>
-<p>Planner は、マインドマップとは別に日程・タスクを扱う作業面です。左アクティビティバーの <strong>プランナー</strong> から開きます。</p>
-<blockquote><p>現在の主実装は Calendar です。Timeline / Task list は画面枠がありますが、後フェーズで拡張予定です。</p></blockquote>
+<p>Planner は、マインドマップとは別に日程・タスクを扱う作業面です。左アクティビティバーの <strong>プランナー</strong> から開きます。上部のセグメントで <strong>Timeline</strong> / <strong>Task list</strong> / <strong>Calendar</strong> を切り替えます（最後に使ったタブは再起動後も復元されます）。Timeline は後フェーズです。</p>
 <h2 id="データの考え方">データの考え方</h2>
 <p>Planner の予定・タスクは、<code>.hrf</code> ファイルではなくアプリ全体の Planner store に保存されます。A.hrf で登録した予定は、B.hrf を開いていても同じ Planner から見えます。</p>
-<p>永続先はアプリサポートフォルダ配下の <code>hrdayaflow/planner.json</code> です。将来 SQLite へ移行できるよう、UI と保存層は分離されています。</p>
+<p>永続先はアプリサポートフォルダ配下の <code>hrdayaflow/planner.json</code>（<strong>version: 2</strong>）です。v1 のファイルを開くと Inbox を自動生成し、同ディレクトリに <code>planner.v1.bak.json</code> を<strong>一度だけ</strong>残してから v2 で保存します（<strong>ダウングレード不可</strong>）。将来 SQLite へ移行できるよう、UI と保存層は分離されています。</p>
+<p>タスクと予定は同じデータ型（<code>CalItem</code>）で、種別（kind）だけで分かれます。Task list で編集・完了した内容は Calendar にもすぐ反映されます。</p>
+<h2 id="Task-list">Task list</h2>
+<p>受信トレイ / 今日 / 次の 7 日間 / リスト別のタスク一覧です。</p>
+<h3 id="左ナビ">左ナビ</h3>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>内容</th></tr></thead><tbody><tr><td>受信トレイ</td><td>リスト未指定（または Inbox）の未完了タスク</td></tr><tr><td>今日</td><td>期限・開始が今日のもの ＋ <strong>期限超過</strong></td></tr><tr><td>次の 7 日間</td><td>今日〜今日+6 日 ＋ 期限超過</td></tr><tr><td>リスト一覧</td><td>色ドット・名前・未完了件数。「+ リスト」で新規作成</td></tr><tr><td>完了済み</td><td>完了 / 実行しない（内部ステータス）の履歴</td></tr></tbody></table></div>
+<h3 id="クイック追加">クイック追加</h3>
+<p>上部の入力欄に自然文を入れて Enter。例:</p>
+<pre><code class="language-text">明日 15時 会議
+毎週月 9時 朝会
+6/20 締切
+毎日 朝ラン</code></pre>
+<p>常に <strong>タスク</strong> として追加されます。リスト別ビューではそのリストへ、それ以外は受信トレイへ入ります。今日 / 次の 7 日間ビューで日付が無い入力には、今日の日付が補完されます。</p>
+<h3 id="行の操作">行の操作</h3>
+<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>チェック</td><td>完了。繰り返し（RRULE）付きは <strong>次回日付へロール</strong>（SnackBar で案内）</td></tr><tr><td>行タップ</td><td>編集ダイアログ（リスト選択可）</td></tr><tr><td>同一セクション内ドラッグ</td><td>並び順を保存（再起動後も維持）</td></tr><tr><td>↑↓ / Space / Enter / Ctrl+N</td><td>行フォーカス・完了トグル・編集・入力欄へ</td></tr></tbody></table></div>
+<h3 id="リストの管理">リストの管理</h3>
+<p>「+ リスト」またはリストの編集から、名前 / 色（テーマ色または任意 hex）/ 絵文字を設定できます。<strong>受信トレイは削除・改名不可</strong>。リスト削除時は所属タスクが受信トレイへ移ります（確認あり）。</p>
 <h2 id="Calendar-ビュー">Calendar ビュー</h2>
 <p>Calendar は月 / 週 / 日を切り替えられます。</p>
 <div class="table-wrap"><table><thead><tr><th>表示</th><th>用途</th></tr></thead><tbody><tr><td>月</td><td>月全体の予定量を俯瞰する</td></tr><tr><td>週</td><td>時間帯つきの予定を並べて見る</td></tr><tr><td>日</td><td>1 日の予定を詳細に見る</td></tr></tbody></table></div>
-<p>上部のナビゲーションで前後へ移動し、<strong>今日</strong>で現在日に戻ります。</p>
-<h2 id="予定・タスクの追加">予定・タスクの追加</h2>
-<p>Calendar 上の日付や時間帯をクリックすると追加ダイアログが開きます。予定は開始 / 終了、終日、タスクは期限や完了状態を持てます。</p>
-<p>下部のクイック追加バーでは、日本語・英語の自然な入力を簡易解析します。</p>
-<p>例:</p>
-<pre><code class="language-text">明日 14:00 打ち合わせ
-毎週月 9:00 週次レビュー
-平日 8:30 朝の確認
-monthly 15 report</code></pre>
+<p>上部のナビゲーションで前後へ移動し、<strong>今日</strong>で現在日に戻ります。色はリスト色 → 優先度 → 種別の順で決まります（テーマトークン経由）。</p>
+<h2 id="予定・タスクの追加（Calendar）">予定・タスクの追加（Calendar）</h2>
+<p>Calendar 上の日付や時間帯をクリックすると追加ダイアログが開きます。予定は開始 / 終了、終日、タスクは期限や完了状態・所属リストを持てます。</p>
+<p>下部のクイック追加バーでも日本語・英語の自然な入力を簡易解析します（Calendar 側は予定/タスクを入力から推定）。</p>
 <p>対応する主な解析:</p>
 <div class="table-wrap"><table><thead><tr><th>入力</th><th>解釈</th></tr></thead><tbody><tr><td>今日 / 明日 / 明後日 / 昨日</td><td>相対日付</td></tr><tr><td>月火水木金土日 / mon tue ...</td><td>曜日</td></tr><tr><td>14:00 / 9時30分</td><td>時刻</td></tr><tr><td>毎日 / 毎週 / 平日 / 毎月D日</td><td>RRULE 繰り返し</td></tr></tbody></table></div>
-<h2 id="繰り返し">繰り返し</h2>
-<p>繰り返しは RFC5545 の RRULE 文字列として保存されます。現在は daily / weekly / monthly / yearly の基本形と、曜日・月日指定を扱います。</p>
-<h2 id="操作">操作</h2>
-<div class="table-wrap"><table><thead><tr><th>操作</th><th>効果</th></tr></thead><tbody><tr><td>予定クリック</td><td>編集ダイアログを開く</td></tr><tr><td>タスクのチェック</td><td>完了 / 未完了を切り替え</td></tr><tr><td>週 / 日ビューでドラッグ</td><td>予定の移動</td></tr><tr><td>下端リサイズ</td><td>予定の終了時刻を変更</td></tr></tbody></table></div>
+<h2 id="繰り返しと完了ロール">繰り返しと完了ロール</h2>
+<p>繰り返しは RFC5545 の RRULE 文字列として保存されます（daily / weekly / monthly / yearly の基本形と曜日・月日指定）。</p>
+<p>Task list でも Calendar でも、完了トグルは同じ経路です。</p>
+<ul><li>RRULE なし → 完了</li><li>RRULE あり → 次の occurrence へ due/start/end を進め、未完了のまま（COUNT/UNTIL 到達時は通常完了）</li></ul>
+<h2 id="Quick-Entry（トレイ）のタスクモード">Quick Entry（トレイ）のタスクモード</h2>
+<p>ウィンドウを閉じたあともトレイから <strong>Quick Entry</strong> を開けます。ダイアログ上部で <strong>ノート | タスク</strong> を切り替えられます（最後のモードを記憶）。</p>
+<ul><li><strong>ノート</strong>: 従来どおり、対象マップへノート追加</li><li><strong>タスク</strong>: 入力を自然文解析して受信トレイにタスク追加（プランナーと同じパーサ）</li></ul>
+<h2 id="MCP-ツール（planner）">MCP ツール（planner）</h2>
+<p>アプリ内蔵 MCP（既定 <code>localhost:3737</code>）から、マインドマップモード中でもタスク操作できます。</p>
+<div class="table-wrap"><table><thead><tr><th>ツール</th><th>用途</th></tr></thead><tbody><tr><td><code>list_task_lists</code></td><td>リスト一覧（Inbox・未完了件数付き）</td></tr><tr><td><code>list_tasks</code></td><td><code>view</code>: <code>inbox</code> / <code>today</code> / <code>next7</code> / <code>list</code> / <code>completed</code>（<code>listId</code>・<code>limit</code> 任意）</td></tr><tr><td><code>add_task</code></td><td><code>text</code>（自然文）または <code>title</code> + 任意フィールド。kind は task 固定</td></tr><tr><td><code>complete_task</code></td><td><code>id</code> で完了。<code>undo: true</code> で未完了に戻す。ロール結果を返す</td></tr></tbody></table></div>
+<p>例: <code>add_task</code>（<code>text: &quot;明日 15時 会議&quot;</code>）→ <code>list_tasks</code>（<code>view: today</code>）→ <code>complete_task</code>。</p>
+<p>マップ系ツールの概要は <span class="missing">開発者ガイド</span> も参照。</p>
 <h2 id="マインドマップとの関係">マインドマップとの関係</h2>
-<p>現段階では Planner はアプリ全体の予定表として独立しています。今後、ノートから予定化、予定から元ノートへジャンプ、Kanban / Gantt / Table との同一データ表示へ拡張する計画があります。</p>
+<p>現段階では Planner はアプリ全体の予定表として独立しています。今後、ノートから予定化、予定から元ノートへジャンプ、Kanban / Gantt / Table との同一データ表示へ拡張する計画があります（タスク管理ロードマップ T2 以降）。</p>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
-<ul><li>[ ] 左アクティビティバーから Planner を開ける</li><li>[ ] Calendar の月 / 週 / 日を切り替えられる</li><li>[ ] 今日ボタンで現在日に戻る</li><li>[ ] 日付クリックで予定を追加できる</li><li>[ ] クイック追加で「明日 14:00 打ち合わせ」を予定化できる</li><li>[ ] タスクの完了状態を切り替えられる</li><li>[ ] 週 / 日ビューで予定の移動・リサイズができる</li><li>[ ] 別の <code>.hrf</code> を開いても Planner の予定が見える</li></ul>
-<p><span class="missing">← 11</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#12-Planner-Calendar">12 Planner / Calendar</a></li><li class="lvl-2"><a href="#データの考え方">データの考え方</a></li><li class="lvl-2"><a href="#Calendar-ビュー">Calendar ビュー</a></li><li class="lvl-2"><a href="#予定・タスクの追加">予定・タスクの追加</a></li><li class="lvl-2"><a href="#繰り返し">繰り返し</a></li><li class="lvl-2"><a href="#操作">操作</a></li><li class="lvl-2"><a href="#マインドマップとの関係">マインドマップとの関係</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">12 Planner</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+<ul><li>[ ] 左アクティビティバーから Planner を開ける</li><li>[ ] Task list / Calendar を切り替えられ、再起動後にタブが復元される</li><li>[ ] 受信トレイ / 今日 / 次の 7 日間 / リスト別が表示される</li><li>[ ] クイック追加で「明日 15時 会議」等がタスクになる</li><li>[ ] リストの作成・改名・削除（削除で Inbox へ退避）ができる</li><li>[ ] 並び替えが再起動後も残る</li><li>[ ] 繰り返しタスクの完了で次回へロールする（Calendar でも同様）</li><li>[ ] トレイ → Quick Entry → タスクモードで追加できる</li><li>[ ] MCP で <code>list_task_lists</code> / <code>add_task</code> / <code>list_tasks</code> / <code>complete_task</code> が通る</li><li>[ ] Calendar の月 / 週 / 日を切り替えられる</li><li>[ ] 別の <code>.hrf</code> を開いても Planner の予定・タスクが見える</li></ul>
+<p><span class="missing">← 11</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 13</span></p>
+<hr>
+<h2 id="カレンダーの表示切替">カレンダーの表示切替</h2>
+<p>カレンダー上部のセグメントボタンで <strong>月 / 週 / 日</strong> を切り替えます。</p>
+<div class="table-wrap"><table><thead><tr><th>表示</th><th>向いていること</th></tr></thead><tbody><tr><td>月</td><td>全体の埋まり具合を見る</td></tr><tr><td>週</td><td>その週の配分を見る</td></tr><tr><td>日</td><td>1 日の中の時間割を詰める</td></tr></tbody></table></div>
+<h2 id="優先度">優先度</h2>
+<p>予定とタスクには優先度を付けられます。<strong>なし / 低 / 中 / 高</strong> の 4 段階です。<br>スマートリストの並び順に効きます。</p></article>
+  <aside class="rightcol"><div class="graph" data-slug="features/12-planner-calendar/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#12-Planner-Calendar-Task-list">12 Planner / Calendar / Task list</a></li><li class="lvl-2"><a href="#データの考え方">データの考え方</a></li><li class="lvl-2"><a href="#Task-list">Task list</a></li><li class="lvl-3"><a href="#左ナビ">左ナビ</a></li><li class="lvl-3"><a href="#クイック追加">クイック追加</a></li><li class="lvl-3"><a href="#行の操作">行の操作</a></li><li class="lvl-3"><a href="#リストの管理">リストの管理</a></li><li class="lvl-2"><a href="#Calendar-ビュー">Calendar ビュー</a></li><li class="lvl-2"><a href="#予定・タスクの追加（Calendar）">予定・タスクの追加（Calendar）</a></li><li class="lvl-2"><a href="#繰り返しと完了ロール">繰り返しと完了ロール</a></li><li class="lvl-2"><a href="#Quick-Entry（トレイ）のタスクモード">Quick Entry（トレイ）のタスクモード</a></li><li class="lvl-2"><a href="#MCP-ツール（planner）">MCP ツール（planner）</a></li><li class="lvl-2"><a href="#マインドマップとの関係">マインドマップとの関係</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li><li class="lvl-2"><a href="#カレンダーの表示切替">カレンダーの表示切替</a></li><li class="lvl-2"><a href="#優先度">優先度</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/12-planner-calendar";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/12-planner-calendar";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

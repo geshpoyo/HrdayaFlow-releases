@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja" data-theme="iroha">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>更新・停止・診断・サポート | HṛdayaFlow Manual</title>
+<meta name="description" content="#manual · #update · #killswitch · #diagnostics · #support 更新・停止・診断・サポート ← インストール時の警告 | 目次 | → 03 キャンバス 新しい版がどう届くか、届かないときに何を見るか、こちらから利用を止めることがある仕組み、…">
+<meta name="robots" content="noai, noimageai">
+
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="更新・停止・診断・サポート | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #update · #killswitch · #diagnostics · #support 更新・停止・診断・サポート ← インストール時の警告 | 目次 | → 03 キャンバス 新しい版がどう届くか、届かないときに何を見るか、こちらから利用を止めることがある仕組み、…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
+</head>
+<body>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
+<main class="layout">
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:basics"><span data-pagefind-meta="title" hidden aria-hidden="true">更新・停止・診断・サポート</span><div class="note-meta">#manual · #update · #killswitch · #diagnostics · #support</div><h1 id="更新・停止・診断・サポート">更新・停止・診断・サポート</h1>
+<p><span class="missing">← インストール時の警告</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 03 キャンバス</span></p>
+<p>新しい版がどう届くか、届かないときに何を見るか、こちらから利用を止めることがある仕組み、<br>そして困ったときの窓口。</p>
+<hr>
+<h2 id="自動更新の流れ">自動更新の流れ</h2>
+<p>起動時と、その後 24 時間ごとに確認します。</p>
+<pre><code>起動（+ 24 時間ごと）
+   ↓
+配信フィードを取得（10 秒でタイムアウト。200 以外は「更新なし」）
+   ↓ 新しい版があれば
+更新ダイアログ「今すぐ / あとで」
+   ↓ 今すぐ
+インストーラー（.msi）をダウンロード（進捗表示）
+   ↓
+① sha256 を照合 — 空でも不一致でも中止
+   ↓
+② 未保存のタブを保存 — 保存できなければ中止（インストーラーを起動しない）
+   ↓
+インストーラーを起動してアプリを終了 → 上書きインストール</code></pre>
+<p><strong>守りが 2 段入っています。</strong></p>
+<div class="table-wrap"><table><thead><tr><th>段</th><th>何を防ぐか</th></tr></thead><tbody><tr><td>sha256 照合</td><td>配布物のすり替え・破損したダウンロード。ハッシュが<strong>空の配布物も拒否</strong>します</td></tr><tr><td>保存ガード</td><td>「更新したら書きかけが消えた」。保存に失敗したらインストーラーを起動しません</td></tr></tbody></table></div>
+<p>署名検証（Authenticode）は既定で行いません。コード署名証明書を取得していないため、<br>検証を必須にすると全員が失敗します。改竄検知は sha256 で担保しています。</p>
+<h3 id="手動で確認する">手動で確認する</h3>
+<p><strong>ヘルプ ▸ マニュアルの更新を確認…</strong> はマニュアル用です。アプリ本体の更新確認は<br><strong>設定 ▸ 更新</strong> から行えます。自動更新を OFF にすると定期確認は止まります。</p>
+<h3 id="⚠-更新が届かないとき（既知の制約）">⚠ 更新が届かないとき（既知の制約）</h3>
+<p>現在、アプリの既定チャンネルは <strong>stable</strong> ですが、アルファ版は <strong>beta</strong> チャンネルにのみ<br>配信しています。<strong>既定のままだと更新が見つかりません。</strong></p>
+<p>対処は 2 つあります。</p>
+<ul><li>設定でチャンネルを <strong>beta</strong> に切り替える</li><li>サイトの<a href="https://hrdayaflow.geshtalt.jp/#download" target="_blank" rel="noopener noreferrer">ダウンロードページ</a>から新しい</li></ul>
+<p>  インストーラーを直接取得して上書きインストールする（データは残ります）</p>
+<p>この食い違いは把握しており、次の版で解消予定です。</p>
+<hr>
+<h2 id="閲覧のみモード（リモート停止）">閲覧のみモード（リモート停止）</h2>
+<p>重大な不具合が見つかった版を、配信側から止めることがあります。<br>データを壊し続けるより、いったん編集を止めてもらう方が安全なためです。</p>
+<p>停止された版を起動すると、理由のメッセージと［<strong>閲覧のみで続行</strong>］が出ます。</p>
+<div class="table-wrap"><table><thead><tr><th>できること</th><th>できないこと</th></tr></thead><tbody><tr><td>保存済みマップを開いて読む</td><td>編集・保存</td></tr><tr><td>内容をコピーして退避する</td><td>新規作成</td></tr></tbody></table></div>
+<p><strong>保存済みのファイルには一切触れません。</strong> アプリが書き換えたり消したりすることはありません。</p>
+<h3 id="ネットに繋がらないときは制限しません">ネットに繋がらないときは制限しません</h3>
+<p>配信側の情報を取得できない場合、<strong>制限をかけません</strong>（fail-open）。<br>機内やオフライン環境でアプリが使えなくなることはありません。<br>「更新を確認できませんでした（オフラインの可能性があります）」と出るだけです。</p>
+<p>一度受け取った停止指示は、オフラインでも効き続けます。解除も配信側から行われ、<br>次の起動時に反映されます。</p>
+<hr>
+<h2 id="診断とフィードバック">診断とフィードバック</h2>
+<p><strong>設定 ▸ 診断とフィードバック</strong> で、不具合報告に貼り付ける情報を組み立てられます。</p>
+<h3 id="何が入るか">何が入るか</h3>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>例</th></tr></thead><tbody><tr><td>App</td><td><code>0.0.7+4</code></td></tr><tr><td>OS</td><td><code>windows</code> とビルド情報</td></tr><tr><td>Locale</td><td>プラットフォームの言語と、アプリの言語設定</td></tr><tr><td>Install</td><td><code>インストーラー</code> / <code>flutter run</code> / <code>その他</code></td></tr><tr><td>Crash logs</td><td>件数とファイル名</td></tr><tr><td>MCP enabled</td><td><code>true</code> / <code>false</code></td></tr><tr><td>Auto-update enabled</td><td><code>true</code> / <code>false</code></td></tr></tbody></table></div>
+<h3 id="何が入らないか">何が入らないか</h3>
+<ul><li><strong>マップの中身は一切入りません</strong>。ファイル名も本文も含みません</li><li><strong>ユーザー名を含むパスは <code>~</code> に置き換えられます</strong>（<code>C:\Users\yourname\…</code> → <code>~\…</code>）</li></ul>
+<h3 id="自動送信はしません">自動送信はしません</h3>
+<p>このアプリはどこにも自動でデータを送りません。コピーしたものを、あなたが<br>貼り付けたときだけ相手に渡ります。ログフォルダを開く導線と、直近クラッシュの<br>一覧も同じ画面にあります。</p>
+<p>プライバシーの全体方針は <a class="wikilink" href="../../privacy/">privacy</a> を参照してください。</p>
+<hr>
+<h2 id="困ったときの窓口">困ったときの窓口</h2>
+<div class="table-wrap"><table><thead><tr><th>窓口</th><th>向いていること</th><th>言語</th></tr></thead><tbody><tr><td><a href="https://hrdayaflow.geshtalt.jp/discord" target="_blank" rel="noopener noreferrer">Discord</a></td><td>インストールできない・起動しない・使い方がわからない</td><td>日本語</td></tr><tr><td><a href="https://github.com/geshpoyo/HrdayaFlow-releases/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a></td><td>再現手順のある不具合、要望</td><td>英語</td></tr><tr><td><span class="missing">トラブルシューティング</span></td><td>まず自分で調べたいとき</td><td>日本語</td></tr></tbody></table></div>
+<p>報告するときは、上の診断情報を貼ると原因の切り分けが早くなります。</p>
+<hr>
+<h2 id="同梱チュートリアル">同梱チュートリアル</h2>
+<p><strong>初回起動時にチュートリアルが自動で開きます</strong>（1 回だけ。2 回目以降は開きません）。<br>自動で開くのが不要なら、設定の「初回起動時にチュートリアルを開く」を OFF にしてください。</p>
+<p>あとから開くときは <strong>ヘルプ ▸ チュートリアルを開く…</strong>。</p>
+<ul><li>実体は <code>&lt;appSupport&gt;/manual/HrdayaFlowTutorial.hrf</code></li><li><strong>閲覧のみ</strong>で開きます。うっかり書き換えて原本が変わることはありません</li><li>書き込んで練習したいときは、バナーの［自分用にコピー］から複製を作ります</li><li>既に開いていれば、同じタブに切り替わります（重複して開きません）</li></ul>
+<hr>
+<h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
+<ul><li>[ ] 設定 ▸ 診断とフィードバック で診断情報をコピーでき、パスが <code>~</code> になっている</li><li>[ ] ネットワークを切って起動しても、編集・保存が普通にできる</li><li>[ ] ヘルプ ▸ チュートリアルを開く… で閲覧のみのタブが開く</li><li>[ ] 2 回目の起動でチュートリアルが自動で開かない</li></ul></article>
+  <aside class="rightcol"><div class="graph" data-slug="basics/05-updates-and-support/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#更新・停止・診断・サポート">更新・停止・診断・サポート</a></li><li class="lvl-2"><a href="#自動更新の流れ">自動更新の流れ</a></li><li class="lvl-3"><a href="#手動で確認する">手動で確認する</a></li><li class="lvl-3"><a href="#⚠-更新が届かないとき（既知の制約）">⚠ 更新が届かないとき（既知の制約）</a></li><li class="lvl-2"><a href="#閲覧のみモード（リモート停止）">閲覧のみモード（リモート停止）</a></li><li class="lvl-3"><a href="#ネットに繋がらないときは制限しません">ネットに繋がらないときは制限しません</a></li><li class="lvl-2"><a href="#診断とフィードバック">診断とフィードバック</a></li><li class="lvl-3"><a href="#何が入るか">何が入るか</a></li><li class="lvl-3"><a href="#何が入らないか">何が入らないか</a></li><li class="lvl-3"><a href="#自動送信はしません">自動送信はしません</a></li><li class="lvl-2"><a href="#困ったときの窓口">困ったときの窓口</a></li><li class="lvl-2"><a href="#同梱チュートリアル">同梱チュートリアル</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div></aside>
+</main>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="basics/05-updates-and-support";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
+
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
+</body>
+</html>

@@ -1,51 +1,75 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>02 はじめに | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #getting-started · #install 02 はじめに ← 01 概要 | 目次 | → 03 キャンバス インストール Windows 配布しているのは MSI インストーラー 1 種類 だけです（Windows 10 / 11 の 64bit 向け）。…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="02 はじめに | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #getting-started · #install 02 はじめに ← 01 概要 | 目次 | → 03 キャンバス インストール Windows 配布しているのは MSI インストーラー 1 種類 だけです（Windows 10 / 11 の 64bit 向け）。…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>02 はじめに</h1><div class="note-meta">#manual · #getting-started · #install</div><h1 id="02-はじめに">02 はじめに</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:basics"><span data-pagefind-meta="title" hidden aria-hidden="true">02 はじめに</span><div class="note-meta">#manual · #getting-started · #install</div><h1 id="02-はじめに">02 はじめに</h1>
 <p><span class="missing">← 01 概要</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 03 キャンバス</span></p>
 <h2 id="インストール">インストール</h2>
 <h3 id="Windows">Windows</h3>
-<ol><li>GitHub Releases から <code>HrdayaFlow-Setup-x.y.z.exe</code> (MSI/NSIS) をダウンロード</li><li>インストーラを起動 (SmartScreen が出たら「詳細情報」→「実行」)</li><li>既定で <code>C:\Users\&lt;user&gt;\AppData\Local\Programs\HrdayaFlow\</code> にインストール</li><li>スタートメニューから「HṛdayaFlow」を起動</li></ol>
-<blockquote><p>⚙ MSI のサイレントインストールは <code>msiexec /i HrdayaFlow.msi /quiet</code> で可。</p></blockquote>
+<p>配布しているのは <strong>MSI インストーラー 1 種類</strong>だけです（Windows 10 / 11 の 64bit 向け）。</p>
+<ol><li><a href="https://hrdayaflow.geshtalt.jp/#download" target="_blank" rel="noopener noreferrer">公式サイトのダウンロードボタン</a>から</li></ol>
+<p>   <code>HrdayaFlow-&lt;版&gt;-x64.msi</code> を取得します。GitHub Releases からも同じものを入手できます</p>
+<ol><li>ダウンロードしたファイルをダブルクリックします</li><li><strong>「WindowsによってPCが保護されました」と出たら</strong> → ［詳細情報］→［実行］。</li></ol>
+<p>   コード署名証明書をまだ取得していないために出る警告です。詳しくは <span class="missing">04-install-warning</span></p>
+<ol><li>インストール先は <code>C:\Program Files\HrdayaFlow</code>（既定。変更可）</li><li>スタートメニューの「HrdayaFlow」から起動します</li></ol>
+<blockquote><p>⚙ 無人インストール: <code>msiexec /i HrdayaFlow-&lt;版&gt;-x64.msi /qb</code><br>（<code>/quiet</code> でも可。既に同じ版が入っていると「変更 / 修復 / 削除」になります）</p></blockquote>
+<blockquote><p>💾 <strong>必要なランタイムは同梱しています。</strong> VC++ 再頒布可能パッケージを別途入れる必要は<br>ありません。WebView2 が無い環境では、インストール完了時に導入案内が開きます。</p></blockquote>
 <h3 id="macOS-Linux">macOS / Linux</h3>
 <p>ビルド済みバイナリは未配布。開発リポジトリから <code>flutter build macos</code> / <code>flutter build linux</code> で生成してください。詳細は <span class="missing">04-developer-guide › セットアップ</span>。</p>
 <h2 id="初回起動">初回起動</h2>
-<p>初回起動時のみオンボーディングウィザードが出ます (現状は最小)。</p>
-<ol><li><strong>言語選択</strong> — 日本語 / English</li><li><strong>テーマ選択</strong> — Light / Dark / System</li><li><strong>データフォルダ</strong> — 既定: <code>&lt;Documents&gt;/HrdayaFlow/</code></li><li><strong>サンプルマップを開く</strong> — チェックすると <code>welcome.hrf</code> が起動</li></ol>
+<p><strong>設定ウィザードはありません。</strong> 起動すると、そのままキャンバスが開きます。</p>
+<p>初回だけ、同梱の<strong>チュートリアルマップが自動で開きます</strong>（閲覧のみ）。2 回目からは開きません。<br>不要なら設定の「初回起動時にチュートリアルを開く」を OFF にしてください。<br>あとから開くときは <strong>ヘルプ ▸ チュートリアルを開く…</strong>。</p>
+<p>言語とテーマは <strong>設定（Ctrl+,）</strong> からいつでも変更できます。初回に選ばせる画面はありません。</p>
+<p>保存先を決める設定もありません。マップは<strong>保存するときに自分で場所を選びます</strong><br>（メニュー ▸ ファイル ▸ 名前を付けて保存）。自動保存だけは<br><code>%USERPROFILE%\.hrdaya\autosave\</code> に置かれます。</p>
+<p>更新・診断・サポートについては <span class="missing">05-updates-and-support</span> を参照してください。</p>
 <h2 id="画面の構成">画面の構成</h2>
-<pre><code>┌─────────────────────────────────────────────────────────┐
-│ ☰ ファイル | 編集 | 表示 | ノード | エクスポート | ヘルプ │  ← メニューバー
-├─────────────────────────────────────────────────────────┤
-│ [📄][📁][💾] [↶][↷] [+ノード] [Inspector ▶]      [🔍]  │  ← ツールバー
-├──────┬──────────────────────────────────────┬───────────┤
-│      │                                      │           │
-│ 📋   │                                      │  📐       │
-│Outline│         Canvas                      │ Inspector │
-│      │       (無限キャンバス)                │  (Format) │
-│      │                                      │           │
-│      │                                      │           │
-├──────┴──────────────────────────────────────┴───────────┤
-│ ステータス: 12 nodes / Zoom 100% / Saved 18:23           │  ← ステータスバー
+<pre><code>┌──┬──────────────────────────────────────────────────────┐
+│  │ ＋ │ タブ名 ✕ │                              🔔      │ ← タブバー
+│  ├──────────────────────────────────────────────────────┤
+│左│ ファイル 編集 表示 レイアウト ノート フォーマット AI  │ ← メニューバー
+│ア│ ウィンドウ ヘルプ                          ◐ ⛶ ✎    │
+│ク├──────────────────────────────────────────────────────┤
+│テ│ [アイコン列：全画面・矩形・整列・グリッド・表・…]  ⟲ ⓘ│ ← ツールバー
+│ィ├───────────────────────────────────┬──────────────────┤
+│ビ│                                   │                  │
+│テ│            キャンバス              │   インスペクタ    │
+│ィ│          （無限平面）              │  （選択物の設定） │
+│バ│                                   │        ┌────────┐│
+│ｌ│                                   │        │ミニマップ││
+├──┴───────────────────────────────────┴────────┴────────┤
+│ ノート 2・エッジ 1・グループ 0    中央(X,Y)・カーソル・ズーム │ ← ステータスバー
 └─────────────────────────────────────────────────────────┘</code></pre>
-<div class="table-wrap"><table><thead><tr><th>領域</th><th>役割</th><th>主章</th></tr></thead><tbody><tr><td>メニューバー</td><td>ファイル・編集・表示・エクスポートなど全コマンド</td><td>各章</td></tr><tr><td>ツールバー</td><td>よく使うコマンドのアイコン化</td><td>各章</td></tr><tr><td><strong>Canvas (中央)</strong></td><td>ノードを配置・接続する無限平面</td><td><span class="missing">01-canvas-and-gestures</span></td></tr><tr><td><strong>Outline (左)</strong></td><td>階層ツリービュー / Container 入れ子表示</td><td><span class="missing">09-search-and-outline</span></td></tr><tr><td><strong>Inspector (右)</strong></td><td>選択ノードの書式・スタイル</td><td><span class="missing">06-inspector-and-formatting</span></td></tr><tr><td>ステータスバー</td><td>ノード数・ズーム率・保存状態</td><td>—</td></tr></tbody></table></div>
+<p><strong>左アクティビティバー</strong>で「マップ」と「プランナー」を切り替えます。<br>メニューの全項目は <span class="missing">06-menu-reference</span> に一覧があります。</p>
+<div class="table-wrap"><table><thead><tr><th>領域</th><th>役割</th><th>主章</th></tr></thead><tbody><tr><td>メニューバー</td><td>9 メニュー・147 項目</td><td><span class="missing">06-menu-reference</span></td></tr><tr><td>ツールバー</td><td>よく使うコマンドのアイコン化</td><td>各章</td></tr><tr><td><strong>Canvas (中央)</strong></td><td>ノードを配置・接続する無限平面</td><td><span class="missing">01-canvas-and-gestures</span></td></tr><tr><td><strong>左アクティビティバー</strong></td><td>マップ / プランナーの切替。折りたたみ可（状態は保存）</td><td><span class="missing">01-canvas-and-gestures</span></td></tr><tr><td><strong>Outline</strong></td><td>階層ツリービュー / Container 入れ子表示</td><td><span class="missing">09-search-and-outline</span></td></tr><tr><td><strong>Inspector (右)</strong></td><td>選択ノードの書式・スタイル</td><td><span class="missing">06-inspector-and-formatting</span></td></tr><tr><td>ステータスバー</td><td>ノード数・ズーム率・保存状態</td><td>—</td></tr></tbody></table></div>
 <blockquote><p>🖱 左右パネルはタイトルバーをドラッグでサイズ調整、<code>✕</code> ボタンで折りたたみ可。</p></blockquote>
 <h2 id="5-分でわかる基本操作">5 分でわかる基本操作</h2>
 <h3 id="①-新規マップを作る">① 新規マップを作る</h3>
@@ -69,24 +93,14 @@
 <ul><li>[ ] 起動 → 画面 3 領域が表示される</li><li>[ ] ⌨ <code>Ctrl+N</code> で新規マップ</li><li>[ ] 🖱 ダブルクリックでノード追加 → タイプして文字入力</li><li>[ ] 🖱 ハンドルドラッグでノード接続</li><li>[ ] ⌨ <code>Ctrl+S</code> で保存先指定 → <code>.hrf</code> ファイルが作られる</li><li>[ ] ⌨ <code>Ctrl+W</code> (またはタブ ✕) でマップを閉じる</li><li>[ ] ⌨ <code>Ctrl+O</code> で同 <code>.hrf</code> を再オープン → 内容が一致</li></ul>
 <p>すべて ✓ なら基本系は OK。次は <span class="missing">03 キャンバスとジェスチャー</span> へ。</p>
 <p><span class="missing">← 01</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 03</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#02-はじめに">02 はじめに</a></li><li class="lvl-2"><a href="#インストール">インストール</a></li><li class="lvl-3"><a href="#Windows">Windows</a></li><li class="lvl-3"><a href="#macOS-Linux">macOS / Linux</a></li><li class="lvl-2"><a href="#初回起動">初回起動</a></li><li class="lvl-2"><a href="#画面の構成">画面の構成</a></li><li class="lvl-2"><a href="#5-分でわかる基本操作">5 分でわかる基本操作</a></li><li class="lvl-3"><a href="#①-新規マップを作る">① 新規マップを作る</a></li><li class="lvl-3"><a href="#②-ノートを置く">② ノートを置く</a></li><li class="lvl-3"><a href="#③-ノートを繋ぐ">③ ノートを繋ぐ</a></li><li class="lvl-3"><a href="#④-整える">④ 整える</a></li><li class="lvl-3"><a href="#⑤-保存する">⑤ 保存する</a></li><li class="lvl-3"><a href="#⑥-共有する">⑥ 共有する</a></li><li class="lvl-2"><a href="#サンプルマップで遊ぶ">サンプルマップで遊ぶ</a></li><li class="lvl-2"><a href="#よくある最初のつまずき">よくある最初のつまずき</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">02 はじめに</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+  <aside class="rightcol"><div class="graph" data-slug="basics/02-getting-started/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#02-はじめに">02 はじめに</a></li><li class="lvl-2"><a href="#インストール">インストール</a></li><li class="lvl-3"><a href="#Windows">Windows</a></li><li class="lvl-3"><a href="#macOS-Linux">macOS / Linux</a></li><li class="lvl-2"><a href="#初回起動">初回起動</a></li><li class="lvl-2"><a href="#画面の構成">画面の構成</a></li><li class="lvl-2"><a href="#5-分でわかる基本操作">5 分でわかる基本操作</a></li><li class="lvl-3"><a href="#①-新規マップを作る">① 新規マップを作る</a></li><li class="lvl-3"><a href="#②-ノートを置く">② ノートを置く</a></li><li class="lvl-3"><a href="#③-ノートを繋ぐ">③ ノートを繋ぐ</a></li><li class="lvl-3"><a href="#④-整える">④ 整える</a></li><li class="lvl-3"><a href="#⑤-保存する">⑤ 保存する</a></li><li class="lvl-3"><a href="#⑥-共有する">⑥ 共有する</a></li><li class="lvl-2"><a href="#サンプルマップで遊ぶ">サンプルマップで遊ぶ</a></li><li class="lvl-2"><a href="#よくある最初のつまずき">よくある最初のつまずき</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="basics/02-getting-started";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="basics/02-getting-started";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

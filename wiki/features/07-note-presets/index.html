@@ -1,28 +1,40 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>07-note-presets | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="ノートプリセット (NP-01) よく使うノートの見た目（フォント、色、枠、サイズなど）を プリセット として保存し、ワンクリックで適用できます。アプリ全体用と、開いている .hrf 専用のプリセットを分けて持てます。 関連 フォーマット全般:…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="07-note-presets | HṛdayaFlow Manual">
+<meta property="og:description" content="ノートプリセット (NP-01) よく使うノートの見た目（フォント、色、枠、サイズなど）を プリセット として保存し、ワンクリックで適用できます。アプリ全体用と、開いている .hrf 専用のプリセットを分けて持てます。 関連 フォーマット全般:…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>07-note-presets</h1><div class="note-meta"></div><h1 id="ノートプリセット-(NP-01)">ノートプリセット (NP-01)</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">07-note-presets</span><h1>07-note-presets</h1><h1 id="ノートプリセット-(NP-01)">ノートプリセット (NP-01)</h1>
 <p>よく使うノートの見た目（フォント、色、枠、サイズなど）を <strong>プリセット</strong> として保存し、ワンクリックで適用できます。アプリ全体用と、開いている <code>.hrf</code> 専用のプリセットを分けて持てます。</p>
 <h2 id="関連">関連</h2>
-<ul><li>フォーマット全般: <span class="missing">06-formatting</span>（存在する場合）</li><li>キャンバス操作: <span class="missing">01-canvas-and-gestures</span></li></ul>
+<ul><li>フォーマット全般: <span class="missing">06-inspector-and-formatting</span></li><li>キャンバス操作: <span class="missing">01-canvas-and-gestures</span></li></ul>
 <h2 id="プリセットの作成">プリセットの作成</h2>
 <ol><li>スタイルの元にしたい <strong>ノートを 1 つ選択</strong> します。</li><li>インスペクタ上部の <strong>プリセット</strong> セクションで <strong>＋</strong> を押します（選択が 0 件のときは無効）。</li><li>ダイアログで名前・保存先（★デフォルト / HrdayaFlow / プロジェクト）・各項目の適用 ON/OFF を設定して <strong>保存</strong>。</li></ol>
 <p>空の初期値から作る場合も、同じダイアログで項目ごとにチェックと値を入れます。</p>
@@ -33,25 +45,20 @@
 <h2 id="スタイルのコピー／貼り付け">スタイルのコピー／貼り付け</h2>
 <ol><li>コピー元ノートを <strong>Ctrl+C</strong>（Mac は Cmd+C）でコピーします。</li><li>貼り付け先ノートを選び <strong>Ctrl+Shift+V</strong>（Mac は <strong>Cmd+Shift+V</strong>）を押します。</li><li>チップで項目を選び <strong>適用</strong>。次回起動まで選択が記憶されます。</li></ol>
 <h2 id="折りたたみ">折りたたみ</h2>
-<p>「HrdayaFlow プリセット」「プロジェクト (.hrf)」セクションの見出しをタップすると折りたたみできます。状態はアプリに保存されます。</p><section class="backlinks"><h3>Backlinks</h3><ul><li><a href="../../features/05-note-stacks/">05-note-stacks</a></li></ul></section></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#ノートプリセット-(NP-01)">ノートプリセット (NP-01)</a></li><li class="lvl-2"><a href="#関連">関連</a></li><li class="lvl-2"><a href="#プリセットの作成">プリセットの作成</a></li><li class="lvl-2"><a href="#適用とデフォルト">適用とデフォルト</a></li><li class="lvl-2"><a href="#🔐-ロック">🔐 ロック</a></li><li class="lvl-2"><a href="#スタイルのコピー／貼り付け">スタイルのコピー／貼り付け</a></li><li class="lvl-2"><a href="#折りたたみ">折りたたみ</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">07-note-pr</text>
-    <a href="../../features/05-note-stacks/"><circle cx="170" cy="50" r="6" class="g-back"></circle><title>05-note-stacks</title></a><text x="170" y="66" text-anchor="middle">05-note-</text>
-  </svg></div></aside>
+<p>「HrdayaFlow プリセット」「プロジェクト (.hrf)」セクションの見出しをタップすると折りたたみできます。状態はアプリに保存されます。</p>
+<hr>
+<h2 id="プリセットの保存先">プリセットの保存先</h2>
+<p>プリセットを作るとき、どこに置くかを選べます。<strong>これは重要な選択です。</strong></p>
+<div class="table-wrap"><table><thead><tr><th>保存先</th><th>範囲</th><th>向いていること</th></tr></thead><tbody><tr><td>アプリに保存</td><td>すべてのマップで使える</td><td>自分の定番スタイル</td></tr><tr><td>この <code>.hrf</code> に保存</td><td>そのファイルの中だけ</td><td>プロジェクト固有の配色。ファイルを渡せば相手にも伝わる</td></tr><tr><td>既定にする</td><td>新規ノート作成時に自動適用</td><td>いつもの見た目を初期値にする</td></tr></tbody></table></div>
+<p><strong><code>.hrf</code> に保存したプリセットはファイルと一緒に移動します。</strong> 他の人にマップを渡すとき、<br>スタイルもそのまま渡したいならこちらを選びます。アプリに保存したものは自分の環境限りです。</p><div data-pagefind-ignore><section class="backlinks"><h3>Backlinks</h3><ul><li><a href="../../00-INDEX/">HṛdayaFlow ユーザーマニュアル</a></li><li><a href="../../features/05-note-stacks/">05-note-stacks</a></li></ul></section></div></article>
+  <aside class="rightcol"><div class="graph" data-slug="features/07-note-presets/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#ノートプリセット-(NP-01)">ノートプリセット (NP-01)</a></li><li class="lvl-2"><a href="#関連">関連</a></li><li class="lvl-2"><a href="#プリセットの作成">プリセットの作成</a></li><li class="lvl-2"><a href="#適用とデフォルト">適用とデフォルト</a></li><li class="lvl-2"><a href="#🔐-ロック">🔐 ロック</a></li><li class="lvl-2"><a href="#スタイルのコピー／貼り付け">スタイルのコピー／貼り付け</a></li><li class="lvl-2"><a href="#折りたたみ">折りたたみ</a></li><li class="lvl-2"><a href="#プリセットの保存先">プリセットの保存先</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/07-note-presets";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/07-note-presets";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>

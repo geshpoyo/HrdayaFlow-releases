@@ -1,0 +1,572 @@
+/**
+ * Typography Presets — Senastra Design System
+ * ==============================================
+ * Version: 1.0.0
+ *
+ * 色の data-theme と直交するタイポグラフィ軸です。
+ *
+ * 使い方:
+ *   <html data-theme="iroha" data-typeface="mincho-mixed">
+ *
+ *   body { font-family: var(--font-body); }
+ *   h1   { font-family: var(--font-display); }
+ *   .ui  { font-family: var(--font-ui); }
+ *
+ * 構成:
+ *   - Primitive: --font-sans / --font-serif / --font-rounded / --font-mono
+ *   - Semantic:  --font-body / --font-heading / --font-display / --font-ui / --font-code / --font-article
+ *   - Density:   --text-base / --leading-normal など（readable / compact で上書き）
+ *
+ * 全 20 プリセット:
+ *   geshtalt / system / noto-sans-jp / noto-serif-jp / mincho / mincho-mixed /
+ *   zen-kaku / rounded / readable / compact / tabular / editorial /
+ *   mplus / roboto / merriweather / zen-maru / zen-antique / klee / sawarabi /
+ *   custom
+ *
+ * カスタム:
+ *   data-typeface="custom" のうえで、--font-sans 等を JS から上書き。
+ *
+ * 推奨読み込み順: design-tokens.css → typography-presets.css → themes.css
+ * （design-tokens 未使用時も、このファイル単体でベーススケールが定義されます）
+ */
+
+/* ─────────────────────────────────────────────
+   BASE SCALE（design-tokens と整合。未読込時のフォールバック）
+   ───────────────────────────────────────────── */
+:root {
+  /* Primitive stacks（各プリセットで上書き） */
+  --font-sans: 'Inter', 'Hiragino Sans', 'Yu Gothic UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', 'HGS Mincho E', serif;
+  --font-rounded: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
+
+  /* Semantic（コンポーネントはこちらを優先して参照） */
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  /* 役割別の字間・行間（プリセットで調整可） */
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.04em;
+  --tracking-ui: 0.01em;
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+
+  /* サイズスケール（design-tokens 互換） */
+  --text-2xs: 10px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 15px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+  --text-4xl: 36px;
+  --text-5xl: 48px;
+  --text-hero: 64px;
+  --text-display: 80px;
+
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  --leading-none: 1;
+  --leading-tight: 1.2;
+  --leading-snug: 1.4;
+  --leading-normal: 1.6;
+  --leading-relaxed: 1.75;
+  --leading-loose: 2;
+
+  --tracking-tighter: -0.04em;
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+  --tracking-wider: 0.08em;
+  --tracking-widest: 0.16em;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: geshtalt（既定・Inter ベース）
+   ═════════════════════════════════════════════ */
+[data-typeface="geshtalt"] {
+  --font-sans: 'Inter', 'Hiragino Sans', 'Yu Gothic UI', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --font-rounded: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.04em;
+  --tracking-ui: 0.01em;
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: system（Web フォントなし・OS フォントのみ）
+   ═════════════════════════════════════════════ */
+[data-typeface="system"] {
+  --font-sans: system-ui, -apple-system, 'Segoe UI', 'Hiragino Sans', 'Yu Gothic UI', sans-serif;
+  --font-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'HGS Mincho E', serif;
+  --font-rounded: system-ui, sans-serif;
+  --font-mono: ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.015em;
+  --tracking-display: -0.03em;
+  --tracking-ui: 0;
+  --leading-body: 1.58;
+  --leading-heading: 1.22;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: noto-sans-jp（日本語 UI 向けゴシック）
+   ═════════════════════════════════════════════ */
+[data-typeface="noto-sans-jp"] {
+  --font-sans: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', 'Noto Sans JP', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Noto Sans JP', ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.035em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.65;
+  --leading-heading: 1.18;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: noto-serif-jp（読み物・縦組みにも合う明朝本文）
+   ═════════════════════════════════════════════ */
+[data-typeface="noto-serif-jp"] {
+  --font-sans: 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: -0.01em;
+  --tracking-display: -0.02em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.75;
+  --leading-heading: 1.25;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: mincho（明朝で統一・和文芸・展示）
+   ═════════════════════════════════════════════ */
+[data-typeface="mincho"] {
+  --font-sans: 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Shippori Mincho', 'Hiragino Mincho ProN', 'Yu Mincho', 'HGS Mincho E', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.02em;
+  --tracking-display: 0.04em;
+  --tracking-ui: 0.03em;
+  --leading-body: 1.8;
+  --leading-heading: 1.35;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: mincho-mixed（本文明朝・UIゴシック）
+   ═════════════════════════════════════════════ */
+[data-typeface="mincho-mixed"] {
+  --font-sans: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Shippori Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.01em;
+  --tracking-display: 0.02em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.72;
+  --leading-heading: 1.28;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: zen-kaku（現代的な日本語ゴシック）
+   ═════════════════════════════════════════════ */
+[data-typeface="zen-kaku"] {
+  --font-sans: 'Zen Kaku Gothic New', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.025em;
+  --tracking-display: -0.04em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.62;
+  --leading-heading: 1.2;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: rounded（ソフトな UI・親しみやすさ）
+   ═════════════════════════════════════════════ */
+[data-typeface="rounded"] {
+  --font-sans: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.01em;
+  --tracking-display: -0.02em;
+  --tracking-ui: 0.04em;
+  --leading-body: 1.68;
+  --leading-heading: 1.22;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: readable（長文・ブログ・ドキュメント）
+   ═════════════════════════════════════════════ */
+[data-typeface="readable"] {
+  --font-sans: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --text-base: 16px;
+  --text-md: 17px;
+  --leading-normal: 1.75;
+  --leading-relaxed: 1.85;
+  --leading-body: 1.75;
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.03em;
+  --tracking-ui: 0.01em;
+  --leading-heading: 1.22;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: compact（ダッシュボード・高密度 UI）
+   ═════════════════════════════════════════════ */
+[data-typeface="compact"] {
+  --font-sans: 'Inter', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --text-base: 14px;
+  --text-sm: 12px;
+  --text-xs: 11px;
+  --leading-normal: 1.45;
+  --leading-snug: 1.3;
+  --leading-body: 1.45;
+
+  --tracking-heading: -0.015em;
+  --tracking-display: -0.03em;
+  --tracking-ui: 0;
+  --leading-heading: 1.15;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: tabular（数値・表・モノスペース強め）
+   ═════════════════════════════════════════════ */
+[data-typeface="tabular"] {
+  --font-sans: 'Noto Sans JP', 'Inter', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', serif;
+  --font-rounded: sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-mono);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.04em;
+  --tracking-ui: 0.04em;
+  --leading-body: 1.5;
+  --leading-heading: 1.2;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: editorial（雑誌風・見出しだけ幅広いトラッキング）
+   ═════════════════════════════════════════════ */
+[data-typeface="editorial"] {
+  --font-sans: 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Shippori Mincho', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.06em;
+  --tracking-display: 0.08em;
+  --tracking-ui: 0.05em;
+  --leading-body: 1.78;
+  --leading-heading: 1.3;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: mplus（M PLUS 1p ベース・やわらかモダンゴシック）
+   ═════════════════════════════════════════════ */
+[data-typeface="mplus"] {
+  --font-sans: 'M PLUS 1p', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', 'M PLUS 1p', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.035em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.65;
+  --leading-heading: 1.2;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: roboto（Roboto ベース・欧文 UI の定番）
+   ═════════════════════════════════════════════ */
+[data-typeface="roboto"] {
+  --font-sans: 'Roboto', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Merriweather', 'Noto Serif JP', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Roboto Mono', ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.015em;
+  --tracking-display: -0.03em;
+  --tracking-ui: 0.01em;
+  --leading-body: 1.58;
+  --leading-heading: 1.2;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: merriweather（欧文長文・高可読 serif）
+   ═════════════════════════════════════════════ */
+[data-typeface="merriweather"] {
+  --font-sans: 'Roboto', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Merriweather', 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: -0.01em;
+  --tracking-display: -0.02em;
+  --tracking-ui: 0.01em;
+  --leading-body: 1.72;
+  --leading-heading: 1.25;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: zen-maru（Zen Maru Gothic・温かみのある和丸ゴ）
+   ═════════════════════════════════════════════ */
+[data-typeface="zen-maru"] {
+  --font-sans: 'Zen Maru Gothic', 'M PLUS Rounded 1c', system-ui, sans-serif;
+  --font-serif: 'Zen Old Mincho', 'Noto Serif JP', serif;
+  --font-rounded: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.01em;
+  --tracking-display: -0.02em;
+  --tracking-ui: 0.03em;
+  --leading-body: 1.7;
+  --leading-heading: 1.25;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: zen-antique（Zen Antique Soft・大正ロマン風レトロ）
+   ═════════════════════════════════════════════ */
+[data-typeface="zen-antique"] {
+  --font-sans: 'Zen Kaku Gothic New', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Zen Antique Soft', 'Zen Old Mincho', 'Noto Serif JP', serif;
+  --font-rounded: 'Zen Maru Gothic', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.03em;
+  --tracking-display: 0.06em;
+  --tracking-ui: 0.03em;
+  --leading-body: 1.8;
+  --leading-heading: 1.32;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: klee（Klee One・硬筆風・教科書体的な品格）
+   ═════════════════════════════════════════════ */
+[data-typeface="klee"] {
+  --font-sans: 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Klee One', 'Zen Old Mincho', 'Noto Serif JP', serif;
+  --font-rounded: 'Zen Maru Gothic', 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.02em;
+  --tracking-display: 0.04em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.78;
+  --leading-heading: 1.3;
+}
+
+/* ═════════════════════════════════════════════
+   PRESET: sawarabi（Sawarabi Mincho + Gothic・繊細で軽やかな和文）
+   ═════════════════════════════════════════════ */
+[data-typeface="sawarabi"] {
+  --font-sans: 'Sawarabi Gothic', 'Noto Sans JP', system-ui, sans-serif;
+  --font-serif: 'Sawarabi Mincho', 'Noto Serif JP', 'Hiragino Mincho ProN', serif;
+  --font-rounded: 'M PLUS Rounded 1c', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --font-body: var(--font-serif);
+  --font-heading: var(--font-serif);
+  --font-display: var(--font-serif);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-serif);
+
+  --tracking-heading: 0.02em;
+  --tracking-display: 0.04em;
+  --tracking-ui: 0.02em;
+  --leading-body: 1.75;
+  --leading-heading: 1.28;
+}
+
+/* ═════════════════════════════════════════════
+   CUSTOM（JS から --font-* を上書き）
+   ═════════════════════════════════════════════ */
+[data-typeface="custom"] {
+  --font-sans: system-ui, sans-serif;
+  --font-serif: serif;
+  --font-rounded: system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+  --font-display: var(--font-sans);
+  --font-ui: var(--font-sans);
+  --font-code: var(--font-mono);
+  --font-article: var(--font-sans);
+
+  --tracking-heading: -0.02em;
+  --tracking-display: -0.04em;
+  --tracking-ui: 0.01em;
+  --leading-body: 1.6;
+  --leading-heading: 1.2;
+}
+
+/* ─────────────────────────────────────────────
+   UTILITY: タイポを一括適用（任意）
+   ───────────────────────────────────────────── */
+.type-body { font-family: var(--font-body); line-height: var(--leading-body); }
+.type-heading { font-family: var(--font-heading); letter-spacing: var(--tracking-heading); line-height: var(--leading-heading); }
+.type-display { font-family: var(--font-display); letter-spacing: var(--tracking-display); }
+.type-ui { font-family: var(--font-ui); letter-spacing: var(--tracking-ui); }
+.type-code { font-family: var(--font-code); }
+.type-article { font-family: var(--font-article); line-height: var(--leading-body); }

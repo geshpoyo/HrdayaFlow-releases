@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="ja" data-theme="light">
+<html lang="ja" data-theme="iroha">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>05 エッジと接続 | HṛdayaFlow Manual</title>
-<meta name="description" content="HṛdayaFlow ユーザーマニュアル / Manual.">
-
-<script>(function(){try{var s=localStorage.getItem('senpub-theme');var t=s||"light";if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-<link rel="stylesheet" href="../../_site/site.css">
+<meta name="description" content="#manual · #edges · #connections 05 エッジと接続 ← 04 ノード | 目次 | → 06 グループ ノート同士を関係づけるのがエッジ。ただの線ではなく、 意味 (semantic type) と 見た目 (style) を独立して扱う。 エッジを引く 🖱…">
+<meta name="robots" content="noai, noimageai">
 
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HṛdayaFlow Manual">
+<meta property="og:title" content="05 エッジと接続 | HṛdayaFlow Manual">
+<meta property="og:description" content="#manual · #edges · #connections 05 エッジと接続 ← 04 ノード | 目次 | → 06 グループ ノート同士を関係づけるのがエッジ。ただの線ではなく、 意味 (semantic type) と 見た目 (style) を独立して扱う。 エッジを引く 🖱…">
+<meta name="twitter:card" content="summary">
+
+<script>(function(){try{var BASE="iroha";var VALID={"iroha":true,"raijin":true,"fuujin":true,"usui":true,"shouman":true,"hakuro":true,"tsukimi":true,"soukou":true,"taisetsu":true,"shirakawago":true,"ryukyu":true,"chojugiga":true,"hokusai":true,"gogh":true,"geshtalt":true};var base=localStorage.getItem('senpub-theme-base')||BASE;if(!VALID[base])base=BASE;var mode="light";var s=localStorage.getItem('senpub-theme');if(s==='light'||s==='dark')mode=s;if(mode==='system'){mode=(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches)?'dark':'light';}document.documentElement.setAttribute('data-theme',mode==='dark'?base+'-dark':base);}catch(e){document.documentElement.setAttribute('data-theme',"iroha");}})();</script>
+<link rel="stylesheet" href="../../_site/senastra/variables.css">
+<link rel="stylesheet" href="../../_site/senastra/themes.css">
+<link rel="stylesheet" href="../../_site/senastra/typography-presets.css">
+<link rel="stylesheet" href="../../_site/site.css?v=8e1e0f041d">
+
+
+
+
+
 </head>
 <body>
-<header class="topbar">
-  <a class="brand" href="../../">HṛdayaFlow Manual</a>
-  <div class="topbar-actions"><input class="search-box" id="q" type="search" placeholder="検索…"><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div>
-</header>
+
+<a class="skip-link" href="#content">本文へスキップ</a>
+<button class="nav-toggle" id="navToggle" type="button" aria-label="ナビゲーション" aria-expanded="false">☰</button>
 <main class="layout">
-  <nav class="sidebar" id="nav"></nav>
-  <article class="content"><h1>05 エッジと接続</h1><div class="note-meta">#manual · #edges · #connections</div><h1 id="05-エッジと接続">05 エッジと接続</h1>
+  <aside class="sidebar"><a class="nav-brand" href="../../">HṛdayaFlow Manual</a><div class="nav-search"><input class="search-box" id="q" type="search" placeholder="検索…" autocomplete="off" aria-label="サイト内を検索"><div class="search-results" id="sr" hidden></div></div><nav class="nav-tree" id="nav"></nav><div class="nav-footer"><a class="owner-link" href="https://hrdayaflow.geshtalt.jp/" rel="home">HṛdayaFlow 公式サイトへ <span aria-hidden="true">↗</span></a><button class="theme-pick" id="themePick" type="button" aria-label="テーマ選択" aria-haspopup="dialog" aria-expanded="false" aria-controls="themePicker" title="テーマ">色</button><button class="theme-toggle" id="themeToggle" type="button" aria-label="テーマ切替" title="ライト/ダーク切替">◐</button></div><div class="theme-picker" id="themePicker" role="dialog" aria-label="テーマ選択" hidden></div></aside>
+  <article class="content" id="content" data-pagefind-body data-pagefind-filter="section:features"><span data-pagefind-meta="title" hidden aria-hidden="true">05 エッジと接続</span><div class="note-meta">#manual · #edges · #connections</div><h1 id="05-エッジと接続">05 エッジと接続</h1>
 <p><span class="missing">← 04 ノード</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 06 グループ</span></p>
 <p>ノート同士を関係づけるのがエッジ。ただの線ではなく、<strong>意味 (semantic type)</strong> と <strong>見た目 (style)</strong> を独立して扱う。</p>
 <h2 id="エッジを引く">エッジを引く</h2>
@@ -32,13 +44,26 @@
 <p>🖱 <strong>ノート右クリック → 「親子関係を解除」</strong>: Alt+P と同じ挙動。選択中ノートに親がある時のみメニューに現れます。</p>
 <h3 id="親子関係の特殊な振る舞い-(v004-O-系)">親子関係の特殊な振る舞い (v0.0.4 O 系)</h3>
 <ul><li><strong>キャンバスには矢印が描画されません</strong> (<code>EdgeKind.hierarchy</code> は描画されない)</li><li>データは Inspector「親子・階層」セクションで <strong>ルートからの完全ツリー</strong> として確認・編集できます</li><li><strong>親を移動すると子孫すべてが推移的に追従</strong> します (Blender 流 transform inheritance)<ul><li>対象操作: G (Blender grab) / D&amp;D ドラッグ / 矢印キー nudge / Inspector x,y 入力</li><li>回転 (R) / スケール (S) の伝播は v2 以降</li></ul></li><li><strong>Container と Frame も親子関係 Edge の端点</strong> になれます<ul><li>Container を移動すると中の子孫が追従 (<code>Container.containerMembers[]</code> は cache)</li><li>Frame に対しても親子関係を結べる (装飾フレームに子ノートを従属させる)</li></ul></li><li><strong>親子関係と通常エッジは共存できます</strong>: 親 a → 子 b の親子関係を持つノート間に、<strong><code>generic</code> / <code>causality</code> / <code>reference</code> 等の通常エッジを別途引くことが可能</strong>。両者は独立したレイヤーとして扱われる</li></ul>
-<h2 id="Semantic-Type-(意味)">Semantic Type (意味)</h2>
-<p>エッジには「種類」がある。見た目とは独立して、データとして保持される。</p>
-<div class="table-wrap"><table><thead><tr><th>Semantic Type</th><th>既定の見た目</th><th>用途</th></tr></thead><tbody><tr><td><code>parent-child</code></td><td>細い実線</td><td>階層・所属</td></tr><tr><td><code>cause-effect</code></td><td>矢印つき実線</td><td>因果関係</td></tr><tr><td><code>dependency</code></td><td>破線矢印</td><td>依存・参照</td></tr><tr><td><code>relation</code></td><td>太い実線</td><td>関連 (緩い)</td></tr><tr><td><code>custom</code></td><td>ユーザー定義</td><td>プロジェクト固有</td></tr></tbody></table></div>
-<p>Inspector の Edge セクションで type を変えると、自動でデフォルトスタイルが当たる。後から個別に上書き可。</p>
+<h2 id="接続の種類（意味）">接続の種類（意味）</h2>
+<p>エッジには「意味」を持たせられます。見た目とは独立したデータで、<code>.hrf</code> に保存されます。<br>インスペクタの「接続」で切り替えます。<strong>9 種類</strong>あります。</p>
+<div class="table-wrap"><table><thead><tr><th>表示名</th><th>内部名</th><th>使いどころ</th></tr></thead><tbody><tr><td>汎用（関連）</td><td><code>generic</code></td><td>既定。とりあえず繋ぐとき</td></tr><tr><td>階層</td><td><code>hierarchy</code></td><td>親子・所属</td></tr><tr><td>因果</td><td><code>causality</code></td><td>A が B を引き起こす</td></tr><tr><td>参照</td><td><code>reference</code></td><td>参照・引用</td></tr><tr><td>対比</td><td><code>contrast</code></td><td>対立・比較</td></tr><tr><td>派生・流れ</td><td><code>flow</code></td><td>工程・派生</td></tr><tr><td>集約</td><td><code>aggregation</code></td><td>全体と部分</td></tr><tr><td>依存</td><td><code>dependency</code></td><td>依存関係</td></tr><tr><td>カスタム</td><td><code>custom</code></td><td>プロジェクト固有</td></tr></tbody></table></div>
 <h2 id="エッジのスタイル">エッジのスタイル</h2>
-<p>選択 → Inspector → Edge セクション。</p>
-<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>値</th></tr></thead><tbody><tr><td>線色</td><td>任意カラー</td></tr><tr><td>線幅</td><td>1〜10 px</td></tr><tr><td>ダッシュパターン</td><td>実線 / 破線 / 点線 / 1 点鎖線</td></tr><tr><td>矢印頭</td><td>なし / 片端 / 両端 / 大きさ</td></tr><tr><td>カーブ</td><td>直線 / ベジェ (S字) / 直角 (Manhattan)</td></tr><tr><td>ラベル</td><td>エッジ上に表示するテキスト</td></tr><tr><td>ラベル位置</td><td>中央 / from 寄り / to 寄り</td></tr></tbody></table></div>
+<p>選択 → インスペクタ。</p>
+<div class="table-wrap"><table><thead><tr><th>プロパティ</th><th>値</th></tr></thead><tbody><tr><td>線の形状</td><td>直線 / 曲線（ベジェ） / 折れ線（直角）</td></tr><tr><td>ルーティング</td><td>継承（既定） / 直線 / スマート / 手動</td></tr><tr><td>線スタイル</td><td><strong>8 種</strong>（下表）</td></tr><tr><td>太さ</td><td>スライダー</td></tr><tr><td>色</td><td>パレット + 任意色</td></tr><tr><td>矢印</td><td>向き（なし / 順方向 / 逆方向 / 両方）と、端の形（<strong>10 種</strong>）</td></tr><tr><td>ラベル</td><td>エッジ上に表示するテキスト</td></tr></tbody></table></div>
+<h3 id="線スタイル（8-種）">線スタイル（8 種）</h3>
+<div class="table-wrap"><table><thead><tr><th>表示</th><th>内部名</th><th>見た目</th></tr></thead><tbody><tr><td>実線</td><td><code>solid</code></td><td>途切れない線</td></tr><tr><td>破線</td><td><code>dashed</code></td><td>一定間隔のダッシュ</td></tr><tr><td>点線</td><td><code>dotted</code></td><td>点の連なり</td></tr><tr><td>長破線</td><td><code>longDash</code></td><td>長めのダッシュ</td></tr><tr><td>破点</td><td><code>dashDot</code></td><td>一点鎖線</td></tr><tr><td>二重線</td><td><code>doubleLine</code></td><td>平行な 2 本</td></tr><tr><td>波線</td><td><code>wave</code></td><td>サイン波</td></tr><tr><td>ジグザグ</td><td><code>zigzag</code></td><td>V 字の繰り返し</td></tr></tbody></table></div>
+<h3 id="矢印の端の形（10-種）">矢印の端の形（10 種）</h3>
+<p><code>none</code> / <code>arrow</code>（開きシェブロン）/ <code>doubleChevron</code>（<code>&lt;&lt;</code>）/ <code>filledTriangle</code>（塗り三角）/<br><code>hollowTriangle</code>（輪郭のみ三角）/ <code>diamond</code> ・ <code>hollowDiamond</code>（UML 集約風の中空ひし形）/<br><code>filledCircle</code> ・ <code>circle</code> / <code>block</code>（角バー）。</p>
+<p>始点と終点で別々に指定できます。UML 記法（集約は中空ひし形、コンポジションは塗りひし形）を<br>そのまま表現できます。</p>
+<h2 id="エッジプリセット">エッジプリセット</h2>
+<p>よく使う組み合わせを 1 クリックで当てられます。インスペクタの「エッジプリセット」から選びます。<br><strong>組み込みで 8 種類</strong>あります。</p>
+<div class="table-wrap"><table><thead><tr><th>プリセット</th><th>中身</th></tr></thead><tbody><tr><td>シンプル矢印</td><td>細い実線＋塗り潰し三角</td></tr><tr><td>オープン矢印</td><td>実線＋開きシェブロン</td></tr><tr><td>双方向</td><td>双方向シェブロン</td></tr><tr><td>依存（破線）</td><td>橙色の破線＋開き矢印</td></tr><tr><td>UML 集約</td><td>始点に中空ダイアモンド</td></tr><tr><td>UML コンポジション</td><td>始点に塗り潰しダイアモンド</td></tr><tr><td>フロー（波形）</td><td>波線＋ホバーで流れアニメ</td></tr><tr><td>対立（ジグザグ）</td><td>赤ジグザグ＋両端バー</td></tr></tbody></table></div>
+<p>★ 印を付けたプリセットは、<strong>新規エッジ作成時に自動で適用</strong>されます。<br>自分の組み合わせは ＋ ボタンで保存できます。</p>
+<h2 id="エッジのアニメーション（LFO）">エッジのアニメーション（LFO）</h2>
+<p>エッジは動かせます。インスペクタのアニメーション節で設定します。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>選べる値</th></tr></thead><tbody><tr><td>波形</td><td>サイン / 三角 / 鋸歯 / 逆鋸 / 矩形 / S&amp;H</td></tr><tr><td>対象</td><td>不透明度 / 流れ / 脈動 / グロー</td></tr><tr><td>向き</td><td>順方向 / 逆方向 / 両方 / 継承</td></tr><tr><td>再生条件</td><td>常時 / ホバー時 / 選択時 / オフ / 継承</td></tr></tbody></table></div>
+<p>「流れ」は破線が線に沿って動く表現で、工程やデータの向きを示すのに向いています。<br><strong>「ホバー時」にしておくと普段は静止</strong>するので、マップ全体が騒がしくなりません。</p>
+<blockquote><p>⚙ プレゼンテーションモードでは、アニメーションを一時停止できます。<br>同時に動くエッジの本数にも上限があり、大きなマップでも重くなりません。</p></blockquote>
 <h3 id="ラベル">ラベル</h3>
 <p>エッジをダブルクリック → ラベル編集モード。短文 (例: 「呼び出す」「from 2024」)。</p>
 <h2 id="エッジの編集と削除">エッジの編集と削除</h2>
@@ -71,7 +96,7 @@
   A ──→ ● ──→ X
   B ──┘    └── (Dot→X は本数ぶん残る。重なって 1 本に見えることもある)
   C ──┘</code></pre>
-<p>スクリーンショット付きの設計資料: <span class="missing">v0.0.4 Q 系議事録</span></p>
+<p>スクリーンショット付きの設計資料: <code>HrdayaFlow/docs/v0-0-4/q-knife-reroute/README.md</code>（開発リポジトリ）</p>
 <h3 id="操作">操作</h3>
 <ol><li><code>Shift</code> を押しながら <strong>右マウスダウン</strong> → <strong>ドラッグ</strong> で軌跡を引く</li><li>軌跡が通過した <strong>通常エッジ</strong> (キャンバスに見えるエッジ) が赤くハイライトされる</li><li>右マウスアップで切断確定。ストローク終点に <strong>Dot</strong> が 1 個生成される</li><li>切断された各エッジ <code>S → T</code> は <code>S → Dot</code> と <code>Dot → T</code> の 2 本に分割される</li></ol>
 <h3 id="仕様">仕様</h3>
@@ -83,25 +108,23 @@
 <ul><li><strong>見た目</strong>: 小さい ● (塗り潰し円)。初期直径 14 px</li><li><strong>移動</strong>: 通常ノートと同じく <code>G</code> / ドラッグ / 矢印キー (1 px / <code>Shift</code> 16 px / <code>Ctrl</code> 64 px)</li><li><strong>サイズ変更</strong>: <code>S</code> 又は 8 方向リサイズハンドル (常に正方形 = 円、4–48 px)</li><li><strong>回転</strong>: 円なので意味なし。<code>R</code> は無効</li><li><strong>テキスト編集 / F2</strong>: 無効 (ラベルを持たない)</li><li><strong>Ctrl+P (親子化)</strong>: 無効 (Dot は親子関係に含められない)</li><li><strong>自動削除</strong>: Dot に接続するエッジが 0 本になると Dot 自身も自動削除される (ゴミ Dot 散乱防止)</li><li><strong>Ctrl+G</strong>: Dot を Container メンバーにできる (Container 移動で追従)</li></ul>
 <h2 id="動作確認チェックリスト">動作確認チェックリスト</h2>
 <ul><li>[ ] ハンドルドラッグで 2 ノード接続</li><li>[ ] <code>Shift + ドラッグ</code> で矢印つきエッジ</li><li>[ ] エッジクリックで選択 → 色変更</li><li>[ ] エッジ端ドラッグで接続先変更</li><li>[ ] <code>Delete</code> で削除</li><li>[ ] エッジダブルクリック → ラベル編集</li><li>[ ] ノートを回転 → エッジが追従</li><li>[ ] 複数エッジ選択 → 一括色変更</li><li>[ ] <code>Shift + 右マウスドラッグ</code> で複数エッジを切断 → Dot 1 個 + リルート</li><li>[ ] <code>Esc</code> でナイフ中断 → 変化なし</li><li>[ ] Dot を <code>G</code> / <code>S</code> で移動・リサイズ、<code>R</code> は無効</li><li>[ ] 接続ノート削除後、孤立 Dot が自動削除される</li></ul>
-<p><span class="missing">← 04</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 06</span></p></article>
-  <aside class="rightcol"><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#05-エッジと接続">05 エッジと接続</a></li><li class="lvl-2"><a href="#エッジを引く">エッジを引く</a></li><li class="lvl-2"><a href="#キーボード">キーボード</a></li><li class="lvl-3"><a href="#親子関係の特殊な振る舞い-(v004-O-系)">親子関係の特殊な振る舞い (v0.0.4 O 系)</a></li><li class="lvl-2"><a href="#Semantic-Type-(意味)">Semantic Type (意味)</a></li><li class="lvl-2"><a href="#エッジのスタイル">エッジのスタイル</a></li><li class="lvl-3"><a href="#ラベル">ラベル</a></li><li class="lvl-2"><a href="#エッジの編集と削除">エッジの編集と削除</a></li><li class="lvl-2"><a href="#接続点-(Pin)">接続点 (Pin)</a></li><li class="lvl-2"><a href="#自動レイアウトとエッジ">自動レイアウトとエッジ</a></li><li class="lvl-2"><a href="#既存ノートの繋ぎ替え">既存ノートの繋ぎ替え</a></li><li class="lvl-2"><a href="#多対多">多対多</a></li><li class="lvl-2"><a href="#接続検証-(GSR-変形時)">接続検証 (G/S/R 変形時)</a></li><li class="lvl-2"><a href="#エッジの一括操作">エッジの一括操作</a></li><li class="lvl-2"><a href="#エッジ非表示">エッジ非表示</a></li><li class="lvl-2"><a href="#ナイフでエッジリルート-(Dot-中継)">ナイフでエッジリルート (Dot 中継)</a></li><li class="lvl-3"><a href="#切断前-→-切断後-(イメージ)">切断前 → 切断後 (イメージ)</a></li><li class="lvl-3"><a href="#操作">操作</a></li><li class="lvl-3"><a href="#仕様">仕様</a></li><li class="lvl-3"><a href="#中断-誤発動防止">中断 / 誤発動防止</a></li><li class="lvl-3"><a href="#Dot-ノートについて">Dot ノートについて</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li></ul></div><div class="graph"><h3>Interactive Graph</h3><svg viewBox="0 0 340 300">
-    <g class="g-lines"><line x1="170" y1="150" x2="170" y2="50" /></g>
-    <circle cx="170" cy="150" r="11" class="g-center"></circle>
-    <text x="170" y="174" text-anchor="middle" class="g-center-label">05 エッジと接続</text>
-    <a href="../../00-INDEX/"><circle cx="170" cy="50" r="6" class="g-out"></circle><title>HṛdayaFlow ユーザーマニュアル</title></a><text x="170" y="66" text-anchor="middle">HṛdayaFl</text>
-  </svg></div></aside>
+<p><span class="missing">← 04</span> | <a class="wikilink" href="../../00-INDEX/">目次</a> | <span class="missing">→ 06</span></p>
+<hr>
+<h2 id="ルーティング（経路の決め方）">ルーティング（経路の決め方）</h2>
+<p>エッジをどう引き回すかは 2 つの設定で決まります。<strong>表示メニュー</strong>から切り替えます。</p>
+<div class="table-wrap"><table><thead><tr><th>設定</th><th>既定</th><th>何が変わるか</th></tr></thead><tbody><tr><td>グローバル束線ルーティング</td><td><strong>ON</strong></td><td>同じ方向へ向かうエッジを 3 層のレーンに束ねて通す。密な図でも線が重なりにくい。OFF にすると従来どおり 1 本ずつ独立に経路を決める</td></tr><tr><td>エッジスマートルーティング</td><td><strong>OFF</strong></td><td>ノートを避けて回り込む経路を計算する。既存の <code>.hrf</code> と見た目を変えないため既定は OFF</td></tr></tbody></table></div>
+<p>束線が有効なとき、次の値で見え方を調整できます。</p>
+<div class="table-wrap"><table><thead><tr><th>項目</th><th>既定</th><th>意味</th></tr></thead><tbody><tr><td>レーン間隔</td><td>12 px</td><td>束ねた線どうしの間隔</td></tr><tr><td>通路の最小幅</td><td>8 px</td><td>これより狭い隙間には通さない</td></tr><tr><td>曲がりの半径</td><td>6 px</td><td>角の丸み</td></tr></tbody></table></div>
+<blockquote><p>⚠ <strong>重なったノートの隙間には通しません。</strong> 重なり合うノートの外接矩形をひとつにまとめて<br>障害物として扱うため、見た目の細い隙間を線がすり抜けることはありません。</p></blockquote>
+<blockquote><p>🖱 ルーティングを切り替えると既存エッジの経路が変わります。選択中のエッジは、<br>経路が動いても選択が外れないように救済されます。</p></blockquote></article>
+  <aside class="rightcol"><div class="graph" data-slug="features/03-edges-and-connections/"><div class="graph-header"><h3>Interactive Graph</h3><div class="graph-actions"><button type="button" class="graph-btn graph-semantic" aria-pressed="false" aria-label="意味的つながり" title="意味的つながりを表示">意味的つながり</button><button type="button" class="graph-btn graph-expand" aria-label="Expand local graph" title="Expand">↗</button><button type="button" class="graph-btn graph-global" aria-label="Global graph" title="Global graph">⚹</button></div></div><div class="graph-host"><div class="graph-viewport" aria-label="Local graph"></div><canvas class="graph-canvas graph-fallback" width="340" height="300" aria-hidden="true" hidden></canvas></div><div id="graph-related" class="graph-related" hidden aria-live="polite"></div></div><div class="otp"><h3>On This Page</h3><ul><li class="lvl-1"><a href="#05-エッジと接続">05 エッジと接続</a></li><li class="lvl-2"><a href="#エッジを引く">エッジを引く</a></li><li class="lvl-2"><a href="#キーボード">キーボード</a></li><li class="lvl-3"><a href="#親子関係の特殊な振る舞い-(v004-O-系)">親子関係の特殊な振る舞い (v0.0.4 O 系)</a></li><li class="lvl-2"><a href="#接続の種類（意味）">接続の種類（意味）</a></li><li class="lvl-2"><a href="#エッジのスタイル">エッジのスタイル</a></li><li class="lvl-3"><a href="#線スタイル（8-種）">線スタイル（8 種）</a></li><li class="lvl-3"><a href="#矢印の端の形（10-種）">矢印の端の形（10 種）</a></li><li class="lvl-2"><a href="#エッジプリセット">エッジプリセット</a></li><li class="lvl-2"><a href="#エッジのアニメーション（LFO）">エッジのアニメーション（LFO）</a></li><li class="lvl-3"><a href="#ラベル">ラベル</a></li><li class="lvl-2"><a href="#エッジの編集と削除">エッジの編集と削除</a></li><li class="lvl-2"><a href="#接続点-(Pin)">接続点 (Pin)</a></li><li class="lvl-2"><a href="#自動レイアウトとエッジ">自動レイアウトとエッジ</a></li><li class="lvl-2"><a href="#既存ノートの繋ぎ替え">既存ノートの繋ぎ替え</a></li><li class="lvl-2"><a href="#多対多">多対多</a></li><li class="lvl-2"><a href="#接続検証-(GSR-変形時)">接続検証 (G/S/R 変形時)</a></li><li class="lvl-2"><a href="#エッジの一括操作">エッジの一括操作</a></li><li class="lvl-2"><a href="#エッジ非表示">エッジ非表示</a></li><li class="lvl-2"><a href="#ナイフでエッジリルート-(Dot-中継)">ナイフでエッジリルート (Dot 中継)</a></li><li class="lvl-3"><a href="#切断前-→-切断後-(イメージ)">切断前 → 切断後 (イメージ)</a></li><li class="lvl-3"><a href="#操作">操作</a></li><li class="lvl-3"><a href="#仕様">仕様</a></li><li class="lvl-3"><a href="#中断-誤発動防止">中断 / 誤発動防止</a></li><li class="lvl-3"><a href="#Dot-ノートについて">Dot ノートについて</a></li><li class="lvl-2"><a href="#動作確認チェックリスト">動作確認チェックリスト</a></li><li class="lvl-2"><a href="#ルーティング（経路の決め方）">ルーティング（経路の決め方）</a></li></ul></div></aside>
 </main>
-<div class="search-results" id="sr" hidden></div>
-<script>window.__SEARCH__="../../search.json";window.__NAV__="../../nav.json";window.__CUR__="features/03-edges-and-connections";window.__ROOT__="../../";</script>
-<script src="../../_site/site.js" defer></script>
+<script>window.__SEARCH__="../../search.json";window.__SEARCH_CFG__={"backend":"pagefind","meiliHost":"","meiliSearchKey":"","meiliIndex":"scopius"};window.__NAV__="../../nav.json";window.__CUR__="features/03-edges-and-connections";window.__ROOT__="../../";window.__WIKI__="hrdayaflow-manual";window.__SENASTRA_THEME__="iroha";</script>
+<script src="../../_site/site.js?v=8e1e0f041d" defer></script>
 
-<script>
-  window.MathJax={tex:{inlineMath:[['\\(','\\)']],displayMath:[['\\[','\\]']]}};
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js" defer></script>
-<script type="module">
-  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs";
-  mermaid.initialize({startOnLoad:true,theme:(document.documentElement.getAttribute('data-theme')==='dark')?'dark':'neutral'});
-</script>
+
+<div id="member-island" hidden data-pagefind-ignore></div>
+
+
 </body>
 </html>
